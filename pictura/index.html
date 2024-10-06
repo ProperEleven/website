@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pictura AI - AI Image Generation & Restoration</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+    <style>
+      /* Reset and base styles */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        background-color: #f5f5f5;
+      }
+
+      /* Navigation styles */
+      nav {
+        background-color: white;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .nav-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        font-size: 24px;
+        font-weight: bold;
+        color: #6d28d9;
+        padding: 15px 0;
+      }
+
+      .nav-buttons a {
+        text-decoration: none;
+        padding: 8px 16px;
+        margin-left: 10px;
+      }
+
+      .nav-buttons a:first-child {
+        color: #4b5563;
+      }
+
+      .nav-buttons a:last-child {
+        background-color: #6d28d9;
+        color: white;
+        border-radius: 4px;
+      }
+
+      /* Hero section styles */
+      .hero {
+        background: linear-gradient(to right, #6d28d9, #4f46e5);
+        color: white;
+        padding: 80px 20px;
+        text-align: center;
+      }
+
+      .hero-content {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .hero h1 {
+        font-size: 48px;
+        font-weight: 800;
+        margin-bottom: 20px;
+      }
+
+      .hero p {
+        font-size: 24px;
+        margin-bottom: 30px;
+      }
+
+      .cta-button {
+        display: inline-block;
+        background-color: white;
+        color: #6d28d9;
+        padding: 12px 24px;
+        border-radius: 4px;
+        text-decoration: none;
+        font-weight: 600;
+      }
+
+      /* Features section styles */
+      .features {
+        padding: 80px 20px;
+      }
+
+      .features h2 {
+        text-align: center;
+        font-size: 36px;
+        margin-bottom: 40px;
+      }
+
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 40px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .feature {
+        text-align: center;
+      }
+
+      .feature img {
+        width: 64px;
+        height: 64px;
+        margin-bottom: 20px;
+      }
+
+      .feature h3 {
+        font-size: 24px;
+        margin-bottom: 10px;
+      }
+
+      /* Showcase section styles */
+      .showcase {
+        background-color: #f3f4f6;
+        padding: 80px 20px;
+      }
+
+      .showcase h2 {
+        text-align: center;
+        font-size: 36px;
+        margin-bottom: 40px;
+      }
+
+      .showcase-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .showcase-grid img {
+        width: 100%;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      /* CTA section styles */
+      .cta {
+        padding: 80px 20px;
+        text-align: center;
+      }
+
+      .cta h2 {
+        font-size: 36px;
+        margin-bottom: 20px;
+      }
+
+      .cta p {
+        font-size: 20px;
+        color: #4b5563;
+        margin-bottom: 30px;
+      }
+
+      /* Footer styles */
+      footer {
+        background-color: #1f2937;
+        color: white;
+        padding: 60px 20px;
+      }
+
+      .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .footer-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 40px;
+        margin-bottom: 40px;
+      }
+
+      .footer-column h3 {
+        font-size: 18px;
+        margin-bottom: 20px;
+      }
+
+      .footer-column ul {
+        list-style: none;
+      }
+
+      .footer-column ul li {
+        margin-bottom: 10px;
+      }
+
+      .footer-column ul li a {
+        color: white;
+        text-decoration: none;
+      }
+
+      .social-links a {
+        color: white;
+        font-size: 20px;
+        margin-right: 15px;
+      }
+
+      .footer-bottom {
+        text-align: center;
+        padding-top: 20px;
+        border-top: 1px solid #374151;
+      }
+
+      /* Responsive design */
+      @media (max-width: 768px) {
+        .features-grid,
+        .showcase-grid,
+        .footer-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .hero h1 {
+          font-size: 36px;
+        }
+
+        .hero p {
+          font-size: 20px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .features-grid,
+        .showcase-grid,
+        .footer-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .nav-buttons a {
+          padding: 6px 12px;
+          font-size: 14px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div class="nav-container">
+        <div class="logo">Pictura AI</div>
+      </div>
+    </nav>
+
+    <main>
+      <section class="hero">
+        <div class="hero-content">
+          <h1>Transform Your Images with AI Magic</h1>
+          <p>
+            Generate stunning artwork, restore old photos, and explore a world
+            of AI-powered creativity.
+          </p>
+          <a href="#" class="cta-button">Get Started Free</a>
+        </div>
+      </section>
+
+      <section class="features">
+        <h2>Unleash Your Creativity</h2>
+        <div class="features-grid">
+          <div class="feature">
+            <h3>AI Image Generation</h3>
+            <p>
+              Create unique, stunning images from text descriptions using
+              cutting-edge AI technology.
+            </p>
+          </div>
+          <div class="feature">
+            <h3>Photo Restoration</h3>
+            <p>
+              Breathe new life into old, damaged photos with our advanced
+              restoration tools.
+            </p>
+          </div>
+          <div class="feature">
+            <h3>Explore & Save</h3>
+            <p>
+              Discover and save inspiring AI-generated artwork from our creative
+              community.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- <section class="showcase">
+        <h2>See What's Possible</h2>
+        <div class="showcase-grid">
+          <img src="/api/placeholder/400/300" alt="AI Art Example 1" />
+          <img src="/api/placeholder/400/300" alt="AI Art Example 2" />
+          <img src="/api/placeholder/400/300" alt="AI Art Example 3" />
+          <img src="/api/placeholder/400/300" alt="Restored Photo Example 1" />
+          <img src="/api/placeholder/400/300" alt="Restored Photo Example 2" />
+          <img src="/api/placeholder/400/300" alt="Restored Photo Example 3" />
+        </div>
+      </section>
+
+      <section class="cta">
+        <h2>Ready to Start Creating?</h2>
+        <p>
+          Join thousands of creators using Pictura AI to bring their imagination
+          to life.
+        </p>
+        <a href="#" class="cta-button">Get Started Now</a>
+      </section> -->
+    </main>
+
+    <footer>
+      <div class="footer-content">
+        <div class="footer-grid">
+          <div class="footer-column">
+            <h3>Pictura AI</h3>
+          </div>
+          <div class="footer-column">
+            <h3>Features</h3>
+            <ul>
+              <li><a href="#">AI Generation</a></li>
+              <li><a href="#">Photo Restoration</a></li>
+              <li><a href="#">Explore</a></li>
+            </ul>
+          </div>
+          <!-- <div class="footer-column">
+            <h3>Support</h3>
+            <ul>
+              <li><a href="#">Help Center</a></li>
+              <li><a href="#">Terms of Service</a></li>
+              <li><a href="#">Privacy Policy</a></li>
+            </ul>
+          </div> -->
+          <div class="footer-column">
+            <h3>Connect</h3>
+            <div class="social-links">
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-facebook"></i></a>
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2024 Pictura AI. All rights reserved.</p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

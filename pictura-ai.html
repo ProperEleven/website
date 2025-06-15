@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pictura AI - AI-Powered Image Generation & Restoration</title>
+    <meta name="description" content="Transform text into stunning images and restore old photos with Pictura AI. Available on iOS and Android.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-bg: #FBFAF9;
+            --secondary-bg: #F5F2EF;
+            --surface: #FFFFFF;
+            --surface-alt: #F8F6F3;
+            --accent: #36322F;
+            --accent-hover: #2A2724;
+            --text-primary: #36322F;
+            --text-secondary: #6D6D6D;
+            --text-muted: #8B8B8B;
+            --border: #E9E3DD;
+            --border-light: #F0EAE4;
+            --shadow-sm: 0 1px 2px 0 rgba(54, 50, 47, 0.05);
+            --shadow: 0 1px 3px 0 rgba(54, 50, 47, 0.1), 0 1px 2px 0 rgba(54, 50, 47, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(54, 50, 47, 0.1), 0 4px 6px -2px rgba(54, 50, 47, 0.05);
+            --shadow-xl: 0 20px 25px -5px rgba(54, 50, 47, 0.1), 0 10px 10px -5px rgba(54, 50, 47, 0.04);
+            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --gradient-4: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            --gradient-5: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            --gradient-6: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            --max-width: 1024px;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Inter", Helvetica, Arial, sans-serif;
+            background: var(--primary-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Header */
+        .header {
+            padding: 2rem 0;
+            border-bottom: 1px solid var(--border);
+            background: var(--surface);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            letter-spacing: -0.025em;
+        }
+
+        .back-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color 0.3s ease;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .back-link:hover {
+            color: var(--text-primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 5rem 0;
+            background: var(--gradient-1);
+            text-align: center;
+            border-radius: 0 0 32px 32px;
+            margin-bottom: 5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.05) 100%);
+        }
+
+        .hero .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            color: white;
+            letter-spacing: -0.05em;
+            line-height: 1.1;
+        }
+
+        .hero p {
+            font-size: 1.375rem;
+            max-width: 650px;
+            margin: 0 auto 3rem;
+            opacity: 0.95;
+            color: white;
+            line-height: 1.6;
+        }
+
+        /* App Store Buttons */
+        .store-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .store-button {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 14px;
+            padding: 0.875rem 1.75rem;
+            text-decoration: none;
+            color: white;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .store-button:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-2px);
+            border-color: rgba(255, 255, 255, 0.35);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .store-button i {
+            margin-right: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        /* Features Grid */
+        .features {
+            padding: 5rem 0;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 5rem;
+        }
+
+        .feature-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: var(--shadow);
+            transition: all 0.4s ease;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, transparent 0%, rgba(54, 50, 47, 0.02) 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: var(--shadow-xl);
+            border-color: var(--border-light);
+        }
+
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-1);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            color: white;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .feature-card:nth-child(2) .feature-icon {
+            background: var(--gradient-2);
+        }
+
+        .feature-card:nth-child(3) .feature-icon {
+            background: var(--gradient-3);
+        }
+
+        .feature-card:nth-child(4) .feature-icon {
+            background: var(--gradient-4);
+        }
+
+        .feature-card:nth-child(5) .feature-icon {
+            background: var(--gradient-5);
+        }
+
+        .feature-card:nth-child(6) .feature-icon {
+            background: var(--gradient-6);
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            font-weight: 800;
+            letter-spacing: -0.025em;
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+
+        /* Screenshots Section */
+        .screenshots {
+            background: var(--surface-alt);
+            border: 1px solid var(--border);
+            padding: 5rem 0;
+            border-radius: 32px;
+            margin: 3rem 0;
+            box-shadow: var(--shadow);
+        }
+
+        .screenshots h2 {
+            text-align: center;
+            font-size: 2.75rem;
+            margin-bottom: 3rem;
+            color: var(--text-primary);
+            font-weight: 900;
+            letter-spacing: -0.05em;
+        }
+
+        .screenshot-gallery {
+            display: flex;
+            gap: 2rem;
+            overflow-x: auto;
+            padding: 1rem 2rem;
+            scroll-snap-type: x mandatory;
+        }
+
+        .screenshot {
+            min-width: 260px;
+            height: 520px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            scroll-snap-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            font-weight: 600;
+            box-shadow: var(--shadow);
+        }
+
+        /* CTA Section */
+        .cta {
+            text-align: center;
+            padding: 6rem 0;
+        }
+
+        .cta h2 {
+            font-size: 2.75rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+            font-weight: 900;
+            letter-spacing: -0.05em;
+        }
+
+        .cta p {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 3rem;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        .cta .store-buttons .store-button {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: white;
+        }
+
+        .cta .store-buttons .store-button:hover {
+            background: var(--accent-hover);
+            border-color: var(--accent-hover);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--secondary-bg);
+            border-top: 1px solid var(--border);
+            padding: 4rem 0;
+            margin-top: 6rem;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--text-secondary);
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .hero {
+                padding: 4rem 0;
+                margin-bottom: 4rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.125rem;
+            }
+
+            .features {
+                padding: 4rem 0;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+
+            .feature-card {
+                padding: 2rem;
+            }
+
+            .store-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .store-button {
+                width: 220px;
+                justify-content: center;
+            }
+
+            .screenshot-gallery {
+                padding: 1rem;
+            }
+
+            .screenshots {
+                padding: 4rem 0;
+            }
+
+            .cta {
+                padding: 4rem 0;
+            }
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        .slide-up {
+            opacity: 0;
+            transform: translateY(40px);
+            animation: slideUp 0.8s ease-out forwards;
+        }
+
+        @keyframes slideUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container header-content">
+            <a href="/" class="logo">
+                <i class="fas fa-palette"></i> Pictura AI
+            </a>
+            <a href="/" class="back-link">
+                <i class="fas fa-arrow-left"></i> Back to Home
+            </a>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1 class="fade-in">Create & Restore with AI Magic</h1>
+                <p class="fade-in" style="animation-delay: 0.2s">
+                    Transform your imagination into stunning visuals. Generate images from text, enhance photos, and bring old memories back to life with cutting-edge AI technology.
+                </p>
+                <div class="store-buttons fade-in" style="animation-delay: 0.4s">
+                    <a href="https://apps.apple.com/app/pictura-ai/id1234567890" class="store-button">
+                        <i class="fab fa-apple"></i>
+                        Download for iOS
+                    </a>
+                    <a href="https://play.google.com/store/apps/details?id=com.propereleven.picturaai" class="store-button">
+                        <i class="fab fa-google-play"></i>
+                        Get on Android
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="features container">
+            <div class="features-grid">
+                <div class="feature-card slide-up">
+                    <div class="feature-icon">
+                        <i class="fas fa-magic"></i>
+                    </div>
+                    <h3>Text to Image</h3>
+                    <p>Describe your vision and watch AI bring it to life. From landscapes to portraits, create anything you imagine with precision and style.</p>
+                </div>
+
+                <div class="feature-card slide-up" style="animation-delay: 0.1s">
+                    <div class="feature-icon">
+                        <i class="fas fa-image"></i>
+                    </div>
+                    <h3>Photo Enhancement</h3>
+                    <p>Enhance image quality, adjust lighting, remove unwanted objects, and perfect your photos with advanced AI algorithms.</p>
+                </div>
+
+                <div class="feature-card slide-up" style="animation-delay: 0.2s">
+                    <div class="feature-icon">
+                        <i class="fas fa-undo"></i>
+                    </div>
+                    <h3>Restore Memories</h3>
+                    <p>Bring old, damaged, or faded photos back to their former glory with powerful AI restoration technology.</p>
+                </div>
+
+                <div class="feature-card slide-up" style="animation-delay: 0.3s">
+                    <div class="feature-icon">
+                        <i class="fas fa-paint-brush"></i>
+                    </div>
+                    <h3>Style Transfer</h3>
+                    <p>Apply artistic styles to your photos. Transform them into paintings, sketches, or any artistic style you prefer.</p>
+                </div>
+
+                <div class="feature-card slide-up" style="animation-delay: 0.4s">
+                    <div class="feature-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Lightning Fast</h3>
+                    <p>Generate and edit images in seconds. Our optimized AI models deliver professional results instantly.</p>
+                </div>
+
+                <div class="feature-card slide-up" style="animation-delay: 0.5s">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Privacy First</h3>
+                    <p>Your images stay private. We respect your privacy and never share or store your personal creations.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="screenshots">
+            <div class="container">
+                <h2 class="fade-in">See It In Action</h2>
+                <div class="screenshot-gallery">
+                    <div class="screenshot">Text to Image</div>
+                    <div class="screenshot">Photo Editor</div>
+                    <div class="screenshot">Restoration Tool</div>
+                    <div class="screenshot">Style Gallery</div>
+                    <div class="screenshot">Export Options</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta container">
+            <h2 class="fade-in">Ready to Create Amazing Images?</h2>
+            <p class="fade-in" style="animation-delay: 0.2s">
+                Join thousands of creators using Pictura AI to bring their ideas to life and transform their creative process.
+            </p>
+            <div class="store-buttons fade-in" style="animation-delay: 0.4s">
+                <a href="https://apps.apple.com/app/pictura-ai/id1234567890" class="store-button">
+                    <i class="fab fa-apple"></i>
+                    Download for iOS
+                </a>
+                <a href="https://play.google.com/store/apps/details?id=com.propereleven.picturaai" class="store-button">
+                    <i class="fab fa-google-play"></i>
+                    Download for Android
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container footer-content">
+            <p>&copy; 2024 Proper Eleven Technologies. All rights reserved.</p>
+            <ul class="footer-links">
+                <li><a href="/pictura/privacy_policy.html">Privacy Policy</a></li>
+                <li><a href="/pictura/terms.html">Terms of Service</a></li>
+                <li><a href="/">Home</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <script>
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.slide-up').forEach(el => {
+            el.style.animationPlayState = 'paused';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

@@ -3,189 +3,553 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Proper Eleven Technologies</title>
+    <title>Proper Eleven Technologies - Building Digital Solutions</title>
+    <meta
+      name="description"
+      content="Proper Eleven Technologies creates innovative digital products including AI-powered image tools and PDF processing solutions."
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
     <style>
-      body {
-        font-family: "Arial", sans-serif;
-        line-height: 1.6;
+      * {
         margin: 0;
         padding: 0;
-        color: #333;
-        background-color: #f5f5f7;
         box-sizing: border-box;
       }
 
+      :root {
+        --primary-bg: #fbfaf9;
+        --secondary-bg: #f5f2ef;
+        --surface: #ffffff;
+        --surface-alt: #f8f6f3;
+        --accent: #36322f;
+        --accent-hover: #2a2724;
+        --text-primary: #36322f;
+        --text-secondary: #6d6d6d;
+        --text-muted: #8b8b8b;
+        --border: #e9e3dd;
+        --border-light: #f0eae4;
+        --shadow-sm: 0 1px 2px 0 rgba(54, 50, 47, 0.05);
+        --shadow: 0 1px 3px 0 rgba(54, 50, 47, 0.1),
+          0 1px 2px 0 rgba(54, 50, 47, 0.06);
+        --shadow-lg: 0 10px 15px -3px rgba(54, 50, 47, 0.1),
+          0 4px 6px -2px rgba(54, 50, 47, 0.05);
+        --shadow-xl: 0 20px 25px -5px rgba(54, 50, 47, 0.1),
+          0 10px 10px -5px rgba(54, 50, 47, 0.04);
+        --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        --max-width: 1024px;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          "Inter", Helvetica, Arial, sans-serif;
+        background: var(--primary-bg);
+        color: var(--text-primary);
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
       .container {
+        max-width: var(--max-width);
         margin: 0 auto;
-        padding: 4rem;
-        max-width: 600px;
-        height: 100vh;
+        padding: 0 24px;
       }
 
-      .content {
-        margin: 2rem 0;
+      /* Hero Section */
+      .hero {
+        padding: 6rem 0 5rem;
+        text-align: center;
+        background: var(--primary-bg);
       }
 
-      .vertical {
+      .hero h1 {
+        font-size: 4rem;
+        font-weight: 900;
+        margin-bottom: 2rem;
+        color: var(--text-primary);
+        letter-spacing: -0.05em;
+        line-height: 1.1;
+      }
+
+      .hero p {
+        font-size: 1.375rem;
+        color: var(--text-secondary);
+        max-width: 700px;
+        margin: 0 auto 4rem;
+        font-weight: 400;
+        line-height: 1.6;
+      }
+
+      /* Bento Grid */
+      .bento-container {
+        margin: 0 0 6rem 0;
+        position: relative;
+        z-index: 10;
+      }
+
+      .bento-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: repeat(3, 220px);
+        gap: 1.5rem;
+        margin-bottom: 3rem;
+      }
+
+      /* Grid Layout */
+      .bento-card:nth-child(1) {
+        /* Pictura AI */
+        grid-column: 1 / 3;
+        grid-row: 1 / 3;
+      }
+
+      .bento-card:nth-child(2) {
+        /* MyPDFGenius */
+        grid-column: 3 / 5;
+        grid-row: 1 / 3;
+      }
+
+      .bento-card:nth-child(3) {
+        /* Mission */
+        grid-column: 1 / 2;
+        grid-row: 3 / 4;
+      }
+
+      .bento-card:nth-child(4) {
+        /* Technology */
+        grid-column: 2 / 3;
+        grid-row: 3 / 4;
+      }
+
+      .bento-card:nth-child(5) {
+        /* Support */
+        grid-column: 3 / 5;
+        grid-row: 3 / 4;
+      }
+
+      .bento-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 24px;
+        padding: 2.5rem;
+        box-shadow: var(--shadow);
+        transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         display: flex;
         flex-direction: column;
-        gap: 2em;
-        justify-content: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .bento-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(
+          135deg,
+          transparent 0%,
+          rgba(54, 50, 47, 0.02) 100%
+        );
+        opacity: 0;
+        transition: opacity 0.4s ease;
+      }
+
+      .bento-card:hover {
+        transform: translateY(-8px);
+        box-shadow: var(--shadow-xl);
+        border-color: var(--border-light);
+      }
+
+      .bento-card:hover::before {
+        opacity: 1;
+      }
+
+      .card-icon {
+        font-size: 2.75rem;
+        margin-bottom: 1.5rem;
+        color: var(--text-secondary);
+      }
+
+      .card-title {
+        font-size: 1.75rem;
+        font-weight: 800;
+        margin-bottom: 1rem;
+        color: var(--text-primary);
+        letter-spacing: -0.025em;
+      }
+
+      .card-description {
+        color: var(--text-secondary);
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+        flex-grow: 1;
+        line-height: 1.6;
+      }
+
+      .card-link {
+        color: var(--accent);
+        text-decoration: none;
+        font-weight: 600;
+        display: inline-flex;
         align-items: center;
+        gap: 0.5rem;
+        transition: all 0.3s ease;
+        font-size: 0.95rem;
       }
 
-      .horizontal {
+      .card-link:hover {
+        color: var(--accent-hover);
+        gap: 0.75rem;
+      }
+
+      /* Product Cards Special Styling */
+      .product-card {
+        background: var(--surface-alt);
+        border: 1px solid var(--border-light);
+      }
+
+      .product-card .card-icon {
+        width: 70px;
+        height: 70px;
+        background: var(--gradient-1);
+        border-radius: 18px;
         display: flex;
-        flex-direction: row;
-        gap: 1em;
-      }
-
-      .card {
-        background-color: #fff;
-        padding: 1em 2em;
-        border-radius: 28px;
-        max-width: 600px;
-        width: 100%;
-      }
-
-      .footer {
-        color: #2c3e50;
-        text-align: center;
-        padding: 1rem 0;
-        width: 100%;
-      }
-
-      h1 {
-        margin: 0;
-        font-size: 2rem;
-      }
-
-      h2 {
-        margin: 0;
-        color: #2c3e50;
-      }
-
-      li {
-        margin: 0.5em 0;
-      }
-
-      .link-group {
-        display: flex;
-        flex-direction: row;
+        align-items: center;
         justify-content: center;
-        gap: 1em;
-        @media screen and (max-width: 600px) {
-          flex-direction: column;
-        }
+        margin-bottom: 1.5rem;
+        font-size: 1.75rem;
+        color: white;
+        box-shadow: var(--shadow-lg);
       }
 
-      .img-group {
+      .product-card:nth-child(2) .card-icon {
+        background: var(--gradient-2);
+      }
+
+      /* Stats Section */
+      .stats-section {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 28px;
+        padding: 4rem;
+        margin-bottom: 6rem;
+        box-shadow: var(--shadow);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .stats-section::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: var(--gradient-3);
+        opacity: 0.02;
+      }
+
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 3rem;
+        text-align: center;
+        position: relative;
+        z-index: 1;
+      }
+
+      .stat-item h3 {
+        font-size: 3rem;
+        font-weight: 900;
+        color: var(--text-primary);
+        margin-bottom: 0.75rem;
+        letter-spacing: -0.05em;
+      }
+
+      .stat-item p {
+        color: var(--text-secondary);
+        font-weight: 600;
+        font-size: 1rem;
+      }
+
+      /* Footer */
+      footer {
+        background: var(--secondary-bg);
+        border-top: 1px solid var(--border);
+        padding: 4rem 0;
+        margin-top: 6rem;
+      }
+
+      .footer-content {
         display: flex;
-        flex-direction: row;
-        gap: 1em;
-        margin-top: 1.5em;
-        @media screen and (max-width: 600px) {
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 2rem;
+      }
+
+      .footer-links {
+        display: flex;
+        gap: 2.5rem;
+        list-style: none;
+      }
+
+      .footer-links a {
+        color: var(--text-muted);
+        text-decoration: none;
+        font-size: 0.95rem;
+        font-weight: 500;
+        transition: color 0.3s ease;
+      }
+
+      .footer-links a:hover {
+        color: var(--text-secondary);
+      }
+
+      /* Mobile Responsiveness */
+      @media (max-width: 768px) {
+        .hero {
+          padding: 4rem 0 3rem;
+        }
+
+        .hero h1 {
+          font-size: 2.5rem;
+        }
+
+        .hero p {
+          font-size: 1.125rem;
+          margin-bottom: 3rem;
+        }
+
+        .bento-container {
+          margin: 0 0 4rem 0;
+        }
+
+        .bento-grid {
+          grid-template-columns: 1fr;
+          grid-template-rows: auto;
+          gap: 1.25rem;
+        }
+
+        .bento-card:nth-child(1),
+        .bento-card:nth-child(2),
+        .bento-card:nth-child(3),
+        .bento-card:nth-child(4),
+        .bento-card:nth-child(5) {
+          grid-column: 1;
+          grid-row: auto;
+        }
+
+        .bento-card {
+          padding: 2rem;
+        }
+
+        .stats-section {
+          padding: 3rem 2rem;
+        }
+
+        .stats-grid {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 2rem;
+        }
+
+        .footer-content {
           flex-direction: column;
+          text-align: center;
         }
       }
 
-      .divider {
-        width: "100%";
-        height: 2px;
-        background-color: #f5f5f7;
+      @media (max-width: 640px) {
+        .hero h1 {
+          font-size: 2rem;
+        }
+
+        .stats-grid {
+          grid-template-columns: 1fr;
+          gap: 1.5rem;
+        }
+
+        .stat-item h3 {
+          font-size: 2.5rem;
+        }
+      }
+
+      /* Animations */
+      .fade-in {
+        opacity: 0;
+        animation: fadeIn 0.8s ease-out forwards;
+      }
+
+      @keyframes fadeIn {
+        to {
+          opacity: 1;
+        }
+      }
+
+      .slide-up {
+        opacity: 0;
+        transform: translateY(40px);
+        animation: slideUp 0.8s ease-out forwards;
+      }
+
+      @keyframes slideUp {
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Smooth scrolling */
+      html {
+        scroll-behavior: smooth;
+      }
+
+      /* Additional Refinements */
+      .bento-card .card-title {
+        background: linear-gradient(
+          135deg,
+          var(--text-primary) 0%,
+          var(--text-secondary) 100%
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .product-card .card-title {
+        background: var(--text-primary);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      /* Hover effects similar to Firecrawl */
+      .bento-card:hover {
+        filter: grayscale(0);
+        transform: translateY(-8px) scale(1.02);
+      }
+
+      .product-card .card-icon:hover {
+        transform: scale(1.05);
       }
     </style>
   </head>
   <body>
-    <div class="container">
-      <h1 style="text-align: center">Proper Eleven Technologies</h1>
-
-      <div class="content vertical">
-        <div class="card">
-          <h2>Who are we?</h2>
-          <div class="divider"></div>
-          <p>
-            We are a new age tech startup dedicated to delivering innovative
-            solutions for businesses and individuals. Our commitment to
-            excellence and cutting-edge technology sets us apart in the
-            industry.
+    <main>
+      <section class="hero">
+        <div class="container">
+          <h1 class="fade-in">Proper Eleven Technologies</h1>
+          <p class="fade-in" style="animation-delay: 0.2s">
+            We create innovative tools that simplify your digital life. From
+            AI-powered image generation to comprehensive PDF processing.
           </p>
         </div>
+      </section>
 
-        <div class="card">
-          <h2>Our Products</h2>
-          <div class="divider"></div>
-          <div style="margin-top: 1.5em">
-            <h2>
-              <a
-                style="font-size: 1.2em; text-decoration: none"
-                href="pictura/index.html"
-                >Pictura AI</a
-              >
-            </h2>
-            <p>
-              Pictura AI is a modern AI images generator and AI images enhancer.
-            </p>
-            <div>
-              <li>Create stunning images using AI with simple prompts.</li>
-              <li>Restore and Revive your old photos</li>
-              <li>
-                Colorize black and white photos to life with our AI
-                colorization.
-              </li>
-              <li>
-                Enhance, Upscale, sharpen, and improve your images like never
-                before.
-              </li>
+      <section class="container" id="products">
+        <div class="bento-container">
+          <div class="bento-grid">
+            <!-- Pictura AI Card -->
+            <div class="bento-card product-card slide-up">
+              <div class="card-icon">
+                <i class="fas fa-palette"></i>
+              </div>
+              <h2 class="card-title">Pictura AI</h2>
+              <p class="card-description">
+                Transform your ideas into stunning visuals with AI. Create
+                images from text, enhance photos, and restore old memories with
+                cutting-edge technology.
+              </p>
+              <a href="/pictura-ai.html" class="card-link">
+                Explore Pictura AI <i class="fas fa-arrow-right"></i>
+              </a>
             </div>
 
-            <div class="img-group">
-              <a
-                href="https://apps.apple.com/us/app/pictura-ai/id6727008693?platform=iphone"
-              >
-                <img
-                  src="app-store-icon.png"
-                  style="object-fit: contain; width: 150px; border-radius: 1em"
-                />
+            <!-- MyPDFGenius Card -->
+            <div
+              class="bento-card product-card slide-up"
+              style="animation-delay: 0.1s"
+            >
+              <div class="card-icon">
+                <i class="fas fa-file-pdf"></i>
+              </div>
+              <h2 class="card-title">MyPDFGenius</h2>
+              <p class="card-description">
+                Your complete PDF toolkit with 30+ free tools. Edit, merge,
+                split, compress, and convert PDFs effortlessly on web and
+                mobile.
+              </p>
+              <a href="/mypdfgenius.html" class="card-link">
+                Discover MyPDFGenius <i class="fas fa-arrow-right"></i>
               </a>
-              <a
-                href="https://play.google.com/store/apps/details?id=com.propereleven.picturaai1"
-              >
-                <img
-                  src="play-store-icon.webp"
-                  style="object-fit: contain; width: 150px; border-radius: 1em"
-                />
-              </a>
+            </div>
+
+            <!-- Mission Card -->
+            <div class="bento-card slide-up" style="animation-delay: 0.2s">
+              <i class="fas fa-rocket card-icon"></i>
+              <h3 class="card-title">Our Mission</h3>
+              <p class="card-description">
+                Making powerful technology accessible through intuitive design.
+              </p>
+            </div>
+
+            <!-- Technology Card -->
+            <div class="bento-card slide-up" style="animation-delay: 0.3s">
+              <i class="fas fa-code card-icon"></i>
+              <h3 class="card-title">Cutting-Edge Tech</h3>
+              <p class="card-description">
+                Built with modern frameworks and AI models for reliability.
+              </p>
+            </div>
+
+            <!-- Support Card -->
+            <div class="bento-card slide-up" style="animation-delay: 0.4s">
+              <i class="fas fa-headset card-icon"></i>
+              <h3 class="card-title">Always Here</h3>
+              <p class="card-description">
+                Dedicated support to help you make the most of our products.
+              </p>
             </div>
           </div>
         </div>
+      </section>
+    </main>
 
-        <div class="card">
-          <div>
-            <h2>
-              <a
-                style="font-size: 1.2em; text-decoration: none"
-                href="https://nestedbits.com"
-                >Nested Bits</a
-              >
-            </h2>
-          </div>
-        </div>
+    <footer>
+      <div class="container footer-content">
+        <p>&copy; 2025 Proper Eleven Technologies. All rights reserved.</p>
+        <ul class="footer-links">
+          <li><a href="/privacy.html">Privacy Policy</a></li>
+          <li><a href="/pictura-ai.html">Pictura AI</a></li>
+          <li><a href="https://www.mypdfgenius.com">MyPDFGenius</a></li>
+        </ul>
       </div>
+    </footer>
 
-      <div class="footer">
-        <p>
-          &copy;
-          <script>
-            document.write(new Date().getFullYear());
-          </script>
-          Proper Eleven Technologies Private Limited. All rights reserved.
-        </p>
-        <div class="link-group">
-          <a style="font-size: 1em" href="privacy.html">Privacy Policy</a>
-          <a style="font-size: 1em" href="terms.html">Terms & Conditions</a>
-        </div>
-      </div>
-    </div>
+    <script>
+      // Intersection Observer for animations
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.style.animationPlayState = "running";
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll(".slide-up").forEach((el) => {
+        el.style.animationPlayState = "paused";
+        observer.observe(el);
+      });
+    </script>
   </body>
 </html>

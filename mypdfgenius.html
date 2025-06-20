@@ -1,711 +1,842 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MyPDFGenius - Complete PDF Toolkit with 30+ Free Tools</title>
-    <meta name="description" content="Edit, merge, split, compress, and convert PDFs with MyPDFGenius. 30+ free PDF tools available on web and mobile.">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <meta
+      name="description"
+      content="Edit, merge, split, compress, and convert PDFs with MyPDFGenius. 30+ free PDF tools available on web and mobile."
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-        :root {
-            --primary-bg: #FBFAF9;
-            --secondary-bg: #F5F2EF;
-            --surface: #FFFFFF;
-            --surface-alt: #F8F6F3;
-            --accent: #dc2626;
-            --accent-hover: #b91c1c;
-            --text-primary: #36322F;
-            --text-secondary: #6D6D6D;
-            --text-muted: #8B8B8B;
-            --border: #E9E3DD;
-            --border-light: #F0EAE4;
-            --shadow-sm: 0 1px 2px 0 rgba(54, 50, 47, 0.05);
-            --shadow: 0 1px 3px 0 rgba(54, 50, 47, 0.1), 0 1px 2px 0 rgba(54, 50, 47, 0.06);
-            --shadow-lg: 0 10px 15px -3px rgba(54, 50, 47, 0.1), 0 4px 6px -2px rgba(54, 50, 47, 0.05);
-            --shadow-xl: 0 20px 25px -5px rgba(54, 50, 47, 0.1), 0 10px 10px -5px rgba(54, 50, 47, 0.04);
-            --gradient-1: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
-            --gradient-2: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
-            --gradient-3: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
-            --gradient-4: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
-            --max-width: 1024px;
-        }
+      :root {
+        --primary-bg: #fbfaf9;
+        --secondary-bg: #f5f2ef;
+        --surface: #ffffff;
+        --surface-alt: #f8f6f3;
+        --accent: #dc2626;
+        --accent-hover: #b91c1c;
+        --text-primary: #36322f;
+        --text-secondary: #6d6d6d;
+        --text-muted: #8b8b8b;
+        --border: #e9e3dd;
+        --border-light: #f0eae4;
+        --shadow-sm: 0 1px 2px 0 rgba(54, 50, 47, 0.05);
+        --shadow: 0 1px 3px 0 rgba(54, 50, 47, 0.1),
+          0 1px 2px 0 rgba(54, 50, 47, 0.06);
+        --shadow-lg: 0 10px 15px -3px rgba(54, 50, 47, 0.1),
+          0 4px 6px -2px rgba(54, 50, 47, 0.05);
+        --shadow-xl: 0 20px 25px -5px rgba(54, 50, 47, 0.1),
+          0 10px 10px -5px rgba(54, 50, 47, 0.04);
+        --gradient-1: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+        --gradient-2: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+        --gradient-3: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+        --gradient-4: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+        --max-width: 1024px;
+      }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Inter", Helvetica, Arial, sans-serif;
-            background: var(--primary-bg);
-            color: var(--text-primary);
-            line-height: 1.6;
-        }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          "Inter", Helvetica, Arial, sans-serif;
+        background: var(--primary-bg);
+        color: var(--text-primary);
+        line-height: 1.6;
+      }
 
-        .container {
-            max-width: var(--max-width);
-            margin: 0 auto;
-            padding: 0 24px;
-        }
+      .container {
+        max-width: var(--max-width);
+        margin: 0 auto;
+        padding: 0 24px;
+      }
 
-        /* Header */
-        .header {
-            padding: 2rem 0;
-            border-bottom: 1px solid var(--border);
-            background: var(--surface);
-        }
+      /* Header */
+      .header {
+        padding: 2rem 0;
+        border-bottom: 1px solid var(--border);
+        background: var(--surface);
+      }
 
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+      .header-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
 
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--text-primary);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            letter-spacing: -0.025em;
-        }
+      .logo {
+        font-size: 1.5rem;
+        font-weight: 800;
+        color: var(--text-primary);
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        letter-spacing: -0.025em;
+      }
 
-        .back-link {
-            color: var(--text-secondary);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: color 0.3s ease;
-            font-weight: 500;
-            font-size: 0.95rem;
-        }
+      .back-link {
+        color: var(--text-secondary);
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: color 0.3s ease;
+        font-weight: 500;
+        font-size: 0.95rem;
+      }
 
-        .back-link:hover {
-            color: var(--text-primary);
-        }
+      .back-link:hover {
+        color: var(--text-primary);
+      }
 
-        /* Hero Section */
+      /* Hero Section */
+      .hero {
+        padding: 5rem 0;
+        background: var(--gradient-1);
+        text-align: center;
+        border-radius: 0 0 32px 32px;
+        margin-bottom: 5rem;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(0, 0, 0, 0.1) 0%,
+          rgba(0, 0, 0, 0.05) 100%
+        );
+      }
+
+      .hero .container {
+        position: relative;
+        z-index: 1;
+      }
+
+      .hero h1 {
+        font-size: 3.5rem;
+        font-weight: 900;
+        margin-bottom: 1.5rem;
+        color: white;
+        letter-spacing: -0.05em;
+        line-height: 1.1;
+      }
+
+      .hero p {
+        font-size: 1.375rem;
+        max-width: 650px;
+        margin: 0 auto 2.5rem;
+        opacity: 0.95;
+        color: white;
+        line-height: 1.6;
+      }
+
+      .hero-stats {
+        display: flex;
+        justify-content: center;
+        gap: 4rem;
+        margin-top: 3rem;
+        flex-wrap: wrap;
+      }
+
+      .hero-stat {
+        text-align: center;
+      }
+
+      .hero-stat h3 {
+        font-size: 2.25rem;
+        margin-bottom: 0.5rem;
+        color: white;
+        font-weight: 900;
+        letter-spacing: -0.05em;
+      }
+
+      .hero-stat p {
+        opacity: 0.9;
+        font-size: 1rem;
+        color: white;
+        font-weight: 600;
+      }
+
+      /* Action Buttons */
+      .action-buttons {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-bottom: 3rem;
+      }
+
+      .action-button {
+        display: inline-flex;
+        align-items: center;
+        background: rgba(255, 255, 255, 0.15);
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        border-radius: 14px;
+        padding: 0.875rem 1.75rem;
+        text-decoration: none;
+        color: white;
+        backdrop-filter: blur(10px);
+        transition: all 0.3s ease;
+        font-weight: 600;
+        font-size: 0.95rem;
+      }
+
+      .action-button:hover {
+        background: rgba(255, 255, 255, 0.25);
+        transform: translateY(-2px);
+        border-color: rgba(255, 255, 255, 0.35);
+        box-shadow: var(--shadow-lg);
+      }
+
+      .action-button.primary {
+        background: white;
+        color: var(--accent);
+        border-color: white;
+      }
+
+      .action-button.primary:hover {
+        background: rgba(255, 255, 255, 0.9);
+      }
+
+      .action-button i {
+        margin-right: 0.5rem;
+        font-size: 1.1rem;
+      }
+
+      /* Tools Grid */
+      .tools-section {
+        padding: 5rem 0;
+      }
+
+      .tools-section h2 {
+        text-align: center;
+        font-size: 2.75rem;
+        margin-bottom: 3rem;
+        color: var(--text-primary);
+        font-weight: 900;
+        letter-spacing: -0.05em;
+      }
+
+      .tools-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 5rem;
+      }
+
+      .tool-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        padding: 2rem;
+        box-shadow: var(--shadow);
+        transition: all 0.4s ease;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .tool-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(
+          135deg,
+          transparent 0%,
+          rgba(54, 50, 47, 0.02) 100%
+        );
+        opacity: 0;
+        transition: opacity 0.4s ease;
+      }
+
+      .tool-card:hover {
+        transform: translateY(-6px) scale(1.02);
+        box-shadow: var(--shadow-xl);
+        border-color: var(--border-light);
+      }
+
+      .tool-card:hover::before {
+        opacity: 1;
+      }
+
+      .tool-icon {
+        width: 60px;
+        height: 60px;
+        background: var(--gradient-1);
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 1.5rem;
+        font-size: 1.5rem;
+        color: white;
+        box-shadow: var(--shadow-lg);
+      }
+
+      .tool-card:nth-child(even) .tool-icon {
+        background: var(--gradient-2);
+      }
+
+      .tool-card h4 {
+        font-size: 1.125rem;
+        margin-bottom: 0.75rem;
+        color: var(--text-primary);
+        font-weight: 700;
+        letter-spacing: -0.025em;
+      }
+
+      .tool-card p {
+        color: var(--text-secondary);
+        font-size: 0.95rem;
+        line-height: 1.6;
+      }
+
+      /* Features Section */
+      .features {
+        background: var(--surface-alt);
+        border: 1px solid var(--border);
+        padding: 5rem 0;
+        border-radius: 32px;
+        margin: 3rem 0;
+        box-shadow: var(--shadow);
+      }
+
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 3rem;
+      }
+
+      .feature-card {
+        padding: 2.5rem;
+        text-align: center;
+      }
+
+      .feature-icon {
+        width: 70px;
+        height: 70px;
+        background: var(--gradient-1);
+        border-radius: 18px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 1.5rem;
+        font-size: 1.75rem;
+        color: white;
+        box-shadow: var(--shadow-lg);
+      }
+
+      .feature-card:nth-child(2) .feature-icon {
+        background: var(--gradient-2);
+      }
+
+      .feature-card:nth-child(3) .feature-icon {
+        background: var(--gradient-3);
+      }
+
+      .feature-card:nth-child(4) .feature-icon {
+        background: var(--gradient-4);
+      }
+
+      .feature-card h3 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        color: var(--text-primary);
+        font-weight: 800;
+        letter-spacing: -0.025em;
+      }
+
+      .feature-card p {
+        color: var(--text-secondary);
+        line-height: 1.7;
+        font-size: 1rem;
+      }
+
+      /* CTA Section */
+      .cta {
+        text-align: center;
+        padding: 6rem 0;
+      }
+
+      .cta h2 {
+        font-size: 2.75rem;
+        margin-bottom: 1.5rem;
+        color: var(--text-primary);
+        font-weight: 900;
+        letter-spacing: -0.05em;
+      }
+
+      .cta p {
+        font-size: 1.25rem;
+        color: var(--text-secondary);
+        margin-bottom: 3rem;
+        max-width: 650px;
+        margin-left: auto;
+        margin-right: auto;
+        line-height: 1.6;
+      }
+
+      .cta .action-buttons .action-button {
+        background: var(--accent);
+        border-color: var(--accent);
+        color: white;
+      }
+
+      .cta .action-buttons .action-button:hover {
+        background: var(--accent-hover);
+        border-color: var(--accent-hover);
+      }
+
+      /* Footer */
+      footer {
+        background: var(--secondary-bg);
+        border-top: 1px solid var(--border);
+        padding: 4rem 0;
+        margin-top: 6rem;
+      }
+
+      .footer-content {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 2rem;
+      }
+
+      .footer-links {
+        display: flex;
+        gap: 2.5rem;
+        list-style: none;
+      }
+
+      .footer-links a {
+        color: var(--text-muted);
+        text-decoration: none;
+        font-size: 0.95rem;
+        font-weight: 500;
+        transition: color 0.3s ease;
+      }
+
+      .footer-links a:hover {
+        color: var(--text-secondary);
+      }
+
+      /* Mobile Responsiveness */
+      @media (max-width: 768px) {
         .hero {
-            padding: 5rem 0;
-            background: var(--gradient-1);
-            text-align: center;
-            border-radius: 0 0 32px 32px;
-            margin-bottom: 5rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.05) 100%);
-        }
-
-        .hero .container {
-            position: relative;
-            z-index: 1;
+          padding: 4rem 0;
+          margin-bottom: 4rem;
         }
 
         .hero h1 {
-            font-size: 3.5rem;
-            font-weight: 900;
-            margin-bottom: 1.5rem;
-            color: white;
-            letter-spacing: -0.05em;
-            line-height: 1.1;
+          font-size: 2.5rem;
         }
 
         .hero p {
-            font-size: 1.375rem;
-            max-width: 650px;
-            margin: 0 auto 2.5rem;
-            opacity: 0.95;
-            color: white;
-            line-height: 1.6;
+          font-size: 1.125rem;
         }
 
         .hero-stats {
-            display: flex;
-            justify-content: center;
-            gap: 4rem;
-            margin-top: 3rem;
-            flex-wrap: wrap;
+          gap: 2.5rem;
         }
 
-        .hero-stat {
-            text-align: center;
-        }
-
-        .hero-stat h3 {
-            font-size: 2.25rem;
-            margin-bottom: 0.5rem;
-            color: white;
-            font-weight: 900;
-            letter-spacing: -0.05em;
-        }
-
-        .hero-stat p {
-            opacity: 0.9;
-            font-size: 1rem;
-            color: white;
-            font-weight: 600;
-        }
-
-        /* Action Buttons */
-        .action-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-bottom: 3rem;
-        }
-
-        .action-button {
-            display: inline-flex;
-            align-items: center;
-            background: rgba(255, 255, 255, 0.15);
-            border: 1px solid rgba(255, 255, 255, 0.25);
-            border-radius: 14px;
-            padding: 0.875rem 1.75rem;
-            text-decoration: none;
-            color: white;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-            font-weight: 600;
-            font-size: 0.95rem;
-        }
-
-        .action-button:hover {
-            background: rgba(255, 255, 255, 0.25);
-            transform: translateY(-2px);
-            border-color: rgba(255, 255, 255, 0.35);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .action-button.primary {
-            background: white;
-            color: var(--accent);
-            border-color: white;
-        }
-
-        .action-button.primary:hover {
-            background: rgba(255, 255, 255, 0.9);
-        }
-
-        .action-button i {
-            margin-right: 0.5rem;
-            font-size: 1.1rem;
-        }
-
-        /* Tools Grid */
         .tools-section {
-            padding: 5rem 0;
-        }
-
-        .tools-section h2 {
-            text-align: center;
-            font-size: 2.75rem;
-            margin-bottom: 3rem;
-            color: var(--text-primary);
-            font-weight: 900;
-            letter-spacing: -0.05em;
+          padding: 4rem 0;
         }
 
         .tools-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 5rem;
+          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
         }
 
         .tool-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 2rem;
-            box-shadow: var(--shadow);
-            transition: all 0.4s ease;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
+          padding: 1.5rem;
         }
 
-        .tool-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, transparent 0%, rgba(54, 50, 47, 0.02) 100%);
-            opacity: 0;
-            transition: opacity 0.4s ease;
-        }
-
-        .tool-card:hover {
-            transform: translateY(-6px) scale(1.02);
-            box-shadow: var(--shadow-xl);
-            border-color: var(--border-light);
-        }
-
-        .tool-card:hover::before {
-            opacity: 1;
-        }
-
-        .tool-icon {
-            width: 60px;
-            height: 60px;
-            background: var(--gradient-1);
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 1.5rem;
-            font-size: 1.5rem;
-            color: white;
-            box-shadow: var(--shadow-lg);
-        }
-
-        .tool-card:nth-child(even) .tool-icon {
-            background: var(--gradient-2);
-        }
-
-        .tool-card h4 {
-            font-size: 1.125rem;
-            margin-bottom: 0.75rem;
-            color: var(--text-primary);
-            font-weight: 700;
-            letter-spacing: -0.025em;
-        }
-
-        .tool-card p {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            line-height: 1.6;
-        }
-
-        /* Features Section */
         .features {
-            background: var(--surface-alt);
-            border: 1px solid var(--border);
-            padding: 5rem 0;
-            border-radius: 32px;
-            margin: 3rem 0;
-            box-shadow: var(--shadow);
+          padding: 4rem 0;
         }
 
         .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 3rem;
+          grid-template-columns: 1fr;
+          gap: 2rem;
         }
 
         .feature-card {
-            padding: 2.5rem;
-            text-align: center;
+          padding: 2rem;
         }
 
-        .feature-icon {
-            width: 70px;
-            height: 70px;
-            background: var(--gradient-1);
-            border-radius: 18px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 1.5rem;
-            font-size: 1.75rem;
-            color: white;
-            box-shadow: var(--shadow-lg);
+        .action-buttons {
+          flex-direction: column;
+          align-items: center;
         }
 
-        .feature-card:nth-child(2) .feature-icon {
-            background: var(--gradient-2);
+        .action-button {
+          width: 250px;
+          justify-content: center;
         }
 
-        .feature-card:nth-child(3) .feature-icon {
-            background: var(--gradient-3);
-        }
-
-        .feature-card:nth-child(4) .feature-icon {
-            background: var(--gradient-4);
-        }
-
-        .feature-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--text-primary);
-            font-weight: 800;
-            letter-spacing: -0.025em;
-        }
-
-        .feature-card p {
-            color: var(--text-secondary);
-            line-height: 1.7;
-            font-size: 1rem;
-        }
-
-        /* CTA Section */
         .cta {
-            text-align: center;
-            padding: 6rem 0;
+          padding: 4rem 0;
         }
+      }
 
-        .cta h2 {
-            font-size: 2.75rem;
-            margin-bottom: 1.5rem;
-            color: var(--text-primary);
-            font-weight: 900;
-            letter-spacing: -0.05em;
+      /* Animations */
+      .fade-in {
+        opacity: 0;
+        animation: fadeIn 0.8s ease-out forwards;
+      }
+
+      @keyframes fadeIn {
+        to {
+          opacity: 1;
         }
+      }
 
-        .cta p {
-            font-size: 1.25rem;
-            color: var(--text-secondary);
-            margin-bottom: 3rem;
-            max-width: 650px;
-            margin-left: auto;
-            margin-right: auto;
-            line-height: 1.6;
+      .slide-up {
+        opacity: 0;
+        transform: translateY(40px);
+        animation: slideUp 0.8s ease-out forwards;
+      }
+
+      @keyframes slideUp {
+        to {
+          opacity: 1;
+          transform: translateY(0);
         }
-
-        .cta .action-buttons .action-button {
-            background: var(--accent);
-            border-color: var(--accent);
-            color: white;
-        }
-
-        .cta .action-buttons .action-button:hover {
-            background: var(--accent-hover);
-            border-color: var(--accent-hover);
-        }
-
-        /* Footer */
-        footer {
-            background: var(--secondary-bg);
-            border-top: 1px solid var(--border);
-            padding: 4rem 0;
-            margin-top: 6rem;
-        }
-
-        .footer-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 2rem;
-        }
-
-        .footer-links {
-            display: flex;
-            gap: 2.5rem;
-            list-style: none;
-        }
-
-        .footer-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 0.95rem;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-
-        .footer-links a:hover {
-            color: var(--text-secondary);
-        }
-
-        /* Mobile Responsiveness */
-        @media (max-width: 768px) {
-            .hero {
-                padding: 4rem 0;
-                margin-bottom: 4rem;
-            }
-
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero p {
-                font-size: 1.125rem;
-            }
-
-            .hero-stats {
-                gap: 2.5rem;
-            }
-
-            .tools-section {
-                padding: 4rem 0;
-            }
-
-            .tools-grid {
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            }
-
-            .tool-card {
-                padding: 1.5rem;
-            }
-
-            .features {
-                padding: 4rem 0;
-            }
-
-            .features-grid {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            .feature-card {
-                padding: 2rem;
-            }
-
-            .action-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .action-button {
-                width: 250px;
-                justify-content: center;
-            }
-
-            .cta {
-                padding: 4rem 0;
-            }
-        }
-
-        /* Animations */
-        .fade-in {
-            opacity: 0;
-            animation: fadeIn 0.8s ease-out forwards;
-        }
-
-        @keyframes fadeIn {
-            to {
-                opacity: 1;
-            }
-        }
-
-        .slide-up {
-            opacity: 0;
-            transform: translateY(40px);
-            animation: slideUp 0.8s ease-out forwards;
-        }
-
-        @keyframes slideUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <header class="header">
-        <div class="container header-content">
-            <a href="./index.html" class="logo">
-                <i class="fas fa-file-pdf"></i> MyPDFGenius
-            </a>
-            <a href="./index.html" class="back-link">
-                <i class="fas fa-arrow-left"></i> Back to Home
-            </a>
-        </div>
+      <div class="container header-content">
+        <a href="./index.html" class="logo">
+          <i class="fas fa-file-pdf"></i> MyPDFGenius
+        </a>
+        <a href="./index.html" class="back-link">
+          <i class="fas fa-arrow-left"></i> Back to Home
+        </a>
+      </div>
     </header>
 
     <main>
-        <section class="hero">
-            <div class="container">
-                <h1 class="fade-in">Your Complete PDF Toolkit</h1>
-                <p class="fade-in" style="animation-delay: 0.2s">
-                    Everything you need to work with PDFs. Edit, merge, split, compress, convert, and more with 30+ free tools. Part of the <a href="/" style="color: rgba(255,255,255,0.9); text-decoration: underline;">Proper Eleven Technologies</a> suite of digital productivity tools.
-                </p>
-                <div class="action-buttons fade-in" style="animation-delay: 0.4s">
-                    <a href="https://www.mypdfgenius.com" class="action-button primary">
-                        <i class="fas fa-globe"></i>
-                       Edit PDF Online Free
-                    </a>
-                    <span class="action-button" style="cursor: default; opacity: 0.7;">
-                        <i class="fab fa-apple"></i>
-                        iOS App - Coming Soon
-                    </span>
-                    <span class="action-button" style="cursor: default; opacity: 0.7;">
-                        <i class="fab fa-google-play"></i>
-                        Android App - Coming Soon
-                    </span>
-                </div>
-                <div class="hero-stats fade-in" style="animation-delay: 0.6s">
-                    <div class="hero-stat">
-                        <h3>30+</h3>
-                        <p>PDF Tools</p>
-                    </div>
-                    <div class="hero-stat">
-                        <h3>100%</h3>
-                        <p>Free to Use</p>
-                    </div>
-                    <div class="hero-stat">
-                        <h3>1M+</h3>
-                        <p>Files Processed</p>
-                    </div>
-                </div>
+      <section class="hero">
+        <div class="container">
+          <h1 class="fade-in">Your Complete PDF Toolkit</h1>
+          <p class="fade-in" style="animation-delay: 0.2s">
+            Everything you need to work with PDFs. Edit, merge, split, compress,
+            convert, and more with 30+ free tools. Part of the
+            <a
+              href="/"
+              style="
+                color: rgba(255, 255, 255, 0.9);
+                text-decoration: underline;
+              "
+              >Proper Eleven Technologies</a
+            >
+            suite of digital productivity tools.
+          </p>
+          <div class="action-buttons fade-in" style="animation-delay: 0.4s">
+            <a href="https://www.mypdfgenius.com" class="action-button primary">
+              <i class="fas fa-globe"></i>
+              Edit PDF Online Free
+            </a>
+            <span class="action-button" style="cursor: default; opacity: 0.7">
+              <i class="fab fa-apple"></i>
+              iOS App - Coming Soon
+            </span>
+            <span class="action-button" style="cursor: default; opacity: 0.7">
+              <i class="fab fa-google-play"></i>
+              Android App - Coming Soon
+            </span>
+          </div>
+          <div class="hero-stats fade-in" style="animation-delay: 0.6s">
+            <div class="hero-stat">
+              <h3>30+</h3>
+              <p>PDF Tools</p>
             </div>
-        </section>
-
-        <section class="tools-section container">
-            <h2 class="fade-in">Popular PDF Tools</h2>
-            <div class="tools-grid">
-                <div class="tool-card slide-up">
-                    <div class="tool-icon"><i class="fas fa-compress"></i></div>
-                    <h4><a href="https://www.mypdfgenius.com/compress-pdf" style="text-decoration: none; color: inherit; cursor: pointer;">Compress PDF Online</a></h4>
-                    <p>Reduce file size without losing quality</p>
-                </div>
-                <div class="tool-card slide-up" style="animation-delay: 0.1s">
-                    <div class="tool-icon"><i class="fas fa-object-group"></i></div>
-                    <h4><a href="https://www.mypdfgenius.com/merge-pdf" style="text-decoration: none; color: inherit; cursor: pointer;">Merge PDF Online</a></h4>
-                    <p>Combine multiple PDFs into one</p>
-                </div>
-                <div class="tool-card slide-up" style="animation-delay: 0.2s">
-                    <div class="tool-icon"><i class="fas fa-cut"></i></div>
-                    <h4><a href="https://www.mypdfgenius.com/split-pdf" style="text-decoration: none; color: inherit; cursor: pointer;">Split PDF Online</a></h4>
-                    <p>Extract pages or split into multiple files</p>
-                </div>
-                <div class="tool-card slide-up" style="animation-delay: 0.3s">
-                    <div class="tool-icon"><i class="fas fa-edit"></i></div>
-                    <h4><a href="https://www.mypdfgenius.com/edit-pdf" style="text-decoration: none; color: inherit; cursor: pointer;">Edit PDF Online</a></h4>
-                    <p>Add text, images, and annotations</p>
-                </div>
-                <div class="tool-card slide-up" style="animation-delay: 0.4s">
-                    <div class="tool-icon"><i class="fas fa-sync-alt"></i></div>
-                    <h4><a href="https://www.mypdfgenius.com/convert-pdf" style="text-decoration: none; color: inherit; cursor: pointer;">Convert PDF Online</a></h4>
-                    <p>Transform PDFs to Word, Excel, PowerPoint, and other formats with our advanced document conversion technology</p>
-                </div>
-                <div class="tool-card slide-up" style="animation-delay: 0.5s">
-                    <div class="tool-icon"><i class="fas fa-shield-alt"></i></div>
-                    <h4><a href="https://www.mypdfgenius.com/protect-pdf" style="text-decoration: none; color: inherit; cursor: pointer;">Protect PDF Online</a></h4>
-                    <p>Add password and security settings</p>
-                </div>
-                <div class="tool-card slide-up" style="animation-delay: 0.6s">
-                    <div class="tool-icon"><i class="fas fa-unlock"></i></div>
-                    <h4><a href="https://www.mypdfgenius.com/unlock-pdf" style="text-decoration: none; color: inherit; cursor: pointer;">Unlock PDF Online</a></h4>
-                    <p>Remove password protection</p>
-                </div>
-                <div class="tool-card slide-up" style="animation-delay: 0.7s">
-                    <div class="tool-icon"><i class="fas fa-undo"></i></div>
-                    <h4>Rotate PDF</h4>
-                    <p>Fix page orientation easily</p>
-                </div>
-                <div class="tool-card slide-up" style="animation-delay: 0.8s">
-                    <div class="tool-icon"><i class="fas fa-signature"></i></div>
-                    <h4><a href="https://www.mypdfgenius.com/sign-pdf" style="text-decoration: none; color: inherit; cursor: pointer;">Sign PDF Online</a></h4>
-                    <p>Add electronic signatures</p>
-                </div>
-                <div class="tool-card slide-up" style="animation-delay: 0.9s">
-                    <div class="tool-icon"><i class="fas fa-file-image"></i></div>
-                    <h4>PDF to Images</h4>
-                    <p>Convert pages to JPG, PNG</p>
-                </div>
-                <div class="tool-card slide-up" style="animation-delay: 1.0s">
-                    <div class="tool-icon"><i class="fas fa-images"></i></div>
-                    <h4>Images to PDF</h4>
-                    <p>Create PDF from multiple images</p>
-                </div>
-                <div class="tool-card slide-up" style="animation-delay: 1.1s">
-                    <div class="tool-icon"><i class="fas fa-plus"></i></div>
-                    <h4>And 19+ More Tools</h4>
-                    <p>Discover our complete collection of PDF editing, optimization, and conversion utilities</p>
-                </div>
+            <div class="hero-stat">
+              <h3>100%</h3>
+              <p>Free to Use</p>
             </div>
-        </section>
-
-        <section class="features">
-            <div class="container">
-                <div class="features-grid">
-                    <div class="feature-card slide-up">
-                        <div class="feature-icon">
-                            <i class="fas fa-cloud"></i>
-                        </div>
-                        <h3>Cloud Processing</h3>
-                        <p>Process your PDFs securely in the cloud with <a href="https://www.mypdfgenius.com" style="color: var(--text-secondary); text-decoration: underline;">MyPDFGenius web app</a>. No software installation required - works in any browser.</p>
-                    </div>
-
-                    <div class="feature-card slide-up" style="animation-delay: 0.1s">
-                        <div class="feature-icon">
-                            <i class="fas fa-mobile-alt"></i>
-                        </div>
-                        <h3>Mobile Apps</h3>
-                        <p>Take PDF tools with you anywhere. Available on iOS and Android with full feature parity. Discover our other <a href="/pictura-ai.html" style="color: var(--text-secondary); text-decoration: underline;">AI-powered image tools</a> for complete digital creativity.</p>
-                    </div>
-
-                    <div class="feature-card slide-up" style="animation-delay: 0.2s">
-                        <div class="feature-icon">
-                            <i class="fas fa-lock"></i>
-                        </div>
-                        <h3>Secure & Private</h3>
-                        <p>Your files are encrypted and automatically deleted after processing. We never store your documents. Learn more about our <a href="/privacy.html" style="color: var(--text-secondary); text-decoration: underline;">privacy policy</a> and data protection practices.</p>
-                    </div>
-
-                    <div class="feature-card slide-up" style="animation-delay: 0.3s">
-                        <div class="feature-icon">
-                            <i class="fas fa-bolt"></i>
-                        </div>
-                        <h3>Lightning Fast</h3>
-                        <p>Advanced processing algorithms deliver results in seconds, even for large documents.</p>
-                    </div>
-                </div>
+            <div class="hero-stat">
+              <h3>1M+</h3>
+              <p>Files Processed</p>
             </div>
-        </section>
+          </div>
+        </div>
+      </section>
 
-        <section class="cta container">
-            <h2 class="fade-in">Ready to Master Your PDFs?</h2>
-            <p class="fade-in" style="animation-delay: 0.2s">
-                Join millions of users who trust MyPDFGenius for all their PDF processing and document management needs. Explore our complete suite of <a href="/" style="color: var(--text-secondary); text-decoration: underline;">digital productivity tools</a> for enhanced workflow optimization.
+      <section class="tools-section container">
+        <h2 class="fade-in">Popular PDF Tools</h2>
+        <div class="tools-grid">
+          <div class="tool-card slide-up">
+            <div class="tool-icon"><i class="fas fa-compress"></i></div>
+            <h4>
+              <a
+                href="https://www.mypdfgenius.com/compress-pdf"
+                style="text-decoration: none; color: inherit; cursor: pointer"
+                >Compress PDF Online</a
+              >
+            </h4>
+            <p>Reduce file size without losing quality</p>
+          </div>
+          <div class="tool-card slide-up" style="animation-delay: 0.1s">
+            <div class="tool-icon"><i class="fas fa-object-group"></i></div>
+            <h4>
+              <a
+                href="https://www.mypdfgenius.com/merge-pdf"
+                style="text-decoration: none; color: inherit; cursor: pointer"
+                >Merge PDF Online</a
+              >
+            </h4>
+            <p>Combine multiple PDFs into one</p>
+          </div>
+          <div class="tool-card slide-up" style="animation-delay: 0.2s">
+            <div class="tool-icon"><i class="fas fa-cut"></i></div>
+            <h4>
+              <a
+                href="https://www.mypdfgenius.com/split-pdf"
+                style="text-decoration: none; color: inherit; cursor: pointer"
+                >Split PDF Online</a
+              >
+            </h4>
+            <p>Extract pages or split into multiple files</p>
+          </div>
+          <div class="tool-card slide-up" style="animation-delay: 0.3s">
+            <div class="tool-icon"><i class="fas fa-edit"></i></div>
+            <h4>
+              <a
+                href="https://www.mypdfgenius.com/edit-pdf"
+                style="text-decoration: none; color: inherit; cursor: pointer"
+                >Edit PDF Online</a
+              >
+            </h4>
+            <p>Add text, images, and annotations</p>
+          </div>
+          <div class="tool-card slide-up" style="animation-delay: 0.4s">
+            <div class="tool-icon"><i class="fas fa-sync-alt"></i></div>
+            <h4>
+              <a
+                href="https://www.mypdfgenius.com/convert-pdf"
+                style="text-decoration: none; color: inherit; cursor: pointer"
+                >Convert PDF Online</a
+              >
+            </h4>
+            <p>
+              Transform PDFs to Word, Excel, PowerPoint, and other formats with
+              our advanced document conversion technology
             </p>
-            <div class="action-buttons fade-in" style="animation-delay: 0.4s">
-                <a href="https://www.mypdfgenius.com" class="action-button">
-                    <i class="fas fa-rocket"></i>
-                    Get Started Free
-                </a>
+          </div>
+          <div class="tool-card slide-up" style="animation-delay: 0.5s">
+            <div class="tool-icon"><i class="fas fa-shield-alt"></i></div>
+            <h4>
+              <a
+                href="https://www.mypdfgenius.com/protect-pdf"
+                style="text-decoration: none; color: inherit; cursor: pointer"
+                >Protect PDF Online</a
+              >
+            </h4>
+            <p>Add password and security settings</p>
+          </div>
+          <div class="tool-card slide-up" style="animation-delay: 0.6s">
+            <div class="tool-icon"><i class="fas fa-unlock"></i></div>
+            <h4>
+              <a
+                href="https://www.mypdfgenius.com/unlock-pdf"
+                style="text-decoration: none; color: inherit; cursor: pointer"
+                >Unlock PDF Online</a
+              >
+            </h4>
+            <p>Remove password protection</p>
+          </div>
+          <div class="tool-card slide-up" style="animation-delay: 0.7s">
+            <div class="tool-icon"><i class="fas fa-undo"></i></div>
+            <h4>Rotate PDF</h4>
+            <p>Fix page orientation easily</p>
+          </div>
+          <div class="tool-card slide-up" style="animation-delay: 0.8s">
+            <div class="tool-icon"><i class="fas fa-signature"></i></div>
+            <h4>
+              <a
+                href="https://www.mypdfgenius.com/sign-pdf"
+                style="text-decoration: none; color: inherit; cursor: pointer"
+                >Sign PDF Online</a
+              >
+            </h4>
+            <p>Add electronic signatures</p>
+          </div>
+          <div class="tool-card slide-up" style="animation-delay: 0.9s">
+            <div class="tool-icon"><i class="fas fa-file-image"></i></div>
+            <h4>PDF to Images</h4>
+            <p>Convert pages to JPG, PNG</p>
+          </div>
+          <div class="tool-card slide-up" style="animation-delay: 1s">
+            <div class="tool-icon"><i class="fas fa-images"></i></div>
+            <h4>Images to PDF</h4>
+            <p>Create PDF from multiple images</p>
+          </div>
+          <div class="tool-card slide-up" style="animation-delay: 1.1s">
+            <div class="tool-icon"><i class="fas fa-plus"></i></div>
+            <h4>And 19+ More Tools</h4>
+            <p>
+              Discover our complete collection of PDF editing, optimization, and
+              conversion utilities
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="features">
+        <div class="container">
+          <div class="features-grid">
+            <div class="feature-card slide-up">
+              <div class="feature-icon">
+                <i class="fas fa-cloud"></i>
+              </div>
+              <h3>Cloud Processing</h3>
+              <p>
+                Process your PDFs securely in the cloud with
+                <a
+                  href="https://www.mypdfgenius.com"
+                  style="
+                    color: var(--text-secondary);
+                    text-decoration: underline;
+                  "
+                  >MyPDFGenius web app</a
+                >. No software installation required - works in any browser.
+              </p>
             </div>
-        </section>
+
+            <div class="feature-card slide-up" style="animation-delay: 0.1s">
+              <div class="feature-icon">
+                <i class="fas fa-mobile-alt"></i>
+              </div>
+              <h3>Mobile Apps</h3>
+              <p>
+                Take PDF tools with you anywhere. Available on iOS and Android
+                with full feature parity. Discover our other
+                <a
+                  href="/pictura-ai.html"
+                  style="
+                    color: var(--text-secondary);
+                    text-decoration: underline;
+                  "
+                  >AI-powered image tools</a
+                >
+                for complete digital creativity.
+              </p>
+            </div>
+
+            <div class="feature-card slide-up" style="animation-delay: 0.2s">
+              <div class="feature-icon">
+                <i class="fas fa-lock"></i>
+              </div>
+              <h3>Secure & Private</h3>
+              <p>
+                Your files are encrypted and automatically deleted after
+                processing. We never store your documents. Learn more about our
+                <a
+                  href="/privacy.html"
+                  style="
+                    color: var(--text-secondary);
+                    text-decoration: underline;
+                  "
+                  >privacy policy</a
+                >
+                and data protection practices.
+              </p>
+            </div>
+
+            <div class="feature-card slide-up" style="animation-delay: 0.3s">
+              <div class="feature-icon">
+                <i class="fas fa-bolt"></i>
+              </div>
+              <h3>Lightning Fast</h3>
+              <p>
+                Advanced processing algorithms deliver results in seconds, even
+                for large documents.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="cta container">
+        <h2 class="fade-in">Ready to Master Your PDFs?</h2>
+        <p class="fade-in" style="animation-delay: 0.2s">
+          Join millions of users who trust MyPDFGenius for all their PDF
+          processing and document management needs. Explore our complete suite
+          of
+          <a
+            href="/"
+            style="color: var(--text-secondary); text-decoration: underline"
+            >digital productivity tools</a
+          >
+          for enhanced workflow optimization.
+        </p>
+        <div class="action-buttons fade-in" style="animation-delay: 0.4s">
+          <a href="https://www.mypdfgenius.com" class="action-button">
+            <i class="fas fa-rocket"></i>
+            Get Started Free
+          </a>
+        </div>
+      </section>
     </main>
 
     <footer>
-        <div class="container footer-content">
-            <p>&copy; 2024 Proper Eleven Technologies. All rights reserved.</p>
-            <ul class="footer-links">
-                <li><a href="/privacy.html">Privacy Policy</a></li>
-                <li><a href="https://www.mypdfgenius.com/terms">Terms of Service</a></li>
-                <li><a href="/pictura-ai.html">Pictura AI</a></li>
-                <li><a href="/">Home</a></li>
-            </ul>
-        </div>
+      <div class="container footer-content">
+        <p>&copy; 2025 Proper Eleven Technologies. All rights reserved.</p>
+        <ul class="footer-links">
+          <li>
+            <a href="https://www.mypdfgenius.com/privacy-policy"
+              >Privacy Policy</a
+            >
+          </li>
+          <li>
+            <a href="https://www.mypdfgenius.com/terms">Terms of Service</a>
+          </li>
+        </ul>
+      </div>
     </footer>
 
     <script>
-        // Intersection Observer for animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
+      // Intersection Observer for animations
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      };
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.animationPlayState = 'running';
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.slide-up').forEach(el => {
-            el.style.animationPlayState = 'paused';
-            observer.observe(el);
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.style.animationPlayState = "running";
+          }
         });
+      }, observerOptions);
+
+      document.querySelectorAll(".slide-up").forEach((el) => {
+        el.style.animationPlayState = "paused";
+        observer.observe(el);
+      });
     </script>
-</body>
+  </body>
 </html>

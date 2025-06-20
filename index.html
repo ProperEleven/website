@@ -28,7 +28,7 @@
           0 4px 6px -4px rgba(0, 0, 0, 0.07);
         --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-        --max-width: 1200px; /* Increased slightly for more space */
+        --max-width: 1200px;
       }
 
       * {
@@ -48,7 +48,6 @@
         color: var(--text-primary);
       }
 
-      /* Main layout structure */
       body {
         display: flex;
         flex-direction: column;
@@ -76,7 +75,11 @@
         line-height: 1.15;
         font-weight: 900;
         margin-bottom: 1rem;
-        background: linear-gradient(120deg, var(--accent) 0%, var(--text-secondary) 100%);
+        background: linear-gradient(
+          120deg,
+          var(--accent) 0%,
+          var(--text-secondary) 100%
+        );
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
@@ -88,8 +91,24 @@
         line-height: 1.6;
         font-size: clamp(0.9rem, 2vw, 1.1rem);
       }
-      
-      /* Cards Section */
+
+      /* --- NEW: Products Section Wrapper --- */
+      .products-section {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .products-heading {
+        font-size: clamp(0.9rem, 2vw, 1rem);
+        font-weight: 600;
+        color: var(--text-secondary);
+        margin-bottom: clamp(
+          0.75rem,
+          2vh,
+          1rem
+        ); /* Space between heading and cards */
+      }
+
       .card-grid {
         display: grid;
         grid-template-columns: 1fr;
@@ -104,9 +123,8 @@
         transition: transform 0.3s ease, box-shadow 0.3s ease;
         display: flex;
         flex-direction: column;
-        /* --- UPDATED: Fluid padding and gap as requested --- */
         padding: clamp(1.5rem, 4vh, 2.5rem);
-        gap: clamp(0.4rem, 1vh, 0.5rem); /* approx 6px to 8px */
+        gap: clamp(0.4rem, 1vh, 0.5rem);
       }
 
       .bento-card:hover {
@@ -125,9 +143,13 @@
         flex-shrink: 0;
         font-size: clamp(1.2rem, 2vw, 1.5rem);
       }
-      
-      .pictura-icon { background: var(--gradient-1); }
-      .pdf-icon { background: var(--gradient-2); }
+
+      .pictura-icon {
+        background: var(--gradient-1);
+      }
+      .pdf-icon {
+        background: var(--gradient-2);
+      }
 
       .card-title {
         font-weight: 800;
@@ -150,12 +172,13 @@
         gap: 0.4rem;
         transition: gap 0.3s ease;
         font-size: clamp(0.85rem, 1.8vw, 0.95rem);
-        margin-top: auto; /* Pushes link to the bottom */
-        padding-top: 0.5rem; /* Ensures space above link */
+        margin-top: auto;
+        padding-top: 0.5rem;
       }
-      .card-link:hover { gap: 0.6rem; }
+      .card-link:hover {
+        gap: 0.6rem;
+      }
 
-      /* Footer */
       footer {
         flex-shrink: 0;
         background: var(--secondary-bg);
@@ -166,19 +189,34 @@
         align-items: center;
         font-size: clamp(0.75rem, 1.5vw, 0.85rem);
       }
-      
-      footer p { color: var(--text-muted); }
-      .footer-links { display: flex; gap: 1.5rem; list-style: none; }
-      .footer-links a { color: var(--text-muted); text-decoration: none; transition: color 0.3s; }
-      .footer-links a:hover { color: var(--text-primary); }
-      
+
+      footer p {
+        color: var(--text-muted);
+      }
+      .footer-links {
+        display: flex;
+        gap: 1.5rem;
+        list-style: none;
+      }
+      .footer-links a {
+        color: var(--text-muted);
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+      .footer-links a:hover {
+        color: var(--text-primary);
+      }
+
       /* RESPONSIVE OVERRIDE: For TALL screens (portrait mode) */
       @media (max-aspect-ratio: 1/1) {
         .container {
           grid-template-columns: 1fr;
           gap: clamp(1.5rem, 5vh, 2.5rem);
         }
-        .intro-text { text-align: center; }
+        .intro-text,
+        .products-heading {
+          text-align: center;
+        }
       }
     </style>
   </head>
@@ -188,46 +226,60 @@
         <!-- Left/Top Column: Intro Text -->
         <div class="intro-text">
           <h1>Proper Eleven Technologies</h1>
+          <!-- --- UPDATED: New professional description --- -->
           <p>
-            We create innovative tools that simplify your digital life. From
-            AI-powered image generation to comprehensive PDF processing.
+            We specialize in building robust and scalable digital products. Our
+            expertise allows us to tackle diverse technological challenges,
+            delivering elegant and powerful solutions.
           </p>
         </div>
 
-        <!-- Right/Bottom Column: Product Cards -->
-        <div class="card-grid">
-          <div class="bento-card">
-            <div class="card-icon pictura-icon"><i class="fas fa-palette"></i></div>
-            <h2 class="card-title">Pictura AI</h2>
-            <p class="card-description">
-              Transform ideas into visuals. Create images from text, enhance photos, and restore memories with our AI.
-            </p>
-            <a role="button" href="/pictura-ai.html" class="card-link">
-              Explore Pictura AI <i class="fas fa-arrow-right"></i>
-            </a>
-          </div>
+        <!-- Right/Bottom Column: Products Section -->
+        <div class="products-section">
+          <!-- --- NEW: Products Subheading --- -->
+          <h3 class="products-heading">Our Current Products</h3>
+          <div class="card-grid">
+            <div class="bento-card">
+              <div class="card-icon pictura-icon">
+                <i class="fas fa-palette"></i>
+              </div>
+              <h2 class="card-title">Pictura AI</h2>
+              <p class="card-description">
+                Transform ideas into visuals. Create images from text, enhance
+                photos, and restore memories with our AI.
+              </p>
+              <a role="button" href="/pictura-ai.html" class="card-link">
+                Explore Pictura AI <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
 
-          <div class="bento-card">
-            <div class="card-icon pdf-icon"><i class="fas fa-file-pdf"></i></div>
-            <h2 class="card-title">MyPDFGenius</h2>
-            <p class="card-description">
-              Your complete PDF toolkit with 30+ free tools. Edit, merge, compress, and convert PDFs effortlessly.
-            </p>
-            <a role="button" href="https://www.mypdfgenius.com" class="card-link">
-              Discover MyPDFGenius <i class="fas fa-arrow-right"></i>
-            </a>
+            <div class="bento-card">
+              <div class="card-icon pdf-icon">
+                <i class="fas fa-file-pdf"></i>
+              </div>
+              <h2 class="card-title">MyPDFGenius</h2>
+              <p class="card-description">
+                Your complete PDF toolkit with 30+ free tools. Edit, merge,
+                compress, and convert PDFs effortlessly.
+              </p>
+              <a
+                role="button"
+                href="https://www.mypdfgenius.com"
+                class="card-link"
+              >
+                Discover MyPDFGenius <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
           </div>
         </div>
       </div>
     </main>
 
     <footer>
-        <p>© 2025 Proper Eleven Technologies.</p>
-        <ul class="footer-links">
-          <li><a href="/privacy.html">Privacy</a></li>
-          <li><a href="/pictura-ai.html">Pictura AI</a></li>
-          <li><a href="https://www.mypdfgenius.com">MyPDFGenius</a></li>
-        </ul>
+      <p>© 2025 Proper Eleven Technologies Pvt Ltd.</p>
+      <ul class="footer-links">
+        <li><a href="/privacy.html">Privacy</a></li>
+      </ul>
     </footer>
   </body>
 </html>

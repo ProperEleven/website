@@ -16,6 +16,8 @@ website/
 │   ├── index.html          # Pictura AI product showcase
 │   ├── privacy_policy.html # Pictura AI privacy policy
 │   └── terms.html          # Pictura AI terms and conditions
+├── stoppy/
+│   └── privacy.html        # Stoppy privacy policy, served at /stoppy/privacy (same text as stoppy/legal/privacy.html in the games repo)
 ├── app-store-icon.png      # iOS App Store button asset
 ├── play-store-icon.webp    # Google Play Store button asset
 └── CNAME                   # GitHub Pages domain configuration

@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Repository Overview
 
-This is the static HTML website for Proper Eleven Technologies, hosted at propereleven.com. It serves as the company landing page and product showcase, primarily featuring Pictura AI.
+This is the static HTML website for Proper Eleven Technologies (P.E.T), hosted at propereleven.com: the company landing page, the company privacy policy and Stoppy's privacy policy.
 
 ## Project Structure
 
@@ -12,15 +12,10 @@ This is the static HTML website for Proper Eleven Technologies, hosted at proper
 website/
 ├── index.html              # Main company landing page
 ├── privacy.html            # Company privacy policy
-├── pictura/                # Pictura AI product pages
-│   ├── index.html          # Pictura AI product showcase
-│   ├── privacy_policy.html # Pictura AI privacy policy
-│   └── terms.html          # Pictura AI terms and conditions
 ├── stoppy/
 │   └── privacy.html        # Stoppy privacy policy, served at /stoppy/privacy (same text as stoppy/legal/privacy.html in the games repo)
 ├── app-store-icon.png      # iOS App Store button asset
-├── play-store-icon.webp    # Google Play Store button asset
-└── CNAME                   # GitHub Pages domain configuration
+└── play-store-icon.webp    # Google Play Store button asset
 ```
 
 ## Development Commands
@@ -43,19 +38,19 @@ php -S localhost:8000
 - **Pure Static HTML**: No JavaScript frameworks or build process
 - **Inline CSS**: All styling is embedded within HTML files
 - **Responsive Design**: Media queries for mobile/desktop layouts
-- **External Dependencies**: Only Font Awesome icons (loaded via CDN)
-- **Hosting**: GitHub Pages with custom domain (propereleven.com)
+- **External Dependencies**: Google Fonts on `index.html` and Font Awesome icons on `privacy.html`, both from CDNs
+- **Hosting**: a Cloudflare Worker named `pet-website` serves propereleven.com from this repo's files (static assets). GitHub Pages also builds the repo, at propereleven.github.io/website.
 
 ## Key Design Patterns
 
 - **Card-based Layouts**: Main content organized in styled cards
 - **Consistent Color Scheme**: Light background (#f5f5f7), dark text (#333)
 - **Mobile-First**: Responsive design with specific mobile optimizations
-- **App Store Links**: Direct links to Pictura AI on iOS/Android stores
 
 ## Important Notes
 
 - This website is part of the Proper Eleven Technologies monorepo
-- Changes pushed to main branch are automatically deployed via GitHub Pages
-- The Pictura AI showcased here connects to the `phoenix_ai` backend service
+- Each push to `main` makes Cloudflare build and deploy the `pet-website` Worker. If propereleven.com doesn't change after a push, read that build's log in the Cloudflare dashboard (Workers & Pages → pet-website).
+- Pages are served without `.html`: `stoppy/privacy.html` is https://propereleven.com/stoppy/privacy.
+- Don't add a `_redirects` file with full URLs, such as www to non-www. Cloudflare rejects the whole deploy ("Only relative URLs are allowed", code 100324) and the live site stops updating. Redirects between hostnames belong in a Redirect Rule in the Cloudflare dashboard.
 - App store links should match the bundle identifiers defined in the parent CLAUDE.md

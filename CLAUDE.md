@@ -11,11 +11,9 @@ This is the static HTML website for Proper Eleven Technologies (P.E.T), hosted a
 ```
 website/
 ├── index.html              # Main company landing page
-├── privacy.html            # Company privacy policy
-├── stoppy/
-│   └── privacy.html        # Stoppy privacy policy, served at /stoppy/privacy (same text as stoppy/legal/privacy.html in the games repo)
-├── app-store-icon.png      # iOS App Store button asset
-└── play-store-icon.webp    # Google Play Store button asset
+├── privacy.html            # Company privacy policy; an app with its own policy (Stoppy) follows that one
+└── stoppy/
+    └── privacy.html        # Stoppy privacy policy, served at /stoppy/privacy (same text as stoppy/legal/privacy.html in the games repo)
 ```
 
 ## Development Commands
@@ -53,4 +51,3 @@ php -S localhost:8000
 - Each push to `main` makes Cloudflare build and deploy the `pet-website` Worker. If propereleven.com doesn't change after a push, read that build's log in the Cloudflare dashboard (Workers & Pages → pet-website).
 - Pages are served without `.html`: `stoppy/privacy.html` is https://propereleven.com/stoppy/privacy.
 - Don't add a `_redirects` file with full URLs, such as www to non-www. Cloudflare rejects the whole deploy ("Only relative URLs are allowed", code 100324) and the live site stops updating. Redirects between hostnames belong in a Redirect Rule in the Cloudflare dashboard.
-- App store links should match the bundle identifiers defined in the parent CLAUDE.md

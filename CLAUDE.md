@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Repository Overview
 
-This is the static HTML website for Proper Eleven Technologies (P.E.T), hosted at propereleven.com: the company landing page, the company privacy policy, and Stoppy's privacy policy and terms of service.
+This is the static HTML website for Proper Eleven Technologies (P.E.T), hosted at propereleven.com: the company landing page, the company privacy policy, and Stoppy's privacy policy, terms of service and support page.
 
 ## Project Structure
 
@@ -14,7 +14,8 @@ website/
 ├── privacy.html            # Company privacy policy; an app with its own policy (Stoppy) follows that one
 └── stoppy/
     ├── privacy.html        # Stoppy privacy policy, served at /stoppy/privacy (same text as stoppy/legal/privacy.html in the games repo)
-    └── terms.html          # Stoppy terms of service, served at /stoppy/terms (same text as stoppy/legal/terms.html in the games repo)
+    ├── terms.html          # Stoppy terms of service, served at /stoppy/terms (same text as stoppy/legal/terms.html in the games repo)
+    └── support.html        # Stoppy support page, served at /stoppy/support: the Support URL in App Store Connect. Its answers must stay true to the game (no ads or purchases, progress on the device, Settings labels)
 ```
 
 ## Development Commands

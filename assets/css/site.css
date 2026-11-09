@@ -1,0 +1,833 @@
+/* Proper Eleven Technologies: the shared design system.
+   Night and ember: a dark, lit stage where the two ember bars of the mark are the light source.
+   Type: Clash Display (Indian Type Foundry) for headlines and statements, Schibsted Grotesk for reading and interface. */
+
+:root {
+  --night-0: #04050a;
+  --night-1: #080a12;
+  --night-2: #0e111b;
+  --night-3: #161a27;
+  --ink: #f3eee6;
+  --ink-2: #bdb6ab;
+  --ink-3: #8c867c;
+  --line: rgba(243, 238, 230, 0.12);
+  --line-2: rgba(243, 238, 230, 0.22);
+  --ember: #ff5a1f;
+  --ember-2: #ff8a3d;
+  --gold: #ffc581;
+  --ember-ink: #ff9a66;
+  --display: "Clash Display", "Schibsted Grotesk", system-ui, sans-serif;
+  --text: "Schibsted Grotesk", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --gutter: clamp(20px, 5vw, 72px);
+  --max: 1360px;
+  --header-h: 84px;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.76, 0, 0.24, 1);
+  color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  background: var(--night-1);
+}
+
+body {
+  margin: 0;
+  background: var(--night-1);
+  color: var(--ink);
+  font: 400 1.0625rem/1.65 var(--text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+}
+
+/* Film grain over everything, for texture. */
+body::after {
+  content: "";
+  position: fixed;
+  inset: -50%;
+  z-index: 90;
+  pointer-events: none;
+  opacity: 0.07;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+}
+
+img,
+video,
+svg,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+
+img,
+video {
+  height: auto;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--ember-2);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
+::selection {
+  background: var(--ember);
+  color: #160904;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  font-family: var(--display);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+p {
+  margin: 0;
+  text-wrap: pretty;
+}
+
+.wrap {
+  width: 100%;
+  max-width: calc(var(--max) + 2 * var(--gutter));
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.skip {
+  position: fixed;
+  left: var(--gutter);
+  top: -80px;
+  z-index: 200;
+  padding: 12px 18px;
+  background: var(--ink);
+  color: var(--night-1);
+  border-radius: 999px;
+  font-weight: 600;
+}
+
+.skip:focus {
+  top: 14px;
+}
+
+/* ---------- The mark: two ember bars, the "11" of Proper Eleven ---------- */
+
+.mark {
+  display: inline-flex;
+  gap: 5px;
+  height: 24px;
+  flex: none;
+}
+
+.mark i {
+  width: 6px;
+  border-radius: 1px;
+  background: linear-gradient(180deg, var(--gold), var(--ember) 45%, #e8430f);
+  box-shadow: 0 0 14px rgba(255, 90, 31, 0.55);
+}
+
+/* ---------- Header ---------- */
+
+.site-header {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 60;
+  height: var(--header-h);
+  transition: transform 0.6s var(--ease-out), background-color 0.4s, border-color 0.4s, backdrop-filter 0.4s;
+  border-bottom: 1px solid transparent;
+}
+
+.site-header.is-scrolled {
+  background: rgba(8, 10, 18, 0.62);
+  border-bottom-color: var(--line);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+}
+
+.site-header.is-hidden {
+  transform: translateY(-101%);
+}
+
+.site-header__in {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  height: 100%;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  white-space: nowrap;
+}
+
+.brand__word {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 1.3rem;
+  letter-spacing: 0;
+}
+
+.site-nav {
+  display: flex;
+  align-items: center;
+  gap: clamp(20px, 3vw, 40px);
+}
+
+.site-nav a,
+.link-line {
+  position: relative;
+  padding-block: 10px;
+  font-weight: 500;
+  font-size: 0.975rem;
+}
+
+.site-nav a::after,
+.link-line::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 4px;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.6s var(--ease-out);
+}
+
+.site-nav a:hover::after,
+.site-nav a[aria-current="page"]::after,
+.link-line:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.site-nav a[aria-current="page"]::after {
+  background: var(--ember-2);
+}
+
+.menu-toggle {
+  display: none;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  padding: 0 4px 0 12px;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: 500 0.975rem var(--text);
+  cursor: pointer;
+}
+
+.menu-toggle__icon {
+  position: relative;
+  width: 22px;
+  height: 10px;
+}
+
+.menu-toggle__icon::before,
+.menu-toggle__icon::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1.5px;
+  background: currentColor;
+  transition: transform 0.5s var(--ease-out), top 0.5s var(--ease-out);
+}
+
+.menu-toggle__icon::before {
+  top: 0;
+}
+
+.menu-toggle__icon::after {
+  top: 8px;
+}
+
+.menu-toggle[aria-expanded="true"] .menu-toggle__icon::before {
+  top: 4px;
+  transform: rotate(45deg);
+}
+
+.menu-toggle[aria-expanded="true"] .menu-toggle__icon::after {
+  top: 4px;
+  transform: rotate(-45deg);
+}
+
+/* Full-screen menu for small screens. */
+.menu {
+  position: fixed;
+  inset: 0;
+  z-index: 55;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: calc(var(--header-h) + 24px) var(--gutter) 40px;
+  background:
+    radial-gradient(120% 60% at 50% 110%, rgba(255, 90, 31, 0.28), rgba(255, 90, 31, 0) 60%),
+    var(--night-0);
+  clip-path: inset(0 0 100% 0);
+  visibility: hidden;
+  transition: clip-path 0.8s var(--ease-in-out), visibility 0s 0.8s;
+}
+
+.menu.is-open {
+  clip-path: inset(0 0 0 0);
+  visibility: visible;
+  transition: clip-path 0.8s var(--ease-in-out), visibility 0s;
+}
+
+.menu ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.menu li {
+  overflow: hidden;
+}
+
+.menu li a {
+  display: block;
+  padding-block: 4px;
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: clamp(3rem, 14vw, 5rem);
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  transform: translateY(105%);
+  transition: transform 0.9s var(--ease-out);
+}
+
+.menu.is-open li a {
+  transform: none;
+}
+
+.menu.is-open li:nth-child(2) a {
+  transition-delay: 0.06s;
+}
+
+.menu.is-open li:nth-child(3) a {
+  transition-delay: 0.12s;
+}
+
+.menu.is-open li:nth-child(4) a {
+  transition-delay: 0.18s;
+}
+
+.menu__foot {
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+  color: var(--ink-2);
+  font-size: 0.95rem;
+}
+
+@media (max-width: 760px) {
+  .site-nav {
+    display: none;
+  }
+
+  .menu-toggle {
+    display: inline-flex;
+  }
+
+  :root {
+    --header-h: 72px;
+  }
+
+  .brand__word {
+    font-size: 1.2rem;
+  }
+}
+
+@media (min-width: 761px) {
+  .menu {
+    display: none;
+  }
+}
+
+/* ---------- The gate: the page transition. Two halves close like doors, each carrying one bar of the mark. ---------- */
+
+.gate {
+  position: fixed;
+  inset: 0;
+  z-index: 150;
+  display: none;
+  pointer-events: none;
+}
+
+html.js .gate {
+  display: block;
+}
+
+.gate__half {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: calc(50% + 1px);
+  background:
+    radial-gradient(80% 60% at 100% 50%, rgba(255, 90, 31, 0.14), rgba(255, 90, 31, 0) 60%),
+    var(--night-0);
+  will-change: transform;
+}
+
+.gate__half--l {
+  left: 0;
+  transform: translateX(-101%);
+}
+
+.gate__half--r {
+  right: 0;
+  transform: translateX(101%);
+  background:
+    radial-gradient(80% 60% at 0% 50%, rgba(255, 90, 31, 0.14), rgba(255, 90, 31, 0) 60%),
+    var(--night-0);
+}
+
+.gate__bar {
+  position: absolute;
+  top: 50%;
+  width: 7px;
+  height: 30vh;
+  margin-top: -15vh;
+  border-radius: 1px;
+  background: linear-gradient(180deg, var(--gold), var(--ember) 40%, #e3400c);
+  box-shadow: 0 0 22px 3px rgba(255, 90, 31, 0.6), 0 0 90px 12px rgba(255, 90, 31, 0.22);
+  transform: scaleY(0);
+}
+
+.gate__half--l .gate__bar {
+  right: 7px;
+}
+
+.gate__half--r .gate__bar {
+  left: 7px;
+}
+
+/* Closed until the script opens it; set by the inline script in <head>. */
+html.gate-closed .gate {
+  pointer-events: auto;
+}
+
+html.gate-closed .gate__half {
+  transform: none;
+}
+
+html.gate-closed .gate__bar {
+  transform: none;
+}
+
+html.gate-intro .gate__bar {
+  transform: scaleY(0);
+}
+
+/* If the script never runs, open the gate anyway after a moment. */
+html.gate-closed:not(.gate-live) .gate {
+  animation: gate-failsafe 0.01s 2.5s forwards;
+}
+
+@keyframes gate-failsafe {
+  to {
+    visibility: hidden;
+  }
+}
+
+/* ---------- Buttons ---------- */
+
+.btn {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 58px;
+  padding: 0 30px;
+  overflow: hidden;
+  border-radius: 999px;
+  font: 500 1rem var(--text);
+  letter-spacing: 0.005em;
+  white-space: nowrap;
+  transition: color 0.5s var(--ease-out), border-color 0.5s var(--ease-out);
+}
+
+.btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  transform: translateY(101%);
+  transition: transform 0.6s var(--ease-out);
+}
+
+.btn:hover::before {
+  transform: none;
+}
+
+.btn--light {
+  background: var(--ink);
+  color: var(--night-1);
+}
+
+.btn--light::before {
+  background: var(--gold);
+}
+
+.btn--ghost {
+  border: 1px solid var(--line-2);
+  color: var(--ink);
+}
+
+.btn--ghost::before {
+  background: var(--ink);
+}
+
+.btn--ghost:hover {
+  color: var(--night-1);
+  border-color: var(--ink);
+}
+
+.btn__ext {
+  font-size: 0.9em;
+  opacity: 0.8;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+}
+
+/* The App Store badge: Apple's own artwork, unmodified, at least 40px tall. */
+.store-badge {
+  display: inline-block;
+  border-radius: 10px;
+  transition: transform 0.5s var(--ease-out);
+}
+
+.store-badge:hover {
+  transform: translateY(-2px);
+}
+
+.store-badge img {
+  height: 54px;
+  width: auto;
+}
+
+/* ---------- Text styles ---------- */
+
+
+.display {
+  font-family: var(--display);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 0.98;
+}
+
+.title {
+  font-size: clamp(2.6rem, 1.3rem + 4.2vw, 5.75rem);
+  line-height: 1;
+}
+
+.lede {
+  color: var(--ink-2);
+  font-size: clamp(1.125rem, 1rem + 0.45vw, 1.375rem);
+  line-height: 1.6;
+}
+
+.muted {
+  color: var(--ink-2);
+}
+
+/* Split headings: each line slides up from behind its own mask. */
+.split-line {
+  display: block;
+  overflow: clip;
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+}
+
+/* ---------- Reveal states. The script animates these in; without it they stay visible. ---------- */
+
+html.motion [data-reveal] {
+  opacity: 0;
+  transform: translate3d(0, 44px, 0);
+}
+
+html.motion [data-split] {
+  visibility: hidden;
+}
+
+html.motion:not(.motion-live) [data-reveal],
+html.motion:not(.motion-live) [data-split] {
+  animation: reveal-failsafe 0.6s 2.6s forwards;
+}
+
+@keyframes reveal-failsafe {
+  to {
+    opacity: 1;
+    transform: none;
+    visibility: visible;
+  }
+}
+
+/* ---------- Footer ---------- */
+
+.site-footer {
+  position: relative;
+  overflow: hidden;
+  padding-top: clamp(72px, 10vw, 140px);
+  background:
+    radial-gradient(70% 55% at 50% 118%, rgba(255, 90, 31, 0.32), rgba(255, 90, 31, 0) 62%),
+    var(--night-0);
+  border-top: 1px solid var(--line);
+}
+
+.footer__top {
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+  gap: 40px 64px;
+  align-items: start;
+}
+
+.footer__line {
+  max-width: 18ch;
+  font-family: var(--display);
+  font-weight: 500;
+  font-size: clamp(1.9rem, 1.2rem + 2.2vw, 3.25rem);
+  line-height: 1.08;
+  letter-spacing: -0.01em;
+}
+
+.footer__nav {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, max-content));
+  gap: 6px 56px;
+  justify-content: end;
+}
+
+.footer__nav a {
+  padding-block: 8px;
+  color: var(--ink-2);
+  transition: color 0.3s;
+}
+
+.footer__nav a:hover {
+  color: var(--ink);
+}
+
+.footer__mark {
+  display: flex;
+  align-items: flex-end;
+  gap: clamp(12px, 2vw, 28px);
+  margin-top: clamp(56px, 9vw, 120px);
+  margin-inline: calc(var(--gutter) * -0.25);
+  line-height: 0.8;
+}
+
+.footer__mark .mark {
+  height: clamp(56px, 11vw, 168px);
+  gap: clamp(6px, 1vw, 14px);
+  margin-bottom: 1.6vw;
+}
+
+.footer__mark .mark i {
+  width: clamp(10px, 1.6vw, 24px);
+}
+
+.footer__word {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: clamp(2.5rem, 11.2vw, 12.4rem);
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  background: linear-gradient(180deg, var(--ink) 30%, rgba(243, 238, 230, 0.16));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.footer__legal {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px 24px;
+  margin-top: 28px;
+  padding-block: 22px 28px;
+  border-top: 1px solid var(--line);
+  color: var(--ink-3);
+  font-size: 0.875rem;
+}
+
+@media (max-width: 760px) {
+  .footer__top {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .footer__nav {
+    justify-content: start;
+  }
+}
+
+/* ---------- Documents: privacy policies, terms and support ---------- */
+
+.doc {
+  max-width: calc(760px + 2 * var(--gutter));
+  padding-top: calc(var(--header-h) + clamp(48px, 8vw, 112px));
+  padding-bottom: clamp(80px, 10vw, 140px);
+}
+
+.doc__kind {
+  margin-bottom: 18px;
+}
+
+.doc .doc__kind a {
+  color: var(--ink-2);
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.doc .doc__kind a:hover {
+  color: var(--ember-ink);
+}
+
+.doc h1 {
+  font-size: clamp(2.75rem, 1.6rem + 4vw, 5rem);
+  line-height: 1;
+}
+
+.doc .lead {
+  margin-top: 20px;
+  color: var(--ink-2);
+  font-size: 1.25rem;
+}
+
+.doc h1 + .updated,
+.doc .last-updated {
+  margin: 18px 0 36px;
+  color: var(--ink-3);
+  font-size: 0.95rem;
+}
+
+.doc .last-updated {
+  margin-top: 36px;
+}
+
+.doc h2 {
+  margin: 56px 0 14px;
+  font-size: clamp(1.6rem, 1.3rem + 1vw, 2.1rem);
+  line-height: 1.15;
+}
+
+.doc h3 {
+  margin: 32px 0 10px;
+  font-family: var(--text);
+  font-weight: 600;
+  font-size: 1.1rem;
+  letter-spacing: 0;
+}
+
+.doc p,
+.doc ul,
+.doc ol {
+  margin: 0 0 16px;
+  color: #d9d3ca;
+}
+
+.doc ul,
+.doc ol {
+  padding-left: 1.3em;
+}
+
+.doc li + li {
+  margin-top: 8px;
+}
+
+.doc li::marker {
+  color: var(--ember-2);
+}
+
+.doc a {
+  color: var(--ember-ink);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+
+.doc strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.doc .short {
+  margin: 28px 0 12px;
+  padding: 22px 24px 8px;
+  background: linear-gradient(135deg, rgba(255, 90, 31, 0.1), rgba(255, 90, 31, 0.02));
+  border: 1px solid rgba(255, 138, 61, 0.22);
+  border-radius: 16px;
+}
+
+/* ---------- Lenis smooth scrolling ---------- */
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis:not(.lenis-autoToggle).lenis-stopped {
+  overflow: clip;
+}
+
+.lenis [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+/* ---------- Reduced motion ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

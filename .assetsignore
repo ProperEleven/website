@@ -1,0 +1,7 @@
+# Files Cloudflare must not upload as part of propereleven.com. Without this list, /CLAUDE.md and /README.md were public.
+CLAUDE.md
+README.md
+.DS_Store
+**/.DS_Store
+.git
+.gitignore

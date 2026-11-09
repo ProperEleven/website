@@ -1,241 +1,76 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" data-page="doc">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Privacy Policy - Proper Eleven Technologies</title>
+    <link rel="canonical" href="https://propereleven.com/privacy" />
+    <meta name="theme-color" content="#080a12" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png" />
+    <script>
+      (function () {
+        var d = document.documentElement;
+        d.classList.add("js");
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+        d.classList.add("motion");
+        try {
+          if (sessionStorage.getItem("pet-gate") === "1") d.classList.add("gate-closed");
+          sessionStorage.removeItem("pet-gate");
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="preconnect" href="https://api.fontshare.com" />
+    <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&display=swap" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
+      href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:ital,wght@0,400..700;1,400..700&display=swap"
       rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
     />
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-
-      :root {
-        --primary-bg: #fbfaf9;
-        --secondary-bg: #f5f2ef;
-        --surface: #ffffff;
-        --surface-alt: #f8f6f3;
-        --accent: #36322f;
-        --accent-hover: #2a2724;
-        --text-primary: #36322f;
-        --text-secondary: #6d6d6d;
-        --text-muted: #8b8b8b;
-        --border: #e9e3dd;
-        --border-light: #f0eae4;
-        --shadow-sm: 0 1px 2px 0 rgba(54, 50, 47, 0.05);
-        --shadow: 0 1px 3px 0 rgba(54, 50, 47, 0.1),
-          0 1px 2px 0 rgba(54, 50, 47, 0.06);
-        --shadow-lg: 0 10px 15px -3px rgba(54, 50, 47, 0.1),
-          0 4px 6px -2px rgba(54, 50, 47, 0.05);
-        --max-width: 1024px;
-      }
-
-      body {
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-          "Inter", Helvetica, Arial, sans-serif;
-        background: var(--primary-bg);
-        color: var(--text-primary);
-        line-height: 1.6;
-      }
-
-      .container {
-        max-width: var(--max-width);
-        margin: 0 auto;
-        padding: 0 20px;
-      }
-
-      /* Header */
-      header {
-        background: var(--surface);
-        border-bottom: 1px solid var(--border);
-        position: sticky;
-        top: 0;
-        z-index: 100;
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-      }
-
-      nav {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 1rem 0;
-      }
-
-      .logo {
-        font-size: 1.5rem;
-        font-weight: 800;
-        color: var(--text-primary);
-        text-decoration: none;
-        letter-spacing: -0.025em;
-      }
-
-      .back-link {
-        color: var(--text-secondary);
-        text-decoration: none;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        transition: color 0.3s;
-      }
-
-      .back-link:hover {
-        color: var(--text-primary);
-      }
-
-      /* Hero Section */
-      .hero {
-        background: var(--surface);
-        padding: 4rem 0;
-        text-align: center;
-        border-radius: 0 0 30px 30px;
-        margin-bottom: 2rem;
-        box-shadow: var(--shadow);
-      }
-
-      .hero h1 {
-        font-size: 2.5rem;
-        font-weight: 900;
-        margin-bottom: 1rem;
-        color: var(--text-primary);
-        letter-spacing: -0.05em;
-      }
-
-      .hero p {
-        color: var(--text-secondary);
-        font-size: 1.1rem;
-      }
-
-      /* Main Content */
-      main {
-        background: var(--surface);
-        margin: 2rem 0;
-        border-radius: 20px;
-        padding: 3rem;
-        box-shadow: var(--shadow);
-        border: 1px solid var(--border);
-      }
-
-      .section {
-        margin-bottom: 2.5rem;
-      }
-
-      h2 {
-        color: var(--text-primary);
-        font-size: 1.5rem;
-        font-weight: 800;
-        margin-bottom: 1rem;
-        padding-bottom: 0.5rem;
-        border-bottom: 2px solid var(--border);
-        letter-spacing: -0.025em;
-      }
-
-      h3 {
-        color: var(--text-primary);
-        font-size: 1.2rem;
-        font-weight: 700;
-        margin: 1.5rem 0 0.75rem;
-        letter-spacing: -0.025em;
-      }
-
-      p {
-        margin-bottom: 1rem;
-        color: var(--text-primary);
-      }
-
-      ul {
-        margin: 1rem 0 1rem 2rem;
-      }
-
-      li {
-        margin-bottom: 0.5rem;
-        color: var(--text-primary);
-      }
-
-      .last-updated {
-        background: var(--surface-alt);
-        padding: 1rem;
-        border-radius: 12px;
-        margin-bottom: 2rem;
-        font-style: italic;
-        color: var(--text-secondary);
-        border: 1px solid var(--border);
-      }
-
-      /* Footer */
-      footer {
-        background: var(--secondary-bg);
-        border-top: 1px solid var(--border);
-        padding: 3rem 0;
-        margin-top: 2rem;
-      }
-
-      .footer-content {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 2rem;
-      }
-
-      .footer-links {
-        display: flex;
-        gap: 2rem;
-        list-style: none;
-      }
-
-      .footer-links a {
-        color: var(--text-muted);
-        text-decoration: none;
-        font-size: 0.95rem;
-        font-weight: 500;
-        transition: color 0.3s ease;
-      }
-
-      .footer-links a:hover {
-        color: var(--text-secondary);
-      }
-
-      /* Mobile Responsiveness */
-      @media (max-width: 768px) {
-        .hero h1 {
-          font-size: 2rem;
-        }
-
-        main {
-          padding: 2rem;
-        }
-
-        .footer-content {
-          flex-direction: column;
-          text-align: center;
-        }
-      }
-    </style>
+    <link rel="stylesheet" href="/assets/css/site.css" />
   </head>
   <body>
-    <header>
-      <nav class="container">
-        <a href="./index.html" class="logo">Proper Eleven</a>
-        <a href="./index.html" class="back-link">
-          <i class="fas fa-arrow-left"></i> Back to Home
+    <a class="skip" href="#main">Skip to content</a>
+
+    <div class="gate" aria-hidden="true">
+      <div class="gate__half gate__half--l"><span class="gate__bar"></span></div>
+      <div class="gate__half gate__half--r"><span class="gate__bar"></span></div>
+    </div>
+
+    <header class="site-header" data-header>
+      <div class="wrap site-header__in">
+        <a class="brand" href="/" aria-label="Proper Eleven Technologies home">
+          <span class="mark" aria-hidden="true"><i></i><i></i></span>
+          <span class="brand__word">Proper Eleven</span>
         </a>
-      </nav>
+        <nav class="site-nav" aria-label="Main">
+          <a href="/sagazo">Sagazo</a>
+          <a href="/games">Games</a>
+          <a href="/#contact">Contact</a>
+        </nav>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-menu">
+          <span class="menu-toggle__label">Menu</span><span class="menu-toggle__icon" aria-hidden="true"></span>
+        </button>
+      </div>
     </header>
 
-    <section class="hero">
-      <div class="container">
-        <h1>Privacy Policy</h1>
-        <p>Your privacy and data protection are our top priorities</p>
-      </div>
-    </section>
+    <div class="menu" id="site-menu">
+      <nav aria-label="Menu">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/sagazo">Sagazo</a></li>
+          <li><a href="/games">Games</a></li>
+          <li><a href="/#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <p class="menu__foot">contact@propereleven.com</p>
+    </div>
 
-    <main class="container">
+    <main id="main" class="wrap doc">
+      <h1>Privacy Policy</h1>
+        <p class="lead">Your privacy and data protection are our top priorities</p>
       <div class="last-updated">
         <strong>Last updated:</strong> November 3, 2026
       </div>
@@ -372,13 +207,30 @@
       </div>
     </main>
 
-    <footer>
-      <div class="container footer-content">
-        <p>&copy; 2025 Proper Eleven Technologies. All rights reserved.</p>
-        <ul class="footer-links">
-          <li><a href="/">Home</a></li>
-        </ul>
+    <footer class="site-footer">
+      <div class="wrap">
+        <div class="footer__top">
+          <p class="footer__line">We build companies and products that move humanity forward.</p>
+          <nav class="footer__nav" aria-label="Footer">
+            <a href="/sagazo">Sagazo</a>
+            <a href="/games">Games</a>
+            <a href="/#contact">Contact</a>
+            <a href="/privacy">Privacy policy</a>
+          </nav>
+        </div>
+        <div class="footer__mark" aria-hidden="true">
+          <span class="mark"><i></i><i></i></span><span class="footer__word">Proper Eleven</span>
+        </div>
+        <div class="footer__legal">
+          <span>© 2026 Proper Eleven Technologies Private Limited, India</span>
+          <a href="mailto:contact@propereleven.com">contact@propereleven.com</a>
+        </div>
       </div>
     </footer>
+
+    <script src="/assets/js/vendor/gsap.min.js" defer></script>
+    <script src="/assets/js/vendor/ScrollTrigger.min.js" defer></script>
+    <script src="/assets/js/vendor/lenis.min.js" defer></script>
+    <script src="/assets/js/site.js" defer></script>
   </body>
 </html>

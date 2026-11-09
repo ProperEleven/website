@@ -1,0 +1,821 @@
+<!doctype html>
+<html lang="en" data-page="stoppy">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Stoppy: a 3D puzzle game for iPhone and iPad</title>
+    <meta
+      name="description"
+      content="Stoppy is a 3D puzzle game for iPhone and iPad. Swipe, and the ball rolls until something stops it. It has 50 levels in five worlds and a daily puzzle."
+    />
+    <link rel="canonical" href="https://propereleven.com/stoppy" />
+    <meta name="apple-itunes-app" content="app-id=6832074174" />
+    <meta name="theme-color" content="#5cb4fb" />
+    <link rel="icon" href="/assets/img/stoppy/icon-128.png" type="image/png" />
+    <link rel="apple-touch-icon" href="/assets/img/stoppy/icon-256.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Proper Eleven Technologies" />
+    <meta property="og:title" content="Stoppy: a 3D puzzle game for iPhone and iPad" />
+    <meta
+      property="og:description"
+      content="Swipe, and Stoppy rolls until something stops him. The game is free on the App Store, with 50 levels in five worlds, a daily puzzle and challenges."
+    />
+    <meta property="og:url" content="https://propereleven.com/stoppy" />
+    <meta property="og:image" content="https://propereleven.com/assets/img/stoppy/og.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script>
+      (function () {
+        var d = document.documentElement;
+        d.classList.add("js");
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+        d.classList.add("motion");
+        try {
+          if (sessionStorage.getItem("pet-gate") === "1") d.classList.add("gate-closed");
+          sessionStorage.removeItem("pet-gate");
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="preconnect" href="https://api.fontshare.com" />
+    <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&display=swap" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Schibsted+Grotesk:wght@400..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/assets/css/site.css" />
+    <link rel="stylesheet" href="/assets/css/scene.css" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "MobileApplication",
+        "name": "Stoppy",
+        "alternateName": "Stoppy: Rolling Ball Puzzle",
+        "url": "https://propereleven.com/stoppy",
+        "image": "https://propereleven.com/assets/img/stoppy/og.jpg",
+        "description": "A 3D puzzle game for iPhone and iPad with 50 levels in five worlds, a daily puzzle and challenges.",
+        "applicationCategory": "GameApplication",
+        "operatingSystem": "iOS 15.0 or later, iPadOS 15.0 or later",
+        "contentRating": "4+",
+        "inLanguage": "en",
+        "installUrl": "https://apps.apple.com/app/id6832074174",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Proper Eleven Technologies Private Limited",
+          "url": "https://propereleven.com/"
+        }
+      }
+    </script>
+    <style>
+      /* Stoppy's own look on the shared system: the game's sky, Fredoka and the red ball. */
+      :root {
+        --s-ink: #2b2452;
+        --s-ink-2: #5a537a;
+        --s-red: #f23b4c;
+        --s-red-ink: #c4162f;
+        --s-paper: #fff7fa;
+        --s-line: #ecdff0;
+        --round: "Fredoka", var(--text);
+      }
+
+      html,
+      body {
+        background: var(--s-paper);
+        color: var(--s-ink);
+      }
+
+      ::selection {
+        background: var(--s-red);
+        color: #fff;
+      }
+
+      .site-header.on-light:not(.is-scrolled) {
+        color: var(--s-ink);
+      }
+
+      /* Hero: the whole world, full screen. */
+      .s-hero {
+        height: 100svh;
+        min-height: 640px;
+      }
+
+      .s-hero .scene__scrim {
+        height: 58%;
+      }
+
+      .s-hero__copy {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: clamp(30px, 6.5vh, 72px);
+        z-index: 5;
+        color: #fff;
+      }
+
+      .s-title {
+        font-family: var(--round);
+        font-weight: 700;
+        font-size: clamp(4.6rem, 2rem + 9.4vw, 11.5rem);
+        line-height: 0.84;
+        letter-spacing: -0.025em;
+        text-shadow: 0 10px 60px rgba(40, 20, 90, 0.35);
+      }
+
+      .s-sub {
+        margin-top: 14px;
+        font: 600 clamp(1.25rem, 1rem + 0.9vw, 1.9rem) / 1.25 var(--round);
+        text-shadow: 0 2px 22px rgba(40, 20, 90, 0.45);
+      }
+
+      .s-cta {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 14px 22px;
+        margin-top: clamp(22px, 3vh, 34px);
+      }
+
+      .s-cta .store-badge img {
+        height: 58px;
+      }
+
+      .s-cta p {
+        font-weight: 600;
+        text-shadow: 0 2px 16px rgba(40, 20, 90, 0.5);
+      }
+
+      /* Sections */
+      .s-section {
+        padding-block: clamp(90px, 12vw, 170px);
+      }
+
+      .s-section h2,
+      .s-get h2 {
+        font-family: var(--round);
+        font-weight: 700;
+        font-size: clamp(2.6rem, 1.4rem + 3.6vw, 4.8rem);
+        line-height: 1;
+        letter-spacing: -0.02em;
+      }
+
+      .s-lead {
+        margin-top: 22px;
+        color: var(--s-ink);
+        font-size: clamp(1.2rem, 1.05rem + 0.5vw, 1.5rem);
+        line-height: 1.5;
+      }
+
+      /* How it plays */
+      .play {
+        display: grid;
+        grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+        align-items: center;
+        gap: clamp(48px, 8vw, 128px);
+      }
+
+      .play__text p:not(.s-lead) {
+        margin-top: 18px;
+        max-width: 52ch;
+        color: var(--s-ink-2);
+        font-size: 1.1rem;
+      }
+
+      .play__media {
+        display: grid;
+        justify-items: center;
+        gap: 34px;
+        perspective: 1400px;
+      }
+
+      .phone {
+        width: min(100%, 330px);
+        padding: 10px;
+        border-radius: 50px;
+        background: linear-gradient(150deg, #3d365f, #221c3d 40%, #34295a);
+        box-shadow: 0 50px 100px -24px rgba(43, 36, 82, 0.45), inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+      }
+
+      .phone video {
+        width: 100%;
+        aspect-ratio: 600 / 1300;
+        object-fit: cover;
+        border-radius: 40px;
+        background: #78c8ff;
+      }
+
+      .phone__toggle {
+        min-height: 44px;
+        padding: 0 20px;
+        border: 1.5px solid var(--s-ink);
+        border-radius: 999px;
+        background: transparent;
+        color: var(--s-ink);
+        font: 600 0.95rem var(--text);
+        cursor: pointer;
+        transition: background 0.3s, color 0.3s;
+      }
+
+      .phone__toggle:hover {
+        background: var(--s-ink);
+        color: #fff;
+      }
+
+      /* Worlds */
+      .worlds__head p {
+        margin-top: 16px;
+        max-width: 50ch;
+        color: var(--s-ink-2);
+        font-size: 1.1rem;
+      }
+
+      .worlds__list {
+        display: grid;
+        gap: clamp(36px, 6vw, 80px);
+        margin: clamp(48px, 7vw, 96px) auto 0;
+        padding: 0;
+        list-style: none;
+        counter-reset: world;
+      }
+
+      .world {
+        display: grid;
+        grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+        align-items: center;
+        gap: clamp(28px, 6vw, 96px);
+      }
+
+      .world:nth-child(even) .world__art {
+        order: 2;
+      }
+
+      .world__art {
+        position: relative;
+        display: grid;
+        place-items: center;
+      }
+
+      .world__art::before {
+        content: "";
+        position: absolute;
+        inset: 6% 4%;
+        border-radius: 50%;
+        background: radial-gradient(closest-side, var(--wt), rgba(255, 255, 255, 0));
+        z-index: -1;
+      }
+
+      .world__art img {
+        width: min(100%, 640px);
+        filter: drop-shadow(0 34px 26px rgba(43, 36, 82, 0.16));
+        animation: scene-bob 9s ease-in-out infinite;
+      }
+
+      .world:nth-child(2) .world__art img {
+        animation-delay: -3s;
+      }
+
+      .world:nth-child(3) .world__art img {
+        animation-delay: -6s;
+      }
+
+      .world:nth-child(4) .world__art img {
+        animation-delay: -1.5s;
+      }
+
+      .world:nth-child(5) .world__art img {
+        animation-delay: -4.5s;
+      }
+
+      .world__name {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        font-family: var(--round);
+        font-weight: 700;
+        font-size: clamp(1.9rem, 1.3rem + 1.7vw, 2.9rem);
+        line-height: 1.05;
+      }
+
+      .world__name::before {
+        counter-increment: world;
+        content: counter(world);
+        display: grid;
+        place-items: center;
+        flex: none;
+        width: 1.55em;
+        height: 1.55em;
+        border-radius: 50%;
+        background: var(--w);
+        color: #fff;
+        font-size: 0.62em;
+        box-shadow: 0 8px 20px -6px var(--w);
+      }
+
+      .world p {
+        margin-top: 16px;
+        max-width: 44ch;
+        color: var(--s-ink-2);
+        font-size: 1.1rem;
+      }
+
+      /* More to play */
+      .more__grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: clamp(20px, 3vw, 40px);
+        margin-top: clamp(40px, 6vw, 72px);
+      }
+
+      .screen {
+        margin: 0;
+      }
+
+      .screen img {
+        width: 100%;
+        aspect-ratio: 600 / 1301;
+        object-fit: cover;
+        border: 7px solid var(--s-ink);
+        border-radius: 34px;
+        background: #78c8ff;
+        box-shadow: 0 30px 60px -24px rgba(43, 36, 82, 0.4);
+        transition: transform 0.8s var(--ease-out);
+      }
+
+      .screen:hover img {
+        transform: translateY(-8px) rotate(-1deg);
+      }
+
+      .screen h3 {
+        margin-top: 22px;
+        font-family: var(--round);
+        font-weight: 700;
+        font-size: 1.6rem;
+        letter-spacing: -0.01em;
+        line-height: 1.1;
+      }
+
+      .screen p {
+        margin-top: 8px;
+        color: var(--s-ink-2);
+        font-size: 1rem;
+      }
+
+      .more__note {
+        margin-top: clamp(32px, 4vw, 52px);
+        color: var(--s-ink-2);
+      }
+
+      /* Good to know */
+      .facts {
+        padding: clamp(30px, 5vw, 64px);
+        background: #fff;
+        border-radius: 36px;
+        box-shadow: 0 1px 0 var(--s-line), 0 40px 80px -40px rgba(43, 36, 82, 0.25);
+      }
+
+      .facts h2 {
+        font-family: var(--round);
+        font-weight: 700;
+        font-size: clamp(2rem, 1.4rem + 2vw, 3rem);
+        letter-spacing: -0.015em;
+      }
+
+      .facts dl {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0 clamp(24px, 5vw, 72px);
+        margin: clamp(22px, 3vw, 36px) 0 0;
+      }
+
+      .facts dl div {
+        padding-block: 18px;
+        border-top: 1px solid var(--s-line);
+      }
+
+      .facts dt {
+        font-weight: 700;
+      }
+
+      .facts dd {
+        margin: 4px 0 0;
+        color: var(--s-ink-2);
+      }
+
+      /* Get it */
+      .s-get {
+        position: relative;
+        overflow: hidden;
+        padding-block: clamp(100px, 13vw, 180px);
+        text-align: center;
+        background:
+          radial-gradient(60% 70% at 50% 100%, rgba(255, 196, 214, 0.9), rgba(255, 196, 214, 0) 70%),
+          var(--s-paper);
+      }
+
+      .s-get__in {
+        display: grid;
+        justify-items: center;
+      }
+
+      .s-get__ball {
+        width: clamp(150px, 18vw, 240px);
+        height: auto;
+        filter: drop-shadow(0 28px 22px rgba(196, 22, 47, 0.28));
+        animation: scene-bob 5s ease-in-out infinite;
+      }
+
+      .s-get h2 {
+        margin-top: 22px;
+      }
+
+      .s-get p {
+        margin-top: 14px;
+        color: var(--s-ink-2);
+      }
+
+      .s-get .store-badge {
+        margin-top: 28px;
+      }
+
+      .s-get .store-badge img {
+        height: 58px;
+      }
+
+      .s-get a:not(.store-badge) {
+        color: var(--s-red-ink);
+        font-weight: 600;
+      }
+
+      .s-get__links {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 4px 28px;
+        margin-top: 24px;
+      }
+
+      .s-get__links a {
+        padding-block: 8px;
+      }
+
+      @media (max-width: 1000px) {
+        .more__grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+      @media (max-width: 860px) {
+        .play,
+        .world {
+          grid-template-columns: minmax(0, 1fr);
+        }
+
+        .world:nth-child(even) .world__art {
+          order: 0;
+        }
+
+        .facts dl {
+          grid-template-columns: minmax(0, 1fr);
+        }
+      }
+
+      @media (max-width: 420px) {
+        .screen img {
+          border-width: 5px;
+          border-radius: 22px;
+        }
+
+        .screen h3 {
+          font-size: 1.3rem;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .world__art img,
+        .s-get__ball {
+          animation: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <div class="gate" aria-hidden="true">
+      <div class="gate__half gate__half--l"><span class="gate__bar"></span></div>
+      <div class="gate__half gate__half--r"><span class="gate__bar"></span></div>
+    </div>
+
+    <header class="site-header on-light" data-header>
+      <div class="wrap site-header__in">
+        <a class="brand" href="/" aria-label="Proper Eleven Technologies home">
+          <span class="mark" aria-hidden="true"><i></i><i></i></span>
+          <span class="brand__word">Proper Eleven</span>
+        </a>
+        <nav class="site-nav" aria-label="Main">
+          <a href="/sagazo">Sagazo</a>
+          <a href="/games" aria-current="page">Games</a>
+          <a href="/#contact">Contact</a>
+        </nav>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-menu">
+          <span class="menu-toggle__label">Menu</span><span class="menu-toggle__icon" aria-hidden="true"></span>
+        </button>
+      </div>
+    </header>
+
+    <div class="menu" id="site-menu">
+      <nav aria-label="Menu">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/sagazo">Sagazo</a></li>
+          <li><a href="/games" aria-current="page">Games</a></li>
+          <li><a href="/#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <p class="menu__foot">contact@propereleven.com</p>
+    </div>
+
+    <main id="main">
+    <section class="scene s-hero" data-scene data-scene-now aria-labelledby="stoppy-title">
+      <div class="scene__stage">
+        <div class="scene__rays"></div>
+        <span class="scene__bokeh" style="left: 14%; top: 18%; width: 26px; height: 26px; background: #ffd3e4"></span>
+        <span class="scene__bokeh" style="left: 66%; top: 9%; width: 18px; height: 18px; background: #d5f0ff; animation-delay: -2s"></span>
+        <span class="scene__bokeh" style="left: 84%; top: 40%; width: 30px; height: 30px; background: #e3d8ff; animation-delay: -4s"></span>
+        <span class="scene__bokeh" style="left: 40%; top: 14%; width: 14px; height: 14px; background: #fff3c9; animation-delay: -1s"></span>
+        <div class="scene__layer scene__l-bounce scene__far" data-depth="0.35">
+          <div class="scene__drift" data-rise><div class="scene__float" style="animation-delay: -2s"><img src="/assets/img/stoppy/worlds/2.webp" alt="" width="1240" height="1121" /></div></div>
+        </div>
+        <div class="scene__layer scene__l-uptown scene__far" data-depth="0.4">
+          <div class="scene__drift" data-rise><div class="scene__float" style="animation-delay: -5s"><img src="/assets/img/stoppy/worlds/3.webp" alt="" width="1240" height="1111" /></div></div>
+        </div>
+        <div class="scene__layer scene__l-docks scene__island" data-depth="0.9">
+          <div class="scene__drift" data-rise><div class="scene__float" style="animation-delay: -1s"><img src="/assets/img/stoppy/worlds/4.webp" alt="" width="1240" height="1140" /></div></div>
+        </div>
+        <div class="scene__layer scene__l-park scene__island" data-depth="1">
+          <div class="scene__drift" data-rise><div class="scene__float" style="animation-delay: -3.5s"><img src="/assets/img/stoppy/worlds/5.webp" alt="" width="1240" height="967" /></div></div>
+        </div>
+        <div class="scene__layer scene__l-paint scene__island" data-depth="0.6">
+          <div class="scene__drift" data-rise><div class="scene__float"><img src="/assets/img/stoppy/worlds/1.webp" alt="" width="1240" height="999" /></div></div>
+        </div>
+        <div class="scene__layer scene__l-trail" data-depth="0.7">
+          <div class="scene__drift">
+            <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+              <defs>
+                <linearGradient id="trail" gradientUnits="userSpaceOnUse" x1="520" y1="300" x2="990" y2="380">
+                  <stop offset="0" stop-color="#f23b4c" stop-opacity="0" />
+                  <stop offset="0.45" stop-color="#f23b4c" stop-opacity="0.45" />
+                  <stop offset="1" stop-color="#f6475a" stop-opacity="0.95" />
+                </linearGradient>
+              </defs>
+              <g data-trail>
+                <path d="M 520 298 C 690 262 850 270 958 300 L 996 446 C 860 404 700 330 522 306 Z" fill="url(#trail)" />
+                <path d="M 600 292 C 740 274 860 280 946 306" fill="none" stroke="#fff" stroke-opacity="0.35" stroke-width="7" stroke-linecap="round" />
+                <circle cx="640" cy="336" r="9" fill="#f23b4c" opacity="0.8" />
+                <circle cx="760" cy="262" r="6" fill="#f23b4c" opacity="0.7" />
+                <circle cx="560" cy="270" r="5" fill="#f23b4c" opacity="0.5" />
+              </g>
+            </svg>
+          </div>
+        </div>
+        <div class="scene__layer scene__l-stoppy" data-depth="0.8">
+          <div class="scene__drift" data-stoppy><div class="scene__float" style="animation-duration: 5s"><img src="/assets/img/stoppy/stoppy.svg" alt="" width="1024" height="1024" /></div></div>
+        </div>
+        <div class="scene__layer scene__l-prickle" data-depth="1.1">
+          <div class="scene__drift" data-prickle><div class="scene__float" style="animation-duration: 6.5s; animation-delay: -2s"><img src="/assets/img/stoppy/prickle.webp" alt="" width="360" height="360" /></div></div>
+        </div>
+      </div>
+      <div class="scene__scrim"></div>
+      <div class="wrap s-hero__copy">
+        <h1 id="stoppy-title" class="s-title" data-scene-copy>Stoppy</h1>
+        <p class="s-sub" data-scene-copy>A 3D puzzle game for iPhone and iPad</p>
+        <div class="s-cta" data-scene-copy>
+          <a class="store-badge" href="https://apps.apple.com/app/id6832074174">
+            <img src="/assets/img/badges/app-store-black.svg" alt="Download Stoppy on the App Store" width="174" height="58" />
+          </a>
+          <p>Free, with no ads and no in-app purchases</p>
+        </div>
+      </div>
+    </section>
+
+      <section class="s-section wrap play" aria-labelledby="play-title">
+        <div class="play__text">
+          <h2 id="play-title" data-split>Think first, then swipe</h2>
+          <p class="s-lead" data-reveal>
+            Swipe, and Stoppy rolls until something stops him. He can't stop halfway, so before each move you work out where he
+            will end up.
+          </p>
+          <p data-reveal>
+            Get him to the glowing finish in as few moves as you can. The fewest moves earn three stars. Mind the potholes: each
+            fall costs a life, and you have three per level.
+          </p>
+          <p data-reveal>
+            Every level is a small logic puzzle with no dead ends, so wherever you've rolled, you can still win. The first level
+            shows each move before you make it.
+          </p>
+        </div>
+        <div class="play__media">
+          <div class="phone" data-phone>
+            <video
+              src="/assets/video/stoppy-preview.mp4"
+              poster="/assets/img/stoppy/preview-poster.webp"
+              width="600"
+              height="1300"
+              autoplay
+              muted
+              loop
+              playsinline
+              preload="metadata"
+              aria-label="Stoppy being played: swipes, paint, crates, Prickles and the finish"
+            ></video>
+          </div>
+          <button class="phone__toggle" type="button" hidden>Pause video</button>
+        </div>
+      </section>
+
+      <section class="s-section worlds" aria-labelledby="worlds-title">
+        <div class="wrap worlds__head">
+          <h2 id="worlds-title" data-split>Five worlds, 50 levels</h2>
+          <p data-reveal>Each world adds something new. They open one after another, with ten levels in each.</p>
+        </div>
+        <ol class="wrap worlds__list">
+          <li class="world" style="--w: #b4462c; --wt: #ffe0d4">
+            <div class="world__art" data-reveal>
+              <img src="/assets/img/stoppy/worlds/1.webp" alt="The Paint Yard island: a cream board with coral rails, slate walls and splashes of paint." width="1240" height="999" loading="lazy" />
+            </div>
+            <div data-reveal data-delay="0.1">
+              <h3 class="world__name">Paint Yard</h3>
+              <p>
+                Roll through paint to take its colour. Jelly gates only let their own colour through, and water washes the paint
+                off. Red is heavy: a red ball smashes cracked blocks.
+              </p>
+            </div>
+          </li>
+          <li class="world" style="--w: #3f5a9a; --wt: #dbe6fb">
+            <div class="world__art" data-reveal>
+              <img src="/assets/img/stoppy/worlds/2.webp" alt="The Bounce Street island: a pale blue board with hurdles to hop over." width="1240" height="1121" loading="lazy" />
+            </div>
+            <div data-reveal data-delay="0.1">
+              <h3 class="world__name">Bounce Street</h3>
+              <p>Blue is bouncy, so a blue ball hops over hurdles. Red and blue make purple, which does both.</p>
+            </div>
+          </li>
+          <li class="world" style="--w: #8e5435; --wt: #f9e1cf">
+            <div class="world__art" data-reveal>
+              <img src="/assets/img/stoppy/worlds/3.webp" alt="The Uptown island: wooden platforms on several floors, joined by stairs." width="1240" height="1111" loading="lazy" />
+            </div>
+            <div data-reveal data-delay="0.1">
+              <h3 class="world__name">Uptown</h3>
+              <p>The boards rise in platforms. Stairs are the only way up, and rolling off an edge drops him a floor.</p>
+            </div>
+          </li>
+          <li class="world" style="--w: #2f6e72; --wt: #d6efeb">
+            <div class="world__art" data-reveal>
+              <img src="/assets/img/stoppy/worlds/4.webp" alt="The Docks island: a mint board with wooden crates to push." width="1240" height="1140" loading="lazy" />
+            </div>
+            <div data-reveal data-delay="0.1">
+              <h3 class="world__name">The Docks</h3>
+              <p>
+                Grab the glove to shove wooden crates. A crate slides until something stops it, and one pushed into a pothole
+                fills it.
+              </p>
+            </div>
+          </li>
+          <li class="world" style="--w: #4f7336; --wt: #e4f0d0">
+            <div class="world__art" data-reveal>
+              <img src="/assets/img/stoppy/worlds/5.webp" alt="The Prickle Park island: a sunny board with wooden fences and spiky purple Prickles." width="1240" height="967" loading="lazy" />
+            </div>
+            <div data-reveal data-delay="0.1">
+              <h3 class="world__name">Prickle Park</h3>
+              <p>Spiky Prickles roll around on their own. Touch one and you lose a life, so wait for a gap.</p>
+            </div>
+          </li>
+        </ol>
+      </section>
+
+      <section class="s-section wrap more" aria-labelledby="more-title">
+        <h2 id="more-title" data-split>More to play</h2>
+        <div class="more__grid">
+          <figure class="screen" data-reveal>
+            <img src="/assets/img/stoppy/screens/daily.webp" alt="The daily puzzle screen." width="600" height="1301" loading="lazy" />
+            <figcaption>
+              <h3>Daily puzzle</h3>
+              <p>Everyone gets the same puzzle each day. Mondays are gentle and Sundays are tough. Keep your streak going and share how you did.</p>
+            </figcaption>
+          </figure>
+          <figure class="screen" data-reveal data-delay="0.08">
+            <img src="/assets/img/stoppy/screens/challenge.webp" alt="The challenge screen." width="600" height="1301" loading="lazy" />
+            <figcaption>
+              <h3>Challenges</h3>
+              <p>You get random boards from the worlds you've finished, against the clock and with no hints.</p>
+            </figcaption>
+          </figure>
+          <figure class="screen" data-reveal data-delay="0.16">
+            <img src="/assets/img/stoppy/screens/awards.webp" alt="The awards screen with several awards earned." width="600" height="1301" loading="lazy" />
+            <figcaption>
+              <h3>Awards</h3>
+              <p>There are 25 awards to earn, like Wrecking Ball for smashing 25 cracked blocks.</p>
+            </figcaption>
+          </figure>
+          <figure class="screen" data-reveal data-delay="0.24">
+            <img src="/assets/img/stoppy/screens/wardrobe.webp" alt="The wardrobe screen with hats, glasses and trails for Stoppy." width="600" height="1301" loading="lazy" />
+            <figcaption>
+              <h3>Wardrobe</h3>
+              <p>Unlock hats, glasses and trails for Stoppy as you play. Nothing is for sale.</p>
+            </figcaption>
+          </figure>
+        </div>
+        <p class="more__note" data-reveal>The daily puzzle and challenges open once you finish the first world, Paint Yard.</p>
+      </section>
+
+      <section class="wrap" aria-labelledby="facts-title">
+        <div class="facts" data-reveal>
+          <h2 id="facts-title">Good to know</h2>
+          <dl>
+            <div>
+              <dt>Price</dt>
+              <dd>Free. There are no ads and nothing to buy.</dd>
+            </div>
+            <div>
+              <dt>Internet</dt>
+              <dd>Stoppy plays offline, so you don't need Wi-Fi.</dd>
+            </div>
+            <div>
+              <dt>Sign-in</dt>
+              <dd>None. Your progress stays on your iPhone or iPad.</dd>
+            </div>
+            <div>
+              <dt>Hints</dt>
+              <dd>You earn points as you play, and points pay for hints that show your next move. You also get three undos a game.</dd>
+            </div>
+            <div>
+              <dt>Controls</dt>
+              <dd>Swipe, or turn on the arrow buttons in Settings and tap.</dd>
+            </div>
+            <div>
+              <dt>Age rating</dt>
+              <dd>4+ on the App Store.</dd>
+            </div>
+            <div>
+              <dt>Needs</dt>
+              <dd>iOS 15 or iPadOS 15, or later.</dd>
+            </div>
+            <div>
+              <dt>Language</dt>
+              <dd>English.</dd>
+            </div>
+          </dl>
+        </div>
+      </section>
+
+      <section class="s-get" aria-labelledby="get-title">
+        <div class="wrap s-get__in">
+          <img class="s-get__ball" src="/assets/img/stoppy/stoppy.svg" alt="" width="1024" height="1024" loading="lazy" data-reveal />
+          <h2 id="get-title" data-split>Get Stoppy</h2>
+          <p data-reveal>It's free on the App Store for iPhone and iPad.</p>
+          <a class="store-badge" href="https://apps.apple.com/app/id6832074174" data-reveal>
+            <img src="/assets/img/badges/app-store-black.svg" alt="Download Stoppy on the App Store" width="174" height="58" />
+          </a>
+          <p data-reveal>Questions or ideas? Write to <a href="mailto:support@propereleven.com">support@propereleven.com</a>.</p>
+          <nav class="s-get__links" aria-label="Stoppy help and policies" data-reveal>
+            <a href="/stoppy/support">Support</a>
+            <a href="/stoppy/privacy">Privacy policy</a>
+            <a href="/stoppy/terms">Terms of service</a>
+          </nav>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <div class="footer__top">
+          <p class="footer__line">We build companies and products that move humanity forward.</p>
+          <nav class="footer__nav" aria-label="Footer">
+            <a href="/sagazo">Sagazo</a>
+            <a href="/games">Games</a>
+            <a href="/#contact">Contact</a>
+            <a href="/privacy">Privacy policy</a>
+          </nav>
+        </div>
+        <div class="footer__mark" aria-hidden="true">
+          <span class="mark"><i></i><i></i></span><span class="footer__word">Proper Eleven</span>
+        </div>
+        <div class="footer__legal">
+          <span>© 2026 Proper Eleven Technologies Private Limited, India</span>
+          <a href="mailto:contact@propereleven.com">contact@propereleven.com</a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="/assets/js/vendor/gsap.min.js" defer></script>
+    <script src="/assets/js/vendor/ScrollTrigger.min.js" defer></script>
+    <script src="/assets/js/vendor/SplitText.min.js" defer></script>
+    <script src="/assets/js/vendor/lenis.min.js" defer></script>
+    <script src="/assets/js/site.js" defer></script>
+    <script src="/assets/js/scene.js" defer></script>
+    <script src="/assets/js/stoppy.js" defer></script>
+  </body>
+</html>

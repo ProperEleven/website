@@ -1,0 +1,1055 @@
+<!doctype html>
+<html lang="en" data-page="sagazo">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sagazo: the social commerce app for India</title>
+    <meta
+      name="description"
+      content="Sagazo is a social commerce app for India by Proper Eleven Technologies: a feed of posts and photos, Circles for every interest, and shops from across India."
+    />
+    <link rel="canonical" href="https://propereleven.com/sagazo" />
+    <meta name="theme-color" content="#fffaf6" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Proper Eleven Technologies" />
+    <meta property="og:title" content="Sagazo: the social commerce app for India" />
+    <meta property="og:description" content="Share what's on your mind, find your people and discover products from sellers across India." />
+    <meta property="og:url" content="https://propereleven.com/sagazo" />
+    <meta property="og:image" content="https://propereleven.com/assets/img/sagazo/og.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script>
+      (function () {
+        var d = document.documentElement;
+        d.classList.add("js");
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+        d.classList.add("motion");
+        try {
+          if (sessionStorage.getItem("pet-gate") === "1") d.classList.add("gate-closed");
+          sessionStorage.removeItem("pet-gate");
+        } catch (e) {}
+      })();
+    </script>
+    <link rel="preconnect" href="https://api.fontshare.com" />
+    <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600&display=swap" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Figtree:wght@400..900&family=Schibsted+Grotesk:wght@400..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/assets/css/site.css" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Sagazo",
+        "url": "https://sagazo.com/",
+        "description": "A social commerce app for India: a feed of posts and photos, Circles for every interest, and shops from sellers across India.",
+        "applicationCategory": "SocialNetworkingApplication",
+        "operatingSystem": "Web",
+        "inLanguage": ["en", "hi", "te", "ta"],
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" },
+        "publisher": {
+          "@type": "Organization",
+          "name": "Proper Eleven Technologies Private Limited",
+          "url": "https://propereleven.com/"
+        }
+      }
+    </script>
+    <style>
+      /* Sagazo's own look on the shared system: its warm whites, its red and its typeface, Figtree. */
+      :root {
+        --z-bg: #fffaf6;
+        --z-bg-2: #f6f3ed;
+        --z-ink: #211c16;
+        --z-ink-2: #5a5248;
+        --z-line: #eae3d7;
+        --z-red: #ff2442;
+        --z-red-strong: #e01030;
+        --z-red-soft: #ffe3e7;
+        --z-gold: #f4b942;
+        --z-font: "Figtree", system-ui, sans-serif;
+      }
+
+      html,
+      body {
+        background: var(--z-bg);
+        color: var(--z-ink);
+      }
+
+      ::selection {
+        background: var(--z-red);
+        color: #fff;
+      }
+
+      .site-header.on-light:not(.is-scrolled) {
+        color: var(--z-ink);
+      }
+
+      main h1,
+      main h2,
+      main h3 {
+        font-family: var(--z-font);
+        font-weight: 800;
+        letter-spacing: -0.03em;
+      }
+
+      main p {
+        font-family: var(--z-font);
+      }
+
+      .z-btn {
+        position: relative;
+        isolation: isolate;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        min-height: 56px;
+        padding: 0 28px;
+        overflow: hidden;
+        border-radius: 999px;
+        font: 700 1rem var(--z-font);
+        transition: color 0.5s var(--ease-out), border-color 0.5s var(--ease-out);
+      }
+
+      .z-btn::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        border-radius: inherit;
+        transform: translateY(101%);
+        transition: transform 0.6s var(--ease-out);
+      }
+
+      .z-btn:hover::before {
+        transform: none;
+      }
+
+      .z-btn--red {
+        background: var(--z-red-strong);
+        color: #fff;
+        box-shadow: 0 14px 30px -10px rgba(224, 16, 48, 0.55);
+      }
+
+      .z-btn--red::before {
+        background: #b80a26;
+      }
+
+      .z-btn--line {
+        border: 1.5px solid var(--z-ink);
+        color: var(--z-ink);
+      }
+
+      .z-btn--line::before {
+        background: var(--z-ink);
+      }
+
+      .z-btn--line:hover {
+        color: #fff;
+      }
+
+      .z-btn--light {
+        background: #fff;
+        color: var(--z-ink);
+      }
+
+      .z-btn--light::before {
+        background: var(--z-gold);
+      }
+
+      .z-btn--ghost {
+        border: 1.5px solid rgba(255, 255, 255, 0.35);
+        color: #fff;
+      }
+
+      .z-btn--ghost::before {
+        background: #fff;
+      }
+
+      .z-btn--ghost:hover {
+        color: var(--z-ink);
+        border-color: #fff;
+      }
+
+      /* ---------- Hero ---------- */
+      .z-hero {
+        position: relative;
+        overflow: clip;
+        padding-top: calc(var(--header-h) + clamp(28px, 5vw, 72px));
+        padding-bottom: clamp(56px, 8vw, 120px);
+      }
+
+      .z-hero__bg span {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(70px);
+        opacity: 0.55;
+        pointer-events: none;
+      }
+
+      .z-hero__bg .b1 {
+        width: 46vw;
+        height: 46vw;
+        right: -10vw;
+        top: -8vw;
+        background: #ffd0d8;
+      }
+
+      .z-hero__bg .b2 {
+        width: 30vw;
+        height: 30vw;
+        right: 22vw;
+        top: 26vw;
+        background: #ffe6b8;
+      }
+
+      .z-hero__bg .b3 {
+        width: 34vw;
+        height: 34vw;
+        left: -12vw;
+        bottom: -14vw;
+        background: #ffe3e7;
+      }
+
+      .z-hero__grid {
+        position: relative;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+        align-items: center;
+        gap: clamp(36px, 6vw, 96px);
+      }
+
+      .z-logo {
+        width: clamp(170px, 16vw, 230px);
+        height: auto;
+      }
+
+      .z-title {
+        margin-top: clamp(24px, 3vw, 36px);
+        font-size: clamp(2.8rem, 1.3rem + 4.6vw, 6rem);
+        line-height: 0.98;
+      }
+
+      .z-lede {
+        margin-top: 24px;
+        max-width: 44ch;
+        color: var(--z-ink-2);
+        font-size: clamp(1.125rem, 1rem + 0.45vw, 1.4rem);
+        line-height: 1.55;
+      }
+
+      .z-hero .actions {
+        margin-top: 36px;
+      }
+
+      .z-phones {
+        position: relative;
+        height: clamp(520px, 52vw, 720px);
+      }
+
+      .z-phone-wrap {
+        position: absolute;
+        inset: 0;
+      }
+
+      .z-phone-wrap--front {
+        z-index: 3;
+      }
+
+      .z-phone {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: clamp(200px, 17vw, 260px);
+        aspect-ratio: 390 / 844;
+        padding: 9px;
+        border-radius: 44px;
+        background: linear-gradient(150deg, #2b2620, #0f0d0a 40%, #26211b);
+        box-shadow: 0 50px 90px -30px rgba(80, 30, 20, 0.45), inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+      }
+
+      .z-phone::before {
+        content: "";
+        position: absolute;
+        top: 18px;
+        left: 50%;
+        z-index: 2;
+        width: 30%;
+        height: 22px;
+        margin-left: -15%;
+        border-radius: 999px;
+        background: #000;
+      }
+
+      .z-phone img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: top;
+        border-radius: 35px;
+      }
+
+      .z-phone--c {
+        z-index: 3;
+        transform: translate(-50%, -50%);
+      }
+
+      .z-phone--l {
+        z-index: 2;
+        transform: translate(-112%, -46%) rotate(-9deg);
+      }
+
+      .z-phone--r {
+        z-index: 2;
+        transform: translate(12%, -46%) rotate(9deg);
+      }
+
+      .z-float {
+        position: absolute;
+        z-index: 4;
+      }
+
+      .z-bob {
+        animation: z-bob 7s ease-in-out infinite;
+      }
+
+      @keyframes z-bob {
+        50% {
+          transform: translate3d(0, -10px, 0);
+        }
+      }
+
+      .z-float--card {
+        left: 2%;
+        top: 8%;
+      }
+
+      .z-float--verified {
+        right: 0;
+        top: 16%;
+      }
+
+      .z-float--lang {
+        left: 8%;
+        bottom: 6%;
+      }
+
+      .z-card {
+        width: 160px;
+        overflow: hidden;
+        background: #fff;
+        border-radius: 16px;
+        box-shadow: 0 26px 50px -18px rgba(80, 30, 20, 0.4);
+        transform: rotate(-6deg);
+      }
+
+      .z-card img {
+        width: 100%;
+        aspect-ratio: 334 / 220;
+        object-fit: cover;
+      }
+
+      .z-card p {
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
+        padding: 9px 12px 11px;
+        font-size: 0.8rem;
+      }
+
+      .z-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 12px 18px;
+        background: #fff;
+        border-radius: 999px;
+        box-shadow: 0 22px 44px -16px rgba(80, 30, 20, 0.38);
+        font: 700 0.9rem var(--z-font);
+        white-space: nowrap;
+      }
+
+      .z-pill__tick {
+        display: grid;
+        place-items: center;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: #0f6b4f;
+        color: #fff;
+        font-size: 0.8rem;
+      }
+
+      .z-pill--lang {
+        gap: 14px;
+      }
+
+      .z-pill--lang span + span {
+        padding-left: 14px;
+        border-left: 1px solid var(--z-line);
+      }
+
+      /* ---------- Sections ---------- */
+      .z-section {
+        padding-block: clamp(90px, 12vw, 170px);
+      }
+
+      .z-section h2 {
+        font-size: clamp(2.5rem, 1.4rem + 3.6vw, 4.8rem);
+        line-height: 1;
+      }
+
+      .z-section p {
+        margin-top: 20px;
+        max-width: 48ch;
+        color: var(--z-ink-2);
+        font-size: 1.15rem;
+        line-height: 1.6;
+      }
+
+      .z-split {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        align-items: center;
+        gap: clamp(40px, 7vw, 120px);
+      }
+
+      .z-feed {
+        background: var(--z-bg-2);
+      }
+
+      /* What a post can carry */
+      .z-types {
+        display: grid;
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        gap: 16px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .z-types li {
+        display: grid;
+        justify-items: start;
+        gap: 18px;
+        grid-column: span 2;
+        padding: 26px 24px;
+        background: #fff;
+        border-radius: 26px;
+        box-shadow: 0 1px 0 var(--z-line), 0 30px 60px -40px rgba(80, 30, 20, 0.35);
+        font: 800 1.15rem var(--z-font);
+        letter-spacing: -0.01em;
+      }
+
+      .z-types svg {
+        width: 44px;
+        height: 44px;
+        padding: 10px;
+        border-radius: 14px;
+        background: var(--z-red-soft);
+        color: var(--z-red-strong);
+      }
+
+      /* Three tall tiles on wide screens, the middle one set lower. */
+      @media (min-width: 961px) {
+        .z-types {
+          gap: 20px;
+        }
+
+        .z-types li {
+          align-content: space-between;
+          min-height: 250px;
+          padding: 30px 28px;
+          font-size: 1.35rem;
+        }
+
+        .z-types li:nth-child(2) {
+          position: relative;
+          top: 44px;
+        }
+
+        .z-types svg {
+          width: 60px;
+          height: 60px;
+          padding: 14px;
+          border-radius: 18px;
+        }
+      }
+
+      /* Circles: rings of people turning around a shared centre. The section clips sideways because a spinning ring's
+         square box pokes past the screen edge at 45°, even though the circle itself never does. */
+      .z-circles {
+        overflow-x: clip;
+      }
+
+      .z-orbits {
+        position: relative;
+        aspect-ratio: 1;
+        width: min(86%, 520px);
+        margin-inline: auto;
+      }
+
+      .z-ring {
+        position: absolute;
+        inset: var(--inset);
+        border: 1.5px dashed rgba(224, 16, 48, 0.25);
+        border-radius: 50%;
+        animation: z-turn var(--speed) linear infinite;
+      }
+
+      .z-ring i {
+        position: absolute;
+        width: var(--s, 44px);
+        height: var(--s, 44px);
+        margin: calc(var(--s, 44px) / -2);
+        border-radius: 50%;
+        background: var(--c);
+        box-shadow: 0 10px 24px -8px rgba(80, 30, 20, 0.35), inset 0 0 0 4px rgba(255, 255, 255, 0.55);
+      }
+
+      @keyframes z-turn {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      .z-orbits__core {
+        position: absolute;
+        inset: 38%;
+        display: grid;
+        place-items: center;
+        border-radius: 50%;
+        background: radial-gradient(circle at 35% 30%, #ff5b73, var(--z-red-strong));
+        box-shadow: 0 30px 60px -20px rgba(224, 16, 48, 0.6);
+        color: #fff;
+      }
+
+      .z-orbits__core svg {
+        width: 46%;
+        height: 46%;
+      }
+
+      /* Sellers */
+      .z-sell {
+        position: relative;
+        overflow: clip;
+        padding-block: clamp(100px, 13vw, 180px);
+        background:
+          radial-gradient(60% 50% at 85% 10%, rgba(255, 36, 66, 0.22), rgba(255, 36, 66, 0) 70%),
+          radial-gradient(50% 40% at 0% 100%, rgba(244, 185, 66, 0.14), rgba(244, 185, 66, 0) 70%),
+          #1a1612;
+        color: #fff;
+      }
+
+      .z-sell h2 {
+        font-size: clamp(2.8rem, 1.5rem + 4.6vw, 6.2rem);
+        line-height: 0.98;
+      }
+
+      .z-sell__head p {
+        margin-top: 24px;
+        max-width: 46ch;
+        color: rgba(255, 255, 255, 0.78);
+        font-size: clamp(1.15rem, 1rem + 0.45vw, 1.4rem);
+        line-height: 1.55;
+      }
+
+      .z-sell__grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        align-items: center;
+        gap: clamp(32px, 6vw, 96px);
+        margin-top: clamp(48px, 7vw, 96px);
+      }
+
+      .z-ledger {
+        padding: clamp(28px, 4vw, 48px);
+        background: #fff;
+        color: var(--z-ink);
+        border-radius: 32px;
+        box-shadow: 0 50px 100px -40px rgba(0, 0, 0, 0.6);
+      }
+
+      .z-ledger__row {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 16px;
+        padding-block: 18px;
+        border-bottom: 1px solid var(--z-line);
+        font: 600 1.05rem var(--z-font);
+      }
+
+      .z-ledger__row b {
+        font: 800 clamp(2.2rem, 1.6rem + 2vw, 3.4rem) var(--z-font);
+        letter-spacing: -0.03em;
+        font-variant-numeric: tabular-nums;
+      }
+
+      .z-ledger__row--you b {
+        color: var(--z-red-strong);
+      }
+
+      .z-ledger__zero {
+        display: inline-flex;
+        align-items: baseline;
+        gap: 8px;
+        margin-top: 22px;
+        padding: 10px 16px;
+        background: #e7f4ee;
+        color: #0f6b4f;
+        border-radius: 999px;
+        font: 700 0.95rem var(--z-font);
+      }
+
+      .z-ledger__note {
+        margin-top: 18px;
+        color: var(--z-ink-2);
+        font-size: 0.95rem;
+        line-height: 1.55;
+      }
+
+      .z-sell__points p {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 1.15rem;
+        line-height: 1.6;
+      }
+
+      .z-sell__points p + p {
+        margin-top: 22px;
+      }
+
+      .z-tools {
+        margin-top: clamp(64px, 9vw, 120px);
+        padding-top: clamp(32px, 4vw, 48px);
+        border-top: 1px solid rgba(255, 255, 255, 0.14);
+      }
+
+      .z-tools h3 {
+        font-size: clamp(1.7rem, 1.3rem + 1.4vw, 2.6rem);
+      }
+
+      .z-tools p {
+        margin-top: 10px;
+        color: rgba(255, 255, 255, 0.72);
+      }
+
+      .z-tools ul {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin: 26px 0 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .z-tools li {
+        padding: 10px 18px;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 999px;
+        font: 600 0.95rem var(--z-font);
+        transition: background 0.4s, color 0.4s, border-color 0.4s;
+      }
+
+      .z-tools li:hover {
+        background: #fff;
+        color: var(--z-ink);
+        border-color: #fff;
+      }
+
+      .z-sell .actions {
+        margin-top: clamp(40px, 5vw, 64px);
+      }
+
+      /* Built for India */
+      .z-india {
+        text-align: center;
+      }
+
+      .z-india p {
+        margin-inline: auto;
+      }
+
+      .z-langs {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px clamp(24px, 5vw, 72px);
+        margin-top: clamp(36px, 5vw, 64px);
+        font: 800 clamp(2.4rem, 1.4rem + 4vw, 5.4rem) / 1.2 var(--z-font);
+        letter-spacing: -0.02em;
+      }
+
+      .z-langs span:nth-child(1) {
+        color: var(--z-ink);
+      }
+
+      .z-langs span:nth-child(2) {
+        color: var(--z-red-strong);
+      }
+
+      .z-langs span:nth-child(3) {
+        color: #c98a12;
+      }
+
+      .z-langs span:nth-child(4) {
+        color: #0f6b4f;
+      }
+
+      .z-india .z-safe {
+        max-width: 60ch;
+        margin-top: clamp(40px, 5vw, 64px);
+        padding-top: 32px;
+        border-top: 1px solid var(--z-line);
+      }
+
+      /* Closing call */
+      .z-cta {
+        position: relative;
+        overflow: clip;
+        padding-block: clamp(100px, 12vw, 170px);
+        text-align: center;
+        background:
+          radial-gradient(70% 70% at 50% 120%, rgba(255, 36, 66, 0.55), rgba(255, 36, 66, 0) 70%),
+          #1a1612;
+        color: #fff;
+      }
+
+      .z-cta__logo {
+        width: clamp(180px, 18vw, 250px);
+        height: auto;
+        margin-inline: auto;
+      }
+
+      .z-cta h2 {
+        margin-top: 28px;
+        font-size: clamp(2.6rem, 1.4rem + 4vw, 5.2rem);
+        line-height: 1;
+      }
+
+      .z-cta p {
+        margin: 18px auto 0;
+        max-width: 44ch;
+        color: rgba(255, 255, 255, 0.75);
+        font-size: 1.15rem;
+      }
+
+      .z-cta .actions {
+        justify-content: center;
+        margin-top: 36px;
+      }
+
+      @media (max-width: 960px) {
+        .z-hero__grid,
+        .z-split,
+        .z-sell__grid {
+          grid-template-columns: minmax(0, 1fr);
+        }
+
+        .z-phones {
+          height: 560px;
+        }
+
+        .z-split--rev .z-orbits {
+          order: 2;
+        }
+      }
+
+      @media (max-width: 560px) {
+        .z-phone {
+          width: 176px;
+          border-radius: 36px;
+        }
+
+        .z-phone img {
+          border-radius: 28px;
+        }
+
+        .z-phone--l {
+          transform: translate(-104%, -44%) rotate(-9deg);
+        }
+
+        .z-phone--r {
+          transform: translate(4%, -44%) rotate(9deg);
+        }
+
+        .z-card {
+          width: 128px;
+        }
+
+        .z-float--card {
+          left: -2%;
+        }
+
+        .z-pill {
+          padding: 10px 14px;
+          font-size: 0.8rem;
+        }
+
+        .z-pill--lang {
+          gap: 10px;
+        }
+
+        .z-pill--lang span + span {
+          padding-left: 10px;
+        }
+
+        .z-types {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .z-types li {
+          grid-column: span 1;
+        }
+
+        .z-types li:nth-child(3) {
+          grid-column: 1 / -1;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .z-bob,
+        .z-ring {
+          animation: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <div class="gate" aria-hidden="true">
+      <div class="gate__half gate__half--l"><span class="gate__bar"></span></div>
+      <div class="gate__half gate__half--r"><span class="gate__bar"></span></div>
+    </div>
+
+    <header class="site-header on-light" data-header>
+      <div class="wrap site-header__in">
+        <a class="brand" href="/" aria-label="Proper Eleven Technologies home">
+          <span class="mark" aria-hidden="true"><i></i><i></i></span>
+          <span class="brand__word">Proper Eleven</span>
+        </a>
+        <nav class="site-nav" aria-label="Main">
+          <a href="/sagazo" aria-current="page">Sagazo</a>
+          <a href="/games">Games</a>
+          <a href="/#contact">Contact</a>
+        </nav>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-menu">
+          <span class="menu-toggle__label">Menu</span><span class="menu-toggle__icon" aria-hidden="true"></span>
+        </button>
+      </div>
+    </header>
+
+    <div class="menu" id="site-menu">
+      <nav aria-label="Menu">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/sagazo" aria-current="page">Sagazo</a></li>
+          <li><a href="/games">Games</a></li>
+          <li><a href="/#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <p class="menu__foot">contact@propereleven.com</p>
+    </div>
+
+    <main id="main">
+      <section class="z-hero" aria-labelledby="z-title">
+        <div class="z-hero__bg" aria-hidden="true"><span class="b1"></span><span class="b2"></span><span class="b3"></span></div>
+        <div class="wrap z-hero__grid">
+          <div>
+            <img class="z-logo" src="/assets/img/sagazo/logo-color.webp" alt="Sagazo" width="760" height="278" data-reveal data-reveal-open />
+            <h1 id="z-title" class="z-title" data-split data-split-open data-delay="0.1">A social commerce app where India shares and shops</h1>
+            <p class="z-lede" data-reveal data-reveal-open data-delay="0.35">
+              Share what's on your mind, find your people and discover products from sellers across India. One free account covers
+              all of it.
+            </p>
+            <div class="actions" data-reveal data-reveal-open data-delay="0.45">
+              <a class="z-btn z-btn--red" href="https://sagazo.com" data-magnetic>Visit sagazo.com <span aria-hidden="true">↗</span></a>
+              <a class="z-btn z-btn--line" href="https://sagazo.com/become-a-seller" data-magnetic>Sell on Sagazo</a>
+            </div>
+          </div>
+          <div class="z-phones" data-phones aria-hidden="true">
+            <div class="z-phone-wrap" data-phone="0.6"><div class="z-phone z-phone--l"><img src="/assets/img/sagazo/screen-tools.webp" alt="" width="780" height="1688" /></div></div>
+            <div class="z-phone-wrap" data-phone="0.6"><div class="z-phone z-phone--r"><img src="/assets/img/sagazo/screen-help.webp" alt="" width="780" height="1688" /></div></div>
+            <div class="z-phone-wrap z-phone-wrap--front" data-phone="1"><div class="z-phone z-phone--c"><img src="/assets/img/sagazo/screen-seller.webp" alt="" width="780" height="1688" /></div></div>
+            <div class="z-float z-float--card" data-chip>
+              <div class="z-bob">
+                <div class="z-card">
+                  <img src="/assets/img/sagazo/silk-saree.webp" alt="" width="334" height="192" />
+                  <p>Silk saree <b>₹2,450</b></p>
+                </div>
+              </div>
+            </div>
+            <div class="z-float z-float--verified" data-chip>
+              <div class="z-bob" style="animation-delay: -2s"><div class="z-pill"><span class="z-pill__tick">✓</span>Verified shops</div></div>
+            </div>
+            <div class="z-float z-float--lang" data-chip>
+              <div class="z-bob" style="animation-delay: -4s">
+                <div class="z-pill z-pill--lang">
+                  <span lang="en">English</span><span lang="hi">हिंदी</span><span lang="te">తెలుగు</span><span lang="ta">தமிழ்</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="z-section z-feed" aria-labelledby="feed-title">
+        <div class="wrap z-split">
+          <div>
+            <h2 id="feed-title" data-split>Share what's on your mind</h2>
+            <p data-reveal>
+              Sagazo has a freestyle feed for India, where posts are ranked by how new and how active they are. React, reply and
+              see what people are talking about.
+            </p>
+            <p data-reveal>A post can carry photos, a poll, a product from your shop, a link preview or a circle card.</p>
+          </div>
+          <ul class="z-types" aria-label="What a post can carry">
+            <li data-reveal>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="3" /><circle cx="9" cy="10" r="2" /><path d="m21 16-5-5-9 9" /></svg>
+              Photos
+            </li>
+            <li data-reveal data-delay="0.06">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2" /></svg>
+              Polls
+            </li>
+            <li data-reveal data-delay="0.12">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9h18l-1.5 11h-15z" /><path d="M8 9V7a4 4 0 0 1 8 0v2" /></svg>
+              Products
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="z-section z-circles" aria-labelledby="circles-title">
+        <div class="wrap z-split z-split--rev">
+          <div class="z-orbits" aria-hidden="true" data-reveal>
+            <div class="z-ring" style="--inset: 0%; --speed: 70s">
+              <i style="left: 50%; top: 0%; --c: #ffb8c4"></i><i style="left: 93%; top: 75%; --c: #f4b942; --s: 52px"></i><i style="left: 7%; top: 75%; --c: #9fd8c3; --s: 38px"></i>
+            </div>
+            <div class="z-ring" style="--inset: 14%; --speed: 48s; animation-direction: reverse">
+              <i style="left: 100%; top: 50%; --c: #ff8aa0; --s: 40px"></i><i style="left: 0%; top: 50%; --c: #ffd27a"></i><i style="left: 50%; top: 100%; --c: #b9c6ff; --s: 34px"></i>
+            </div>
+            <div class="z-ring" style="--inset: 27%; --speed: 32s">
+              <i style="left: 50%; top: 0%; --c: #ffcf9e; --s: 34px"></i><i style="left: 50%; top: 100%; --c: #ff9db0; --s: 30px"></i>
+            </div>
+            <div class="z-orbits__core">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2" /><path d="M3 20c.6-3.4 3-5.2 6-5.2s5.4 1.8 6 5.2" /><circle cx="17" cy="9" r="2.6" /><path d="M16.5 14.2c2.4.3 4 1.9 4.5 4.8" /></svg>
+            </div>
+          </div>
+          <div>
+            <h2 id="circles-title" data-split>Find your people in Circles</h2>
+            <p data-reveal>
+              Circles are groups for any interest, trade or hobby. Each one has its own feed, member list and group chat, and it
+              can be public or private.
+            </p>
+            <p data-reveal>Share updates and meet people who care about the same things.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="z-sell" aria-labelledby="sell-title">
+        <div class="wrap">
+          <div class="z-sell__head">
+            <h2 id="sell-title" data-split>Open your shop. Keep 100%.</h2>
+            <p data-reveal>
+              Anyone in India can open a shop in a few minutes. Opening one is free, and there is no commission on sales, no
+              listing fee and no monthly charge.
+            </p>
+          </div>
+          <div class="z-sell__grid">
+            <div class="z-ledger" data-reveal>
+              <div class="z-ledger__row"><span>A buyer pays</span><b data-count="700">₹700</b></div>
+              <div class="z-ledger__row z-ledger__row--you"><span>You get</span><b data-count="700">₹700</b></div>
+              <span class="z-ledger__zero"><b>0%</b> commission</span>
+              <p class="z-ledger__note">The only deduction is the TCS the law requires from GST-registered shops.</p>
+            </div>
+            <div class="z-sell__points">
+              <p data-reveal>Your products show up in the feed and in search, and you can post them in Circles you belong to.</p>
+              <p data-reveal data-delay="0.08">The Sagazo team verifies each shop before its products show to buyers.</p>
+            </div>
+          </div>
+          <div class="z-tools">
+            <h3 data-reveal>Free tools for sellers</h3>
+            <p data-reveal>They work in your browser, they're free and there's nothing to sign up for.</p>
+            <ul data-reveal>
+              <li>Invoice maker</li>
+              <li>GST calculator</li>
+              <li>Amount in words</li>
+              <li>Shipping label maker</li>
+              <li>Product label maker</li>
+              <li>Volumetric weight calculator</li>
+              <li>Selling price calculator</li>
+              <li>Shop QR poster</li>
+            </ul>
+          </div>
+          <div class="actions" data-reveal>
+            <a class="z-btn z-btn--light" href="https://sagazo.com/become-a-seller" data-magnetic>Open your shop</a>
+            <a class="z-btn z-btn--ghost" href="https://sagazo.com/tools" data-magnetic>See the free tools</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="z-section z-india wrap" aria-labelledby="india-title">
+        <h2 id="india-title" data-split>Built for India</h2>
+        <div class="z-langs" aria-label="Sagazo's languages">
+          <span lang="en" data-reveal>English</span>
+          <span lang="hi" data-reveal data-delay="0.08">हिंदी</span>
+          <span lang="te" data-reveal data-delay="0.16">తెలుగు</span>
+          <span lang="ta" data-reveal data-delay="0.24">தமிழ்</span>
+        </div>
+        <p data-reveal>Sagazo's buttons and menus are in English, Hindi, Telugu and Tamil, and it's open to people across India.</p>
+        <p class="z-safe" data-reveal>
+          Every account on Sagazo is tied to a verified phone number. People can report anything that breaks the Community
+          Guidelines, and moderators look at every report. Sagazo follows India's Digital Personal Data Protection Act, 2023.
+        </p>
+      </section>
+
+      <section class="z-cta" aria-labelledby="cta-title">
+        <div class="wrap">
+          <img class="z-cta__logo" src="/assets/img/sagazo/logo-white.webp" alt="" width="760" height="278" loading="lazy" data-reveal />
+          <h2 id="cta-title" data-split>Visit Sagazo</h2>
+          <p data-reveal>Sagazo is made by Proper Eleven Technologies Private Limited, India.</p>
+          <div class="actions" data-reveal>
+            <a class="z-btn z-btn--light" href="https://sagazo.com" data-magnetic>Go to sagazo.com <span aria-hidden="true">↗</span></a>
+            <a class="z-btn z-btn--ghost" href="https://sagazo.com/become-a-seller" data-magnetic>Sell on Sagazo</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <div class="footer__top">
+          <p class="footer__line">We build companies and products that move humanity forward.</p>
+          <nav class="footer__nav" aria-label="Footer">
+            <a href="/sagazo">Sagazo</a>
+            <a href="/games">Games</a>
+            <a href="/#contact">Contact</a>
+            <a href="/privacy">Privacy policy</a>
+          </nav>
+        </div>
+        <div class="footer__mark" aria-hidden="true">
+          <span class="mark"><i></i><i></i></span><span class="footer__word">Proper Eleven</span>
+        </div>
+        <div class="footer__legal">
+          <span>© 2026 Proper Eleven Technologies Private Limited, India</span>
+          <a href="mailto:contact@propereleven.com">contact@propereleven.com</a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="/assets/js/vendor/gsap.min.js" defer></script>
+    <script src="/assets/js/vendor/ScrollTrigger.min.js" defer></script>
+    <script src="/assets/js/vendor/SplitText.min.js" defer></script>
+    <script src="/assets/js/vendor/lenis.min.js" defer></script>
+    <script src="/assets/js/site.js" defer></script>
+    <script src="/assets/js/sagazo.js" defer></script>
+  </body>
+</html>

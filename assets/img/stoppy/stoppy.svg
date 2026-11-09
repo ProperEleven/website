@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024" aria-hidden="true"><defs>
+    <radialGradient id="stbody" cx="0.38" cy="0.3" r="0.8" fx="0.33" fy="0.24">
+      <stop offset="0" stop-color="#ffc4bc"/>
+      <stop offset="0.24" stop-color="#ff7d80"/>
+      <stop offset="0.7" stop-color="#f2464f"/>
+      <stop offset="1" stop-color="#cc2c3a"/>
+    </radialGradient>
+    <filter id="stblur10" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="10"/></filter>
+    <filter id="stblur22" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="22"/></filter></defs>
+    
+    <ellipse cx="512" cy="548" rx="400" ry="372" fill="url(#stbody)"/>
+    <ellipse cx="362" cy="338" rx="118" ry="64" transform="rotate(-28 362 338)" fill="#fff" opacity="0.55" filter="url(#stblur10)"/>
+    <circle cx="244" cy="436" r="20" fill="#fff" opacity="0.6"/>
+    
+    
+    <ellipse cx="392" cy="562" rx="75" ry="89" fill="#fff"/>
+    <ellipse cx="398" cy="577" rx="56" ry="67" fill="#2a1f2d"/>
+    <circle cx="379" cy="546" r="20" fill="#fff"/>
+    <circle cx="418" cy="606" r="10" fill="#fff"/>
+    
+    <ellipse cx="632" cy="562" rx="75" ry="89" fill="#fff"/>
+    <ellipse cx="638" cy="577" rx="56" ry="67" fill="#2a1f2d"/>
+    <circle cx="619" cy="546" r="20" fill="#fff"/>
+    <circle cx="658" cy="606" r="10" fill="#fff"/>
+    <ellipse cx="294" cy="682" rx="58" ry="32" fill="#ffb3c6" opacity="0.75"/>
+    <ellipse cx="730" cy="682" rx="58" ry="32" fill="#ffb3c6" opacity="0.75"/>
+    <path d="M 478 668 Q 512 704 546 668" fill="none" stroke="#2a1f2d" stroke-width="15" stroke-linecap="round"/></svg>

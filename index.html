@@ -1,129 +1,844 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>P.E.T — Proper Eleven Technologies</title>
-  <meta name="description" content="P.E.T — Proper Eleven Technologies. Building what moves humanity forward.">
-  <meta name="theme-color" content="#070706">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23070706'/%3E%3Crect x='8' y='6' width='5' height='20' fill='%23ff5a1f'/%3E%3Crect x='19' y='6' width='5' height='20' fill='%23ff5a1f'/%3E%3C/svg%3E">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500&family=Syne:wght@700&display=swap" rel="stylesheet">
-  <style>
-    :root { --night:#070706; --ink:#f6f1e8; --muted:#9c948a; --ember:#ff5a1f; --line:#2a2622; }
-    * { box-sizing: border-box; }
-    html, body { margin: 0; height: 100%; background: var(--night); color: var(--ink); font-family: Outfit, sans-serif; -webkit-font-smoothing: antialiased; }
-    a { color: inherit; text-decoration: none; }
-    ::selection { background: var(--ember); color: var(--night); }
-    :focus-visible { outline: 2px solid var(--ember); outline-offset: 3px; }
-    .stage { position: relative; height: 100dvh; overflow: hidden; }
-    canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
-    .veil { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse at center, transparent 0%, rgba(7,7,6,.55) 55%, #070706 100%); }
-    .center { position: relative; z-index: 1; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 1.5rem; }
-    .kicker { margin: 0; color: var(--ember); letter-spacing: .28em; text-transform: uppercase; font-size: .75rem; font-weight: 500; }
-    h1 { margin: 1.25rem 0 0; font-family: Syne, sans-serif; font-size: clamp(4rem, 14vw, 7.5rem); letter-spacing: -.04em; line-height: .9; }
-    .rule { width: 4rem; height: 1px; margin: 1.5rem auto 0; background: var(--ember); transform-origin: left; }
-    p.line { margin: 1.5rem 0 0; max-width: 22rem; font-size: clamp(1.15rem, 2.4vw, 1.5rem); line-height: 1.35; }
-    .go { margin-top: 2.5rem; display: inline-flex; align-items: center; gap: .75rem; min-height: 2.75rem; padding: .75rem 1.25rem; border: 1px solid var(--line); font-size: .875rem; letter-spacing: .04em; transition: border-color .3s, color .3s; }
-    .go:hover { border-color: var(--ember); color: var(--ember); }
-    .legal a, .legal span { display: block; margin-top: .35rem; }
-    .legal a:hover { color: var(--ink); }
-    .dot { width: .4rem; height: .4rem; border-radius: 50%; background: var(--ember); animation: pulse 2.4s ease-in-out infinite; }
-    .legal { position: absolute; left: 0; right: 0; bottom: 1.5rem; z-index: 1; margin: 0; text-align: center; color: var(--muted); font-size: .75rem; }
-    .rise { animation: rise 1.1s cubic-bezier(.2,0,0,1) both; }
-    .d2 { animation-delay: .2s; } .d3 { animation-delay: .4s; } .d4 { animation-delay: .6s; }
-    @keyframes rise { from { opacity: 0; transform: translateY(16px); filter: blur(6px); } to { opacity: 1; transform: none; filter: none; } }
-    @keyframes pulse { 50% { opacity: .4; transform: scale(1.4); } }
-    @media (prefers-reduced-motion: reduce) { .rise, .dot { animation: none; } }
-  </style>
-</head>
-<body>
-  <main class="stage">
-    <canvas id="field" aria-hidden="true"></canvas>
-    <div class="veil"></div>
-    <div class="center">
-      <p class="kicker rise">Proper Eleven Technologies</p>
-      <h1 class="rise d2">P.E.T</h1>
-      <div class="rule rise d3"></div>
-      <p class="line rise d4">Building what moves humanity forward.</p>
-      <a class="go rise d4" href="https://sagazo.com" target="_blank"><span class="dot"></span>Sagazo ↗</a>
-    </div>
-    <p class="legal rise d4">Proper Eleven Technologies Private Limited<a href="mailto:contact@propereleven.com">contact@propereleven.com</a><span>From India</span></p>
-  </main>
-  <script>
-    const canvas = document.getElementById("field");
-    const ctx = canvas.getContext("2d");
-    const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const pointer = { x: .5, y: .42 };
-    let nodes = [];
-    function resize() {
-      const dpr = Math.min(devicePixelRatio || 1, 2);
-      canvas.width = canvas.clientWidth * dpr;
-      canvas.height = canvas.clientHeight * dpr;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      const count = Math.round(Math.min(110, canvas.clientWidth / 12));
-      nodes = Array.from({ length: count }, () => ({
-        x: Math.random(), y: Math.random(),
-        vx: (Math.random() - .5) * .00035, vy: (Math.random() - .5) * .00035,
-        p: Math.random() * Math.PI * 2
-      }));
-    }
-    function draw(t) {
-      const w = canvas.clientWidth, h = canvas.clientHeight;
-      ctx.clearRect(0, 0, w, h);
-      const breathe = reduce ? .5 : .5 + Math.sin(t * .00045) * .5;
-      [0.5 - 0.045 - breathe * 0.01, 0.5 + 0.045 + breathe * 0.01].forEach((cx, i) => {
-        const g = ctx.createLinearGradient(0, h * .18, 0, h * .82);
-        g.addColorStop(0, "rgba(255,90,31,0)");
-        g.addColorStop(.45, "rgba(255,90,31," + (.35 + breathe * .35) + ")");
-        g.addColorStop(1, "rgba(255,90,31,0)");
-        ctx.fillStyle = g;
-        const width = 2 + i * .4 + breathe * 1.4;
-        ctx.fillRect(cx * w - width / 2, h * .16, width, h * .68);
-      });
-      nodes.forEach((n) => {
-        if (!reduce) {
-          n.x += n.vx + Math.sin(t * .0003 + n.p) * .00008;
-          n.y += n.vy + Math.cos(t * .00025 + n.p) * .00008;
-          n.x += (pointer.x - .5) * .0004;
-          n.y += (pointer.y - .5) * .0004;
-          if (n.x < 0 || n.x > 1) n.vx *= -1;
-          if (n.y < 0 || n.y > 1) n.vy *= -1;
-          n.x = Math.min(1, Math.max(0, n.x));
-          n.y = Math.min(1, Math.max(0, n.y));
-        }
-      });
-      for (let i = 0; i < nodes.length; i++) {
-        for (let j = i + 1; j < nodes.length; j++) {
-          const dx = (nodes[i].x - nodes[j].x) * w;
-          const dy = (nodes[i].y - nodes[j].y) * h;
-          const dist = Math.hypot(dx, dy);
-          if (dist < 130) {
-            ctx.strokeStyle = "rgba(246,241,232," + ((1 - dist / 130) * .16) + ")";
-            ctx.beginPath();
-            ctx.moveTo(nodes[i].x * w, nodes[i].y * h);
-            ctx.lineTo(nodes[j].x * w, nodes[j].y * h);
-            ctx.stroke();
-          }
+<!doctype html>
+<html lang="en" data-page="home">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Proper Eleven Technologies</title>
+    <meta
+      name="description"
+      content="Proper Eleven Technologies is a company from India that builds companies and products to move humanity forward, from the Sagazo app to original games."
+    />
+    <link rel="canonical" href="https://propereleven.com/" />
+    <meta name="theme-color" content="#080a12" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Proper Eleven Technologies" />
+    <meta property="og:title" content="Proper Eleven Technologies" />
+    <meta property="og:description" content="We build companies and products that move humanity forward." />
+    <meta property="og:url" content="https://propereleven.com/" />
+    <meta property="og:image" content="https://propereleven.com/assets/img/og-home.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script>
+      (function () {
+        var d = document.documentElement;
+        d.classList.add("js");
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+        d.classList.add("motion");
+        var fromSite = false;
+        var introDone = false;
+        try {
+          fromSite = sessionStorage.getItem("pet-gate") === "1";
+          sessionStorage.removeItem("pet-gate");
+          introDone = sessionStorage.getItem("pet-intro") === "1";
+        } catch (e) {}
+        if (fromSite) d.classList.add("gate-closed");
+        else if (!introDone) d.classList.add("gate-closed", "gate-intro");
+      })();
+    </script>
+    <link rel="preconnect" href="https://api.fontshare.com" />
+    <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&display=swap" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/assets/css/site.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "/assets/js/vendor/three/three.module.js",
+          "three/addons/": "/assets/js/vendor/three/addons/"
         }
       }
-      nodes.forEach((n) => {
-        ctx.fillStyle = "rgba(255,176,140,.75)";
-        ctx.beginPath();
-        ctx.arc(n.x * w, n.y * h, 1.3, 0, Math.PI * 2);
-        ctx.fill();
-      });
-      requestAnimationFrame(draw);
-    }
-    addEventListener("pointermove", (e) => {
-      const b = canvas.getBoundingClientRect();
-      pointer.x = (e.clientX - b.left) / b.width;
-      pointer.y = (e.clientY - b.top) / b.height;
-    });
-    addEventListener("resize", resize);
-    resize();
-    requestAnimationFrame(draw);
-  </script>
-</body>
+    </script>
+    <link rel="modulepreload" href="/assets/js/vendor/three/three.core.js" />
+    <link rel="modulepreload" href="/assets/js/vendor/three/three.module.js" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Proper Eleven Technologies Private Limited",
+        "alternateName": ["Proper Eleven Technologies", "P.E.T"],
+        "url": "https://propereleven.com/",
+        "logo": "https://propereleven.com/assets/img/pet-mark-512.png",
+        "email": "contact@propereleven.com",
+        "address": { "@type": "PostalAddress", "addressCountry": "IN" }
+      }
+    </script>
+    <style>
+      /* ---------- Hero: the gate ---------- */
+      /* The hero scrolls away like any section (no pinning), and the next section slides up over it. */
+      .hero {
+        position: relative;
+        z-index: 0;
+        height: 100svh;
+        min-height: 560px;
+      }
+
+      .hero__stage {
+        position: relative;
+        height: 100%;
+        overflow: hidden;
+        will-change: transform;
+        background:
+          radial-gradient(42% 46% at 66% 54%, rgba(255, 90, 31, 0.2), rgba(255, 90, 31, 0) 70%),
+          radial-gradient(90% 40% at 50% 100%, rgba(255, 90, 31, 0.08), rgba(255, 90, 31, 0) 70%),
+          var(--night-1);
+      }
+
+      .hero__canvas {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: opacity 1.6s var(--ease-out);
+      }
+
+      .hero__canvas.is-ready {
+        opacity: 1;
+      }
+
+      .hero__shade {
+        position: absolute;
+        inset: auto 0 0;
+        height: 58%;
+        background: linear-gradient(to top, rgba(8, 10, 18, 0.94) 8%, rgba(8, 10, 18, 0));
+        pointer-events: none;
+      }
+
+      .hero__content {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        padding-bottom: clamp(24px, 4.5vh, 52px);
+        will-change: transform, opacity;
+      }
+
+      .hero__title {
+        max-width: 13ch;
+        font-size: clamp(2.8rem, 1.1rem + 5vw, 6.6rem);
+        line-height: 0.98;
+        letter-spacing: -0.012em;
+      }
+
+      .hero__foot {
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 24px;
+        margin-top: clamp(26px, 4.5vh, 48px);
+        padding-top: 18px;
+        border-top: 1px solid var(--line);
+        color: var(--ink-2);
+        font-size: 0.95rem;
+      }
+
+      .hero__cue {
+        display: inline-flex;
+        align-items: center;
+        gap: 14px;
+      }
+
+      .hero__cue::after {
+        content: "";
+        width: 42px;
+        height: 1px;
+        background: currentColor;
+        transform-origin: left;
+        animation: cue 2.6s var(--ease-in-out) infinite;
+      }
+
+      @keyframes cue {
+        0% {
+          transform: scaleX(0);
+          transform-origin: left;
+        }
+        45% {
+          transform: scaleX(1);
+          transform-origin: left;
+        }
+        55% {
+          transform: scaleX(1);
+          transform-origin: right;
+        }
+        100% {
+          transform: scaleX(0);
+          transform-origin: right;
+        }
+      }
+
+      /* ---------- Statement ---------- */
+      .statement {
+        position: relative;
+        z-index: 1;
+        padding-block: clamp(96px, 13vw, 200px);
+        background: var(--night-1);
+        border-radius: clamp(24px, 4vw, 48px) clamp(24px, 4vw, 48px) 0 0;
+        box-shadow: 0 -40px 90px -30px rgba(0, 0, 0, 0.7);
+      }
+
+      .statement__text {
+        max-width: 1120px;
+        font-family: var(--display);
+        font-weight: 500;
+        font-size: clamp(1.9rem, 1rem + 2.9vw, 3.9rem);
+        line-height: 1.16;
+        letter-spacing: -0.01em;
+      }
+
+      .statement__text .accent {
+        color: var(--gold);
+      }
+
+      /* ---------- Sagazo ---------- */
+      .venture {
+        position: relative;
+        padding-block: clamp(90px, 12vw, 180px);
+        overflow: clip;
+      }
+
+      .venture__glow {
+        position: absolute;
+        top: 8%;
+        right: -18%;
+        width: min(78vw, 1100px);
+        aspect-ratio: 1;
+        background: radial-gradient(closest-side, rgba(255, 36, 66, 0.2), rgba(255, 110, 40, 0.09) 55%, rgba(255, 110, 40, 0));
+        pointer-events: none;
+      }
+
+      .venture__grid {
+        position: relative;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        align-items: center;
+        gap: clamp(40px, 7vw, 120px);
+      }
+
+      .venture__logo {
+        width: clamp(170px, 17vw, 236px);
+        height: auto;
+        margin-bottom: clamp(28px, 4vw, 44px);
+      }
+
+      .venture h2 {
+        font-size: clamp(2.5rem, 1.35rem + 3.4vw, 4.75rem);
+        line-height: 1.01;
+      }
+
+      .venture__copy p {
+        margin-top: 22px;
+        max-width: 46ch;
+        color: var(--ink-2);
+        font-size: 1.125rem;
+      }
+
+      .venture .actions {
+        margin-top: 40px;
+      }
+
+      .stage {
+        position: relative;
+        height: clamp(560px, 60vw, 780px);
+        perspective: 1600px;
+      }
+
+      .device {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: clamp(236px, 21vw, 312px);
+        aspect-ratio: 390 / 844;
+        margin: calc(clamp(236px, 21vw, 312px) * -1.082) 0 0 calc(clamp(236px, 21vw, 312px) * -0.5);
+        padding: 10px;
+        border-radius: 50px;
+        background: linear-gradient(150deg, #3a3c48, #101118 38%, #24252f 70%, #0b0c11);
+        box-shadow:
+          0 60px 120px -20px rgba(0, 0, 0, 0.75),
+          0 0 0 1px rgba(255, 255, 255, 0.09) inset,
+          0 0 120px rgba(255, 36, 66, 0.14);
+        transform: rotateY(-18deg) rotateX(8deg) rotateZ(3deg);
+        transform-style: preserve-3d;
+      }
+
+      .device::before {
+        content: "";
+        position: absolute;
+        top: 20px;
+        left: 50%;
+        z-index: 2;
+        width: 30%;
+        height: 24px;
+        margin-left: -15%;
+        border-radius: 999px;
+        background: #000;
+      }
+
+      .device img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: top;
+        border-radius: 40px;
+      }
+
+      .float {
+        position: absolute;
+        z-index: 3;
+      }
+
+      .float__in {
+        animation: bob 7s ease-in-out infinite;
+      }
+
+      .float--b .float__in {
+        animation-duration: 8.5s;
+        animation-delay: -3s;
+      }
+
+      .float--c .float__in {
+        animation-duration: 6s;
+        animation-delay: -1.5s;
+      }
+
+      @keyframes bob {
+        50% {
+          transform: translate3d(0, -12px, 0);
+        }
+      }
+
+      .float--a {
+        top: 9%;
+        left: 2%;
+      }
+
+      .float--b {
+        bottom: 9%;
+        right: 1%;
+      }
+
+      .float--c {
+        top: 16%;
+        right: 6%;
+      }
+
+      .card {
+        width: 168px;
+        overflow: hidden;
+        background: #fff;
+        color: #1b2547;
+        border-radius: 16px;
+        box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.6);
+      }
+
+      .float--a .card {
+        transform: rotate(-7deg);
+      }
+
+      .float--b .card {
+        transform: rotate(6deg);
+      }
+
+      .card img {
+        width: 100%;
+        aspect-ratio: 334 / 220;
+        object-fit: cover;
+      }
+
+      .card p {
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
+        padding: 10px 12px 12px;
+        font-size: 0.8rem;
+        line-height: 1.25;
+      }
+
+      .card b {
+        font-weight: 700;
+      }
+
+      .chip {
+        display: grid;
+        place-items: center;
+        padding: 12px 18px;
+        background: #0f6b4f;
+        color: #fff;
+        border-radius: 18px;
+        box-shadow: 0 24px 50px -10px rgba(0, 0, 0, 0.55);
+        font-size: 0.8rem;
+        line-height: 1.1;
+        transform: rotate(4deg);
+      }
+
+      .chip b {
+        font-size: 1.6rem;
+        font-weight: 700;
+      }
+
+      /* ---------- Games: a window that opens into a bright world ---------- */
+      .games {
+        position: relative;
+        padding-top: clamp(80px, 11vw, 170px);
+      }
+
+      .games__head {
+        display: grid;
+        grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+        align-items: end;
+        gap: 28px clamp(32px, 6vw, 96px);
+      }
+
+      .games__head h2 {
+        font-size: clamp(2.8rem, 1.3rem + 4.6vw, 6.4rem);
+        line-height: 0.98;
+        letter-spacing: -0.012em;
+      }
+
+      .games__head p {
+        max-width: 42ch;
+        color: var(--ink-2);
+        font-size: 1.125rem;
+      }
+
+      .games__head .actions {
+        margin-top: 28px;
+      }
+
+      .portal-track {
+        position: relative;
+        height: 230svh;
+        margin-top: clamp(40px, 6vw, 88px);
+      }
+
+      .portal {
+        position: sticky;
+        top: 0;
+        height: 100svh;
+        overflow: hidden;
+        clip-path: inset(10% 8% round 40px);
+        background:
+          radial-gradient(60% 50% at 50% 0%, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0) 60%),
+          linear-gradient(180deg, #5db5fb 0%, #8ccafe 30%, #bdbcfd 64%, #ffd9e8 100%);
+      }
+
+      .portal__rays {
+        position: absolute;
+        inset: -20% 10% 30%;
+        background: conic-gradient(from 180deg at 50% 0%, transparent 0deg, rgba(255, 255, 255, 0.35) 8deg, transparent 18deg, transparent 30deg, rgba(255, 255, 255, 0.22) 36deg, transparent 46deg, transparent 314deg, rgba(255, 255, 255, 0.22) 324deg, transparent 330deg, transparent 342deg, rgba(255, 255, 255, 0.35) 352deg, transparent 360deg);
+        filter: blur(6px);
+        opacity: 0.8;
+      }
+
+      .island {
+        position: absolute;
+        will-change: transform;
+      }
+
+      .island img {
+        width: 100%;
+        height: auto;
+        filter: drop-shadow(0 40px 30px rgba(70, 50, 140, 0.22));
+        animation: bob 8s ease-in-out infinite;
+      }
+
+      .island--1 {
+        left: 30%;
+        top: 30%;
+        width: 40%;
+      }
+
+      .island--1 img {
+        animation-duration: 9s;
+      }
+
+      .island--2 {
+        left: -3%;
+        top: 9%;
+        width: 27%;
+      }
+
+      .island--2 img {
+        animation-delay: -2s;
+      }
+
+      .island--3 {
+        right: -2%;
+        top: 12%;
+        width: 29%;
+      }
+
+      .island--3 img {
+        animation-delay: -4s;
+        animation-duration: 10s;
+      }
+
+      .island--4 {
+        left: 4%;
+        bottom: -8%;
+        width: 30%;
+      }
+
+      .island--4 img {
+        animation-delay: -6s;
+      }
+
+      .island--5 {
+        right: 4%;
+        bottom: -6%;
+        width: 31%;
+      }
+
+      .island--5 img {
+        animation-delay: -1s;
+        animation-duration: 11s;
+      }
+
+      .sparkle {
+        position: absolute;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #fff;
+        box-shadow: 0 0 12px 3px rgba(255, 255, 255, 0.8);
+        opacity: 0.8;
+        animation: twinkle 3.4s ease-in-out infinite;
+      }
+
+      @keyframes twinkle {
+        50% {
+          opacity: 0.15;
+          transform: scale(0.5);
+        }
+      }
+
+      /* ---------- Contact ---------- */
+      .contact {
+        position: relative;
+        padding-block: clamp(120px, 16vw, 230px) clamp(100px, 13vw, 180px);
+      }
+
+      .contact h2 {
+        font-size: clamp(2.6rem, 1.4rem + 4vw, 5.5rem);
+        line-height: 1;
+      }
+
+      .contact__mail {
+        position: relative;
+        display: inline-block;
+        margin-top: clamp(24px, 3vw, 40px);
+        padding-bottom: 6px;
+        font-family: var(--display);
+        font-weight: 500;
+        font-size: clamp(1.6rem, 0.5rem + 4.4vw, 5.25rem);
+        line-height: 1.05;
+        letter-spacing: -0.01em;
+        background: linear-gradient(100deg, var(--gold), var(--ember-2) 60%, var(--ember));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        overflow-wrap: anywhere;
+      }
+
+      .contact__mail::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 2px;
+        background: linear-gradient(90deg, var(--gold), var(--ember));
+        transform: scaleX(0.18);
+        transform-origin: left;
+        transition: transform 0.9s var(--ease-out);
+      }
+
+      .contact__mail:hover::after,
+      .contact__mail:focus-visible::after {
+        transform: scaleX(1);
+      }
+
+      .contact p {
+        margin-top: 30px;
+        color: var(--ink-2);
+      }
+
+      .contact p a {
+        color: var(--ink);
+        border-bottom: 1px solid var(--line-2);
+        transition: border-color 0.3s;
+      }
+
+      .contact p a:hover {
+        border-color: var(--ember-2);
+      }
+
+      /* ---------- Small screens ---------- */
+      @media (max-width: 900px) {
+        .venture__grid,
+        .games__head {
+          grid-template-columns: minmax(0, 1fr);
+        }
+
+        .stage {
+          height: 600px;
+          margin-top: 12px;
+        }
+
+        .device {
+          width: 250px;
+          margin: -270px 0 0 -125px;
+        }
+
+        .portal {
+          clip-path: inset(6% 5% round 28px);
+        }
+
+        .island--1 {
+          left: 14%;
+          top: 34%;
+          width: 72%;
+        }
+
+        .island--2 {
+          left: -14%;
+          top: 8%;
+          width: 52%;
+        }
+
+        .island--3 {
+          right: -16%;
+          top: 16%;
+          width: 52%;
+        }
+
+        .island--4 {
+          left: -12%;
+          bottom: -2%;
+          width: 56%;
+        }
+
+        .island--5 {
+          right: -14%;
+          bottom: -4%;
+          width: 56%;
+        }
+      }
+
+      @media (max-width: 520px) {
+        .card {
+          width: 128px;
+        }
+
+        .float--a {
+          left: -2%;
+        }
+
+        .float--b {
+          right: -3%;
+        }
+
+        .chip b {
+          font-size: 1.3rem;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .portal-track {
+          height: auto;
+        }
+
+        .portal {
+          position: relative;
+        }
+
+        .portal {
+          clip-path: none;
+          height: 90svh;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <div class="gate" aria-hidden="true">
+      <div class="gate__half gate__half--l"><span class="gate__bar"></span></div>
+      <div class="gate__half gate__half--r"><span class="gate__bar"></span></div>
+    </div>
+
+    <header class="site-header" data-header>
+      <div class="wrap site-header__in">
+        <a class="brand" href="/" aria-label="Proper Eleven Technologies home">
+          <span class="mark" aria-hidden="true"><i></i><i></i></span>
+          <span class="brand__word">Proper Eleven</span>
+        </a>
+        <nav class="site-nav" aria-label="Main">
+          <a href="/sagazo">Sagazo</a>
+          <a href="/games">Games</a>
+          <a href="/#contact">Contact</a>
+        </nav>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-menu">
+          <span class="menu-toggle__label">Menu</span><span class="menu-toggle__icon" aria-hidden="true"></span>
+        </button>
+      </div>
+    </header>
+
+    <div class="menu" id="site-menu">
+      <nav aria-label="Menu">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/sagazo">Sagazo</a></li>
+          <li><a href="/games">Games</a></li>
+          <li><a href="/#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <p class="menu__foot">contact@propereleven.com</p>
+    </div>
+
+    <main id="main">
+      <section class="hero" data-hero aria-labelledby="hero-title">
+        <div class="hero__stage">
+          <canvas class="hero__canvas" data-gate-canvas aria-hidden="true"></canvas>
+          <div class="hero__shade"></div>
+          <div class="wrap hero__content" data-hero-content>
+            <h1 id="hero-title" class="hero__title" data-split data-split-open data-delay="0.1">
+              We build companies and products that move humanity forward.
+            </h1>
+            <div class="hero__foot" data-reveal data-reveal-open data-delay="0.55">
+              <span>Proper Eleven Technologies, India</span>
+              <span class="hero__cue">Scroll</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="statement" id="about" aria-label="About Proper Eleven">
+        <div class="wrap">
+        <p class="statement__text" data-words>
+          Proper Eleven Technologies is a company from India. We start companies and build our own products. Sagazo helps
+          sellers across India open a shop for free, and our games make you stop and think.
+        </p>
+        </div>
+      </section>
+
+      <section class="venture" id="sagazo" aria-labelledby="sagazo-title">
+        <div class="venture__glow" aria-hidden="true"></div>
+        <div class="wrap venture__grid">
+          <div class="venture__copy">
+            <img class="venture__logo" src="/assets/img/sagazo/logo-white.webp" alt="Sagazo" width="760" height="278" data-reveal />
+            <h2 id="sagazo-title" data-split>A social commerce app where India shares and shops</h2>
+            <p data-reveal>
+              People post what they love, follow friends and join circles. Products from sellers across India appear in the
+              same feed, next to people's posts.
+            </p>
+            <p data-reveal>For sellers, opening a shop is free. There is no commission on sales, no listing fee and no monthly charge.</p>
+            <div class="actions" data-reveal>
+              <a class="btn btn--light" href="https://sagazo.com" data-magnetic>Visit sagazo.com <span class="btn__ext" aria-hidden="true">↗</span></a>
+              <a class="btn btn--ghost" href="/sagazo" data-magnetic>More about Sagazo</a>
+            </div>
+          </div>
+          <div class="stage" data-stage aria-hidden="true">
+            <div class="device" data-device>
+              <img src="/assets/img/sagazo/screen-seller.webp" alt="" width="780" height="1688" loading="lazy" />
+            </div>
+            <div class="float float--a" data-depth="0.5">
+              <div class="float__in">
+                <div class="card">
+                  <img src="/assets/img/sagazo/silk-saree.webp" alt="" width="334" height="192" loading="lazy" />
+                  <p>Silk saree <b>₹2,450</b></p>
+                </div>
+              </div>
+            </div>
+            <div class="float float--b" data-depth="0.85">
+              <div class="float__in">
+                <div class="card">
+                  <img src="/assets/img/sagazo/aari-work-blouse.webp" alt="" width="334" height="192" loading="lazy" />
+                  <p>Aari work blouse <b>₹950</b></p>
+                </div>
+              </div>
+            </div>
+            <div class="float float--c" data-depth="1.1">
+              <div class="float__in"><div class="chip"><b>0%</b>commission</div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="games" id="games" aria-labelledby="games-title">
+        <div class="wrap games__head">
+          <h2 id="games-title" data-split>We build exciting games</h2>
+          <div>
+            <p data-reveal>
+              They're original games for phones and tablets, with bright worlds, characters of their own and puzzles that make you
+              think.
+            </p>
+            <div class="actions" data-reveal data-delay="0.1">
+              <a class="btn btn--light" href="/games" data-magnetic>See our games</a>
+            </div>
+          </div>
+        </div>
+        <div class="portal-track" data-portal-track>
+          <div class="portal" data-portal aria-hidden="true">
+            <div class="portal__rays"></div>
+            <div class="island island--2" data-island="0.6"><div class="island__drift"><img src="/assets/img/stoppy/worlds/2.webp" alt="" width="1240" height="1121" loading="lazy" /></div></div>
+            <div class="island island--3" data-island="0.8"><div class="island__drift"><img src="/assets/img/stoppy/worlds/3.webp" alt="" width="1240" height="1111" loading="lazy" /></div></div>
+            <div class="island island--1" data-island="0.35"><div class="island__drift"><img src="/assets/img/stoppy/worlds/1.webp" alt="" width="1240" height="999" loading="lazy" /></div></div>
+            <div class="island island--4" data-island="1.1"><div class="island__drift"><img src="/assets/img/stoppy/worlds/4.webp" alt="" width="1240" height="1140" loading="lazy" /></div></div>
+            <div class="island island--5" data-island="1.25"><div class="island__drift"><img src="/assets/img/stoppy/worlds/5.webp" alt="" width="1240" height="967" loading="lazy" /></div></div>
+            <span class="sparkle" style="left: 18%; top: 22%"></span>
+            <span class="sparkle" style="left: 72%; top: 9%; animation-delay: -1.2s"></span>
+            <span class="sparkle" style="left: 56%; top: 68%; animation-delay: -2.1s; width: 6px; height: 6px"></span>
+            <span class="sparkle" style="left: 9%; top: 60%; animation-delay: -0.6s; width: 5px; height: 5px"></span>
+            <span class="sparkle" style="left: 88%; top: 52%; animation-delay: -2.8s"></span>
+          </div>
+        </div>
+      </section>
+
+      <section class="contact wrap" id="contact" aria-labelledby="contact-title">
+        <h2 id="contact-title" data-split>Get in touch</h2>
+        <a class="contact__mail" href="mailto:contact@propereleven.com" data-reveal>contact@propereleven.com</a>
+        <p data-reveal>
+          For help with one of our games, write to <a href="mailto:support@propereleven.com">support@propereleven.com</a>. For
+          Sagazo, visit <a href="https://sagazo.com">sagazo.com</a>.
+        </p>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <div class="footer__top">
+          <p class="footer__line">We build companies and products that move humanity forward.</p>
+          <nav class="footer__nav" aria-label="Footer">
+            <a href="/sagazo">Sagazo</a>
+            <a href="/games">Games</a>
+            <a href="/#contact">Contact</a>
+            <a href="/privacy">Privacy policy</a>
+          </nav>
+        </div>
+        <div class="footer__mark" aria-hidden="true">
+          <span class="mark"><i></i><i></i></span><span class="footer__word">Proper Eleven</span>
+        </div>
+        <div class="footer__legal">
+          <span>© 2026 Proper Eleven Technologies Private Limited, India</span>
+          <a href="mailto:contact@propereleven.com">contact@propereleven.com</a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="/assets/js/vendor/gsap.min.js" defer></script>
+    <script src="/assets/js/vendor/ScrollTrigger.min.js" defer></script>
+    <script src="/assets/js/vendor/SplitText.min.js" defer></script>
+    <script src="/assets/js/vendor/lenis.min.js" defer></script>
+    <script src="/assets/js/site.js" defer></script>
+    <script src="/assets/js/home.js" defer></script>
+    <script type="module" src="/assets/js/gate.js"></script>
+  </body>
 </html>

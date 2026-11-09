@@ -1,0 +1,185 @@
+/* Stoppy's world, built in layers from the game's own art: the five islands, Stoppy on a streak of
+   red paint, and a Prickle. Every layer sits on a 16:9 stage that covers its box, so they stay lined up
+   at any size; scene.js brings them in and moves them with the pointer and the scroll. */
+
+.scene {
+  position: relative;
+  overflow: hidden;
+  container-type: size;
+  background:
+    radial-gradient(50% 45% at 50% 0%, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0) 70%),
+    linear-gradient(180deg, #58b2fb 0%, #87c8ff 32%, #b9b9fd 66%, #ffd8e7 100%);
+  isolation: isolate;
+}
+
+.scene__stage {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: max(100cqw, 177.78cqh);
+  aspect-ratio: 16 / 9;
+  transform: translate(-50%, -50%);
+}
+
+/* Tall boxes (phones): a wider stage, nudged left so Stoppy and the Paint Yard island stay in frame, with sky above. */
+@container (orientation: portrait) {
+  .scene__stage {
+    left: 36%;
+    top: 47%;
+    width: 235cqw;
+  }
+}
+
+.scene__rays {
+  position: absolute;
+  inset: -30% 18% 20%;
+  background: conic-gradient(
+    from 180deg at 50% 0%,
+    transparent 0deg,
+    rgba(255, 255, 255, 0.42) 6deg,
+    transparent 14deg,
+    transparent 24deg,
+    rgba(255, 255, 255, 0.26) 30deg,
+    transparent 38deg,
+    transparent 322deg,
+    rgba(255, 255, 255, 0.26) 330deg,
+    transparent 336deg,
+    transparent 346deg,
+    rgba(255, 255, 255, 0.42) 354deg,
+    transparent 360deg
+  );
+  filter: blur(8px);
+  animation: rays 9s ease-in-out infinite;
+}
+
+@keyframes rays {
+  50% {
+    opacity: 0.65;
+    transform: rotate(1.5deg);
+  }
+}
+
+.scene__layer {
+  position: absolute;
+  will-change: transform;
+}
+
+.scene__layer > * {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.scene__float {
+  animation: scene-bob 8s ease-in-out infinite;
+}
+
+@keyframes scene-bob {
+  50% {
+    transform: translate3d(0, -1.4%, 0);
+  }
+}
+
+.scene__island img {
+  filter: drop-shadow(0 3vw 2.4vw rgba(70, 50, 140, 0.24));
+}
+
+.scene__far img {
+  filter: drop-shadow(0 2vw 1.6vw rgba(70, 50, 140, 0.18)) blur(0.6px) saturate(0.92);
+}
+
+/* Positions on the 1600 × 900 stage, in percent. */
+.scene__l-bounce {
+  left: 1%;
+  top: 5%;
+  width: 24%;
+}
+
+.scene__l-uptown {
+  right: 2%;
+  top: 8%;
+  width: 25%;
+}
+
+.scene__l-docks {
+  left: -1%;
+  bottom: -14%;
+  width: 26%;
+}
+
+.scene__l-park {
+  right: 0%;
+  bottom: -16%;
+  width: 28%;
+}
+
+.scene__l-paint {
+  left: 27%;
+  top: 33%;
+  width: 41%;
+}
+
+.scene__l-trail {
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.scene__l-trail svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.scene__l-stoppy {
+  left: 54.5%;
+  top: 24%;
+  width: 17.5%;
+}
+
+.scene__l-stoppy img {
+  filter: drop-shadow(0 2.2vw 1.6vw rgba(196, 22, 47, 0.32));
+}
+
+.scene__l-prickle {
+  left: 72.5%;
+  top: 47%;
+  width: 7.6%;
+}
+
+.scene__l-prickle img {
+  filter: drop-shadow(0 1.4vw 1vw rgba(60, 30, 90, 0.3));
+}
+
+.scene__bokeh {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(2px);
+  opacity: 0.55;
+  animation: bokeh 7s ease-in-out infinite;
+}
+
+@keyframes bokeh {
+  50% {
+    opacity: 0.2;
+    transform: translate3d(0, -12px, 0);
+  }
+}
+
+/* A soft wash at the bottom so text on the scene stays readable. */
+.scene__scrim {
+  position: absolute;
+  inset: auto 0 0;
+  height: 48%;
+  background: linear-gradient(to top, rgba(36, 22, 70, 0.62), rgba(36, 22, 70, 0));
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scene__float,
+  .scene__rays,
+  .scene__bokeh {
+    animation: none;
+  }
+}

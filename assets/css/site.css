@@ -530,7 +530,15 @@ html.gate-closed:not(.gate-live) .gate {
   gap: 14px;
 }
 
-/* The App Store badge: Apple's own artwork, unmodified, at least 40px tall. */
+/* Store badges: Apple's and Google's own artwork, unmodified. With both shown, Apple's black badge comes first and
+   Google's is the same height. Keep a quarter of the badge height clear around each (the 16px gap covers 64px badges). */
+.store-badges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+}
+
 .store-badge {
   display: inline-block;
   border-radius: 10px;
@@ -544,6 +552,13 @@ html.gate-closed:not(.gate-live) .gate {
 .store-badge img {
   height: 54px;
   width: auto;
+}
+
+/* Both badges fit on one line on a 360px phone. Apple's minimum is 40px, Google's 28px. */
+@media (max-width: 480px) {
+  .store-badge img {
+    height: 46px;
+  }
 }
 
 /* ---------- Text styles ---------- */

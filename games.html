@@ -6,7 +6,7 @@
     <title>Games by Proper Eleven Technologies</title>
     <meta
       name="description"
-      content="Proper Eleven Technologies makes games. The first is Stoppy, a 3D puzzle game for iPhone and iPad with 50 levels in five worlds and a daily puzzle."
+      content="Proper Eleven Technologies makes games. The first is Stoppy, a 3D puzzle game for iPhone, iPad and Android with 50 levels in five worlds and a daily puzzle."
     />
     <link rel="canonical" href="https://propereleven.com/games" />
     <meta name="theme-color" content="#080a12" />
@@ -15,7 +15,7 @@
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Proper Eleven Technologies" />
     <meta property="og:title" content="Games by Proper Eleven Technologies" />
-    <meta property="og:description" content="Stoppy, a 3D puzzle game for iPhone and iPad, is our first game." />
+    <meta property="og:description" content="Stoppy, a 3D puzzle game for iPhone, iPad and Android, is our first game." />
     <meta property="og:url" content="https://propereleven.com/games" />
     <meta property="og:image" content="https://propereleven.com/assets/img/stoppy/og.jpg" />
     <meta property="og:image:width" content="1200" />
@@ -162,16 +162,21 @@
         font-size: 0.9rem;
       }
 
+      /* The badges sit above the button, so this column stays narrow and the description keeps its width. */
       .g-info .actions {
-        justify-content: flex-end;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 18px;
       }
 
       .g-note {
+        max-width: 90ch;
         margin-top: clamp(64px, 9vw, 120px);
         padding-top: 28px;
         border-top: 1px solid var(--line);
         color: var(--ink-3);
-        font-size: 0.95rem;
+        font-size: 0.8rem;
+        line-height: 1.5;
       }
 
       @media (max-width: 860px) {
@@ -181,7 +186,7 @@
         }
 
         .g-info .actions {
-          justify-content: flex-start;
+          align-items: flex-start;
         }
 
         .g-scene {
@@ -291,7 +296,7 @@
             <div class="scene__scrim"></div>
             <div class="g-scene__copy">
               <h2 id="stoppy-title" class="g-name" data-scene-copy>Stoppy</h2>
-              <p class="g-sub" data-scene-copy>A 3D puzzle game for iPhone and iPad</p>
+              <p class="g-sub" data-scene-copy>A 3D puzzle game for iPhone, iPad and Android</p>
             </div>
           </div>
         </a>
@@ -305,16 +310,26 @@
             <ul class="g-facts" data-reveal data-delay="0.08">
               <li>Free</li>
               <li>Plays offline</li>
-              <li>Rated 4+</li>
+              <li>For all ages</li>
             </ul>
           </div>
           <div class="actions" data-reveal data-delay="0.15">
-            <a class="store-badge" href="https://apps.apple.com/app/id6832074174">
-              <img src="/assets/img/badges/app-store-white.svg" alt="Download Stoppy on the App Store" width="162" height="54" />
-            </a>
+            <div class="store-badges">
+              <a class="store-badge" href="https://apps.apple.com/app/id6832074174">
+                <img src="/assets/img/badges/app-store-black.svg" alt="Download Stoppy on the App Store" width="162" height="54" />
+              </a>
+              <a class="store-badge" href="https://play.google.com/store/apps/details?id=com.propereleven.stoppy">
+                <img src="/assets/img/badges/google-play.svg" alt="Get Stoppy on Google Play" width="182" height="54" />
+              </a>
+            </div>
             <a class="btn btn--light" href="/stoppy" data-magnetic>Explore Stoppy</a>
           </div>
         </div>
+
+        <p class="g-note" data-reveal>
+          Apple, the Apple logo, iPhone and iPad are trademarks of Apple Inc., registered in the U.S. and other countries and
+          regions. App Store is a service mark of Apple Inc. Google Play and the Google Play logo are trademarks of Google LLC.
+        </p>
       </section>
     </main>
 

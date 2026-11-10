@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Stoppy: a 3D puzzle game for iPhone and iPad</title>
+    <title>Stoppy: a 3D puzzle game for iPhone, iPad and Android</title>
     <meta
       name="description"
-      content="Stoppy is a 3D puzzle game for iPhone and iPad. Swipe, and the ball rolls until something stops it. It has 50 levels in five worlds and a daily puzzle."
+      content="Stoppy is a 3D puzzle game for iPhone, iPad and Android. Swipe, and the ball rolls until something stops it. It has 50 levels in five worlds and a daily puzzle."
     />
     <link rel="canonical" href="https://propereleven.com/stoppy" />
     <meta name="apple-itunes-app" content="app-id=6832074174" />
@@ -15,10 +15,10 @@
     <link rel="apple-touch-icon" href="/assets/img/stoppy/icon-256.png" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Proper Eleven Technologies" />
-    <meta property="og:title" content="Stoppy: a 3D puzzle game for iPhone and iPad" />
+    <meta property="og:title" content="Stoppy: a 3D puzzle game for iPhone, iPad and Android" />
     <meta
       property="og:description"
-      content="Swipe, and Stoppy rolls until something stops him. The game is free on the App Store, with 50 levels in five worlds, a daily puzzle and challenges."
+      content="Swipe, and Stoppy rolls until something stops him. The game is free on the App Store and Google Play, with 50 levels in five worlds, a daily puzzle and challenges."
     />
     <meta property="og:url" content="https://propereleven.com/stoppy" />
     <meta property="og:image" content="https://propereleven.com/assets/img/stoppy/og.jpg" />
@@ -56,12 +56,15 @@
         "alternateName": "Stoppy: Rolling Ball Puzzle",
         "url": "https://propereleven.com/stoppy",
         "image": "https://propereleven.com/assets/img/stoppy/og.jpg",
-        "description": "A 3D puzzle game for iPhone and iPad with 50 levels in five worlds, a daily puzzle and challenges.",
+        "description": "A 3D puzzle game for iPhone, iPad and Android with 50 levels in five worlds, a daily puzzle and challenges.",
         "applicationCategory": "GameApplication",
-        "operatingSystem": "iOS 15.0 or later, iPadOS 15.0 or later",
+        "operatingSystem": "iOS 15.0 or later, iPadOS 15.0 or later, Android 7.0 or later",
         "contentRating": "4+",
         "inLanguage": "en",
-        "installUrl": "https://apps.apple.com/app/id6832074174",
+        "installUrl": [
+          "https://apps.apple.com/app/id6832074174",
+          "https://play.google.com/store/apps/details?id=com.propereleven.stoppy"
+        ],
         "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
         "publisher": {
           "@type": "Organization",
@@ -135,7 +138,7 @@
         display: flex;
         flex-wrap: wrap;
         align-items: center;
-        gap: 14px 22px;
+        gap: 16px 22px;
         margin-top: clamp(22px, 3vh, 34px);
       }
 
@@ -436,7 +439,8 @@
         color: var(--s-ink-2);
       }
 
-      .s-get .store-badge {
+      .s-get .store-badges {
+        justify-content: center;
         margin-top: 28px;
       }
 
@@ -461,6 +465,13 @@
         padding-block: 8px;
       }
 
+      .s-get .s-get__legal {
+        max-width: 64ch;
+        margin-top: 40px;
+        font-size: 0.8rem;
+        line-height: 1.5;
+      }
+
       @media (max-width: 1000px) {
         .more__grid {
           grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -479,6 +490,13 @@
 
         .facts dl {
           grid-template-columns: minmax(0, 1fr);
+        }
+      }
+
+      @media (max-width: 480px) {
+        .s-cta .store-badge img,
+        .s-get .store-badge img {
+          height: 46px;
         }
       }
 
@@ -591,11 +609,16 @@
       <div class="scene__scrim"></div>
       <div class="wrap s-hero__copy">
         <h1 id="stoppy-title" class="s-title" data-scene-copy>Stoppy</h1>
-        <p class="s-sub" data-scene-copy>A 3D puzzle game for iPhone and iPad</p>
+        <p class="s-sub" data-scene-copy>A 3D puzzle game for iPhone, iPad and Android</p>
         <div class="s-cta" data-scene-copy>
-          <a class="store-badge" href="https://apps.apple.com/app/id6832074174">
-            <img src="/assets/img/badges/app-store-black.svg" alt="Download Stoppy on the App Store" width="174" height="58" />
-          </a>
+          <div class="store-badges">
+            <a class="store-badge" href="https://apps.apple.com/app/id6832074174">
+              <img src="/assets/img/badges/app-store-black.svg" alt="Download Stoppy on the App Store" width="174" height="58" />
+            </a>
+            <a class="store-badge" href="https://play.google.com/store/apps/details?id=com.propereleven.stoppy">
+              <img src="/assets/img/badges/google-play.svg" alt="Get Stoppy on Google Play" width="196" height="58" />
+            </a>
+          </div>
           <p>Free, with no ads and no in-app purchases</p>
         </div>
       </div>
@@ -745,7 +768,7 @@
             </div>
             <div>
               <dt>Sign-in</dt>
-              <dd>None. Your progress stays on your iPhone or iPad.</dd>
+              <dd>None. Your progress stays on your phone or tablet.</dd>
             </div>
             <div>
               <dt>Hints</dt>
@@ -757,11 +780,11 @@
             </div>
             <div>
               <dt>Age rating</dt>
-              <dd>4+ on the App Store.</dd>
+              <dd>4+ on the App Store. On Google Play, it's rated Everyone in the US and 3+ in India.</dd>
             </div>
             <div>
               <dt>Needs</dt>
-              <dd>iOS 15 or iPadOS 15, or later.</dd>
+              <dd>iOS 15, iPadOS 15 or Android 7.0, or&nbsp;later.</dd>
             </div>
             <div>
               <dt>Language</dt>
@@ -775,16 +798,26 @@
         <div class="wrap s-get__in">
           <img class="s-get__ball" src="/assets/img/stoppy/stoppy.svg" alt="" width="1024" height="1024" loading="lazy" data-reveal />
           <h2 id="get-title" data-split>Get Stoppy</h2>
-          <p data-reveal>It's free on the App Store for iPhone and iPad.</p>
-          <a class="store-badge" href="https://apps.apple.com/app/id6832074174" data-reveal>
-            <img src="/assets/img/badges/app-store-black.svg" alt="Download Stoppy on the App Store" width="174" height="58" />
-          </a>
+          <p data-reveal>It's free on the App Store for iPhone and iPad, and on Google Play for Android.</p>
+          <div class="store-badges" data-reveal>
+            <a class="store-badge" href="https://apps.apple.com/app/id6832074174">
+              <img src="/assets/img/badges/app-store-black.svg" alt="Download Stoppy on the App Store" width="174" height="58" />
+            </a>
+            <a class="store-badge" href="https://play.google.com/store/apps/details?id=com.propereleven.stoppy">
+              <img src="/assets/img/badges/google-play.svg" alt="Get Stoppy on Google Play" width="196" height="58" />
+            </a>
+          </div>
           <p data-reveal>Questions or ideas? Write to <a href="mailto:support@propereleven.com">support@propereleven.com</a>.</p>
           <nav class="s-get__links" aria-label="Stoppy help and policies" data-reveal>
             <a href="/stoppy/support">Support</a>
             <a href="/stoppy/privacy">Privacy policy</a>
             <a href="/stoppy/terms">Terms of service</a>
           </nav>
+          <p class="s-get__legal" data-reveal>
+            Apple, the Apple logo, iPhone and iPad are trademarks of Apple Inc., registered in the U.S. and other countries
+            and regions. App Store is a service mark of Apple Inc. Google Play and the Google Play logo are trademarks of
+            Google LLC.
+          </p>
         </div>
       </section>
     </main>

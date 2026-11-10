@@ -1,6 +1,9 @@
 /* The home page's hero: the mark of Proper Eleven built as a monument.
    Two obsidian pillars stand in a misty night, light pours out between them, embers rise,
-   and as you scroll the camera walks through the gate. Three.js, with bloom. */
+   and as you scroll the camera walks through the gate. Three.js, with bloom.
+   It starts when the page is idle and builds its shaders in the background before the first frame, so the page
+   never freezes while they compile. Phones get fewer pixels and particles, and draw 30 frames a second while the
+   page is still. */
 import * as THREE from "three";
 import { EffectComposer } from "three/addons/postprocessing/EffectComposer.js";
 import { RenderPass } from "three/addons/postprocessing/RenderPass.js";
@@ -14,11 +17,40 @@ const canvas = document.querySelector("[data-gate-canvas]");
 const content = document.querySelector("[data-hero-content]");
 
 if (hero && canvas && hasWebGL()) {
+  const start = () =>
+    init().catch((err) => {
+      console.warn("The gate scene could not start:", err);
+    });
+  if ("requestIdleCallback" in window) window.requestIdleCallback(start, { timeout: 500 });
+  else window.setTimeout(start, 50);
+}
+
+/* Builds every shader program the way renderOnce() would use it, without drawing, then resolves once they've all
+   linked. With KHR_parallel_shader_compile the browser compiles them off the main thread. Without it, the first
+   frame compiles them as it always did. */
+function precompile(renderer, renderOnce) {
+  const materials = new Set();
+  const draw = renderer.render;
+  renderer.render = (scene, camera) => {
+    for (const m of renderer.compile(scene, camera)) materials.add(m);
+  };
   try {
-    init();
-  } catch (err) {
-    console.warn("The gate scene could not start:", err);
+    renderOnce();
+  } finally {
+    renderer.render = draw;
   }
+  const giveUp = performance.now() + 5000;
+  return new Promise((resolve) => {
+    const check = () => {
+      for (const m of materials) {
+        const program = renderer.properties.get(m).currentProgram;
+        if (program === undefined || program.isReady()) materials.delete(m);
+      }
+      if (materials.size === 0 || performance.now() > giveUp) resolve();
+      else window.setTimeout(check, 16);
+    };
+    check();
+  });
 }
 
 function hasWebGL() {
@@ -37,13 +69,14 @@ const smooth = (a, b, v) => {
 };
 const easeInOut = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
 
-function init() {
+async function init() {
   const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const coarse = window.matchMedia("(pointer: coarse)").matches;
   const small = Math.min(window.innerWidth, window.innerHeight) < 700;
+  const phone = coarse && small;
 
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: false, powerPreference: "high-performance", alpha: false });
-  let dpr = Math.min(window.devicePixelRatio || 1, small ? 1.5 : 1.75);
+  let dpr = Math.min(window.devicePixelRatio || 1, phone ? 1.25 : small ? 1.5 : 1.75);
   renderer.setPixelRatio(dpr);
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.0;
@@ -231,7 +264,7 @@ function init() {
   scene.add(new THREE.HemisphereLight(0x161b30, 0x040406, 0.5));
 
   /* Embers rising out of the gate. */
-  const EMBERS = small ? 420 : 900;
+  const EMBERS = phone ? 300 : small ? 420 : 900;
   const eg = new THREE.BufferGeometry();
   const ePos = new Float32Array(EMBERS * 3);
   const eSeed = new Float32Array(EMBERS);
@@ -295,7 +328,7 @@ function init() {
   /* Low mist drifting across the floor. */
   const mistTex = makeMistTexture();
   const mists = [];
-  const MISTS = small ? 7 : 12;
+  const MISTS = phone ? 5 : small ? 7 : 12;
   for (let i = 0; i < MISTS; i++) {
     const near = i % 3 === 0;
     const m = new THREE.Sprite(
@@ -397,14 +430,28 @@ function init() {
     return r.height > 0 ? clamp(-r.top / r.height, 0, 1) : 0;
   }
 
+  // Nothing draws until the shaders are ready.
+  let ready = false;
   let visible = true;
   new IntersectionObserver((entries) => {
     visible = entries[0].isIntersecting;
-    if (visible && !running) loop();
+    if (ready && visible && !running) loop();
   }).observe(hero);
   document.addEventListener("visibilitychange", () => {
-    if (!document.hidden && !running) loop();
+    if (ready && !document.hidden && !running) loop();
   });
+
+  // Phones draw 30 frames a second while the page is still, and every frame while it scrolls.
+  let lastScroll = 0;
+  if (phone) {
+    window.addEventListener(
+      "scroll",
+      () => {
+        lastScroll = performance.now();
+      },
+      { passive: true }
+    );
+  }
 
   let last = performance.now();
   let running = false;
@@ -413,9 +460,10 @@ function init() {
   let firstFrame = true;
   let time = 0;
 
-  function frame() {
+  function frame(pace = 1 / 60) {
     const now = performance.now();
-    const dt = Math.min((now - last) / 1000, 0.05);
+    const gap = (now - last) / 1000;
+    const dt = Math.min(gap, 0.05);
     last = now;
     if (!reduce) time += dt;
     const p = reduce ? 0 : progress();
@@ -474,10 +522,10 @@ function init() {
       canvas.classList.add("is-ready");
     }
 
-    // If the device struggles, render fewer pixels.
+    // If the device struggles to keep its pace, render fewer pixels.
     frames++;
     if (frames > 20 && frames < 140) {
-      slowTime += dt > 0.026 ? 1 : 0;
+      slowTime += gap > pace * 1.55 ? 1 : 0;
       if (slowTime > 40 && dpr > 1) {
         dpr = 1;
         renderer.setPixelRatio(dpr);
@@ -490,12 +538,18 @@ function init() {
   function loop() {
     running = true;
     last = performance.now();
-    const tick = () => {
+    let drawn = 0;
+    const tick = (now) => {
       if (!visible || document.hidden) {
         running = false;
         return;
       }
-      frame();
+      // At most 60 frames a second, even on 120 Hz screens.
+      const pace = phone && now - lastScroll > 200 ? 1 / 30 : 1 / 60;
+      if (now - drawn >= pace * 1000 - 2) {
+        drawn = now;
+        frame(pace);
+      }
       if (reduce) {
         running = false;
         return;
@@ -504,12 +558,17 @@ function init() {
     };
     requestAnimationFrame(tick);
   }
-  loop();
 
   if (reduce) {
     // One still frame, redrawn when the size changes.
-    new ResizeObserver(() => requestAnimationFrame(frame)).observe(canvas);
+    new ResizeObserver(() => {
+      if (ready) requestAnimationFrame(() => frame());
+    }).observe(canvas);
   }
+
+  await precompile(renderer, () => composer.render(0));
+  ready = true;
+  loop();
 }
 
 function makeMistTexture() {

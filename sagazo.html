@@ -22,16 +22,7 @@
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
     <script>
-      (function () {
-        var d = document.documentElement;
-        d.classList.add("js");
-        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-        d.classList.add("motion");
-        try {
-          if (sessionStorage.getItem("pet-gate") === "1") d.classList.add("gate-closed");
-          sessionStorage.removeItem("pet-gate");
-        } catch (e) {}
-      })();
+      if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) document.documentElement.classList.add("motion");
     </script>
     <link rel="preconnect" href="https://api.fontshare.com" />
     <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
@@ -824,10 +815,6 @@
   <body>
     <a class="skip" href="#main">Skip to content</a>
 
-    <div class="gate" aria-hidden="true">
-      <div class="gate__half gate__half--l"><span class="gate__bar"></span></div>
-      <div class="gate__half gate__half--r"><span class="gate__bar"></span></div>
-    </div>
 
     <header class="site-header on-light" data-header>
       <div class="wrap site-header__in">
@@ -863,22 +850,22 @@
         <div class="z-hero__bg" aria-hidden="true"><span class="b1"></span><span class="b2"></span><span class="b3"></span></div>
         <div class="wrap z-hero__grid">
           <div>
-            <img class="z-logo" src="/assets/img/sagazo/logo-color.webp" alt="Sagazo" width="760" height="278" data-reveal data-reveal-open />
-            <h1 id="z-title" class="z-title" data-split data-split-open data-delay="0.1">A social commerce app where India shares and shops</h1>
-            <p class="z-lede" data-reveal data-reveal-open data-delay="0.35">
+            <img class="z-logo" src="/assets/img/sagazo/logo-color.webp" alt="Sagazo" width="760" height="278" />
+            <h1 id="z-title" class="z-title">A social commerce app where India shares and shops</h1>
+            <p class="z-lede">
               Share what's on your mind, find your people and discover products from sellers across India. One free account covers
               all of it.
             </p>
-            <div class="actions" data-reveal data-reveal-open data-delay="0.45">
+            <div class="actions">
               <a class="z-btn z-btn--red" href="https://sagazo.com" data-magnetic>Visit sagazo.com <span aria-hidden="true">↗</span></a>
               <a class="z-btn z-btn--line" href="https://sagazo.com/become-a-seller" data-magnetic>Sell on Sagazo</a>
             </div>
           </div>
           <div class="z-phones" data-phones aria-hidden="true">
-            <div class="z-phone-wrap" data-phone="0.6"><div class="z-phone z-phone--l"><img src="/assets/img/sagazo/screen-tools.webp" alt="" width="780" height="1688" /></div></div>
-            <div class="z-phone-wrap" data-phone="0.6"><div class="z-phone z-phone--r"><img src="/assets/img/sagazo/screen-help.webp" alt="" width="780" height="1688" /></div></div>
-            <div class="z-phone-wrap z-phone-wrap--front" data-phone="1"><div class="z-phone z-phone--c"><img src="/assets/img/sagazo/screen-seller.webp" alt="" width="780" height="1688" /></div></div>
-            <div class="z-float z-float--card" data-chip>
+            <div class="z-phone-wrap"><div class="z-phone z-phone--l"><img src="/assets/img/sagazo/screen-tools.webp" alt="" width="780" height="1688" /></div></div>
+            <div class="z-phone-wrap"><div class="z-phone z-phone--r"><img src="/assets/img/sagazo/screen-help.webp" alt="" width="780" height="1688" /></div></div>
+            <div class="z-phone-wrap z-phone-wrap--front"><div class="z-phone z-phone--c"><img src="/assets/img/sagazo/screen-seller.webp" alt="" width="780" height="1688" /></div></div>
+            <div class="z-float z-float--card">
               <div class="z-bob">
                 <div class="z-card">
                   <img src="/assets/img/sagazo/silk-saree.webp" alt="" width="334" height="192" />
@@ -886,10 +873,10 @@
                 </div>
               </div>
             </div>
-            <div class="z-float z-float--verified" data-chip>
+            <div class="z-float z-float--verified">
               <div class="z-bob" style="animation-delay: -2s"><div class="z-pill"><span class="z-pill__tick">✓</span>Verified shops</div></div>
             </div>
-            <div class="z-float z-float--lang" data-chip>
+            <div class="z-float z-float--lang">
               <div class="z-bob" style="animation-delay: -4s">
                 <div class="z-pill z-pill--lang">
                   <span lang="en">English</span><span lang="hi">हिंदी</span><span lang="te">తెలుగు</span><span lang="ta">தமிழ்</span>

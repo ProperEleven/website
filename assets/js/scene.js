@@ -1,5 +1,5 @@
-/* Brings Stoppy's layered world to life: the islands rise into place, the paint trail draws itself,
-   Stoppy flies in along it, and the layers drift with the pointer and the scroll at their own depths. */
+/* Stoppy's layered world, in place from the first paint. The layers drift at their own depths as the scene scrolls
+   past, and against the pointer where there's a mouse. */
 (function () {
   "use strict";
   var gsap = window.gsap;
@@ -12,34 +12,6 @@
 
   scenes.forEach(function (scene) {
     var layers = scene.querySelectorAll("[data-depth]");
-    var islands = scene.querySelectorAll("[data-rise]");
-    var trail = scene.querySelector("[data-trail]");
-    var stoppy = scene.querySelector("[data-stoppy]");
-    var prickle = scene.querySelector("[data-prickle]");
-    var copy = scene.querySelectorAll("[data-scene-copy]");
-
-    gsap.set(islands, { yPercent: 30, opacity: 0 });
-    if (trail) gsap.set(trail, { scaleX: 0, transformOrigin: "0% 50%" });
-    if (stoppy) gsap.set(stoppy, { xPercent: -170, yPercent: 120, rotation: -40, scale: 0.6, opacity: 0 });
-    if (prickle) gsap.set(prickle, { scale: 0, rotation: -90 });
-    gsap.set(copy, { y: 40, opacity: 0 });
-
-    var tl = gsap.timeline({ paused: true });
-    tl.to(islands, { yPercent: 0, opacity: 1, duration: 1.6, ease: "expo.out", stagger: { each: 0.09, from: "center" } }, 0);
-    if (trail) tl.to(trail, { scaleX: 1, duration: 1.0, ease: "power3.inOut" }, 0.45);
-    if (stoppy) tl.to(stoppy, { xPercent: 0, yPercent: 0, rotation: 0, scale: 1, opacity: 1, duration: 1.25, ease: "back.out(1.4)" }, 0.55);
-    if (prickle) tl.to(prickle, { scale: 1, rotation: 0, duration: 0.9, ease: "back.out(2.2)" }, 1.15);
-    tl.to(copy, { y: 0, opacity: 1, duration: 1.2, ease: "expo.out", stagger: 0.08 }, 0.7);
-
-    var play = function () {
-      tl.play();
-    };
-    var start = function () {
-      if (ST && !scene.hasAttribute("data-scene-now")) ST.create({ trigger: scene, start: "top 75%", once: true, onEnter: play });
-      else play();
-    };
-    if (window.PET && window.PET.whenOpen) window.PET.whenOpen(start);
-    else start();
 
     // Scroll: deeper layers travel further as the scene leaves the screen.
     if (ST) {

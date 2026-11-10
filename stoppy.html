@@ -26,16 +26,7 @@
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
     <script>
-      (function () {
-        var d = document.documentElement;
-        d.classList.add("js");
-        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-        d.classList.add("motion");
-        try {
-          if (sessionStorage.getItem("pet-gate") === "1") d.classList.add("gate-closed");
-          sessionStorage.removeItem("pet-gate");
-        } catch (e) {}
-      })();
+      if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) document.documentElement.classList.add("motion");
     </script>
     <link rel="preconnect" href="https://api.fontshare.com" />
     <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
@@ -511,7 +502,9 @@
         }
       }
 
-      @media (prefers-reduced-motion: reduce) {
+      /* These bob with their drop shadow on the same element, which redraws the shadow every frame. Touch screens
+         keep them still. */
+      @media (prefers-reduced-motion: reduce), (pointer: coarse) {
         .world__art img,
         .s-get__ball {
           animation: none;
@@ -522,10 +515,6 @@
   <body>
     <a class="skip" href="#main">Skip to content</a>
 
-    <div class="gate" aria-hidden="true">
-      <div class="gate__half gate__half--l"><span class="gate__bar"></span></div>
-      <div class="gate__half gate__half--r"><span class="gate__bar"></span></div>
-    </div>
 
     <header class="site-header on-light" data-header>
       <div class="wrap site-header__in">
@@ -557,7 +546,7 @@
     </div>
 
     <main id="main">
-    <section class="scene s-hero" data-scene data-scene-now aria-labelledby="stoppy-title">
+    <section class="scene s-hero" data-scene aria-labelledby="stoppy-title">
       <div class="scene__stage">
         <div class="scene__rays"></div>
         <span class="scene__bokeh" style="left: 14%; top: 18%; width: 26px; height: 26px; background: #ffd3e4"></span>
@@ -565,19 +554,19 @@
         <span class="scene__bokeh" style="left: 84%; top: 40%; width: 30px; height: 30px; background: #e3d8ff; animation-delay: -4s"></span>
         <span class="scene__bokeh" style="left: 40%; top: 14%; width: 14px; height: 14px; background: #fff3c9; animation-delay: -1s"></span>
         <div class="scene__layer scene__l-bounce scene__far" data-depth="0.35">
-          <div class="scene__drift" data-rise><div class="scene__float" style="animation-delay: -2s"><img src="/assets/img/stoppy/worlds/2.webp" alt="" width="1240" height="1121" /></div></div>
+          <div class="scene__drift"><div class="scene__float" style="animation-delay: -2s"><img src="/assets/img/stoppy/worlds/2.webp" alt="" width="1240" height="1121" /></div></div>
         </div>
         <div class="scene__layer scene__l-uptown scene__far" data-depth="0.4">
-          <div class="scene__drift" data-rise><div class="scene__float" style="animation-delay: -5s"><img src="/assets/img/stoppy/worlds/3.webp" alt="" width="1240" height="1111" /></div></div>
+          <div class="scene__drift"><div class="scene__float" style="animation-delay: -5s"><img src="/assets/img/stoppy/worlds/3.webp" alt="" width="1240" height="1111" /></div></div>
         </div>
         <div class="scene__layer scene__l-docks scene__island" data-depth="0.9">
-          <div class="scene__drift" data-rise><div class="scene__float" style="animation-delay: -1s"><img src="/assets/img/stoppy/worlds/4.webp" alt="" width="1240" height="1140" /></div></div>
+          <div class="scene__drift"><div class="scene__float" style="animation-delay: -1s"><img src="/assets/img/stoppy/worlds/4.webp" alt="" width="1240" height="1140" /></div></div>
         </div>
         <div class="scene__layer scene__l-park scene__island" data-depth="1">
-          <div class="scene__drift" data-rise><div class="scene__float" style="animation-delay: -3.5s"><img src="/assets/img/stoppy/worlds/5.webp" alt="" width="1240" height="967" /></div></div>
+          <div class="scene__drift"><div class="scene__float" style="animation-delay: -3.5s"><img src="/assets/img/stoppy/worlds/5.webp" alt="" width="1240" height="967" /></div></div>
         </div>
         <div class="scene__layer scene__l-paint scene__island" data-depth="0.6">
-          <div class="scene__drift" data-rise><div class="scene__float"><img src="/assets/img/stoppy/worlds/1.webp" alt="" width="1240" height="999" /></div></div>
+          <div class="scene__drift"><div class="scene__float"><img src="/assets/img/stoppy/worlds/1.webp" alt="" width="1240" height="999" /></div></div>
         </div>
         <div class="scene__layer scene__l-trail" data-depth="0.7">
           <div class="scene__drift">
@@ -589,7 +578,7 @@
                   <stop offset="1" stop-color="#f6475a" stop-opacity="0.95" />
                 </linearGradient>
               </defs>
-              <g data-trail>
+              <g>
                 <path d="M 520 298 C 690 262 850 270 958 300 L 996 446 C 860 404 700 330 522 306 Z" fill="url(#trail)" />
                 <path d="M 600 292 C 740 274 860 280 946 306" fill="none" stroke="#fff" stroke-opacity="0.35" stroke-width="7" stroke-linecap="round" />
                 <circle cx="640" cy="336" r="9" fill="#f23b4c" opacity="0.8" />
@@ -600,17 +589,17 @@
           </div>
         </div>
         <div class="scene__layer scene__l-stoppy" data-depth="0.8">
-          <div class="scene__drift" data-stoppy><div class="scene__float" style="animation-duration: 5s"><img src="/assets/img/stoppy/stoppy.svg" alt="" width="1024" height="1024" /></div></div>
+          <div class="scene__drift"><div class="scene__float" style="animation-duration: 5s"><img src="/assets/img/stoppy/stoppy.svg" alt="" width="1024" height="1024" /></div></div>
         </div>
         <div class="scene__layer scene__l-prickle" data-depth="1.1">
-          <div class="scene__drift" data-prickle><div class="scene__float" style="animation-duration: 6.5s; animation-delay: -2s"><img src="/assets/img/stoppy/prickle.webp" alt="" width="360" height="360" /></div></div>
+          <div class="scene__drift"><div class="scene__float" style="animation-duration: 6.5s; animation-delay: -2s"><img src="/assets/img/stoppy/prickle.webp" alt="" width="360" height="360" /></div></div>
         </div>
       </div>
       <div class="scene__scrim"></div>
       <div class="wrap s-hero__copy">
-        <h1 id="stoppy-title" class="s-title" data-scene-copy>Stoppy</h1>
-        <p class="s-sub" data-scene-copy>A 3D puzzle game for iPhone, iPad and Android</p>
-        <div class="s-cta" data-scene-copy>
+        <h1 id="stoppy-title" class="s-title">Stoppy</h1>
+        <p class="s-sub">A 3D puzzle game for iPhone, iPad and Android</p>
+        <div class="s-cta">
           <div class="store-badges">
             <a class="store-badge" href="https://apps.apple.com/app/id6832074174">
               <img src="/assets/img/badges/app-store-black.svg" alt="Download Stoppy on the App Store" width="174" height="58" />

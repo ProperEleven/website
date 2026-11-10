@@ -1,5 +1,5 @@
-/* Sagazo page: the three phones rise and fan out, the cards pop in around them,
-   the phones tilt with the pointer, and the ₹700 ledger counts up when it comes into view. */
+/* Sagazo page: the phones tilt with the pointer and drift as the hero scrolls away, and the ₹700 ledger counts up
+   when it comes into view. The hero itself is in place from the first paint. */
 (function () {
   "use strict";
   var gsap = window.gsap;
@@ -10,17 +10,6 @@
 
   var stage = document.querySelector("[data-phones]");
   if (stage) {
-    var phones = stage.querySelectorAll("[data-phone]");
-    var chips = stage.querySelectorAll("[data-chip]");
-    gsap.set(phones, { y: 140, opacity: 0, transformOrigin: "50% 100%" });
-    gsap.set(chips, { scale: 0.6, opacity: 0 });
-    var intro = function () {
-      gsap.to(phones, { y: 0, opacity: 1, duration: 1.5, ease: "expo.out", stagger: { each: 0.12, from: "end" } });
-      gsap.to(chips, { scale: 1, opacity: 1, duration: 1.1, ease: "back.out(1.8)", stagger: 0.12, delay: 0.55 });
-    };
-    if (window.PET && window.PET.whenOpen) window.PET.whenOpen(intro);
-    else intro();
-
     if (window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
       gsap.set(stage, { transformPerspective: 1600 });
       var rx = gsap.quickTo(stage, "rotationX", { duration: 1.2, ease: "power3" });

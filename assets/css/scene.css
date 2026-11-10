@@ -1,6 +1,6 @@
 /* Stoppy's world, built in layers from the game's own art: the five islands, Stoppy on a streak of
    red paint, and a Prickle. Every layer sits on a 16:9 stage that covers its box, so they stay lined up
-   at any size; scene.js brings them in and moves them with the pointer and the scroll. */
+   at any size; scene.js moves them with the pointer and the scroll. */
 
 .scene {
   position: relative;
@@ -178,6 +178,14 @@
 
 @media (prefers-reduced-motion: reduce) {
   .scene__float,
+  .scene__rays,
+  .scene__bokeh {
+    animation: none;
+  }
+}
+
+/* Touch screens keep the blurred rays and bokeh still: a blurred layer that moves is redrawn on every frame. */
+@media (pointer: coarse) {
   .scene__rays,
   .scene__bokeh {
     animation: none;

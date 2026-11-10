@@ -1,109 +1,75 @@
 /* Proper Eleven Technologies: shared page behaviour.
-   - The gate: page transitions where two dark halves close like doors, each carrying one bar of the mark.
-   - Smooth scrolling (Lenis), the header that hides on the way down, and the small-screen menu.
+   - Pages show at once. The home page's intro (the gate, CSS in index.html) plays once per visit, and the hero's
+     [data-split-open] and [data-reveal-open] rise as it opens. whenOpen() lets other scripts wait for it.
+   - Smooth wheel scrolling (Lenis) for mice and trackpads, the header that hides on the way down, and the
+     small-screen menu. Touch screens keep the browser's own scrolling.
    - Reveals: [data-split] headings rise line by line, [data-reveal] blocks fade up, [data-words] statements
-     light up word by word as you scroll, [data-parallax] layers drift.
+     light up word by word as you scroll, [data-parallax] layers drift. Anything already on screen when the page
+     opens is simply there.
    Everything degrades: without the libraries, or with reduced motion, the page is simply there. */
 (function () {
   "use strict";
 
   var d = document.documentElement;
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
   var gsap = window.gsap;
   var ST = window.ScrollTrigger;
   var Split = window.SplitText;
   var canAnimate = !!(gsap && ST) && !reduce;
 
-  /* ---------- Opening: other scripts can wait for the page to be uncovered ---------- */
+  // Without the animation libraries, nothing waits to be revealed.
+  if (!canAnimate) d.classList.remove("motion");
 
-  var opened = false;
+  /* ---------- The home page's intro ---------- */
+
+  // The doors are about 40% open 1.3 s into the CSS animation. That's when the hero starts to rise.
+  var OPEN_AT = 1300;
+  var intro = d.classList.contains("gate-intro");
+  var introOver = !intro;
+  var opened = !intro;
   var openQueue = [];
+
   function whenOpen(fn) {
     if (opened) fn();
     else openQueue.push(fn);
   }
+
   function markOpened() {
     if (opened) return;
     opened = true;
     openQueue.splice(0).forEach(function (fn) {
       fn();
     });
-    document.dispatchEvent(new CustomEvent("pet:open"));
   }
 
-  /* ---------- The gate ---------- */
-
-  var gate = document.querySelector(".gate");
-  var halves = gate ? gate.querySelectorAll(".gate__half") : [];
-  var bars = gate ? gate.querySelectorAll(".gate__bar") : [];
-  d.classList.add("gate-live");
-
-  function openGate() {
-    var closed = d.classList.contains("gate-closed");
-    var intro = d.classList.contains("gate-intro");
-    if (!gate || !closed || !canAnimate) {
-      d.classList.remove("gate-closed", "gate-intro");
+  if (intro) {
+    var gate = document.querySelector(".gate");
+    var doors = gate ? gate.querySelector(".gate__half") : null;
+    var doorsAnim = doors && doors.getAnimations ? doors.getAnimations()[0] : null;
+    var endIntro = function () {
+      if (introOver) return;
+      introOver = true;
       markOpened();
-      return;
+      d.classList.remove("gate-intro");
+      if (gate) gate.remove();
+    };
+    if (doorsAnim) {
+      var elapsed = typeof doorsAnim.currentTime === "number" ? doorsAnim.currentTime : 0;
+      window.setTimeout(markOpened, Math.max(0, OPEN_AT - elapsed));
+      doorsAnim.finished.then(endIntro, endIntro);
+    } else {
+      markOpened();
+      window.setTimeout(endIntro, 2100);
     }
-    gsap.set(halves, { xPercent: 0 });
-    gsap.set(bars, { scaleY: intro ? 0 : 1, transformOrigin: "50% 50%" });
-    d.classList.remove("gate-intro");
-    var tl = gsap.timeline({
-      onComplete: function () {
-        d.classList.remove("gate-closed");
-        gsap.set(halves, { clearProps: "transform" });
-        gsap.set(bars, { clearProps: "transform" });
-      },
-    });
-    if (intro) {
-      tl.to(bars, { scaleY: 1, duration: 0.85, ease: "expo.out", stagger: 0.08 }, 0.08);
-      try {
-        sessionStorage.setItem("pet-intro", "1");
-      } catch (e) {}
-    }
-    var at = intro ? 0.85 : 0.08;
-    tl.to(halves[0], { xPercent: -101, duration: 1.15, ease: "expo.inOut" }, at);
-    tl.to(halves[1], { xPercent: 101, duration: 1.15, ease: "expo.inOut" }, at);
-    tl.call(markOpened, null, at + 0.45);
   }
 
-  function closeGate(href) {
-    if (!gate || !canAnimate) {
-      window.location.href = href;
-      return;
-    }
-    try {
-      sessionStorage.setItem("pet-gate", "1");
-    } catch (e) {}
-    d.classList.add("gate-leaving");
-    gate.style.pointerEvents = "auto";
-    var tl = gsap.timeline({
-      onComplete: function () {
-        window.location.href = href;
-      },
-    });
-    tl.fromTo(halves[0], { xPercent: -101 }, { xPercent: 0, duration: 0.8, ease: "expo.inOut" }, 0);
-    tl.fromTo(halves[1], { xPercent: 101 }, { xPercent: 0, duration: 0.8, ease: "expo.inOut" }, 0);
-    tl.fromTo(bars, { scaleY: 0 }, { scaleY: 1, duration: 0.55, ease: "expo.out", stagger: 0.06 }, 0.5);
-  }
+  /* ---------- Smooth scrolling, for mice and trackpads ---------- */
 
-  // Coming back with the browser's back button can restore the page with the gate shut.
-  window.addEventListener("pageshow", function (e) {
-    if (!e.persisted || !gate) return;
-    d.classList.remove("gate-closed", "gate-intro", "gate-leaving");
-    gate.style.pointerEvents = "";
-    if (gsap) {
-      gsap.set(halves, { clearProps: "transform" });
-      gsap.set(bars, { clearProps: "transform" });
-    }
-    markOpened();
-  });
-
-  /* ---------- Smooth scrolling ---------- */
-
+  // Touch screens keep native scrolling: Lenis doesn't smooth touch, and its touch listeners would make every swipe
+  // wait for the page's scripts.
   var lenis = null;
-  if (!reduce && window.Lenis) {
+  if (!reduce && finePointer && window.Lenis) {
     lenis = new window.Lenis({ lerp: 0.09, smoothWheel: true, wheelMultiplier: 1 });
     window.__lenis = lenis;
     if (gsap && ST) {
@@ -191,7 +157,7 @@
     });
   }
 
-  /* ---------- Links: same-page anchors scroll, other pages go through the gate ---------- */
+  /* ---------- Links: same-page anchors scroll smoothly, other pages load straight away ---------- */
 
   document.addEventListener("click", function (e) {
     var a = e.target.closest ? e.target.closest("a[href]") : null;
@@ -203,25 +169,29 @@
     } catch (err) {
       return;
     }
-    if (url.origin !== window.location.origin || url.protocol.indexOf("http") !== 0) return;
-    var samePage = url.pathname.replace(/\/$/, "") === window.location.pathname.replace(/\/$/, "");
-    if (samePage && url.hash) {
-      var target = document.getElementById(decodeURIComponent(url.hash.slice(1)));
-      if (target) {
-        e.preventDefault();
-        if (menuOpen) setMenu(false);
-        scrollToEl(target);
-        if (window.history.replaceState) window.history.replaceState(null, "", url.hash);
-      }
-      return;
-    }
-    if (samePage) return;
-    e.preventDefault();
+    var samePage =
+      url.origin === window.location.origin && url.pathname.replace(/\/$/, "") === window.location.pathname.replace(/\/$/, "");
+    var target = samePage && url.hash ? document.getElementById(decodeURIComponent(url.hash.slice(1))) : null;
     if (menuOpen) setMenu(false);
-    closeGate(url.href);
+    if (!target) return;
+    e.preventDefault();
+    scrollToEl(target);
+    if (window.history.replaceState) window.history.replaceState(null, "", url.hash);
   });
 
   /* ---------- Reveals ---------- */
+
+  // Anything on screen when the page opens is shown as it is, so the first screen never waits for a reveal.
+  function showWhatsOnScreen() {
+    if (!d.classList.contains("motion")) return;
+    document.querySelectorAll("[data-reveal]:not([data-reveal-open]), [data-split]:not([data-split-open])").forEach(function (el) {
+      var r = el.getBoundingClientRect();
+      if (r.top < window.innerHeight && r.bottom > 0) {
+        el.removeAttribute("data-reveal");
+        el.removeAttribute("data-split");
+      }
+    });
+  }
 
   function fontsReady() {
     var ready = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
@@ -233,13 +203,21 @@
     gsap.registerPlugin(ST);
     if (Split) gsap.registerPlugin(Split);
     d.classList.add("motion-live");
+    // The home hero rises with the intro. Once the intro is over, or without one, it's simply there.
+    var heroRises = !introOver;
 
     document.querySelectorAll("[data-split]").forEach(function (el) {
+      var atOpen = el.hasAttribute("data-split-open");
+      if (atOpen && !heroRises) return;
       var delay = parseFloat(el.getAttribute("data-delay") || "0");
-      var waitForGate = el.hasAttribute("data-split-open");
       gsap.set(el, { visibility: "visible" });
       if (!Split) {
-        gsap.from(el, { opacity: 0, y: 40, duration: 1.2, ease: "expo.out", delay: delay, scrollTrigger: waitForGate ? null : { trigger: el, start: "top 88%", once: true } });
+        var from = { opacity: 0, y: 40 };
+        var to = { opacity: 1, y: 0, duration: 1.2, ease: "expo.out", delay: delay };
+        if (atOpen) {
+          gsap.set(el, from);
+          whenOpen(function () { gsap.to(el, to); });
+        } else gsap.fromTo(el, from, Object.assign(to, { scrollTrigger: { trigger: el, start: "top 88%", once: true } }));
         return;
       }
       var played = false;
@@ -255,16 +233,18 @@
             played = true;
             gsap.to(self.lines, { yPercent: 0, duration: 1.35, ease: "expo.out", stagger: 0.1, delay: delay });
           };
-          if (waitForGate) whenOpen(run);
+          if (atOpen) whenOpen(run);
           else ST.create({ trigger: el, start: "top 88%", once: true, onEnter: run });
         },
       });
     });
 
     document.querySelectorAll("[data-reveal]").forEach(function (el) {
+      var atOpen = el.hasAttribute("data-reveal-open");
+      if (atOpen && !heroRises) return;
       var delay = parseFloat(el.getAttribute("data-delay") || "0");
       var tween = { opacity: 1, y: 0, duration: 1.3, ease: "expo.out", delay: delay };
-      if (el.hasAttribute("data-reveal-open")) whenOpen(function () { gsap.to(el, tween); });
+      if (atOpen) whenOpen(function () { gsap.to(el, tween); });
       else gsap.to(el, Object.assign(tween, { scrollTrigger: { trigger: el, start: "top 92%", once: true } }));
     });
 
@@ -296,7 +276,7 @@
   /* ---------- Magnetic buttons ---------- */
 
   function setupMagnetic() {
-    if (!canAnimate || !window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
+    if (!canAnimate || !finePointer) return;
     document.querySelectorAll("[data-magnetic]").forEach(function (el) {
       var xTo = gsap.quickTo(el, "x", { duration: 0.7, ease: "power3" });
       var yTo = gsap.quickTo(el, "y", { duration: 0.7, ease: "power3" });
@@ -314,7 +294,7 @@
 
   window.PET = { whenOpen: whenOpen, lenis: lenis, reduce: reduce, canAnimate: canAnimate };
 
-  openGate();
+  showWhatsOnScreen();
   fontsReady().then(function () {
     setupReveals();
     setupMagnetic();

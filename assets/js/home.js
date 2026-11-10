@@ -1,5 +1,4 @@
-/* Home page motion that only this page needs: the Sagazo phone and its floating cards,
-   and the window into the game worlds that opens to the full screen as you scroll. */
+/* Home page motion that only this page needs: the Sagazo phone and its floating cards. */
 (function () {
   "use strict";
   var gsap = window.gsap;
@@ -51,51 +50,6 @@
       stage.addEventListener("pointerleave", function () {
         tiltX(0);
         tiltY(0);
-      });
-    }
-  }
-
-  /* Games: the window opens to the full screen, and the islands rise past at their own speeds. */
-  var track = document.querySelector("[data-portal-track]");
-  var portal = document.querySelector("[data-portal]");
-  if (track && portal) {
-    var small = window.matchMedia("(max-width: 900px)").matches;
-    var from = small ? "inset(6% 5% round 28px)" : "inset(10% 8% round 40px)";
-    gsap.fromTo(
-      portal,
-      { clipPath: from },
-      {
-        clipPath: "inset(0% 0% round 0px)",
-        ease: "none",
-        scrollTrigger: { trigger: track, start: "top 85%", end: "top top", scrub: 0.6 },
-      }
-    );
-    portal.querySelectorAll("[data-island]").forEach(function (el) {
-      var k = parseFloat(el.getAttribute("data-island")) || 0.5;
-      gsap.fromTo(
-        el,
-        { yPercent: 40 * k, scale: 0.92 },
-        {
-          yPercent: -55 * k,
-          scale: 1.04,
-          ease: "none",
-          scrollTrigger: { trigger: track, start: "top bottom", end: "bottom top", scrub: 0.8 },
-        }
-      );
-    });
-    if (fine) {
-      var islands = portal.querySelectorAll("[data-island] .island__drift");
-      var movers = Array.prototype.map.call(islands, function (img) {
-        var k = parseFloat(img.parentNode.getAttribute("data-island")) || 0.5;
-        return { x: gsap.quickTo(img, "x", { duration: 1.4, ease: "power3" }), y: gsap.quickTo(img, "y", { duration: 1.4, ease: "power3" }), k: k };
-      });
-      portal.addEventListener("pointermove", function (e) {
-        var nx = e.clientX / window.innerWidth - 0.5;
-        var ny = e.clientY / window.innerHeight - 0.5;
-        movers.forEach(function (m) {
-          m.x(-nx * 46 * m.k);
-          m.y(-ny * 30 * m.k);
-        });
       });
     }
   }

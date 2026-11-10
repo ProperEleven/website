@@ -48,16 +48,23 @@ body {
   overflow-x: clip;
 }
 
-/* Film grain over everything, for texture. */
+/* Film grain over everything, for texture. It's a blended layer the size of the screen, so touch screens skip it:
+   phones would have to blend it over every frame of scrolling. */
 body::after {
   content: "";
   position: fixed;
-  inset: -50%;
+  inset: 0;
   z-index: 90;
   pointer-events: none;
   opacity: 0.07;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.9 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   mix-blend-mode: overlay;
+}
+
+@media (pointer: coarse) {
+  body::after {
+    display: none;
+  }
 }
 
 img,
@@ -168,6 +175,15 @@ p {
   border-bottom-color: var(--line);
   backdrop-filter: blur(18px) saturate(140%);
   -webkit-backdrop-filter: blur(18px) saturate(140%);
+}
+
+/* Touch screens get a solid bar instead of the blur, which costs phones a redraw on every frame of scrolling. */
+@media (pointer: coarse) {
+  .site-header.is-scrolled {
+    background: rgba(8, 10, 18, 0.94);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
 }
 
 .site-header.is-hidden {
@@ -376,92 +392,6 @@ p {
   }
 }
 
-/* ---------- The gate: the page transition. Two halves close like doors, each carrying one bar of the mark. ---------- */
-
-.gate {
-  position: fixed;
-  inset: 0;
-  z-index: 150;
-  display: none;
-  pointer-events: none;
-}
-
-html.js .gate {
-  display: block;
-}
-
-.gate__half {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: calc(50% + 1px);
-  background:
-    radial-gradient(80% 60% at 100% 50%, rgba(255, 90, 31, 0.14), rgba(255, 90, 31, 0) 60%),
-    var(--night-0);
-  will-change: transform;
-}
-
-.gate__half--l {
-  left: 0;
-  transform: translateX(-101%);
-}
-
-.gate__half--r {
-  right: 0;
-  transform: translateX(101%);
-  background:
-    radial-gradient(80% 60% at 0% 50%, rgba(255, 90, 31, 0.14), rgba(255, 90, 31, 0) 60%),
-    var(--night-0);
-}
-
-.gate__bar {
-  position: absolute;
-  top: 50%;
-  width: 7px;
-  height: 30vh;
-  margin-top: -15vh;
-  border-radius: 1px;
-  background: linear-gradient(180deg, var(--gold), var(--ember) 40%, #e3400c);
-  box-shadow: 0 0 22px 3px rgba(255, 90, 31, 0.6), 0 0 90px 12px rgba(255, 90, 31, 0.22);
-  transform: scaleY(0);
-}
-
-.gate__half--l .gate__bar {
-  right: 7px;
-}
-
-.gate__half--r .gate__bar {
-  left: 7px;
-}
-
-/* Closed until the script opens it; set by the inline script in <head>. */
-html.gate-closed .gate {
-  pointer-events: auto;
-}
-
-html.gate-closed .gate__half {
-  transform: none;
-}
-
-html.gate-closed .gate__bar {
-  transform: none;
-}
-
-html.gate-intro .gate__bar {
-  transform: scaleY(0);
-}
-
-/* If the script never runs, open the gate anyway after a moment. */
-html.gate-closed:not(.gate-live) .gate {
-  animation: gate-failsafe 0.01s 2.5s forwards;
-}
-
-@keyframes gate-failsafe {
-  to {
-    visibility: hidden;
-  }
-}
-
 /* ---------- Buttons ---------- */
 
 .btn {
@@ -595,13 +525,16 @@ html.gate-closed:not(.gate-live) .gate {
 }
 
 /* ---------- Reveal states. The script animates these in; without it they stay visible. ---------- */
+/* The -open variants (the home hero) are hidden only while the home page's intro plays. */
 
-html.motion [data-reveal] {
+html.motion [data-reveal]:not([data-reveal-open]),
+html.gate-intro [data-reveal-open] {
   opacity: 0;
   transform: translate3d(0, 44px, 0);
 }
 
-html.motion [data-split] {
+html.motion [data-split]:not([data-split-open]),
+html.gate-intro [data-split-open] {
   visibility: hidden;
 }
 

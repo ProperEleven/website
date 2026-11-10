@@ -12,7 +12,7 @@ The owner wants it to feel like "a great legendary company in the making": cinem
 
 ```
 website/
-├── index.html              # Home: the 3D gate hero, a statement, Sagazo, "We build exciting games" (no game is named here), contact
+├── index.html              # Home: the intro, the 3D gate hero, a statement, Sagazo, "We build exciting games" (no game is named here), contact
 ├── sagazo.html             # /sagazo: Sagazo's own page, in Sagazo's look (warm whites, its red, Figtree)
 ├── games.html              # /games: every game P.E.T makes; Stoppy is the first, shown as a layered, animated scene
 ├── stoppy.html             # /stoppy: Stoppy's own page, in the game's bright look on the shared system
@@ -22,14 +22,14 @@ website/
 │   ├── terms.html          # /stoppy/terms (same text as stoppy/legal/terms.html in the games repo)
 │   └── support.html        # /stoppy/support: the Support URL in App Store Connect
 ├── assets/
-│   ├── css/site.css        # The design system: tokens, type, header, menu, gate, buttons, reveals, footer, documents
+│   ├── css/site.css        # The design system: tokens, type, header, menu, buttons, reveals, footer, documents
 │   ├── css/scene.css       # Stoppy's layered world (games and Stoppy pages)
-│   ├── js/site.js          # Every page: the gate transitions, smooth scrolling, header, menu, reveals, magnetic buttons
+│   ├── js/site.js          # Every page: smooth scrolling, header, menu, reveals, magnetic buttons, and the home intro's timing
 │   ├── js/gate.js          # Home only: the Three.js hero (an ES module)
-│   ├── js/home.js          # Home only: the Sagazo phone and cards, and the window into the game worlds
-│   ├── js/scene.js         # Games and Stoppy pages: brings the layered scene in and moves it with the pointer and scroll
+│   ├── js/home.js          # Home only: the Sagazo phone and its cards
+│   ├── js/scene.js         # Games and Stoppy pages: moves the layered scene with the pointer and the scroll
 │   ├── js/stoppy.js        # Stoppy page: the video's pause button and the tilting phone
-│   ├── js/sagazo.js        # Sagazo page: the phones fanning out, the pointer tilt and the ₹700 count-up
+│   ├── js/sagazo.js        # Sagazo page: the phones' pointer tilt and scroll drift, and the ₹700 count-up
 │   ├── js/vendor/          # Third-party code, served from here (see "Libraries")
 │   ├── img/                # Share images, icons, store badges, Sagazo and Stoppy art (see "Images and video")
 │   └── video/              # Stoppy's gameplay clip
@@ -44,18 +44,31 @@ website/
 
 There's no build step. Pages are plain HTML with the shared CSS and scripts, plus a `<style>` block for styles only that page uses. Asset URLs are absolute (`/assets/...`), so preview from the site root with a server that maps `/games` to `games.html` the way Cloudflare does (for example `npx serve .`). Python's `http.server` doesn't, so `/stoppy` 404s there. The GitHub Pages mirror at propereleven.github.io/website serves from a subfolder and won't load the assets; propereleven.com is the real site.
 
-Check every change at phone width (390 px) and desktop width, with motion and with reduced motion, and check that nothing scrolls sideways.
+Check every change at phone width (390 px) and desktop width, with motion and with reduced motion, and check that nothing scrolls sideways. For anything that moves, also check it on a phone or with Chrome's phone emulation and CPU throttling (see "Speed").
 
 ## Design
 
 - **Night and ember.** Dark, lit backgrounds (`--night-*`), warm white text, and ember light from the logo's two bars. Tokens are at the top of `site.css`. Product pages and sections keep their product's look: Sagazo's warm whites, red (`#ff2442`, `#e01030` under white text), gold and Figtree; Stoppy's sky, Fredoka and art. Both product pages use a light page with `site-header on-light`, and the P.E.T footer stays dark.
 - **Type.** Clash Display (by the Indian Type Foundry, from Fontshare) for headlines, the wordmark and statements; Schibsted Grotesk (Google Fonts) for reading and interface. Product pages use the product's own face for their content: Fredoka on the Stoppy and games pages, Figtree on the Sagazo page. The owner turned down Bodoni Moda on 9 November 2026 ("I dont like heading font"). Clash Display loads from Fontshare's CSS API: its licence (ITF Free Font License) allows commercial websites but limits redistribution, so don't copy the font files into this public repo.
-- **The mark** is two ember bars, the "11" of Proper Eleven (`.mark`, `favicon.svg`). It returns at every scale: the header, the gate transition, the 3D monoliths of the home hero and the footer's giant wordmark.
-- **The gate** (`site.js`, `.gate` in `site.css`) is the page transition. Two dark halves close like doors, each carrying one glowing bar, then open on the next page. An inline script in each page's `<head>` closes it before the first paint when you arrive from another page of the site (sessionStorage `pet-gate`). The home page also plays it once per visit as the intro (`pet-intro`). If the script never runs, a CSS fallback opens the gate after 2.5 seconds. Reduced motion turns it off.
-- **Reveals** are attributes that `site.js` animates: `data-split` (headings rise line by line behind masks), `data-reveal` (fade up), `data-words` (a statement lights up word by word as you scroll), `data-parallax`. The `-open` variants wait for the gate. Content is hidden only while `html.motion` is set and the script hasn't taken over, with a CSS fallback, so nothing stays invisible if a script fails.
-- **The home hero** (`gate.js`) is a Three.js scene: two obsidian monoliths with light lines on their inner edges, a beam between them, embers, mist, a starry dusk sky, bloom and a finishing pass. The hero is one screen tall and scrolls away normally. As it goes, the camera pushes in and the stage lags behind the scroll, and the next section (its own background and a rounded top) slides up over it. Don't pin it or fade it to black again: on 9 November 2026 the owner found the earlier 250svh pinned version slow, and its dark stretch looked like something was broken. It drops to 1× pixel ratio on slow devices, pauses off screen, renders one still frame for reduced motion, and the page shows a CSS glow if WebGL is missing. Keep the light restrained: when bloom or light levels rise with the scroll, the pillars turn into a blurred wall of light.
-- **Layered scenes** (`scene.css`, `scene.js`): every layer sits on a 16:9 stage that covers its box (container units), so the layers stay aligned. Portrait boxes use a wider stage nudged left to keep Stoppy in frame. Each layer has separate wrappers for the scroll, the pointer and the CSS bobbing (`.scene__layer`, `.scene__drift`, `.scene__float`), because a CSS animation overrides a script's transform on the same element.
+- **The mark** is two ember bars, the "11" of Proper Eleven (`.mark`, `favicon.svg`). It returns at every scale: the header, the home page's intro, the 3D monoliths of the home hero and the footer's giant wordmark.
+- **The intro** (the gate, `.gate` in `index.html`) is the home page's alone. Two dark halves stand closed at the first paint, each carrying one glowing bar; the bars light up and the halves slide apart, in about two seconds. It plays the first time the home page opens in a visit (sessionStorage `pet-intro`, set by the inline script in the page's `<head>`) and never with reduced motion. It's CSS only, so it starts with the first paint and stays smooth while scripts load; `site.js` reads its progress to time the hero's rise and removes it at the end. Until 11 November 2026 the gate also closed and opened between every page, which held each click for over a second; the owner asked for pages to open instantly ("Only keep it for home page"), so don't bring page transitions back.
+- **Reveals** are attributes that `site.js` animates: `data-split` (headings rise line by line behind masks), `data-reveal` (fade up), `data-words` (a statement lights up word by word as you scroll), `data-parallax`. They're for content further down the page. The first screen of every page shows at the first paint: no reveals there, and `site.js` shows any reveal that's on screen when the page opens without animating it. The `-open` variants are only for the home hero, which rises with the intro and is simply there when the intro doesn't play. Content is hidden only while `html.motion` is set and the script hasn't taken over, with a CSS fallback, so nothing stays invisible if a script fails.
+- **The home hero** (`gate.js`) is a Three.js scene: two obsidian monoliths with light lines on their inner edges, a beam between them, embers, mist, a starry dusk sky, bloom and a finishing pass. The hero is one screen tall and scrolls away normally. As it goes, the camera pushes in and the stage lags behind the scroll, and the next section (its own background and a rounded top) slides up over it. Don't pin it or fade it to black again: on 9 November 2026 the owner found the earlier 250svh pinned version slow, and its dark stretch looked like something was broken. It starts when the page is idle and builds all its shaders before the first frame with a compile-only pass (`precompile()` in `gate.js`), so the browser compiles them in the background (`KHR_parallel_shader_compile`). Without that, a first visit froze the page for over a second while the first frame compiled 22 shader programs. Phones (a touch screen under 700 px) render at 1.25× pixel ratio with fewer embers and less mist, and draw 30 frames a second while the page is still. It never draws more than 60 a second, drops to 1× pixel ratio on slow devices, pauses off screen, renders one still frame for reduced motion, and the page shows a CSS glow if WebGL is missing. Keep the light restrained: when bloom or light levels rise with the scroll, the pillars turn into a blurred wall of light.
+- **Layered scenes** (`scene.css`, `scene.js`): every layer sits on a 16:9 stage that covers its box (container units), so the layers stay aligned. Portrait boxes use a wider stage nudged left to keep Stoppy in frame. Each layer has separate wrappers for the scroll, the pointer and the CSS bobbing (`.scene__layer`, `.scene__drift`, `.scene__float`), because a CSS animation overrides a script's transform on the same element. The scene is in place from the first paint; only the scroll and the pointer move it.
+- **The home page's games section** is the heading, the line and the button, then a quiet row of five small worlds (`.worlds`, three on phones) on the night background. It used to be a full-screen window into Stoppy's world that opened as you scrolled; the owner found it overkill on 11 November 2026 ("Use something subtle"), so keep it small.
 - **Store badges** are the stores' own artwork in `assets/img/badges/`, unmodified: Apple's from its marketing toolbox, and `google-play.svg`, the English "Get it on Google Play" SVG from Google's Partner Marketing Hub (Google Play, Lockups, icons and badges; downloaded 10 November 2026). Stoppy is on both stores (Google Play since November 2026), so the badges sit side by side in `.store-badges` and follow both stores' rules: Apple's black badge comes first (Apple asks for black, not white, whenever another store's badge is shown), Google's is the same height (Google asks for the same size or larger), and a quarter of the badge height stays clear around each. Heights are 54 px, 58 px on the Stoppy page and 46 px below 480 px wide, so both fit on one line on a 360 px phone (minimums: Apple 40 px, Google 28 px). Links: https://apps.apple.com/app/id6832074174 and https://play.google.com/store/apps/details?id=com.propereleven.stoppy. Pages that show the badges end with Apple's and Google's trademark credit line; Apple asks for one wherever its trademarks appear.
+
+## Speed
+
+Pages must open instantly and scroll without lag on phones (owner's request, 11 November 2026). Measured then with phone emulation and the CPU slowed 4×: a click to the next readable page went from about 2.5 s to 0.13 s once the gate transitions went.
+
+- Links load the next page straight away. Don't hold a click for an animation.
+- Nothing on the first screen waits for a script or a font to appear. Hero animations other than the home intro were removed for this.
+- Touch screens keep the browser's own scrolling: `site.js` starts Lenis only for a mouse or trackpad, because its touch listeners aren't passive and make every swipe wait for the page's scripts.
+- On touch screens (`pointer: coarse`) there's no film grain (a blended full-screen layer) and no blur behind the header, and the scenes' blurred rays and bokeh stay still.
+- Don't put a CSS filter (blur, drop shadow) on an element that also animates: the filter is redrawn on every frame. Animate a wrapper and keep the filter on the element inside it, or keep it still on touch screens.
+- Don't animate `clip-path` or full-screen effects with the scroll.
+- Pages without reveals (the policies, terms and support) load only Lenis and `site.js`, not GSAP.
 
 ## Libraries
 
@@ -85,7 +98,7 @@ Everything people read here is checked before it ships: facts against the game's
 ## Images and video
 
 - Stoppy's key art (`assets/img/stoppy/key-*.webp`, `key-wide-*.webp`, `tall.webp`, `og.jpg`) comes from `stoppy/store/app-store/search-results.png` and `header.png` in the games repo.
-- The world islands (`assets/img/stoppy/worlds/1-5.webp`), `prickle.webp` and the phone screens (`assets/img/stoppy/screens/`) were rendered from the running game on 9 November 2026: transparent 3D captures with the sky hidden, and screens from a mid-game save built with the game's own progress code.
+- The world islands (`assets/img/stoppy/worlds/1-5.webp`), `prickle.webp` and the phone screens (`assets/img/stoppy/screens/`) were rendered from the running game on 9 November 2026: transparent 3D captures with the sky hidden, and screens from a mid-game save built with the game's own progress code. `worlds/1-480.webp` to `5-480.webp` are the same islands at 480 px wide for the home page's row (ImageMagick, WebP quality 84).
 - `assets/img/stoppy/stoppy.svg` is Stoppy as the app icon draws him, exported from `scripts/stoppy-art.ts` in the games repo, so he stays sharp at any size.
 - `assets/video/stoppy-preview.mp4` is the App Store preview (`stoppy/store/app-store/preview-iphone.mp4`) re-encoded at 600 px wide with no sound.
 - Sagazo: `logo-color.webp` is the app's 1360 px logo (`sagazo_app/assets/images/sagazo-logo.webp`), and `logo-white.webp` is the same with the navy turned white for dark backgrounds, as Sagazo's own dark logo does. The `screen-*.webp` phone screens are 3× captures of sagazo.com's own pages (become-a-seller, tools, help, about) with the cookie banner and the ordering-date strip hidden. Only company pages, so no member's posts or shop is shown without their say. The product photos are copies from the Sagazo repo (`priv/static/images/sell/`). `og.jpg` is a capture of the page's hero.

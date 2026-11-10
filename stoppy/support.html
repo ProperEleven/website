@@ -13,18 +13,6 @@
     <meta name="theme-color" content="#080a12" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png" />
-    <script>
-      (function () {
-        var d = document.documentElement;
-        d.classList.add("js");
-        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-        d.classList.add("motion");
-        try {
-          if (sessionStorage.getItem("pet-gate") === "1") d.classList.add("gate-closed");
-          sessionStorage.removeItem("pet-gate");
-        } catch (e) {}
-      })();
-    </script>
     <link rel="preconnect" href="https://api.fontshare.com" />
     <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
     <link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&display=swap" rel="stylesheet" />
@@ -39,10 +27,6 @@
   <body>
     <a class="skip" href="#main">Skip to content</a>
 
-    <div class="gate" aria-hidden="true">
-      <div class="gate__half gate__half--l"><span class="gate__bar"></span></div>
-      <div class="gate__half gate__half--r"><span class="gate__bar"></span></div>
-    </div>
 
     <header class="site-header" data-header>
       <div class="wrap site-header__in">
@@ -155,8 +139,6 @@
       </div>
     </footer>
 
-    <script src="/assets/js/vendor/gsap.min.js" defer></script>
-    <script src="/assets/js/vendor/ScrollTrigger.min.js" defer></script>
     <script src="/assets/js/vendor/lenis.min.js" defer></script>
     <script src="/assets/js/site.js" defer></script>
   </body>

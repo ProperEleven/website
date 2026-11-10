@@ -24,18 +24,15 @@
     <script>
       (function () {
         var d = document.documentElement;
-        d.classList.add("js");
         if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
         d.classList.add("motion");
-        var fromSite = false;
-        var introDone = false;
+        // The intro plays the first time the home page opens in a visit.
         try {
-          fromSite = sessionStorage.getItem("pet-gate") === "1";
-          sessionStorage.removeItem("pet-gate");
-          introDone = sessionStorage.getItem("pet-intro") === "1";
+          if (sessionStorage.getItem("pet-intro") !== "1") {
+            sessionStorage.setItem("pet-intro", "1");
+            d.classList.add("gate-intro");
+          }
         } catch (e) {}
-        if (fromSite) d.classList.add("gate-closed");
-        else if (!introDone) d.classList.add("gate-closed", "gate-intro");
       })();
     </script>
     <link rel="preconnect" href="https://api.fontshare.com" />
@@ -71,6 +68,88 @@
       }
     </script>
     <style>
+      /* ---------- The intro: the gate opens once per visit ---------- */
+      /* Two dark halves stand closed at the first paint, each carrying one bar of the mark. The bars light up and the
+         halves slide apart. It's CSS only, so it starts with the page and stays smooth while the scripts and the 3D
+         scene load. The inline script in <head> sets html.gate-intro (never with reduced motion), and site.js removes
+         the gate when the doors are open. */
+      .gate {
+        display: none;
+      }
+
+      html.gate-intro .gate {
+        position: fixed;
+        inset: 0;
+        z-index: 150;
+        display: block;
+        animation: gate-done 0.01s 2s forwards;
+      }
+
+      .gate__half {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: calc(50% + 1px);
+        background:
+          radial-gradient(80% 60% at 100% 50%, rgba(255, 90, 31, 0.14), rgba(255, 90, 31, 0) 60%),
+          var(--night-0);
+        will-change: transform;
+        animation: gate-open-l 1.15s cubic-bezier(0.87, 0, 0.13, 1) 0.85s both;
+      }
+
+      .gate__half--r {
+        left: auto;
+        right: 0;
+        background:
+          radial-gradient(80% 60% at 0% 50%, rgba(255, 90, 31, 0.14), rgba(255, 90, 31, 0) 60%),
+          var(--night-0);
+        animation-name: gate-open-r;
+      }
+
+      .gate__bar {
+        position: absolute;
+        top: 50%;
+        right: 7px;
+        width: 7px;
+        height: 30vh;
+        margin-top: -15vh;
+        border-radius: 1px;
+        background: linear-gradient(180deg, var(--gold), var(--ember) 40%, #e3400c);
+        box-shadow: 0 0 22px 3px rgba(255, 90, 31, 0.6), 0 0 90px 12px rgba(255, 90, 31, 0.22);
+        animation: gate-bar 0.85s var(--ease-out) 0.08s both;
+      }
+
+      .gate__half--r .gate__bar {
+        right: auto;
+        left: 7px;
+        animation-delay: 0.16s;
+      }
+
+      @keyframes gate-bar {
+        from {
+          transform: scaleY(0);
+        }
+      }
+
+      @keyframes gate-open-l {
+        to {
+          transform: translateX(-101%);
+        }
+      }
+
+      @keyframes gate-open-r {
+        to {
+          transform: translateX(101%);
+        }
+      }
+
+      @keyframes gate-done {
+        to {
+          visibility: hidden;
+        }
+      }
+
       /* ---------- Hero: the gate ---------- */
       /* The hero scrolls away like any section (no pinning), and the next section slides up over it. */
       .hero {
@@ -383,7 +462,7 @@
         font-weight: 700;
       }
 
-      /* ---------- Games: a window that opens into a bright world ---------- */
+      /* ---------- Games: the words, then a quiet row of small worlds ---------- */
       .games {
         position: relative;
         padding-top: clamp(80px, 11vw, 170px);
@@ -412,110 +491,56 @@
         margin-top: 28px;
       }
 
-      .portal-track {
+      /* Five small worlds floating on the night, decoration only (the button is the way in). They bob gently where
+         there's a mouse; touch screens keep them still. */
+      .worlds {
         position: relative;
-        height: 230svh;
-        margin-top: clamp(40px, 6vw, 88px);
+        isolation: isolate;
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        align-items: center;
+        gap: clamp(14px, 3vw, 52px);
+        max-width: 1080px;
+        margin: clamp(64px, 8vw, 120px) auto 0;
       }
 
-      .portal {
-        position: sticky;
-        top: 0;
-        height: 100svh;
-        overflow: hidden;
-        clip-path: inset(10% 8% round 40px);
-        background:
-          radial-gradient(60% 50% at 50% 0%, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0) 60%),
-          linear-gradient(180deg, #5db5fb 0%, #8ccafe 30%, #bdbcfd 64%, #ffd9e8 100%);
-      }
-
-      .portal__rays {
+      .worlds::before {
+        content: "";
         position: absolute;
-        inset: -20% 10% 30%;
-        background: conic-gradient(from 180deg at 50% 0%, transparent 0deg, rgba(255, 255, 255, 0.35) 8deg, transparent 18deg, transparent 30deg, rgba(255, 255, 255, 0.22) 36deg, transparent 46deg, transparent 314deg, rgba(255, 255, 255, 0.22) 324deg, transparent 330deg, transparent 342deg, rgba(255, 255, 255, 0.35) 352deg, transparent 360deg);
-        filter: blur(6px);
-        opacity: 0.8;
+        inset: -30% 0;
+        z-index: -1;
+        background: radial-gradient(50% 50% at 50% 55%, rgba(255, 138, 61, 0.09), rgba(255, 138, 61, 0) 72%);
+        pointer-events: none;
       }
 
-      .island {
-        position: absolute;
-        will-change: transform;
-      }
-
-      .island img {
+      .world img {
         width: 100%;
         height: auto;
-        filter: drop-shadow(0 40px 30px rgba(70, 50, 140, 0.22));
-        animation: bob 8s ease-in-out infinite;
       }
 
-      .island--1 {
-        left: 30%;
-        top: 30%;
-        width: 40%;
+      .world:nth-child(even) {
+        transform: translateY(18%);
       }
 
-      .island--1 img {
-        animation-duration: 9s;
-      }
+      @media (hover: hover) and (pointer: fine) {
+        .world img {
+          animation: bob 9s ease-in-out infinite;
+        }
 
-      .island--2 {
-        left: -3%;
-        top: 9%;
-        width: 27%;
-      }
+        .world:nth-child(2) img {
+          animation-delay: -3s;
+        }
 
-      .island--2 img {
-        animation-delay: -2s;
-      }
+        .world:nth-child(3) img {
+          animation-delay: -6s;
+        }
 
-      .island--3 {
-        right: -2%;
-        top: 12%;
-        width: 29%;
-      }
+        .world:nth-child(4) img {
+          animation-delay: -1.5s;
+        }
 
-      .island--3 img {
-        animation-delay: -4s;
-        animation-duration: 10s;
-      }
-
-      .island--4 {
-        left: 4%;
-        bottom: -8%;
-        width: 30%;
-      }
-
-      .island--4 img {
-        animation-delay: -6s;
-      }
-
-      .island--5 {
-        right: 4%;
-        bottom: -6%;
-        width: 31%;
-      }
-
-      .island--5 img {
-        animation-delay: -1s;
-        animation-duration: 11s;
-      }
-
-      .sparkle {
-        position: absolute;
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        background: #fff;
-        box-shadow: 0 0 12px 3px rgba(255, 255, 255, 0.8);
-        opacity: 0.8;
-        animation: twinkle 3.4s ease-in-out infinite;
-      }
-
-      @keyframes twinkle {
-        50% {
-          opacity: 0.15;
-          transform: scale(0.5);
+        .world:nth-child(5) img {
+          animation-delay: -4.5s;
         }
       }
 
@@ -596,39 +621,16 @@
           width: 250px;
           margin: -270px 0 0 -125px;
         }
+      }
 
-        .portal {
-          clip-path: inset(6% 5% round 28px);
+      /* Phones show three of the worlds, a little larger. */
+      @media (max-width: 600px) {
+        .worlds {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
         }
 
-        .island--1 {
-          left: 14%;
-          top: 34%;
-          width: 72%;
-        }
-
-        .island--2 {
-          left: -14%;
-          top: 8%;
-          width: 52%;
-        }
-
-        .island--3 {
-          right: -16%;
-          top: 16%;
-          width: 52%;
-        }
-
-        .island--4 {
-          left: -12%;
-          bottom: -2%;
-          width: 56%;
-        }
-
-        .island--5 {
-          right: -14%;
-          bottom: -4%;
-          width: 56%;
+        .world:nth-child(n + 4) {
+          display: none;
         }
       }
 
@@ -647,21 +649,6 @@
 
         .chip b {
           font-size: 1.3rem;
-        }
-      }
-
-      @media (prefers-reduced-motion: reduce) {
-        .portal-track {
-          height: auto;
-        }
-
-        .portal {
-          position: relative;
-        }
-
-        .portal {
-          clip-path: none;
-          height: 90svh;
         }
       }
     </style>
@@ -785,19 +772,13 @@
             </div>
           </div>
         </div>
-        <div class="portal-track" data-portal-track>
-          <div class="portal" data-portal aria-hidden="true">
-            <div class="portal__rays"></div>
-            <div class="island island--2" data-island="0.6"><div class="island__drift"><img src="/assets/img/stoppy/worlds/2.webp" alt="" width="1240" height="1121" loading="lazy" /></div></div>
-            <div class="island island--3" data-island="0.8"><div class="island__drift"><img src="/assets/img/stoppy/worlds/3.webp" alt="" width="1240" height="1111" loading="lazy" /></div></div>
-            <div class="island island--1" data-island="0.35"><div class="island__drift"><img src="/assets/img/stoppy/worlds/1.webp" alt="" width="1240" height="999" loading="lazy" /></div></div>
-            <div class="island island--4" data-island="1.1"><div class="island__drift"><img src="/assets/img/stoppy/worlds/4.webp" alt="" width="1240" height="1140" loading="lazy" /></div></div>
-            <div class="island island--5" data-island="1.25"><div class="island__drift"><img src="/assets/img/stoppy/worlds/5.webp" alt="" width="1240" height="967" loading="lazy" /></div></div>
-            <span class="sparkle" style="left: 18%; top: 22%"></span>
-            <span class="sparkle" style="left: 72%; top: 9%; animation-delay: -1.2s"></span>
-            <span class="sparkle" style="left: 56%; top: 68%; animation-delay: -2.1s; width: 6px; height: 6px"></span>
-            <span class="sparkle" style="left: 9%; top: 60%; animation-delay: -0.6s; width: 5px; height: 5px"></span>
-            <span class="sparkle" style="left: 88%; top: 52%; animation-delay: -2.8s"></span>
+        <div class="wrap">
+          <div class="worlds" aria-hidden="true" data-reveal data-delay="0.15">
+            <span class="world"><img src="/assets/img/stoppy/worlds/2-480.webp" alt="" width="480" height="434" loading="lazy" /></span>
+            <span class="world"><img src="/assets/img/stoppy/worlds/1-480.webp" alt="" width="480" height="387" loading="lazy" /></span>
+            <span class="world"><img src="/assets/img/stoppy/worlds/3-480.webp" alt="" width="480" height="430" loading="lazy" /></span>
+            <span class="world"><img src="/assets/img/stoppy/worlds/4-480.webp" alt="" width="480" height="441" loading="lazy" /></span>
+            <span class="world"><img src="/assets/img/stoppy/worlds/5-480.webp" alt="" width="480" height="374" loading="lazy" /></span>
           </div>
         </div>
       </section>

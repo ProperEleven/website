@@ -3,6 +3,23 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!--
+      Google Tag Manager, container GTM-T5N42M72, which runs Google Analytics. Ads features are off everywhere,
+      and analytics cookies are off in the EEA, the UK and Switzerland. /privacy (section 2.3) says so: change both together.
+    -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("consent", "default", { ad_storage: "denied", ad_user_data: "denied", ad_personalization: "denied", analytics_storage: "granted" });
+      gtag("consent", "default", {
+        analytics_storage: "denied",
+        region: ["AT", "BE", "BG", "HR", "CY", "CZ", "DK", "EE", "FI", "FR", "DE", "GR", "HU", "IS", "IE", "IT", "LV", "LI", "LT", "LU", "MT", "NL", "NO", "PL", "PT", "RO", "SK", "SI", "ES", "SE", "GB", "CH"],
+      });
+      dataLayer.push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+    </script>
+    <script async src="https://www.googletagmanager.com/gtm.js?id=GTM-T5N42M72"></script>
     <title>Privacy Policy - Proper Eleven Technologies</title>
     <link rel="canonical" href="https://propereleven.com/privacy" />
     <meta name="theme-color" content="#080a12" />
@@ -56,7 +73,7 @@
       <h1>Privacy Policy</h1>
         <p class="lead">Your privacy and data protection are our top priorities</p>
       <div class="last-updated">
-        <strong>Last updated:</strong> November 3, 2026
+        <strong>Last updated:</strong> November 13, 2026
       </div>
 
       <div class="section">
@@ -64,7 +81,7 @@
         <p>
           Welcome to Proper Eleven Technologies ("we," "our," or "us"). This
           Privacy Policy explains how we collect, use, disclose, and safeguard
-          your information when you use our applications and related services.
+          your information when you use our applications, our website and related services.
           Where one of our apps has its own privacy policy, such as
           <a href="/stoppy/privacy">Stoppy's</a>, that policy applies to the app.
         </p>
@@ -91,6 +108,18 @@
           <li>Log data (IP address, access times, error logs)</li>
           <li>Analytics data to improve our services</li>
         </ul>
+
+        <h3>2.3 Our Website</h3>
+        <p>
+          Our website, propereleven.com, uses Google Analytics through Google Tag Manager to count visits and see
+          which pages people read. Google Analytics uses cookies and receives the pages you view, your browser and
+          device type, and your approximate location, worked out from your IP address. Google handles this data for
+          us, and <a href="https://policies.google.com/privacy">Google's privacy policy</a> explains how. We use it
+          only to understand and improve the website, never for advertising. In the European Economic Area, the UK
+          and Switzerland it runs without analytics cookies. You can block these cookies in your browser's settings
+          or with Google's <a href="https://tools.google.com/dlpage/gaoptout">opt-out add-on</a>. The Stoppy app has
+          no analytics; see <a href="/stoppy/privacy">its privacy policy</a>.
+        </p>
       </div>
 
       <div class="section">
@@ -112,7 +141,7 @@
         <ul>
           <li>
             With third-party service providers (payment processors, cloud
-            storage)
+            storage, website analytics)
           </li>
           <li>When required by law or to protect our rights</li>
           <li>With your explicit consent</li>

@@ -75,7 +75,7 @@ Pages must open instantly and scroll without lag on phones (owner's request, 11 
 
 ## Libraries
 
-All served from `assets/js/vendor/`, so the site makes no third-party script requests (the fonts come from Google Fonts and Fontshare):
+All served from `assets/js/vendor/`. The only third-party script is Google Tag Manager (see Analytics), and the fonts come from Google Fonts and Fontshare:
 - Three.js 0.187.0: `three.core.js`, `three.module.js` and the addons in `three/addons/`, minified with esbuild from the games repo's `node_modules/three` (the version Stoppy uses). Loaded through the import map in `index.html`. Licence in `three/LICENSE`.
 - GSAP 3.15.0 with ScrollTrigger and SplitText (free under GSAP's standard licence), from jsDelivr.
 - Lenis 1.3.27 for smooth scrolling, from jsDelivr.
@@ -107,6 +107,15 @@ Everything people read here is checked before it ships: facts against the game's
 - Sagazo: `logo-color.webp` is the app's 1360 px logo (`sagazo_app/assets/images/sagazo-logo.webp`), and `logo-white.webp` is the same with the navy turned white for dark backgrounds, as Sagazo's own dark logo does. The `screen-*.webp` phone screens are 3× captures of sagazo.com's own pages (become-a-seller, tools, help, about) with the cookie banner and the ordering-date strip hidden. Only company pages, so no member's posts or shop is shown without their say. The product photos are copies from the Sagazo repo (`priv/static/images/sell/`). `og.jpg` is a capture of the page's hero.
 - `assets/img/og-home.jpg` is a 1200×630 capture of the home hero after the intro; retake it when the hero changes.
 - Use WebP with `width` and `height` set, and `loading="lazy"` below the first screen.
+
+## Analytics
+
+Google Analytics runs through Google Tag Manager, container `GTM-T5N42M72` (added 13 November 2026 at the owner's request). The tag sits right after the viewport `<meta>` in `index.html`, `games.html`, `sagazo.html`, `stoppy.html` and `privacy.html`. It uses Tag Manager's own start event (`gtm.start`), not `gtag('js', …)`.
+
+- **Consent defaults:** set before the container loads. Ads storage, ad user data and ad personalization are denied everywhere. Analytics storage is denied in the EEA, the UK and Switzerland, where analytics cookies need consent first; Google still gets cookieless visit counts there. There's no consent banner, so those visitors are never asked. If one is added, it calls `gtag('consent', 'update', …)`.
+- **The privacy policy says the same** (`privacy.html`, section 2.3): Google Analytics, what it receives, no advertising use, no analytics cookies in those regions, and how to opt out. Change the policy whenever the tag or its consent settings change.
+- **Pages without the tag:** Stoppy's privacy, terms and support pages are left out because they're about an app that promises no analytics or trackers, and `/stoppy/get` because it redirects at once. Install sources for that link come from the stores instead.
+- **What gets measured is set in Tag Manager**, not in this repo. Publish the container after changing it there.
 
 ## Hosting
 

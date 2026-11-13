@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script>
+      // The one link for profiles and bios. Phones go straight to their store: iPhone and iPad to the
+      // App Store, Android to Google Play. Anything else goes to the Stoppy page. ?from=youtube
+      // (instagram, tiktok, facebook…) says where the visit came from, so each store's reports can
+      // show which platform brings installs. It runs before anything else on the page loads.
+      (function () {
+        var from = (new URLSearchParams(location.search).get("from") || "link")
+          .toLowerCase()
+          .replace(/[^a-z0-9_-]/g, "")
+          .slice(0, 40) || "link";
+        // App Store Connect's provider token for campaign links (App Analytics → Campaigns → Generate
+        // a campaign link, the pt= number). Empty means a plain App Store link with no campaign.
+        var PT = "";
+        var apple = PT
+          ? "https://apps.apple.com/app/apple-store/id6832074174?pt=" + PT + "&ct=" + from + "&mt=8"
+          : "https://apps.apple.com/app/id6832074174";
+        var google =
+          "https://play.google.com/store/apps/details?id=com.propereleven.stoppy&utm_source=" + from + "&utm_medium=social&utm_campaign=bio";
+        window.stoppyStores = { apple: apple, google: google };
+        var ua = navigator.userAgent || "";
+        // iPads asking for desktop pages say "Macintosh"; touch gives them away.
+        if (/iPhone|iPad|iPod/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1)) location.replace(apple);
+        else if (/Android/i.test(ua)) location.replace(google);
+        else location.replace("/stoppy");
+      })();
+    </script>
+    <title>Get Stoppy</title>
+    <meta name="robots" content="noindex" />
+    <meta
+      name="description"
+      content="Stoppy is a 3D puzzle game for iPhone, iPad and Android. Swipe, and the ball rolls until something stops it. It has 50 levels in five worlds and a daily puzzle."
+    />
+    <meta name="theme-color" content="#5cb4fb" />
+    <link rel="icon" href="/assets/img/stoppy/icon-128.png" type="image/png" />
+    <link rel="apple-touch-icon" href="/assets/img/stoppy/icon-256.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Proper Eleven Technologies" />
+    <meta property="og:title" content="Stoppy: a 3D puzzle game for iPhone, iPad and Android" />
+    <meta
+      property="og:description"
+      content="Swipe, and Stoppy rolls until something stops him. The game is free on the App Store and Google Play, with 50 levels in five worlds, a daily puzzle and challenges."
+    />
+    <meta property="og:url" content="https://propereleven.com/stoppy/get" />
+    <meta property="og:image" content="https://propereleven.com/assets/img/stoppy/og.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <style>
+      /* Seen only for a moment while a phone opens its store, or if the redirect can't run. */
+      html,
+      body {
+        margin: 0;
+        min-height: 100%;
+      }
+      body {
+        display: grid;
+        place-items: center;
+        min-height: 100vh;
+        padding: 24px 16px;
+        box-sizing: border-box;
+        background: linear-gradient(180deg, #8fd0ff 0%, #5cb4fb 55%, #3d8bff 100%);
+        font-family: ui-rounded, "SF Pro Rounded", "Fredoka", system-ui, -apple-system, "Segoe UI", sans-serif;
+        color: #2a2440;
+        text-align: center;
+      }
+      main {
+        box-sizing: border-box;
+        width: min(100%, 440px);
+        padding: 32px 22px 22px;
+        border-radius: 32px;
+        background: linear-gradient(180deg, #fff, #f1eef7);
+        box-shadow: 0 18px 44px rgba(42, 36, 64, 0.28);
+      }
+      .icon {
+        display: block;
+        width: 112px;
+        height: 112px;
+        margin: 0 auto 14px;
+        border-radius: 26px;
+        box-shadow: 0 12px 26px rgba(42, 36, 64, 0.25);
+      }
+      h1 {
+        margin: 0;
+        font-size: 40px;
+        line-height: 1.05;
+      }
+      .sub {
+        margin: 8px 0 22px;
+        font-size: 17px;
+        color: #6a6283;
+      }
+      .store-badges {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 15px;
+      }
+      .store-badges img {
+        display: block;
+        height: 58px;
+        width: auto;
+      }
+      .legal {
+        margin: 22px 0 0;
+        font-size: 11px;
+        line-height: 1.45;
+        color: #8a83a0;
+      }
+      @media (max-width: 479px) {
+        .store-badges img {
+          height: 46px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <img class="icon" src="/assets/img/stoppy/icon-256.png" alt="" width="112" height="112" />
+      <h1>Stoppy</h1>
+      <p class="sub">A 3D puzzle game for iPhone, iPad and Android</p>
+      <div class="store-badges">
+        <a id="apple" href="https://apps.apple.com/app/id6832074174">
+          <img src="/assets/img/badges/app-store-black.svg" alt="Download Stoppy on the App Store" width="174" height="58" />
+        </a>
+        <a id="google" href="https://play.google.com/store/apps/details?id=com.propereleven.stoppy">
+          <img src="/assets/img/badges/google-play.svg" alt="Get Stoppy on Google Play" width="196" height="58" />
+        </a>
+      </div>
+      <p class="legal">
+        Apple, the Apple logo, iPhone and iPad are trademarks of Apple Inc., registered in the U.S. and other countries and
+        regions. App Store is a service mark of Apple Inc. Google Play and the Google Play logo are trademarks of Google LLC.
+      </p>
+    </main>
+    <script>
+      // If the page stays up (the redirect was blocked), the badges carry the same tags.
+      if (window.stoppyStores) {
+        document.getElementById("apple").href = window.stoppyStores.apple;
+        document.getElementById("google").href = window.stoppyStores.google;
+      }
+    </script>
+  </body>
+</html>

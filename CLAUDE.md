@@ -20,7 +20,8 @@ website/
 ├── stoppy/
 │   ├── privacy.html        # /stoppy/privacy (same text as stoppy/legal/privacy.html in the games repo)
 │   ├── terms.html          # /stoppy/terms (same text as stoppy/legal/terms.html in the games repo)
-│   └── support.html        # /stoppy/support: the Support URL in App Store Connect
+│   ├── support.html        # /stoppy/support: the Support URL in App Store Connect
+│   └── get.html            # /stoppy/get: the one link for bios, sends each phone to its store (see below)
 ├── assets/
 │   ├── css/site.css        # The design system: tokens, type, header, menu, buttons, reveals, footer, documents
 │   ├── css/scene.css       # Stoppy's layered world (games and Stoppy pages)
@@ -39,6 +40,8 @@ website/
 ```
 
 `stoppy.html` and the `stoppy/` folder sit side by side: Cloudflare serves `/stoppy` from `stoppy.html` and `/stoppy/privacy` from the folder. Don't add `stoppy/index.html`.
+
+`/stoppy/get` is the link for social profiles and bios; Stoppy's short videos end with "Link in bio". An inline script at the top of its `<head>` sends iPhones and iPads to the App Store, Android phones to Google Play and everything else to `/stoppy`, before anything else loads. `?from=youtube` (or `instagram`, `tiktok`, `facebook`) becomes `utm_source` on the Google Play link, so Play Console can split store visits by platform (Store performance → Listing conversion analysis, UTM source). The App Store link gets the same tag as a campaign (`ct`) once `PT` in the script holds the account's provider token from App Store Connect. The page is `noindex` and stays out of the sitemap. Its card, with both badges and the trademark line, only shows if the redirect can't run.
 
 ## Development
 

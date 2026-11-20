@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Repository Overview
 
-This is the static website for Proper Eleven Technologies (P.E.T), hosted at propereleven.com: the company home page, a page for Sagazo, a Games section, Stoppy's page, Stoppy's privacy policy, terms of service and support page, and the company privacy policy.
+This is the static website for Proper Eleven Technologies (P.E.T), hosted at propereleven.com: the company home page, a page for Sagazo, a page for Anatomy of the Human Body, a Games section, Stoppy's page, Stoppy's privacy policy, terms of service and support page, and the company privacy policy.
 
 The owner wants it to feel like "a great legendary company in the making": cinematic, animated and polished. A clean but plain version was rejected as "very basic" on 9 November 2026, so keep new work at that standard.
 
@@ -12,8 +12,9 @@ The owner wants it to feel like "a great legendary company in the making": cinem
 
 ```
 website/
-├── index.html              # Home: the intro, the 3D gate hero, a statement, Sagazo, "We build exciting games" (no game is named here), contact
+├── index.html              # Home: the intro, the 3D gate hero, a statement, Sagazo, Anatomy of the Human Body, "We build exciting games" (no game is named here), contact
 ├── sagazo.html             # /sagazo: Sagazo's own page, in Sagazo's look (warm whites, its red, Figtree)
+├── anatomy.html            # /anatomy: Anatomy of the Human Body's own page, in its website's look (white, ink, teal, Bricolage Grotesque)
 ├── games.html              # /games: every game P.E.T makes; Stoppy is the first, shown as a layered, animated scene
 ├── stoppy.html             # /stoppy: Stoppy's own page, in the game's bright look on the shared system
 ├── privacy.html            # /privacy: company privacy policy; an app with its own policy (Stoppy) follows that one
@@ -31,8 +32,9 @@ website/
 │   ├── js/scene.js         # Games and Stoppy pages: moves the layered scene with the pointer and the scroll
 │   ├── js/stoppy.js        # Stoppy page: the video's pause button and the tilting phone
 │   ├── js/sagazo.js        # Sagazo page: the phones' pointer tilt and scroll drift, and the ₹700 count-up
+│   ├── js/anatomy.js       # Anatomy page: the depth dial's buttons that hold a layer, the phones' tilt and drift
 │   ├── js/vendor/          # Third-party code, served from here (see "Libraries")
-│   ├── img/                # Share images, icons, store badges, Sagazo and Stoppy art (see "Images and video")
+│   ├── img/                # Share images, icons, store badges, Sagazo, Anatomy and Stoppy art (see "Images and video")
 │   └── video/              # Stoppy's gameplay clip
 ├── favicon.svg, favicon.ico
 ├── robots.txt, sitemap.xml # Add new pages to the sitemap
@@ -51,7 +53,7 @@ Check every change at phone width (390 px) and desktop width, with motion and wi
 
 ## Design
 
-- **Night and ember.** Dark, lit backgrounds (`--night-*`), warm white text, and ember light from the logo's two bars. Tokens are at the top of `site.css`. Product pages and sections keep their product's look: Sagazo's warm whites, red (`#ff2442`, `#e01030` under white text), gold and Figtree; Stoppy's sky, Fredoka and art. Both product pages use a light page with `site-header on-light`, and the P.E.T footer stays dark.
+- **Night and ember.** Dark, lit backgrounds (`--night-*`), warm white text, and ember light from the logo's two bars. Tokens are at the top of `site.css`. Product pages and sections keep their product's look: Sagazo's warm whites, red (`#ff2442`, `#e01030` under white text), gold and Figtree; Anatomy of the Human Body's white, ink (`#0e1a1f`), teal (`#087565`), mint and yellow, and Bricolage Grotesque (its app's and website's face, from Google Fonts); Stoppy's sky, Fredoka and art. The product pages use a light page with `site-header on-light`, and the P.E.T footer stays dark. The header, menu and footer list Sagazo, Anatomy, Games and Contact, in that order, on every page.
 - **Type.** Clash Display (by the Indian Type Foundry, from Fontshare) for headlines, the wordmark and statements; Schibsted Grotesk (Google Fonts) for reading and interface. Product pages use the product's own face for their content: Fredoka on the Stoppy and games pages, Figtree on the Sagazo page. The owner turned down Bodoni Moda on 9 November 2026 ("I dont like heading font"). Clash Display loads from Fontshare's CSS API: its licence (ITF Free Font License) allows commercial websites but limits redistribution, so don't copy the font files into this public repo.
 - **The mark** is two ember bars, the "11" of Proper Eleven (`.mark`, `favicon.svg`). It returns at every scale: the header, the home page's intro, the 3D monoliths of the home hero and the footer's giant wordmark.
 - **The intro** (the gate, `.gate` in `index.html`) is the home page's alone. Two dark halves stand closed at the first paint, each carrying one glowing bar; the bars light up and the halves slide apart, in about two seconds. It plays the first time the home page opens in a visit (sessionStorage `pet-intro`, set by the inline script in the page's `<head>`) and never with reduced motion. It's CSS only, so it starts with the first paint and stays smooth while scripts load; `site.js` reads its progress to time the hero's rise and removes it at the end. Until 11 November 2026 the gate also closed and opened between every page, which held each click for over a second; the owner asked for pages to open instantly ("Only keep it for home page"), so don't bring page transitions back.
@@ -92,6 +94,9 @@ Everything people read here is checked before it ships: facts against the game's
 - **Platform names:** Apple's marketing rules ask for Apple products to be named first, so write "iPhone, iPad and Android".
 - **Stoppy's privacy and price claims:** the Stoppy and games pages say there are no ads and nothing to buy, that it plays offline and that progress stays on the device. If ads, purchases or analytics arrive, change those lines together with the privacy policy, the terms and the support page (the games repo's `stoppy/CLAUDE.md` has the full list).
 - **Stoppy wording to avoid:** the tagline "Walls are your brakes" (the owner finds it cringy), "roll the ball", "maze", "sliding puzzle", IQ or brain-training claims, and "for kids". Describe what the game asks of you (planning, thinking ahead) rather than promising it improves anything.
+- **Anatomy of the Human Body** (`anatomy.html` and the home page's section, 21 November 2026): an iPhone app with a whole human body in 3D, and its free website, anatomyofthehumanbody.com. The project is in `../anatomy-of-human-body` (its `CLAUDE.md`, `docs/credits.md`), and every line here comes from it: over 2,000 parts in 3D; the depth dial's eight layers from the skin to the nerves; the Systems views (the skeleton, muscles, organs, nerves, blood vessels); a tapped part turning the rest to an X-ray with its name on a label; a muscle's card (origin, insertion, nerve supply, how well you know it); a page for every part, more than 800; the Find it and Name it quizzes with points, a speed bonus and hints; today's quiz, ten everyday parts in about two minutes; flashcards on spaced repetition (SM-2, in `apple/Anatomy/Study.swift`); a daily goal whose days in a row make the streak. The website: every part page free and in full, over 200 so far (the arm and hand, the leg and foot, the chest), each with a 3D view and its sources, every fact checked against them (Gray's Anatomy, 1918; OpenStax, 2013; NIH; the NCI Thesaurus; Terminologia Anatomica; the Foundational Model of Anatomy). Never say or suggest that any of it is written or checked by AI (that project's primary rule). When the app or the website changes, update these lines with it.
+  - The app isn't in the stores yet, so the page says "Coming soon" for the App Store and Google Play (the owner's request, 21 November 2026), with the stores named in words, not with their badges, which are only for apps already in a store. When it's published, swap in the badges (see "Store badges") and their links.
+  - The page shows the 3D body's pictures, so it carries the credit line BodyParts3D and the HuBMAP library ask for (CC BY 4.0), word for word as the project's about page gives it.
 - **Sagazo lines** follow Sagazo's settled copy and its content checklist (`docs/content-checklist.md` in the Sagazo repo). The sources are Sagazo's `/llms.txt` (`lib/sagazo_web/controllers/llms_controller.ex`), its About page (`priv/pages/en/about.md`) and the seller page's copy (`lib/sagazo_web/live/sell/copy.ex`).
   - "A social commerce app where India shares and shops". The feed ranks posts by how new and how active they are. A post can carry photos, a poll, a product from the author's shop, a link preview or a circle card. Circles have their own feed, member list and group chat, and are public or private. Every account is tied to a verified phone number, and moderators look at every report. The buttons and menus are in English, हिंदी, తెలుగు and தமிழ் (Sagazo's own labels).
   - For sellers: opening a shop is free, with no commission, no listing fee and no monthly charge, so a ₹700 sale pays ₹700. The only deduction is the TCS the law requires from GST-registered shops. Shops are verified before their products show to buyers. The eight free tools go by the names on sagazo.com/tools.
@@ -105,12 +110,13 @@ Everything people read here is checked before it ships: facts against the game's
 - `assets/img/stoppy/stoppy.svg` is Stoppy as the app icon draws him, exported from `scripts/stoppy-art.ts` in the games repo, so he stays sharp at any size.
 - `assets/video/stoppy-preview.mp4` is the App Store preview (`stoppy/store/app-store/preview-iphone.mp4`) re-encoded at 600 px wide with no sound.
 - Sagazo: `logo-color.webp` is the app's 1360 px logo (`sagazo_app/assets/images/sagazo-logo.webp`), and `logo-white.webp` is the same with the navy turned white for dark backgrounds, as Sagazo's own dark logo does. The `screen-*.webp` phone screens are 3× captures of sagazo.com's own pages (become-a-seller, tools, help, about) with the cookie banner and the ordering-date strip hidden. Only company pages, so no member's posts or shop is shown without their say. The product photos are copies from the Sagazo repo (`priv/static/images/sell/`). `og.jpg` is a capture of the page's hero.
+- Anatomy of the Human Body (`assets/img/anatomy/`): the `screen-*.webp` phone screens are the app's own, captured on the iPhone 17 Pro simulator at the default text size with a 9:41 status bar (21 November 2026: Explore, a tapped deltoid, the skeleton, Name it, a flashcard), 780 px wide. `layer-*.webp` are the website's body-system pictures (`site/src/assets/renders/system-*.webp` in that repo, all one framing, so they stack), `part-*.webp` its part pictures, `icon.webp` the app's icon (`site/public/icon-512.png`). `og.jpg` is a 1200×630 capture of the page's hero.
 - `assets/img/og-home.jpg` is a 1200×630 capture of the home hero after the intro; retake it when the hero changes.
 - Use WebP with `width` and `height` set, and `loading="lazy"` below the first screen.
 
 ## Analytics
 
-Google Analytics runs through Google Tag Manager, container `GTM-T5N42M72` (added 13 November 2026 at the owner's request). The tag sits right after the viewport `<meta>` in `index.html`, `games.html`, `sagazo.html`, `stoppy.html` and `privacy.html`. It uses Tag Manager's own start event (`gtm.start`), not `gtag('js', …)`.
+Google Analytics runs through Google Tag Manager, container `GTM-T5N42M72` (added 13 November 2026 at the owner's request). The tag sits right after the viewport `<meta>` in `index.html`, `games.html`, `sagazo.html`, `anatomy.html`, `stoppy.html` and `privacy.html`. It uses Tag Manager's own start event (`gtm.start`), not `gtag('js', …)`.
 
 - **Consent defaults:** set before the container loads. Ads storage, ad user data and ad personalization are denied everywhere. Analytics storage is denied in the EEA, the UK and Switzerland, where analytics cookies need consent first; Google still gets cookieless visit counts there. There's no consent banner, so those visitors are never asked. If one is added, it calls `gtag('consent', 'update', …)`.
 - **The privacy policy says the same** (`privacy.html`, section 2.3): Google Analytics, what it receives, no advertising use, no analytics cookies in those regions, and how to opt out. Change the policy whenever the tag or its consent settings change.

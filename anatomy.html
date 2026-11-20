@@ -1,0 +1,1277 @@
+<!doctype html>
+<html lang="en" data-page="anatomy">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!--
+      Google Tag Manager, container GTM-T5N42M72, which runs Google Analytics. Ads features are off everywhere,
+      and analytics cookies are off in the EEA, the UK and Switzerland. /privacy (section 2.3) says so: change both together.
+    -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("consent", "default", { ad_storage: "denied", ad_user_data: "denied", ad_personalization: "denied", analytics_storage: "granted" });
+      gtag("consent", "default", {
+        analytics_storage: "denied",
+        region: ["AT", "BE", "BG", "HR", "CY", "CZ", "DK", "EE", "FI", "FR", "DE", "GR", "HU", "IS", "IE", "IT", "LV", "LI", "LT", "LU", "MT", "NL", "NO", "PL", "PT", "RO", "SK", "SI", "ES", "SE", "GB", "CH"],
+      });
+      dataLayer.push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+    </script>
+    <script async src="https://www.googletagmanager.com/gtm.js?id=GTM-T5N42M72"></script>
+    <title>Anatomy of the Human Body: explore the body in 3D</title>
+    <meta
+      name="description"
+      content="Anatomy of the Human Body, from Proper Eleven Technologies, is a 3D human body you can turn, peel back and tap, with its parts explained in plain words."
+    />
+    <link rel="canonical" href="https://propereleven.com/anatomy" />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Proper Eleven Technologies" />
+    <meta property="og:title" content="Anatomy of the Human Body: explore the body in 3D" />
+    <meta
+      property="og:description"
+      content="Turn, peel back and tap a 3D human body, with its parts explained in plain words. It's free on the web and coming soon to the App Store and Google Play."
+    />
+    <meta property="og:url" content="https://propereleven.com/anatomy" />
+    <meta property="og:image" content="https://propereleven.com/assets/img/anatomy/og.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script>
+      if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) document.documentElement.classList.add("motion");
+    </script>
+    <link rel="preconnect" href="https://api.fontshare.com" />
+    <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600&display=swap" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Schibsted+Grotesk:wght@400..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/assets/css/site.css" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Anatomy of the Human Body",
+        "url": "https://anatomyofthehumanbody.com/",
+        "description": "The human body in 3D, one part at a time: bones, muscles, organs, nerves and blood vessels, explained in plain words and checked against their sources.",
+        "inLanguage": "en-GB",
+        "publisher": {
+          "@type": "Organization",
+          "name": "Proper Eleven Technologies Private Limited",
+          "url": "https://propereleven.com/"
+        }
+      }
+    </script>
+    <style>
+      /* Anatomy of the Human Body's own look on the shared system: the white, ink and teal of its website, with its
+         mint and yellow, and its typeface, Bricolage Grotesque (the app's and the website's own). */
+      :root {
+        --a-bg: #ffffff;
+        --a-plate: #f4f7f8;
+        --a-stage: #f5f7f9;
+        --a-ink: #0e1a1f;
+        --a-ink-2: #2c3e45;
+        --a-muted: #56666d;
+        --a-line: #e2e8eb;
+        --a-teal: #087565;
+        --a-teal-soft: #e3f5f0;
+        --a-mint: #6ff2dc;
+        --a-sun: #ffc53d;
+        --a-on-sun: #1f1500;
+        --a-display: "Bricolage Grotesque", system-ui, sans-serif;
+        --a-text: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      }
+
+      html,
+      body {
+        background: var(--a-bg);
+        color: var(--a-ink);
+      }
+
+      ::selection {
+        background: var(--a-teal);
+        color: #fff;
+      }
+
+      .site-header.on-light:not(.is-scrolled) {
+        color: var(--a-ink);
+      }
+
+      main h1,
+      main h2,
+      main h3 {
+        font-family: var(--a-display);
+        font-weight: 800;
+        letter-spacing: -0.03em;
+      }
+
+      main p,
+      main li {
+        font-family: var(--a-text);
+      }
+
+      /* ---------- Buttons and the stores ---------- */
+      .a-btn {
+        position: relative;
+        isolation: isolate;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        min-height: 56px;
+        padding: 0 28px;
+        overflow: hidden;
+        border-radius: 999px;
+        font: 600 1rem var(--a-text);
+        white-space: nowrap;
+        transition: color 0.5s var(--ease-out);
+      }
+
+      .a-btn::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        border-radius: inherit;
+        transform: translateY(101%);
+        transition: transform 0.6s var(--ease-out);
+      }
+
+      .a-btn:hover::before {
+        transform: none;
+      }
+
+      .a-btn--teal {
+        background: var(--a-teal);
+        color: #fff;
+      }
+
+      .a-btn--teal::before {
+        background: var(--a-ink);
+      }
+
+      .a-btn--mint {
+        background: var(--a-mint);
+        color: #03211c;
+      }
+
+      .a-btn--mint::before {
+        background: #fff;
+      }
+
+      /* "Coming soon": the stores named in words, not their badges, which are only for apps already in the store. */
+      .a-stores {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .a-store {
+        display: inline-flex;
+        flex-direction: column;
+        justify-content: center;
+        min-height: 56px;
+        padding: 8px 22px 9px;
+        border-radius: 14px;
+        background: var(--a-ink);
+        color: #fff;
+        line-height: 1.15;
+      }
+
+      .a-store small {
+        font: 700 0.66rem/1.2 var(--a-text);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--a-mint);
+      }
+
+      .a-store b {
+        font: 700 1.2rem/1.15 var(--a-text);
+        letter-spacing: -0.01em;
+      }
+
+      .a-stores--light .a-store {
+        background: rgba(255, 255, 255, 0.08);
+        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.22);
+      }
+
+      /* ---------- Hero ---------- */
+      .a-hero {
+        position: relative;
+        overflow: clip;
+        padding-top: calc(var(--header-h) + clamp(28px, 5vw, 72px));
+        padding-bottom: clamp(56px, 8vw, 120px);
+      }
+
+      .a-hero__bg span {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(70px);
+        opacity: 0.6;
+        pointer-events: none;
+      }
+
+      .a-hero__bg .b1 {
+        width: 46vw;
+        height: 46vw;
+        right: -10vw;
+        top: -8vw;
+        background: #cdf3ea;
+      }
+
+      .a-hero__bg .b2 {
+        width: 28vw;
+        height: 28vw;
+        right: 26vw;
+        top: 28vw;
+        background: #fff1c9;
+      }
+
+      .a-hero__bg .b3 {
+        width: 34vw;
+        height: 34vw;
+        left: -12vw;
+        bottom: -14vw;
+        background: #e3f5f0;
+      }
+
+      .a-hero__grid {
+        position: relative;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+        align-items: center;
+        gap: clamp(36px, 6vw, 96px);
+      }
+
+      .a-brand {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+
+      .a-brand img {
+        width: 64px;
+        height: 64px;
+        border-radius: 16px;
+        box-shadow: 0 14px 30px -12px rgba(14, 26, 31, 0.45);
+      }
+
+      .a-brand span {
+        display: flex;
+        flex-direction: column;
+        line-height: 1;
+      }
+
+      .a-brand small {
+        font: 700 0.8rem/1 var(--a-text);
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--a-teal);
+      }
+
+      .a-brand b {
+        margin-top: 4px;
+        font: 800 1.9rem/1 var(--a-display);
+        letter-spacing: -0.02em;
+      }
+
+      .a-title {
+        margin-top: clamp(24px, 3vw, 36px);
+        font-size: clamp(2.6rem, 1.2rem + 3.4vw, 4.6rem);
+        line-height: 0.98;
+      }
+
+      .a-lede {
+        margin-top: 24px;
+        max-width: 44ch;
+        color: var(--a-ink-2);
+        font-size: clamp(1.125rem, 1rem + 0.45vw, 1.4rem);
+        line-height: 1.55;
+      }
+
+      .a-hero .actions {
+        margin-top: 34px;
+      }
+
+      .a-hero .a-stores {
+        margin-top: 16px;
+      }
+
+      .a-phones {
+        position: relative;
+        height: clamp(520px, 52vw, 720px);
+      }
+
+      .a-phone-wrap {
+        position: absolute;
+        inset: 0;
+      }
+
+      .a-phone-wrap--front {
+        z-index: 3;
+      }
+
+      .a-phone {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: clamp(200px, 17vw, 260px);
+        aspect-ratio: 780 / 1696;
+        padding: 9px;
+        border-radius: 44px;
+        background: linear-gradient(150deg, #2c3438, #0b1114 40%, #222b2f);
+        box-shadow: 0 50px 90px -30px rgba(8, 70, 60, 0.45), inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+      }
+
+      .a-phone::before {
+        content: "";
+        position: absolute;
+        top: 18px;
+        left: 50%;
+        z-index: 2;
+        width: 30%;
+        height: 22px;
+        margin-left: -15%;
+        border-radius: 999px;
+        background: #000;
+      }
+
+      .a-phone img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: top;
+        border-radius: 35px;
+      }
+
+      .a-phone--c {
+        z-index: 3;
+        transform: translate(-50%, -50%);
+      }
+
+      .a-phone--l {
+        z-index: 2;
+        transform: translate(-112%, -46%) rotate(-9deg);
+      }
+
+      .a-phone--r {
+        z-index: 2;
+        transform: translate(12%, -46%) rotate(9deg);
+      }
+
+      .a-float {
+        position: absolute;
+        z-index: 4;
+      }
+
+      .a-bob {
+        animation: a-bob 7s ease-in-out infinite;
+      }
+
+      @keyframes a-bob {
+        50% {
+          transform: translate3d(0, -10px, 0);
+        }
+      }
+
+      .a-float--parts {
+        left: 0;
+        top: 10%;
+      }
+
+      .a-float--checked {
+        right: 0;
+        top: 18%;
+      }
+
+      .a-float--free {
+        left: 9%;
+        bottom: 7%;
+      }
+
+      .a-chip {
+        display: grid;
+        place-items: center;
+        padding: 14px 20px;
+        border-radius: 20px;
+        background: var(--a-teal);
+        color: #fff;
+        box-shadow: 0 26px 50px -18px rgba(8, 80, 70, 0.55);
+        font: 600 0.82rem/1.15 var(--a-text);
+        text-align: center;
+        transform: rotate(-5deg);
+      }
+
+      .a-chip b {
+        font: 800 1.9rem/1 var(--a-display);
+        letter-spacing: -0.02em;
+      }
+
+      .a-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        padding: 12px 18px;
+        background: #fff;
+        border-radius: 999px;
+        box-shadow: 0 22px 44px -16px rgba(14, 26, 31, 0.35);
+        font: 700 0.9rem var(--a-text);
+        white-space: nowrap;
+      }
+
+      .a-pill__tick {
+        display: grid;
+        place-items: center;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: var(--a-teal);
+        color: #fff;
+        font-size: 0.8rem;
+      }
+
+      .a-pill--sun {
+        background: var(--a-sun);
+        color: var(--a-on-sun);
+      }
+
+      /* ---------- Sections ---------- */
+      .a-section {
+        padding-block: clamp(90px, 12vw, 170px);
+      }
+
+      .a-section h2,
+      .a-learn h2,
+      .a-cta h2 {
+        font-size: clamp(2.5rem, 1.4rem + 3.6vw, 4.8rem);
+        line-height: 1;
+      }
+
+      .a-section p {
+        margin-top: 20px;
+        max-width: 48ch;
+        color: var(--a-ink-2);
+        font-size: 1.15rem;
+        line-height: 1.6;
+      }
+
+      .a-split {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        align-items: center;
+        gap: clamp(40px, 7vw, 120px);
+      }
+
+      .a-split--rev > :first-child {
+        order: 2;
+      }
+
+      /* Peel it back: the four layers of the body take turns, as the app's depth dial peels them; a tap holds one. */
+      .a-layers {
+        background: var(--a-plate);
+      }
+
+      .a-peel {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: center;
+        gap: clamp(16px, 2.4vw, 32px);
+        margin: 0;
+      }
+
+      .a-peel__stage {
+        position: relative;
+        aspect-ratio: 608 / 760;
+        overflow: hidden;
+        border-radius: 32px;
+        background: var(--a-stage);
+        box-shadow: 0 40px 80px -40px rgba(14, 26, 31, 0.35), inset 0 0 0 1px var(--a-line);
+      }
+
+      .a-peel__layer {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        animation: a-peel 12s infinite backwards;
+      }
+
+      .a-peel__layer:nth-child(2),
+      .a-peel__dial button:nth-child(2) {
+        animation-delay: 3s;
+      }
+
+      .a-peel__layer:nth-child(3),
+      .a-peel__dial button:nth-child(3) {
+        animation-delay: 6s;
+      }
+
+      .a-peel__layer:nth-child(4),
+      .a-peel__dial button:nth-child(4) {
+        animation-delay: 9s;
+      }
+
+      @keyframes a-peel {
+        0% {
+          opacity: 0;
+        }
+        5%,
+        25% {
+          opacity: 1;
+        }
+        30%,
+        100% {
+          opacity: 0;
+        }
+      }
+
+      .a-peel__dial {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .a-peel__dial button {
+        position: relative;
+        min-height: 44px;
+        padding: 10px 18px 10px 36px;
+        border: 0;
+        border-radius: 999px;
+        background: transparent;
+        color: var(--a-muted);
+        font: 600 0.98rem var(--a-text);
+        text-align: left;
+        white-space: nowrap;
+        cursor: pointer;
+        animation: a-dial 12s infinite backwards;
+      }
+
+      .a-peel__dial button::before {
+        content: "";
+        position: absolute;
+        left: 14px;
+        top: 50%;
+        width: 10px;
+        height: 10px;
+        margin-top: -5px;
+        border-radius: 50%;
+        border: 2px solid currentColor;
+        background: transparent;
+      }
+
+      @keyframes a-dial {
+        0% {
+          color: var(--a-muted);
+          background: transparent;
+        }
+        5%,
+        25% {
+          color: var(--a-teal);
+          background: var(--a-teal-soft);
+        }
+        30%,
+        100% {
+          color: var(--a-muted);
+          background: transparent;
+        }
+      }
+
+      .a-peel[data-held] .a-peel__layer,
+      .a-peel[data-held] .a-peel__dial button {
+        animation: none;
+      }
+
+      .a-peel[data-held] .a-peel__layer.is-on {
+        opacity: 1;
+      }
+
+      .a-peel[data-held] .a-peel__dial button[aria-pressed="true"] {
+        color: var(--a-teal);
+        background: var(--a-teal-soft);
+      }
+
+      .a-peel__dial button[aria-pressed="true"]::before {
+        background: currentColor;
+      }
+
+      .a-peel figcaption {
+        grid-column: 1 / -1;
+        color: var(--a-muted);
+        font-size: 0.9rem;
+      }
+
+      /* Tap any part */
+      .a-solo {
+        position: relative;
+        display: grid;
+        place-items: center;
+        min-height: clamp(520px, 50vw, 700px);
+      }
+
+      .a-solo .a-phone {
+        position: relative;
+        left: auto;
+        top: auto;
+        width: clamp(230px, 20vw, 290px);
+        transform: rotate(-4deg);
+      }
+
+      .a-solo .a-float--pages {
+        right: 8%;
+        top: 14%;
+      }
+
+      .a-solo .a-float--card {
+        left: 4%;
+        bottom: 12%;
+      }
+
+      /* Learn it, then test yourself: the website's dark band, with its mint. */
+      .a-learn {
+        position: relative;
+        overflow: clip;
+        padding-block: clamp(90px, 12vw, 170px);
+        background: var(--a-ink);
+        color: #fff;
+      }
+
+      .a-learn::before {
+        content: "";
+        position: absolute;
+        right: -14%;
+        top: -20%;
+        width: min(70vw, 980px);
+        aspect-ratio: 1;
+        background: radial-gradient(closest-side, rgba(111, 242, 220, 0.16), rgba(111, 242, 220, 0));
+        pointer-events: none;
+      }
+
+      .a-learn__grid {
+        position: relative;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        align-items: center;
+        gap: clamp(40px, 7vw, 120px);
+      }
+
+      .a-features {
+        display: grid;
+        gap: 26px;
+        margin: 40px 0 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .a-features li {
+        display: grid;
+        grid-template-columns: 44px minmax(0, 1fr);
+        gap: 4px 16px;
+      }
+
+      .a-features svg {
+        grid-row: span 2;
+        width: 44px;
+        height: 44px;
+        padding: 10px;
+        border-radius: 14px;
+        background: rgba(111, 242, 220, 0.12);
+        color: var(--a-mint);
+      }
+
+      .a-features h3 {
+        font-size: 1.3rem;
+        letter-spacing: -0.01em;
+      }
+
+      .a-features p {
+        color: #c9d4d8;
+        font-size: 1.05rem;
+        line-height: 1.55;
+      }
+
+      .a-duo {
+        position: relative;
+        min-height: clamp(520px, 50vw, 700px);
+      }
+
+      .a-duo .a-phone {
+        width: clamp(200px, 16vw, 250px);
+        box-shadow: 0 50px 90px -30px rgba(0, 0, 0, 0.7), inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+      }
+
+      .a-duo .a-phone--l {
+        transform: translate(-96%, -54%) rotate(-6deg);
+      }
+
+      .a-duo .a-phone--r {
+        transform: translate(-4%, -44%) rotate(6deg);
+      }
+
+      /* Free on the web */
+      .a-web__head {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        align-items: end;
+        gap: 24px clamp(40px, 7vw, 120px);
+      }
+
+      .a-web__head .actions {
+        margin-top: 28px;
+      }
+
+      .a-parts {
+        display: grid;
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        gap: 16px;
+        margin: clamp(48px, 6vw, 72px) 0 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .a-parts a {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        color: var(--a-ink);
+      }
+
+      .a-parts__plate {
+        display: block;
+        aspect-ratio: 4 / 5;
+        overflow: hidden;
+        border-radius: 22px;
+        background: var(--a-stage);
+        box-shadow: inset 0 0 0 1px var(--a-line);
+      }
+
+      .a-parts__plate img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.9s var(--ease-out);
+      }
+
+      .a-parts a:hover img {
+        transform: scale(1.06);
+      }
+
+      .a-parts b {
+        font: 700 1.05rem/1.25 var(--a-display);
+        letter-spacing: -0.01em;
+      }
+
+      .a-parts a:hover b {
+        color: var(--a-teal);
+      }
+
+      /* Checked against its sources */
+      .a-sources {
+        background: var(--a-plate);
+      }
+
+      .a-works {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .a-works li {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        padding: 20px 22px;
+        border-radius: 20px;
+        background: #fff;
+        box-shadow: inset 0 0 0 1px var(--a-line);
+      }
+
+      .a-works b {
+        font: 700 1.1rem/1.25 var(--a-display);
+        letter-spacing: -0.01em;
+      }
+
+      .a-works span {
+        color: var(--a-muted);
+        font-size: 0.92rem;
+        line-height: 1.45;
+      }
+
+      .a-section .a-credit {
+        max-width: 80ch;
+        margin-top: clamp(40px, 5vw, 64px);
+        padding-top: 24px;
+        border-top: 1px solid var(--a-line);
+        color: var(--a-muted);
+        font-size: 0.95rem;
+      }
+
+      .a-credit a {
+        color: var(--a-teal);
+        text-decoration: underline;
+        text-underline-offset: 0.2em;
+      }
+
+      /* The app, coming soon */
+      .a-cta {
+        position: relative;
+        overflow: clip;
+        padding-block: clamp(100px, 13vw, 190px);
+        background: var(--a-ink);
+        color: #fff;
+        text-align: center;
+      }
+
+      .a-cta::before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        bottom: -60%;
+        width: min(110vw, 1500px);
+        aspect-ratio: 1;
+        transform: translateX(-50%);
+        background: radial-gradient(closest-side, rgba(111, 242, 220, 0.18), rgba(111, 242, 220, 0));
+        pointer-events: none;
+      }
+
+      .a-cta .wrap {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .a-cta__icon {
+        width: 92px;
+        height: 92px;
+        margin-bottom: 30px;
+        border-radius: 22px;
+        box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.14);
+      }
+
+      .a-cta p {
+        max-width: 50ch;
+        margin-top: 22px;
+        color: #c9d4d8;
+        font-size: 1.15rem;
+        line-height: 1.6;
+      }
+
+      .a-cta .a-stores {
+        justify-content: center;
+        margin-top: 36px;
+      }
+
+      .a-cta .actions {
+        justify-content: center;
+        margin-top: 20px;
+      }
+
+      .a-cta .a-made {
+        margin-top: 44px;
+        font-size: 0.98rem;
+      }
+
+      .a-cta .a-tm {
+        margin-top: 14px;
+        color: #8fa0a6;
+        font-size: 0.8rem;
+      }
+
+      /* ---------- Small screens ---------- */
+      @media (max-width: 1100px) {
+        .a-parts {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+      }
+
+      @media (max-width: 900px) {
+        .a-hero__grid,
+        .a-split,
+        .a-learn__grid,
+        .a-web__head {
+          grid-template-columns: minmax(0, 1fr);
+        }
+
+        .a-split--rev > :first-child {
+          order: 0;
+        }
+
+        .a-phones {
+          height: clamp(460px, 120vw, 600px);
+        }
+
+        .a-phone {
+          width: clamp(180px, 46vw, 230px);
+        }
+
+        .a-phone--l {
+          transform: translate(-104%, -46%) rotate(-9deg);
+        }
+
+        .a-phone--r {
+          transform: translate(4%, -46%) rotate(9deg);
+        }
+
+        .a-duo {
+          min-height: clamp(460px, 115vw, 600px);
+        }
+
+        .a-duo .a-phone {
+          width: clamp(170px, 42vw, 220px);
+        }
+
+        .a-works {
+          grid-template-columns: minmax(0, 1fr);
+        }
+      }
+
+      @media (max-width: 600px) {
+        .a-parts {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .a-peel {
+          grid-template-columns: minmax(0, 1fr);
+        }
+
+        .a-peel__dial {
+          flex-direction: row;
+          flex-wrap: wrap;
+        }
+
+        .a-float--checked {
+          right: -2%;
+          top: 4%;
+        }
+
+        .a-float--parts {
+          left: -2%;
+          top: 2%;
+        }
+
+        .a-chip b {
+          font-size: 1.5rem;
+        }
+
+        .a-pill {
+          padding: 10px 14px;
+          font-size: 0.82rem;
+        }
+
+        .a-store {
+          padding: 8px 14px 9px;
+        }
+
+        .a-store b {
+          font-size: 1.05rem;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .a-bob {
+          animation: none;
+        }
+
+        .a-peel__layer,
+        .a-peel__dial button {
+          animation: none;
+        }
+
+        .a-peel:not([data-held]) .a-peel__layer:first-child {
+          opacity: 1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <header class="site-header on-light" data-header>
+      <div class="wrap site-header__in">
+        <a class="brand" href="/" aria-label="Proper Eleven Technologies home">
+          <span class="mark" aria-hidden="true"><i></i><i></i></span>
+          <span class="brand__word">Proper Eleven</span>
+        </a>
+        <nav class="site-nav" aria-label="Main">
+          <a href="/sagazo">Sagazo</a>
+          <a href="/anatomy" aria-current="page">Anatomy</a>
+          <a href="/games">Games</a>
+          <a href="/#contact">Contact</a>
+        </nav>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-menu">
+          <span class="menu-toggle__label">Menu</span><span class="menu-toggle__icon" aria-hidden="true"></span>
+        </button>
+      </div>
+    </header>
+
+    <div class="menu" id="site-menu">
+      <nav aria-label="Menu">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/sagazo">Sagazo</a></li>
+          <li><a href="/anatomy" aria-current="page">Anatomy</a></li>
+          <li><a href="/games">Games</a></li>
+          <li><a href="/#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <p class="menu__foot">contact@propereleven.com</p>
+    </div>
+
+    <main id="main">
+      <section class="a-hero" aria-labelledby="a-title">
+        <div class="a-hero__bg" aria-hidden="true"><span class="b1"></span><span class="b2"></span><span class="b3"></span></div>
+        <div class="wrap a-hero__grid">
+          <div>
+            <p class="a-brand">
+              <img src="/assets/img/anatomy/icon.webp" alt="" width="256" height="256" />
+              <span><small>Anatomy of the</small> <b>Human Body</b></span>
+            </p>
+            <h1 id="a-title" class="a-title">Explore the human body, one part at a time.</h1>
+            <p class="a-lede">
+              Turn, zoom and peel back a whole human body in 3D, from the skin to the nerves. Tap any part to see its name, then
+              read about it in plain words.
+            </p>
+            <div class="actions">
+              <a class="a-btn a-btn--teal" href="https://anatomyofthehumanbody.com" data-magnetic>Explore it free on the web <span aria-hidden="true">↗</span></a>
+            </div>
+            <ul class="a-stores" aria-label="The app">
+              <li class="a-store"><small>Coming soon on the</small><b>App Store</b></li>
+              <li class="a-store"><small>Coming soon on</small><b>Google Play</b></li>
+            </ul>
+          </div>
+          <div class="a-phones" data-phones aria-hidden="true">
+            <div class="a-phone-wrap"><div class="a-phone a-phone--l"><img src="/assets/img/anatomy/screen-deltoid.webp" alt="" width="780" height="1696" /></div></div>
+            <div class="a-phone-wrap"><div class="a-phone a-phone--r"><img src="/assets/img/anatomy/screen-skeleton.webp" alt="" width="780" height="1696" /></div></div>
+            <div class="a-phone-wrap a-phone-wrap--front"><div class="a-phone a-phone--c"><img src="/assets/img/anatomy/screen-explore.webp" alt="" width="780" height="1696" /></div></div>
+            <div class="a-float a-float--parts">
+              <div class="a-bob"><div class="a-chip"><b>2,000+</b>parts in 3D</div></div>
+            </div>
+            <div class="a-float a-float--checked">
+              <div class="a-bob" style="animation-delay: -2s"><div class="a-pill"><span class="a-pill__tick">✓</span>Checked against its sources</div></div>
+            </div>
+            <div class="a-float a-float--free">
+              <div class="a-bob" style="animation-delay: -4s"><div class="a-pill a-pill--sun">Free on the web</div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="a-section a-layers" id="layers" aria-labelledby="layers-title">
+        <div class="wrap a-split">
+          <div>
+            <h2 id="layers-title" data-split>Peel it back, layer by layer</h2>
+            <p data-reveal>
+              The depth dial takes the body from the skin to the nerves in eight layers. Stop at any of them and turn the body
+              to see what lies under what.
+            </p>
+            <p data-reveal>One tap shows a whole system: the skeleton, the muscles, the organs, the nerves or the blood vessels.</p>
+          </div>
+          <figure class="a-peel" data-peel data-reveal>
+            <div class="a-peel__stage">
+              <img class="a-peel__layer is-on" src="/assets/img/anatomy/layer-muscles.webp" alt="The muscles of the whole body on our 3D model, seen from the front." width="608" height="760" loading="lazy" />
+              <img class="a-peel__layer" src="/assets/img/anatomy/layer-skeleton.webp" alt="The whole skeleton of our 3D body, seen from the front." width="608" height="760" loading="lazy" />
+              <img class="a-peel__layer" src="/assets/img/anatomy/layer-nerves.webp" alt="The brain, the spinal cord and the nerves of the arms and legs on our 3D body, with the skeleton see-through." width="608" height="760" loading="lazy" />
+              <img class="a-peel__layer" src="/assets/img/anatomy/layer-vessels.webp" alt="The heart and blood vessels of our 3D body, the arteries red and the veins blue, with the skeleton see-through." width="608" height="760" loading="lazy" />
+            </div>
+            <div class="a-peel__dial" role="group" aria-label="Show a layer of the body">
+              <button type="button" aria-pressed="false" data-layer="0">Muscles</button>
+              <button type="button" aria-pressed="false" data-layer="1">Skeleton</button>
+              <button type="button" aria-pressed="false" data-layer="2">Nerves</button>
+              <button type="button" aria-pressed="false" data-layer="3">Blood vessels</button>
+            </div>
+          </figure>
+        </div>
+      </section>
+
+      <section class="a-section" id="parts" aria-labelledby="parts-title">
+        <div class="wrap a-split a-split--rev">
+          <div class="a-solo" aria-hidden="true">
+            <div class="a-phone" data-tilt><img src="/assets/img/anatomy/screen-deltoid.webp" alt="" width="780" height="1696" loading="lazy" /></div>
+            <div class="a-float a-float--pages">
+              <div class="a-bob"><div class="a-chip"><b>800+</b>part pages</div></div>
+            </div>
+            <div class="a-float a-float--card">
+              <div class="a-bob" style="animation-delay: -3s"><div class="a-pill"><span class="a-pill__tick">✓</span>Origin, insertion, nerve</div></div>
+            </div>
+          </div>
+          <div>
+            <h2 id="parts-title" data-split>Tap any part to learn it</h2>
+            <p data-reveal>
+              Tap a part and the rest of the body turns to an X-ray, with the part's name on a label that follows it as the
+              body turns.
+            </p>
+            <p data-reveal>
+              A muscle's card says where it attaches, which nerve supplies it and how well you know it. Pull the card up for
+              the full page, in plain words. Every part in the app has a page, more than 800 in all.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="a-learn" id="learn" aria-labelledby="learn-title">
+        <div class="wrap a-learn__grid">
+          <div>
+            <h2 id="learn-title" data-split>Learn it, then test yourself</h2>
+            <ul class="a-features">
+              <li data-reveal>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8" /><circle cx="12" cy="12" r="3" /><path d="M12 2v3M12 19v3M2 12h3M19 12h3" /></svg>
+                <h3>Find it and Name it</h3>
+                <p>Quiz yourself on the 3D body itself, with points, a speed bonus and a hint when you need one.</p>
+              </li>
+              <li data-reveal data-delay="0.06">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4.5" width="18" height="16" rx="3" /><path d="M3 9.5h18M8 2.5v4M16 2.5v4" /></svg>
+                <h3>Today's quiz</h3>
+                <p>Each day brings ten everyday parts to find, which takes about two minutes.</p>
+              </li>
+              <li data-reveal data-delay="0.12">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="7" width="14" height="14" rx="2.5" /><path d="M8 3.5h10.5A2.5 2.5 0 0 1 21 6v10.5" /></svg>
+                <h3>Flashcards</h3>
+                <p>Cards come back at longer and longer gaps as you get them right.</p>
+              </li>
+              <li data-reveal data-delay="0.18">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3c1.5 3.2 5 4.8 5 9.2A5 5 0 0 1 7 12.2C7 9.5 8.8 8 9.6 6.4c.6 1.6 1.4 2.4 2.4 2.6C12 6.8 11.6 4.8 12 3Z" /></svg>
+                <h3>A daily goal</h3>
+                <p>Set a goal for each day, and your streak grows with each day in a row you reach it.</p>
+              </li>
+            </ul>
+          </div>
+          <div class="a-duo" aria-hidden="true">
+            <div class="a-phone a-phone--l"><img src="/assets/img/anatomy/screen-nameit.webp" alt="" width="780" height="1696" loading="lazy" /></div>
+            <div class="a-phone a-phone--r"><img src="/assets/img/anatomy/screen-cards.webp" alt="" width="780" height="1696" loading="lazy" /></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="a-section" id="web" aria-labelledby="web-title">
+        <div class="wrap">
+          <div class="a-web__head">
+            <h2 id="web-title" data-split>Free on the web, part by part</h2>
+            <div>
+              <p data-reveal>
+                Every part page on anatomyofthehumanbody.com is free to read, in full. Over 200 parts are there so far, from
+                the shoulder to the hand, the hip to the toes and across the chest, each with a 3D view and the sources behind
+                it.
+              </p>
+              <div class="actions" data-reveal>
+                <a class="a-btn a-btn--teal" href="https://anatomyofthehumanbody.com" data-magnetic>Visit anatomyofthehumanbody.com <span aria-hidden="true">↗</span></a>
+              </div>
+            </div>
+          </div>
+          <ul class="a-parts">
+            <li data-reveal>
+              <a href="https://anatomyofthehumanbody.com/chest/heart/heart-chambers/"><span class="a-parts__plate"><img src="/assets/img/anatomy/part-heart-chambers.webp" alt="The four chambers of the heart lit up in our 3D body, seen from the front." width="480" height="600" loading="lazy" /></span><b>Chambers of the heart</b></a>
+            </li>
+            <li data-reveal data-delay="0.05">
+              <a href="https://anatomyofthehumanbody.com/leg-and-foot/thigh/femur/"><span class="a-parts__plate"><img src="/assets/img/anatomy/part-femur.webp" alt="The right femur of our 3D body seen from the front, lit up from the hip to the knee, with the other bones and the muscles see-through." width="480" height="600" loading="lazy" /></span><b>Femur</b></a>
+            </li>
+            <li data-reveal data-delay="0.1">
+              <a href="https://anatomyofthehumanbody.com/arm-and-hand/shoulder/rotator-cuff/"><span class="a-parts__plate"><img src="/assets/img/anatomy/part-rotator-cuff.webp" alt="The back of the right shoulder of our 3D body, with three rotator cuff muscles on the shoulder blade: the supraspinatus, infraspinatus and teres minor." width="480" height="600" loading="lazy" /></span><b>Rotator cuff</b></a>
+            </li>
+            <li data-reveal data-delay="0.15">
+              <a href="https://anatomyofthehumanbody.com/chest/chest-wall/diaphragm/"><span class="a-parts__plate"><img src="/assets/img/anatomy/part-diaphragm.webp" alt="The diaphragm lit up under the see-through rib cage of our 3D body, seen from the front." width="480" height="600" loading="lazy" /></span><b>Diaphragm</b></a>
+            </li>
+            <li data-reveal data-delay="0.2">
+              <a href="https://anatomyofthehumanbody.com/leg-and-foot/hip/sciatic-nerve/"><span class="a-parts__plate"><img src="/assets/img/anatomy/part-sciatic-nerve.webp" alt="The sciatic nerve lit up behind the right hip of our 3D body, seen from behind, with the bones solid and the muscles see-through." width="480" height="600" loading="lazy" /></span><b>Sciatic nerve</b></a>
+            </li>
+            <li data-reveal data-delay="0.25">
+              <a href="https://anatomyofthehumanbody.com/arm-and-hand/shoulder/deltoid/"><span class="a-parts__plate"><img src="/assets/img/anatomy/part-shoulder-sel.webp" alt="The deltoid lit up over the right shoulder of our 3D body, seen from the side, with the bones solid and the other muscles see-through." width="480" height="600" loading="lazy" /></span><b>Deltoid</b></a>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="a-section a-sources" id="sources" aria-labelledby="sources-title">
+        <div class="wrap a-split">
+          <div>
+            <h2 id="sources-title" data-split>Every fact checked against its sources</h2>
+            <p data-reveal>
+              Every fact on a page is checked against published works before the page goes up, and each page lists the works
+              it draws on, with links, so you can read them too.
+            </p>
+          </div>
+          <ul class="a-works" data-reveal>
+            <li><b>Gray's Anatomy</b><span>Gray's Anatomy of the Human Body, 20th edition, 1918</span></li>
+            <li><b>Anatomy and Physiology</b><span>OpenStax, Rice University, 2013</span></li>
+            <li><b>The US National Institutes of Health</b><span>The National Cancer Institute, the National Library of Medicine and NIDDK</span></li>
+            <li><b>The NCI Thesaurus</b><span>The National Cancer Institute's definitions of the body's parts</span></li>
+            <li><b>Terminologia Anatomica</b><span>The international standard for the names of the body's parts</span></li>
+            <li><b>The Foundational Model of Anatomy</b><span>The Structural Informatics Group, University of Washington</span></li>
+          </ul>
+        </div>
+        <div class="wrap">
+          <p class="a-credit" data-reveal>
+            The 3D body is our own. We built it from
+            <a href="https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html">BodyParts3D</a>, © The Database Center for Life
+            Science, and the heart, brain, kidneys, eyes and spinal cord of the
+            <a href="https://humanatlas.io/3d-reference-library">HuBMAP CCF 3D Reference Object Library</a> (Browne, Schlehlein,
+            Herr, Quardokus, Bueckle and Börner, 2024), both licensed under
+            <a href="https://creativecommons.org/licenses/by/4.0/">CC Attribution 4.0 International</a>. We fitted the parts
+            together, simplified their surfaces and coloured each tissue.
+          </p>
+        </div>
+      </section>
+
+      <section class="a-cta" id="app" aria-labelledby="cta-title">
+        <div class="wrap">
+          <img class="a-cta__icon" src="/assets/img/anatomy/icon.webp" alt="" width="256" height="256" loading="lazy" data-reveal />
+          <h2 id="cta-title" data-split>The app is coming soon</h2>
+          <p data-reveal>
+            Anatomy of the Human Body is coming to the App Store and Google Play. Until then, you can explore the body for free
+            on the web.
+          </p>
+          <ul class="a-stores a-stores--light" aria-label="The app" data-reveal>
+            <li class="a-store"><small>Coming soon on the</small><b>App Store</b></li>
+            <li class="a-store"><small>Coming soon on</small><b>Google Play</b></li>
+          </ul>
+          <div class="actions" data-reveal>
+            <a class="a-btn a-btn--mint" href="https://anatomyofthehumanbody.com" data-magnetic>Explore it on the web <span aria-hidden="true">↗</span></a>
+          </div>
+          <p class="a-made" data-reveal>Anatomy of the Human Body is made by Proper Eleven Technologies Private Limited, India.</p>
+          <p class="a-tm">App Store is a service mark of Apple Inc. Google Play is a trademark of Google LLC.</p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <div class="footer__top">
+          <p class="footer__line">We build companies and products that move humanity forward.</p>
+          <nav class="footer__nav" aria-label="Footer">
+            <a href="/sagazo">Sagazo</a>
+            <a href="/anatomy">Anatomy</a>
+            <a href="/games">Games</a>
+            <a href="/#contact">Contact</a>
+            <a href="/privacy">Privacy policy</a>
+          </nav>
+        </div>
+        <div class="footer__mark" aria-hidden="true">
+          <span class="mark"><i></i><i></i></span><span class="footer__word">Proper Eleven</span>
+        </div>
+        <div class="footer__legal">
+          <span>© 2026 Proper Eleven Technologies Private Limited, India</span>
+          <a href="mailto:contact@propereleven.com">contact@propereleven.com</a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="/assets/js/vendor/gsap.min.js" defer></script>
+    <script src="/assets/js/vendor/ScrollTrigger.min.js" defer></script>
+    <script src="/assets/js/vendor/SplitText.min.js" defer></script>
+    <script src="/assets/js/vendor/lenis.min.js" defer></script>
+    <script src="/assets/js/site.js" defer></script>
+    <script src="/assets/js/anatomy.js" defer></script>
+  </body>
+</html>

@@ -1,4 +1,4 @@
-/* Home page motion that only this page needs: the Sagazo phone and its floating cards. */
+/* Home page motion that only this page needs: the Sagazo and Anatomy phones and their floating cards. */
 (function () {
   "use strict";
   var gsap = window.gsap;
@@ -9,17 +9,19 @@
 
   var fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
-  /* Sagazo: the phone straightens as it passes, the cards drift at different depths. */
-  var stage = document.querySelector("[data-stage]");
-  var device = document.querySelector("[data-device]");
-  if (stage && device) {
+  /* Sagazo and Anatomy of the Human Body: each phone straightens as it passes, and its cards drift at different
+     depths. Anatomy's stage (data-mirror) stands on the left, so its phone turns the other way. */
+  document.querySelectorAll("[data-stage]").forEach(function (stage) {
+    var device = stage.querySelector("[data-device]");
+    if (!device) return;
+    var flip = stage.hasAttribute("data-mirror") ? -1 : 1;
     gsap.fromTo(
       device,
-      { rotationY: -28, rotationX: 14, rotationZ: 5, y: 90 },
+      { rotationY: -28 * flip, rotationX: 14, rotationZ: 5 * flip, y: 90 },
       {
-        rotationY: -8,
+        rotationY: -8 * flip,
         rotationX: 3,
-        rotationZ: 1,
+        rotationZ: 1 * flip,
         y: -50,
         ease: "none",
         scrollTrigger: { trigger: stage, start: "top bottom", end: "bottom top", scrub: 0.8 },
@@ -52,5 +54,5 @@
         tiltY(0);
       });
     }
-  }
+  });
 })();

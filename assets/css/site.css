@@ -360,6 +360,10 @@ p {
   transition-delay: 0.18s;
 }
 
+.menu.is-open li:nth-child(5) a {
+  transition-delay: 0.24s;
+}
+
 .menu__foot {
   margin-top: 40px;
   padding-top: 20px;

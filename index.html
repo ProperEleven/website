@@ -622,11 +622,103 @@
         border-color: var(--ember-2);
       }
 
+      /* ---------- Anatomy of the Human Body: Sagazo's section mirrored, its picture on the left, in its teal ---------- */
+      .venture--anatomy {
+        padding-top: clamp(40px, 6vw, 90px);
+      }
+
+      .venture__glow--teal {
+        left: -18%;
+        right: auto;
+        background: radial-gradient(closest-side, rgba(111, 242, 220, 0.16), rgba(8, 117, 101, 0.08) 55%, rgba(8, 117, 101, 0));
+      }
+
+      .venture--anatomy .stage {
+        order: -1;
+      }
+
+      .venture__brand {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        margin-bottom: clamp(28px, 4vw, 44px);
+      }
+
+      .venture__brand img {
+        width: 64px;
+        height: 64px;
+        border-radius: 16px;
+        box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.14);
+      }
+
+      .venture__brand span {
+        display: flex;
+        flex-direction: column;
+        line-height: 1;
+      }
+
+      .venture__brand small {
+        font: 600 0.78rem/1 var(--text);
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: #6ff2dc;
+      }
+
+      .venture__brand b {
+        margin-top: 5px;
+        font: 600 1.85rem/1 var(--display);
+      }
+
+      .stage--mirror .device {
+        transform: rotateY(18deg) rotateX(8deg) rotateZ(-3deg);
+        box-shadow:
+          0 60px 120px -20px rgba(0, 0, 0, 0.75),
+          0 0 0 1px rgba(255, 255, 255, 0.09) inset,
+          0 0 120px rgba(111, 242, 220, 0.14);
+      }
+
+      .stage--mirror .float--a {
+        left: auto;
+        right: 2%;
+      }
+
+      .stage--mirror .float--b {
+        right: auto;
+        left: 1%;
+      }
+
+      .stage--mirror .float--c {
+        right: auto;
+        left: 8%;
+      }
+
+      .card--part {
+        width: 150px;
+      }
+
+      .card--part img {
+        aspect-ratio: 1;
+        background: #f5f7f9;
+      }
+
+      .card--part p {
+        color: #0e1a1f;
+        font-weight: 600;
+      }
+
+      .chip--teal {
+        background: #087565;
+      }
+
       /* ---------- Small screens ---------- */
       @media (max-width: 900px) {
         .venture__grid,
         .games__head {
           grid-template-columns: minmax(0, 1fr);
+        }
+
+        .venture--anatomy .stage {
+          order: 0;
         }
 
         .stage {
@@ -686,6 +778,7 @@
         </a>
         <nav class="site-nav" aria-label="Main">
           <a href="/sagazo">Sagazo</a>
+          <a href="/anatomy">Anatomy</a>
           <a href="/games">Games</a>
           <a href="/#contact">Contact</a>
         </nav>
@@ -700,6 +793,7 @@
         <ul>
           <li><a href="/">Home</a></li>
           <li><a href="/sagazo">Sagazo</a></li>
+          <li><a href="/anatomy">Anatomy</a></li>
           <li><a href="/games">Games</a></li>
           <li><a href="/#contact">Contact</a></li>
         </ul>
@@ -728,7 +822,8 @@
         <div class="wrap">
         <p class="statement__text" data-words>
           Proper Eleven Technologies is a company from India. We start companies and build our own products. Sagazo helps
-          sellers across India open a shop for free, and our games make you stop and think.
+          sellers across India open a shop for free, Anatomy of the Human Body shows the human body in 3D, one part at a
+          time, and our games make you stop and think.
         </p>
         </div>
       </section>
@@ -776,6 +871,52 @@
         </div>
       </section>
 
+      <section class="venture venture--anatomy" id="anatomy" aria-labelledby="anatomy-title">
+        <div class="venture__glow venture__glow--teal" aria-hidden="true"></div>
+        <div class="wrap venture__grid">
+          <div class="venture__copy">
+            <p class="venture__brand" data-reveal>
+              <img src="/assets/img/anatomy/icon.webp" alt="" width="256" height="256" loading="lazy" />
+              <span><small>Anatomy of the</small> <b>Human Body</b></span>
+            </p>
+            <h2 id="anatomy-title" data-split>Explore the human body, one part at a time</h2>
+            <p data-reveal>
+              It's a whole human body in 3D that you can turn, peel back and tap, with each part explained in plain words and
+              checked against its sources.
+            </p>
+            <p data-reveal>The website is free, and the app is coming soon to the App Store and Google Play.</p>
+            <div class="actions" data-reveal>
+              <a class="btn btn--light" href="https://anatomyofthehumanbody.com" data-magnetic>Visit anatomyofthehumanbody.com <span class="btn__ext" aria-hidden="true">↗</span></a>
+              <a class="btn btn--ghost" href="/anatomy" data-magnetic>More about Anatomy</a>
+            </div>
+          </div>
+          <div class="stage stage--mirror" data-stage data-mirror aria-hidden="true">
+            <div class="device" data-device>
+              <img src="/assets/img/anatomy/screen-explore.webp" alt="" width="780" height="1696" loading="lazy" />
+            </div>
+            <div class="float float--a" data-depth="0.5">
+              <div class="float__in">
+                <div class="card card--part">
+                  <img src="/assets/img/anatomy/part-heart-chambers.webp" alt="" width="480" height="600" loading="lazy" />
+                  <p>Chambers of the heart</p>
+                </div>
+              </div>
+            </div>
+            <div class="float float--b" data-depth="0.85">
+              <div class="float__in">
+                <div class="card card--part">
+                  <img src="/assets/img/anatomy/part-femur.webp" alt="" width="480" height="600" loading="lazy" />
+                  <p>Femur</p>
+                </div>
+              </div>
+            </div>
+            <div class="float float--c" data-depth="1.1">
+              <div class="float__in"><div class="chip chip--teal"><b>2,000+</b>parts in 3D</div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section class="games" id="games" aria-labelledby="games-title">
         <div class="wrap games__head">
           <h2 id="games-title" data-split>We build exciting games</h2>
@@ -805,7 +946,8 @@
         <a class="contact__mail" href="mailto:contact@propereleven.com" data-reveal>contact@propereleven.com</a>
         <p data-reveal>
           For help with one of our games, write to <a href="mailto:support@propereleven.com">support@propereleven.com</a>. For
-          Sagazo, visit <a href="https://sagazo.com">sagazo.com</a>.
+          Sagazo, visit <a href="https://sagazo.com">sagazo.com</a>, and for Anatomy of the Human Body,
+          <a href="https://anatomyofthehumanbody.com">anatomyofthehumanbody.com</a>.
         </p>
       </section>
     </main>
@@ -816,6 +958,7 @@
           <p class="footer__line">We build companies and products that move humanity forward.</p>
           <nav class="footer__nav" aria-label="Footer">
             <a href="/sagazo">Sagazo</a>
+            <a href="/anatomy">Anatomy</a>
             <a href="/games">Games</a>
             <a href="/#contact">Contact</a>
             <a href="/privacy">Privacy policy</a>

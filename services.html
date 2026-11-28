@@ -23,7 +23,7 @@
     <title>App, web and game development | Proper Eleven Technologies</title>
     <meta
       name="description"
-      content="Proper Eleven Technologies builds iPhone and Android apps, websites, 3D and games for other companies. It made Sagazo, Anatomy of the Human Body and Stoppy."
+      content="Proper Eleven Technologies builds iPhone and Android apps, websites and games for other companies. It made Sagazo, Anatomy of the Human Body and Stoppy."
     />
     <link rel="canonical" href="https://propereleven.com/services" />
     <meta name="theme-color" content="#080a12" />
@@ -32,7 +32,7 @@
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Proper Eleven Technologies" />
     <meta property="og:title" content="Services by Proper Eleven Technologies" />
-    <meta property="og:description" content="We build apps, websites, 3D and games for other companies." />
+    <meta property="og:description" content="We build apps, websites and games for other companies." />
     <meta property="og:url" content="https://propereleven.com/services" />
     <meta property="og:image" content="https://propereleven.com/assets/img/services/og.jpg" />
     <meta property="og:image:width" content="1200" />
@@ -57,7 +57,7 @@
         "@type": "Service",
         "name": "App, web and game development",
         "serviceType": "Software development",
-        "description": "Apps for iPhone, iPad and Android, websites and web apps, 3D for apps and websites, and games, built for other companies.",
+        "description": "Apps for iPhone, iPad and Android, websites and web apps, and games, built for other companies.",
         "url": "https://propereleven.com/services",
         "provider": {
           "@type": "Organization",
@@ -535,96 +535,6 @@
         margin-left: 4px;
       }
 
-      /* 3D: the website's body pictures take turns, from the skin of the muscles down to the vessels. */
-      .v-stage3d {
-        position: absolute;
-        top: 4%;
-        left: 50%;
-        width: 62%;
-        aspect-ratio: 608 / 760;
-        margin-left: -31%;
-        overflow: hidden;
-        border-radius: 28px;
-        background: #f5f7f9;
-        box-shadow:
-          0 60px 120px -40px rgba(0, 0, 0, 0.8),
-          0 0 0 1px rgba(255, 255, 255, 0.12),
-          0 0 140px rgba(111, 242, 220, 0.12);
-      }
-
-      .v-stage3d img {
-        position: absolute;
-        inset: 0;
-        width: 100%;
-        height: 100%;
-        opacity: 0;
-        animation: v-layer 12s infinite backwards;
-      }
-
-      .v-stage3d img:nth-child(2) {
-        animation-delay: 3s;
-      }
-
-      .v-stage3d img:nth-child(3) {
-        animation-delay: 6s;
-      }
-
-      .v-stage3d img:nth-child(4) {
-        animation-delay: 9s;
-      }
-
-      @keyframes v-layer {
-        0% {
-          opacity: 0;
-        }
-        5%,
-        25% {
-          opacity: 1;
-        }
-        30%,
-        100% {
-          opacity: 0;
-        }
-      }
-
-      .v-part {
-        position: absolute;
-        z-index: 3;
-        left: 0;
-        bottom: 6%;
-      }
-
-      .v-part .v-bob {
-        width: clamp(120px, 11vw, 150px);
-        overflow: hidden;
-        border-radius: 16px;
-        background: #fff;
-        color: #0e1a1f;
-        box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.6);
-        transform: rotate(-6deg);
-        animation-duration: 8.5s;
-      }
-
-      .v-part img {
-        width: 100%;
-        aspect-ratio: 1;
-        object-fit: cover;
-        background: #f5f7f9;
-      }
-
-      .v-part p {
-        padding: 9px 12px 11px;
-        font-size: 0.8rem;
-        font-weight: 600;
-        line-height: 1.25;
-      }
-
-      .m-3d .v-tag--b {
-        left: auto;
-        right: 0;
-        bottom: 14%;
-      }
-
       /* Games: Stoppy's worlds float in his sky. */
       .v-sky {
         position: absolute;
@@ -896,15 +806,10 @@
         }
       }
 
-      /* With reduced motion nothing moves, and the body shows its muscles. */
+      /* With reduced motion nothing moves. */
       @media (prefers-reduced-motion: reduce) {
-        .v-bob,
-        .v-stage3d img {
+        .v-bob {
           animation: none;
-        }
-
-        .v-stage3d img:first-child {
-          opacity: 1;
         }
       }
 
@@ -1188,52 +1093,10 @@
             </div>
           </article>
 
-          <article class="v-row" id="3d" aria-labelledby="three-title">
-            <div class="v-row__copy">
-              <p class="v-row__num" data-reveal aria-hidden="true">03</p>
-              <h3 id="three-title" data-split>3D for apps and websites</h3>
-              <p class="v-row__lede" data-reveal>
-                We build 3D that people can turn and tap, in an app or a web browser, and we make detailed models light enough for
-                a phone.
-              </p>
-              <ul class="v-proof" data-reveal>
-                <li>
-                  <a href="/anatomy">Anatomy of the Human Body</a> has over 2,000 parts in 3D. Tap one, and the rest of the
-                  body turns to an X-ray with the part's name on a label.
-                </li>
-                <li>Stoppy's five worlds are 3D, and so is the scene at the top of this website's home page.</li>
-              </ul>
-              <p class="v-tools__label" data-reveal aria-hidden="true">Tools</p>
-              <ul class="v-tools" data-reveal aria-label="Tools for 3D">
-                <li>Three.js</li>
-                <li>WebGL</li>
-                <li>RealityKit</li>
-                <li>Metal</li>
-              </ul>
-            </div>
-            <div class="v-row__media">
-              <div class="v-media m-3d" data-media aria-hidden="true">
-                <div class="v-grid"></div>
-                <div class="v-stage3d" data-depth="0.4">
-                  <img src="/assets/img/anatomy/layer-muscles.webp" alt="" width="608" height="760" loading="lazy" />
-                  <img src="/assets/img/anatomy/layer-skeleton.webp" alt="" width="608" height="760" loading="lazy" />
-                  <img src="/assets/img/anatomy/layer-nerves.webp" alt="" width="608" height="760" loading="lazy" />
-                  <img src="/assets/img/anatomy/layer-vessels.webp" alt="" width="608" height="760" loading="lazy" />
-                </div>
-                <div class="v-part" data-depth="1">
-                  <div class="v-bob">
-                    <img src="/assets/img/anatomy/part-heart-chambers.webp" alt="" width="480" height="600" loading="lazy" />
-                    <p>Chambers of the heart</p>
-                  </div>
-                </div>
-                <div class="v-tag v-tag--b" data-depth="1.2"><div class="v-bob">Over 2,000 parts in 3D</div></div>
-              </div>
-            </div>
-          </article>
 
           <article class="v-row" id="games" aria-labelledby="games-title">
             <div class="v-row__copy">
-              <p class="v-row__num" data-reveal aria-hidden="true">04</p>
+              <p class="v-row__num" data-reveal aria-hidden="true">03</p>
               <h3 id="games-title" data-split>Games</h3>
               <p class="v-row__lede" data-reveal>
                 We design games and write their code, for phones, tablets and the web.

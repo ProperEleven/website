@@ -170,7 +170,9 @@ p {
   border-bottom: 1px solid transparent;
 }
 
+/* The scrolled bar is dark on every page, so its words are light, even on a product page with dark body text. */
 .site-header.is-scrolled {
+  color: var(--ink);
   background: rgba(8, 10, 18, 0.62);
   border-bottom-color: var(--line);
   backdrop-filter: blur(18px) saturate(140%);
@@ -218,7 +220,8 @@ p {
   gap: clamp(20px, 3vw, 40px);
 }
 
-.site-nav a,
+.site-nav > a,
+.nav-group__toggle,
 .link-line {
   position: relative;
   padding-block: 10px;
@@ -226,7 +229,8 @@ p {
   font-size: 0.975rem;
 }
 
-.site-nav a::after,
+.site-nav > a::after,
+.nav-group__toggle::after,
 .link-line::after {
   content: "";
   position: absolute;
@@ -240,15 +244,163 @@ p {
   transition: transform 0.6s var(--ease-out);
 }
 
-.site-nav a:hover::after,
-.site-nav a[aria-current="page"]::after,
+.site-nav > a:hover::after,
+.site-nav > a[aria-current="page"]::after,
+.nav-group__toggle:hover::after,
+.nav-group[data-current] .nav-group__toggle::after,
 .link-line:hover::after {
   transform: scaleX(1);
   transform-origin: left;
 }
 
-.site-nav a[aria-current="page"]::after {
+.site-nav > a[aria-current="page"]::after,
+.nav-group[data-current] .nav-group__toggle::after {
   background: var(--ember-2);
+}
+
+/* Products: a button that opens a panel of the products (a disclosure, not an ARIA menu). site.js opens it on hover
+   for a mouse and on a click, tap or Enter, and closes it with Escape, a click outside or a scroll. Until the script
+   marks the group ready, hover and focus open it in CSS alone. */
+.nav-group {
+  position: relative;
+}
+
+.nav-group__toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font-family: var(--text);
+  line-height: inherit;
+  cursor: pointer;
+}
+
+.nav-group__toggle::after {
+  right: 17px;
+}
+
+.nav-group__chev {
+  width: 7px;
+  height: 7px;
+  margin-top: -3px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg);
+  transition: transform 0.5s var(--ease-out), margin 0.5s var(--ease-out);
+}
+
+.nav-group.is-open .nav-group__chev {
+  margin-top: 3px;
+  transform: rotate(225deg);
+}
+
+.nav-panel {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 50%;
+  width: 384px;
+  padding: 8px;
+  color: var(--ink);
+  background:
+    radial-gradient(120% 70% at 0% 0%, rgba(255, 90, 31, 0.12), rgba(255, 90, 31, 0) 60%),
+    linear-gradient(180deg, #121624, #0b0d16);
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  box-shadow:
+    0 40px 90px -24px rgba(0, 0, 0, 0.75),
+    0 0 0 1px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  visibility: hidden;
+  transform: translate3d(-50%, -10px, 0) scale(0.98);
+  transform-origin: 50% 0;
+  transition: opacity 0.3s var(--ease-out), transform 0.5s var(--ease-out), visibility 0s 0.5s;
+}
+
+/* The gap between the button and the panel still counts as the panel, so a mouse can cross it. */
+.nav-panel::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 100%;
+  height: 14px;
+}
+
+/* A thin line of ember light along the panel's top edge. */
+.nav-panel::after {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 24px;
+  right: 24px;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(255, 197, 129, 0), var(--gold) 30%, var(--ember) 70%, rgba(255, 90, 31, 0));
+  opacity: 0.7;
+}
+
+.nav-group.is-open .nav-panel,
+.nav-group:not([data-ready]):hover .nav-panel,
+.nav-group:not([data-ready]):focus-within .nav-panel {
+  opacity: 1;
+  visibility: visible;
+  transform: translate3d(-50%, 0, 0);
+  transition: opacity 0.3s var(--ease-out), transform 0.5s var(--ease-out), visibility 0s;
+}
+
+.nav-panel a {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 14px;
+  border-radius: 15px;
+  transition: background-color 0.3s;
+}
+
+.nav-panel a:hover,
+.nav-panel a:focus-visible,
+.nav-panel a[aria-current="page"] {
+  background: rgba(243, 238, 230, 0.06);
+}
+
+.nav-panel img {
+  width: 46px;
+  height: 46px;
+  flex: none;
+  border-radius: 12px;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.12);
+  transition: transform 0.5s var(--ease-out);
+}
+
+.nav-panel a:hover img {
+  transform: translate3d(0, -2px, 0) rotate(-4deg);
+}
+
+.nav-panel b {
+  display: block;
+  font: 600 1.06rem/1.2 var(--display);
+  letter-spacing: 0;
+}
+
+.nav-panel small {
+  display: block;
+  margin-top: 3px;
+  color: var(--ink-2);
+  font-size: 0.875rem;
+  line-height: 1.35;
+}
+
+.nav-panel a[aria-current="page"] b::after {
+  content: "";
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin: 0 0 2px 9px;
+  border-radius: 50%;
+  background: var(--ember-2);
+  box-shadow: 0 0 10px rgba(255, 90, 31, 0.8);
 }
 
 .menu-toggle {
@@ -299,21 +451,27 @@ p {
   transform: rotate(-45deg);
 }
 
-/* Full-screen menu for small screens. */
+/* Full-screen menu for small screens: the products as three app tiles, then the pages in big type. The content sits
+   at the bottom, near the thumb, and scrolls if a short screen can't hold it. */
 .menu {
   position: fixed;
   inset: 0;
   z-index: 55;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
   padding: calc(var(--header-h) + 24px) var(--gutter) 40px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
   background:
     radial-gradient(120% 60% at 50% 110%, rgba(255, 90, 31, 0.28), rgba(255, 90, 31, 0) 60%),
     var(--night-0);
   clip-path: inset(0 0 100% 0);
   visibility: hidden;
   transition: clip-path 0.8s var(--ease-in-out), visibility 0s 0.8s;
+}
+
+.menu > nav {
+  margin-top: auto;
 }
 
 .menu.is-open {
@@ -328,11 +486,69 @@ p {
   list-style: none;
 }
 
-.menu li {
+.menu__label {
+  margin-bottom: 12px;
+  color: var(--ink-3);
+  font: 600 0.75rem/1 var(--text);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.menu__products {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 26px;
+}
+
+.menu__products a {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 6px 13px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  background: rgba(243, 238, 230, 0.03);
+  font-weight: 500;
+  font-size: 0.92rem;
+  line-height: 1.2;
+  text-align: center;
+  opacity: 0;
+  transform: translate3d(0, 24px, 0);
+  transition: opacity 0.6s var(--ease-out), transform 0.9s var(--ease-out), border-color 0.3s;
+}
+
+.menu__products a[aria-current="page"] {
+  border-color: rgba(255, 138, 61, 0.55);
+  background: rgba(255, 90, 31, 0.08);
+}
+
+.menu__products img {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.12);
+}
+
+.menu.is-open .menu__products a {
+  opacity: 1;
+  transform: none;
+}
+
+.menu.is-open .menu__products li:nth-child(2) a {
+  transition-delay: 0.05s;
+}
+
+.menu.is-open .menu__products li:nth-child(3) a {
+  transition-delay: 0.1s;
+}
+
+.menu__main li {
   overflow: hidden;
 }
 
-.menu li a {
+.menu__main a {
   display: block;
   padding-block: 4px;
   font-family: var(--display);
@@ -344,24 +560,24 @@ p {
   transition: transform 0.9s var(--ease-out);
 }
 
-.menu.is-open li a {
+.menu__main a[aria-current="page"] {
+  color: var(--gold);
+}
+
+.menu.is-open .menu__main a {
   transform: none;
 }
 
-.menu.is-open li:nth-child(2) a {
-  transition-delay: 0.06s;
+.menu.is-open .menu__main li:nth-child(1) a {
+  transition-delay: 0.1s;
 }
 
-.menu.is-open li:nth-child(3) a {
-  transition-delay: 0.12s;
+.menu.is-open .menu__main li:nth-child(2) a {
+  transition-delay: 0.16s;
 }
 
-.menu.is-open li:nth-child(4) a {
-  transition-delay: 0.18s;
-}
-
-.menu.is-open li:nth-child(5) a {
-  transition-delay: 0.24s;
+.menu.is-open .menu__main li:nth-child(3) a {
+  transition-delay: 0.22s;
 }
 
 .menu__foot {
@@ -586,12 +802,26 @@ html.motion:not(.motion-live) [data-split] {
 .footer__nav {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, max-content));
-  gap: 6px 56px;
+  gap: 6px 72px;
   justify-content: end;
 }
 
+.footer__col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.footer__head {
+  margin-bottom: 8px;
+  color: var(--ink-3);
+  font: 600 0.75rem/1 var(--text);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
 .footer__nav a {
-  padding-block: 8px;
+  padding-block: 7px;
   color: var(--ink-2);
   transition: color 0.3s;
 }
@@ -650,6 +880,7 @@ html.motion:not(.motion-live) [data-split] {
 
   .footer__nav {
     justify-content: start;
+    column-gap: 56px;
   }
 }
 

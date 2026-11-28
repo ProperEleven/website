@@ -23,7 +23,7 @@
     <title>Proper Eleven Technologies</title>
     <meta
       name="description"
-      content="Proper Eleven Technologies is a company from India that builds companies and products to move humanity forward, from the Sagazo app to original games."
+      content="Proper Eleven Technologies starts companies and builds its own products, such as the Sagazo app and original games. It also builds software for other companies."
     />
     <link rel="canonical" href="https://propereleven.com/" />
     <meta name="theme-color" content="#080a12" />
@@ -561,6 +561,138 @@
         }
       }
 
+      /* ---------- Services: the heading, and a ruled list of what we build on a faint ember grid ---------- */
+      .services {
+        position: relative;
+        isolation: isolate;
+        padding-top: clamp(130px, 16vw, 240px);
+      }
+
+      .services::before {
+        content: "";
+        position: absolute;
+        inset: 6% 0 -24%;
+        z-index: -1;
+        background-image:
+          linear-gradient(rgba(255, 138, 61, 0.075) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 138, 61, 0.075) 1px, transparent 1px);
+        background-size: 64px 64px;
+        background-position: center;
+        -webkit-mask-image: radial-gradient(52% 50% at 68% 52%, #000, transparent 78%);
+        mask-image: radial-gradient(52% 50% at 68% 52%, #000, transparent 78%);
+        pointer-events: none;
+      }
+
+      .services__grid {
+        display: grid;
+        grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.08fr);
+        align-items: center;
+        gap: 56px clamp(40px, 7vw, 120px);
+      }
+
+      .services h2 {
+        font-size: clamp(2.6rem, 1.3rem + 3.6vw, 5rem);
+        line-height: 0.98;
+        letter-spacing: -0.012em;
+      }
+
+      .services__intro p {
+        margin-top: 26px;
+        max-width: 40ch;
+        color: var(--ink-2);
+        font-size: 1.125rem;
+      }
+
+      .services__intro .actions {
+        margin-top: 36px;
+      }
+
+      .services__list {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        border-top: 1px solid var(--line);
+      }
+
+      .services__list li {
+        border-bottom: 1px solid var(--line);
+      }
+
+      .services__list a {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: clamp(16px, 2vw, 26px);
+        padding: clamp(20px, 2.4vw, 32px) 2px;
+        font: 500 clamp(1.3rem, 0.85rem + 1.5vw, 2.2rem) / 1.12 var(--display);
+        letter-spacing: -0.005em;
+      }
+
+      /* Ember light runs along the row's rule on hover. */
+      .services__list a::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -1px;
+        height: 1px;
+        background: linear-gradient(90deg, var(--gold), var(--ember) 60%, rgba(255, 90, 31, 0));
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.9s var(--ease-out);
+      }
+
+      .services__icon {
+        display: grid;
+        place-items: center;
+        width: clamp(44px, 3.8vw, 56px);
+        height: clamp(44px, 3.8vw, 56px);
+        flex: none;
+        border: 1px solid var(--line-2);
+        border-radius: 50%;
+        color: var(--ember-2);
+        transition: background-color 0.45s, border-color 0.45s, color 0.45s;
+      }
+
+      .services__icon svg {
+        width: 46%;
+        height: 46%;
+      }
+
+      .services__name {
+        transition: transform 0.6s var(--ease-out);
+      }
+
+      .services__go {
+        margin-left: auto;
+        padding-left: 12px;
+        color: var(--ink-3);
+        font: 400 1.2rem/1 var(--text);
+        transition: transform 0.6s var(--ease-out), color 0.4s;
+      }
+
+      .services__list a:hover::after,
+      .services__list a:focus-visible::after {
+        transform: scaleX(1);
+      }
+
+      .services__list a:hover .services__icon,
+      .services__list a:focus-visible .services__icon {
+        background: var(--ember);
+        border-color: var(--ember);
+        color: #1a0a04;
+      }
+
+      .services__list a:hover .services__name {
+        transform: translateX(6px);
+      }
+
+      .services__list a:hover .services__go,
+      .services__list a:focus-visible .services__go {
+        color: var(--gold);
+        transform: translateX(6px);
+      }
+
       /* ---------- Contact ---------- */
       .contact {
         position: relative;
@@ -620,6 +752,28 @@
 
       .contact p a:hover {
         border-color: var(--ember-2);
+      }
+
+      /* The credit for the 3D body's pictures in Anatomy's section, and the stores' trademark line. */
+      .contact .contact__note {
+        max-width: 90ch;
+        margin-top: clamp(64px, 9vw, 120px);
+        padding-top: 28px;
+        border-top: 1px solid var(--line);
+        color: var(--ink-3);
+        font-size: 0.8rem;
+        line-height: 1.5;
+      }
+
+      .contact .contact__note--next {
+        margin-top: 12px;
+        padding-top: 0;
+        border-top: 0;
+      }
+
+      .contact .contact__note a {
+        color: var(--ink-2);
+        border-bottom-color: var(--line);
       }
 
       /* ---------- Anatomy of the Human Body: Sagazo's section mirrored, its picture on the left, in its teal ---------- */
@@ -713,7 +867,8 @@
       /* ---------- Small screens ---------- */
       @media (max-width: 900px) {
         .venture__grid,
-        .games__head {
+        .games__head,
+        .services__grid {
           grid-template-columns: minmax(0, 1fr);
         }
 
@@ -777,9 +932,26 @@
           <span class="brand__word">Proper Eleven</span>
         </a>
         <nav class="site-nav" aria-label="Main">
-          <a href="/sagazo">Sagazo</a>
-          <a href="/anatomy">Anatomy</a>
-          <a href="/games">Games</a>
+          <div class="nav-group" data-nav-group>
+            <button class="nav-group__toggle" type="button" aria-expanded="false" aria-controls="nav-products">
+              Products<span class="nav-group__chev" aria-hidden="true"></span>
+            </button>
+            <div class="nav-panel" id="nav-products">
+              <a href="/sagazo">
+                <img src="/assets/img/icons/sagazo.webp" alt="" width="96" height="96" decoding="async" />
+                <span><b>Sagazo</b><small>A social commerce app where India shares and shops</small></span>
+              </a>
+              <a href="/anatomy">
+                <img src="/assets/img/icons/anatomy.webp" alt="" width="96" height="96" decoding="async" />
+                <span><b>Anatomy of the Human Body</b><small>The human body in 3D, one part at a time</small></span>
+              </a>
+              <a href="/games">
+                <img src="/assets/img/icons/games.webp" alt="" width="96" height="96" decoding="async" />
+                <span><b>Games</b><small>Original games for phones and tablets</small></span>
+              </a>
+            </div>
+          </div>
+          <a href="/services">Services</a>
           <a href="/#contact">Contact</a>
         </nav>
         <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-menu">
@@ -788,13 +960,17 @@
       </div>
     </header>
 
-    <div class="menu" id="site-menu">
+    <div class="menu" id="site-menu" data-lenis-prevent>
       <nav aria-label="Menu">
-        <ul>
+        <p class="menu__label" id="menu-products">Products</p>
+        <ul class="menu__products" aria-labelledby="menu-products">
+          <li><a href="/sagazo"><img src="/assets/img/icons/sagazo.webp" alt="" width="96" height="96" decoding="async" />Sagazo</a></li>
+          <li><a href="/anatomy"><img src="/assets/img/icons/anatomy.webp" alt="" width="96" height="96" decoding="async" />Anatomy</a></li>
+          <li><a href="/games"><img src="/assets/img/icons/games.webp" alt="" width="96" height="96" decoding="async" />Games</a></li>
+        </ul>
+        <ul class="menu__main">
           <li><a href="/">Home</a></li>
-          <li><a href="/sagazo">Sagazo</a></li>
-          <li><a href="/anatomy">Anatomy</a></li>
-          <li><a href="/games">Games</a></li>
+          <li><a href="/services">Services</a></li>
           <li><a href="/#contact">Contact</a></li>
         </ul>
       </nav>
@@ -821,9 +997,8 @@
       <section class="statement" id="about" aria-label="About Proper Eleven">
         <div class="wrap">
         <p class="statement__text" data-words>
-          Proper Eleven Technologies is a company from India. We start companies and build our own products. Sagazo helps
-          sellers across India open a shop for free, Anatomy of the Human Body shows the human body in 3D, one part at a
-          time, and our games make you stop and think.
+          We start companies and build our own products. We also take on
+          <span class="accent">software projects for other companies</span>.
         </p>
         </div>
       </section>
@@ -941,13 +1116,76 @@
         </div>
       </section>
 
+      <section class="services" id="services" aria-labelledby="services-title">
+        <div class="wrap services__grid">
+          <div class="services__intro">
+            <h2 id="services-title" data-split>What we build for other companies</h2>
+            <p data-reveal>We take on the same kinds of work we do for our own products.</p>
+            <div class="actions" data-reveal data-delay="0.1">
+              <a class="btn btn--light" href="/services" data-magnetic>See our services</a>
+            </div>
+          </div>
+          <ul class="services__list" aria-label="What we build">
+            <li data-reveal>
+              <a href="/services#apps">
+                <span class="services__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="6.5" y="2.5" width="11" height="19" rx="2.6" /><path d="M10.8 18.4h2.4" /></svg>
+                </span>
+                <span class="services__name">Apps for phones and tablets</span>
+                <span class="services__go" aria-hidden="true">→</span>
+              </a>
+            </li>
+            <li data-reveal data-delay="0.06">
+              <a href="/services#web">
+                <span class="services__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.8" y="4" width="18.4" height="16" rx="2.6" /><path d="M2.8 8.8h18.4M6.3 6.4h.01M8.8 6.4h.01" /></svg>
+                </span>
+                <span class="services__name">Websites and web apps</span>
+                <span class="services__go" aria-hidden="true">→</span>
+              </a>
+            </li>
+            <li data-reveal data-delay="0.12">
+              <a href="/services#3d">
+                <span class="services__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.8 20 7.4v9.2L12 21.2 4 16.6V7.4Z" /><path d="M4 7.4 12 12l8-4.6M12 12v9.2" /></svg>
+                </span>
+                <span class="services__name">3D for apps and websites</span>
+                <span class="services__go" aria-hidden="true">→</span>
+              </a>
+            </li>
+            <li data-reveal data-delay="0.18">
+              <a href="/services#games">
+                <span class="services__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M7.6 7.5h8.8a4.6 4.6 0 0 1 4.5 5.6l-.8 3.5a2.4 2.4 0 0 1-4.1 1.1l-2.2-2.2h-3.6L8 17.7a2.4 2.4 0 0 1-4.1-1.1l-.8-3.5a4.6 4.6 0 0 1 4.5-5.6Z" /><path d="M8.2 10.6v3.2M6.6 12.2h3.2M15.6 11.6h.01M17.4 13.4h.01" /></svg>
+                </span>
+                <span class="services__name">Games</span>
+                <span class="services__go" aria-hidden="true">→</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </section>
+
       <section class="contact wrap" id="contact" aria-labelledby="contact-title">
         <h2 id="contact-title" data-split>Get in touch</h2>
         <a class="contact__mail" href="mailto:contact@propereleven.com" data-reveal>contact@propereleven.com</a>
         <p data-reveal>
+          Write to us about a project for your company, or read about <a href="/services">our software services</a> first.
           For help with one of our games, write to <a href="mailto:support@propereleven.com">support@propereleven.com</a>. For
           Sagazo, visit <a href="https://sagazo.com">sagazo.com</a>, and for Anatomy of the Human Body,
           <a href="https://anatomyofthehumanbody.com">anatomyofthehumanbody.com</a>.
+        </p>
+        <p class="contact__note">
+          The 3D body is our own. We built it from
+          <a href="https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html">BodyParts3D</a>, © The Database Center for Life
+          Science, and the heart, brain, kidneys, eyes and spinal cord of the
+          <a href="https://humanatlas.io/3d-reference-library">HuBMAP CCF 3D Reference Object Library</a> (Browne, Schlehlein,
+          Herr, Quardokus, Bueckle and Börner, 2024), both licensed under
+          <a href="https://creativecommons.org/licenses/by/4.0/">CC Attribution 4.0 International</a>. We fitted the parts
+          together, simplified their surfaces and coloured each tissue.
+        </p>
+        <p class="contact__note contact__note--next">
+          App Store is a service mark of Apple Inc. Google Play is a trademark of Google LLC.
         </p>
       </section>
     </main>
@@ -957,11 +1195,18 @@
         <div class="footer__top">
           <p class="footer__line">We build companies and products that move humanity forward.</p>
           <nav class="footer__nav" aria-label="Footer">
-            <a href="/sagazo">Sagazo</a>
-            <a href="/anatomy">Anatomy</a>
-            <a href="/games">Games</a>
-            <a href="/#contact">Contact</a>
-            <a href="/privacy">Privacy policy</a>
+            <div class="footer__col">
+              <p class="footer__head">Products</p>
+              <a href="/sagazo">Sagazo</a>
+              <a href="/anatomy">Anatomy</a>
+              <a href="/games">Games</a>
+            </div>
+            <div class="footer__col">
+              <p class="footer__head">Company</p>
+              <a href="/services">Services</a>
+              <a href="/#contact">Contact</a>
+              <a href="/privacy">Privacy policy</a>
+            </div>
           </nav>
         </div>
         <div class="footer__mark" aria-hidden="true">

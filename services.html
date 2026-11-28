@@ -1,0 +1,1375 @@
+<!doctype html>
+<html lang="en" data-page="services">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!--
+      Google Tag Manager, container GTM-T5N42M72, which runs Google Analytics. Ads features are off everywhere,
+      and analytics cookies are off in the EEA, the UK and Switzerland. /privacy (section 2.3) says so: change both together.
+    -->
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("consent", "default", { ad_storage: "denied", ad_user_data: "denied", ad_personalization: "denied", analytics_storage: "granted" });
+      gtag("consent", "default", {
+        analytics_storage: "denied",
+        region: ["AT", "BE", "BG", "HR", "CY", "CZ", "DK", "EE", "FI", "FR", "DE", "GR", "HU", "IS", "IE", "IT", "LV", "LI", "LT", "LU", "MT", "NL", "NO", "PL", "PT", "RO", "SK", "SI", "ES", "SE", "GB", "CH"],
+      });
+      dataLayer.push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+    </script>
+    <script async src="https://www.googletagmanager.com/gtm.js?id=GTM-T5N42M72"></script>
+    <title>App, web and game development | Proper Eleven Technologies</title>
+    <meta
+      name="description"
+      content="Proper Eleven Technologies builds iPhone and Android apps, websites, 3D and games for other companies. It made Sagazo, Anatomy of the Human Body and Stoppy."
+    />
+    <link rel="canonical" href="https://propereleven.com/services" />
+    <meta name="theme-color" content="#080a12" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Proper Eleven Technologies" />
+    <meta property="og:title" content="Services by Proper Eleven Technologies" />
+    <meta property="og:description" content="We build apps, websites, 3D and games for other companies." />
+    <meta property="og:url" content="https://propereleven.com/services" />
+    <meta property="og:image" content="https://propereleven.com/assets/img/services/og.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script>
+      if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) document.documentElement.classList.add("motion");
+    </script>
+    <link rel="preconnect" href="https://api.fontshare.com" />
+    <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
+    <link href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&display=swap" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400..700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/assets/css/site.css" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "name": "App, web and game development",
+        "serviceType": "Software development",
+        "description": "Apps for iPhone, iPad and Android, websites and web apps, 3D for apps and websites, and games, built for other companies.",
+        "url": "https://propereleven.com/services",
+        "provider": {
+          "@type": "Organization",
+          "name": "Proper Eleven Technologies Private Limited",
+          "url": "https://propereleven.com/",
+          "email": "contact@propereleven.com"
+        }
+      }
+    </script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://propereleven.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Services", "item": "https://propereleven.com/services" }
+        ]
+      }
+    </script>
+    <style>
+      /* Services: night and ember, like the home page. The pictures are our own products, so every kind of work on the
+         page shows something we built and run. */
+
+      /* ---------- Hero: the words, and a build of our work in a browser and two phones ---------- */
+      .v-hero {
+        position: relative;
+        isolation: isolate;
+        min-height: max(100svh, 680px);
+        padding: calc(var(--header-h) + clamp(28px, 5vw, 72px)) 0 clamp(48px, 6vw, 88px);
+        display: flex;
+        align-items: center;
+        overflow: clip;
+      }
+
+      .v-hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        background:
+          radial-gradient(38% 46% at 74% 46%, rgba(255, 90, 31, 0.2), rgba(255, 90, 31, 0) 70%),
+          radial-gradient(30% 36% at 92% 12%, rgba(255, 197, 129, 0.1), rgba(255, 197, 129, 0) 70%),
+          radial-gradient(60% 40% at 20% 110%, rgba(255, 90, 31, 0.1), rgba(255, 90, 31, 0) 70%);
+        pointer-events: none;
+      }
+
+      .v-hero__grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+        align-items: center;
+        gap: 56px clamp(32px, 5vw, 88px);
+      }
+
+      .crumbs ol {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin: 0 0 clamp(22px, 3vw, 34px);
+        padding: 0;
+        list-style: none;
+        color: var(--ink-3);
+        font: 500 0.8rem/1 var(--text);
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+      }
+
+      .crumbs li + li::before {
+        content: "/";
+        margin-right: 10px;
+        color: var(--line-2);
+      }
+
+      .crumbs a {
+        transition: color 0.3s;
+      }
+
+      .crumbs a:hover {
+        color: var(--ink);
+      }
+
+      .crumbs [aria-current] {
+        color: var(--ember-ink);
+      }
+
+      .v-title {
+        max-width: 15ch;
+        font-size: clamp(2.7rem, 1.2rem + 4vw, 5.6rem);
+        line-height: 0.98;
+        letter-spacing: -0.014em;
+      }
+
+      .v-lede {
+        max-width: 38ch;
+        margin-top: clamp(22px, 2.6vw, 32px);
+      }
+
+      .v-hero .actions {
+        margin-top: clamp(30px, 3.6vw, 44px);
+      }
+
+      /* The build: a browser window with anatomyofthehumanbody.com and two phones, Sagazo and Stoppy, over a blueprint
+         grid. Each piece bobs in its own wrapper, so the script can tilt the whole stage without fighting CSS. */
+      .v-build {
+        position: relative;
+        aspect-ratio: 1 / 0.86;
+        perspective: 1800px;
+      }
+
+      .v-grid {
+        position: absolute;
+        inset: -12% -16%;
+        background-image:
+          linear-gradient(rgba(255, 138, 61, 0.09) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 138, 61, 0.09) 1px, transparent 1px);
+        background-size: 48px 48px;
+        background-position: center;
+        -webkit-mask-image: radial-gradient(closest-side, #000 30%, transparent);
+        mask-image: radial-gradient(closest-side, #000 30%, transparent);
+        pointer-events: none;
+      }
+
+      /* services.js moves --dy with the scroll; `translate` adds it to the piece's own transform. */
+      [data-depth] {
+        translate: 0 var(--dy, 0px);
+      }
+
+      .v-bob {
+        animation: v-bob 8s ease-in-out infinite;
+      }
+
+      @keyframes v-bob {
+        50% {
+          transform: translate3d(0, -10px, 0);
+        }
+      }
+
+      .v-browser {
+        position: absolute;
+        top: 4%;
+        right: 0;
+        width: 90%;
+        overflow: hidden;
+        border-radius: 16px;
+        background: #fff;
+        box-shadow:
+          0 70px 140px -40px rgba(0, 0, 0, 0.8),
+          0 0 0 1px rgba(255, 255, 255, 0.1),
+          0 0 120px rgba(255, 90, 31, 0.12);
+        transform: rotateY(-14deg) rotateX(5deg) rotateZ(1deg);
+        transform-origin: 100% 50%;
+      }
+
+      .v-browser__bar {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        height: clamp(26px, 2.4vw, 34px);
+        padding: 0 12px;
+        background: #ece9e4;
+        border-bottom: 1px solid #ddd8d0;
+      }
+
+      .v-browser__bar i {
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        background: #d1ccc4;
+      }
+
+      .v-browser__bar span {
+        flex: 1;
+        max-width: 62%;
+        margin-left: 10px;
+        padding: 3px 12px;
+        overflow: hidden;
+        border-radius: 999px;
+        background: #fff;
+        color: #5c5852;
+        font: 500 clamp(0.6rem, 0.4rem + 0.35vw, 0.75rem) / 1.4 var(--text);
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+
+      .v-browser img {
+        width: 100%;
+      }
+
+      .v-phone {
+        position: absolute;
+        z-index: 2;
+        width: 27%;
+      }
+
+      .v-phone__body {
+        position: relative;
+        aspect-ratio: 390 / 844;
+        padding: 6%;
+        border-radius: 17% / 8%;
+        background: linear-gradient(150deg, #3a3c48, #101118 38%, #24252f 70%, #0b0c11);
+        box-shadow:
+          0 50px 90px -24px rgba(0, 0, 0, 0.85),
+          0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+      }
+
+      .v-phone__body::before {
+        content: "";
+        position: absolute;
+        top: 3.4%;
+        left: 50%;
+        z-index: 2;
+        width: 30%;
+        height: 3%;
+        margin-left: -15%;
+        border-radius: 999px;
+        background: #000;
+      }
+
+      .v-phone__body img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: top;
+        border-radius: 13% / 6%;
+      }
+
+      .v-phone--a {
+        left: 0;
+        bottom: 0;
+        transform: rotate(-6deg);
+      }
+
+      .v-phone--b {
+        right: 7%;
+        bottom: -7%;
+        width: 23%;
+        transform: rotate(5deg);
+      }
+
+      .v-phone--b .v-bob {
+        animation-duration: 9.5s;
+        animation-delay: -3s;
+      }
+
+      .v-tag {
+        position: absolute;
+        z-index: 3;
+      }
+
+      .v-tag .v-bob {
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        padding: 10px 16px;
+        border: 1px solid var(--line-2);
+        border-radius: 999px;
+        background: rgba(10, 12, 20, 0.86);
+        box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.7);
+        color: var(--ink);
+        font: 500 0.85rem/1 var(--text);
+        white-space: nowrap;
+        animation-duration: 7s;
+        animation-delay: -1.5s;
+      }
+
+      .v-tag .v-bob::before {
+        content: "";
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--ember-2);
+        box-shadow: 0 0 12px rgba(255, 90, 31, 0.9);
+      }
+
+      .v-tag--a {
+        top: -3%;
+        left: 4%;
+      }
+
+      .v-tag--b {
+        left: 24%;
+        bottom: 10%;
+      }
+
+      .v-tag--b .v-bob {
+        animation-duration: 8.5s;
+        animation-delay: -5s;
+      }
+
+      /* ---------- What we build ---------- */
+      /* The blueprint grids reach past the pictures; clip them at the page's edges. */
+      .v-what {
+        padding-top: clamp(100px, 13vw, 190px);
+        overflow-x: clip;
+      }
+
+      .v-what__head {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 0.8fr);
+        align-items: end;
+        gap: 24px clamp(32px, 6vw, 96px);
+        padding-bottom: clamp(40px, 6vw, 80px);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .v-what__head h2 {
+        font-size: clamp(2.8rem, 1.3rem + 4.6vw, 6.4rem);
+        line-height: 0.98;
+        letter-spacing: -0.012em;
+      }
+
+      .v-what__head p {
+        max-width: 40ch;
+        color: var(--ink-2);
+        font-size: 1.125rem;
+      }
+
+      .v-row {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+        align-items: center;
+        gap: 48px clamp(40px, 7vw, 120px);
+        padding-block: clamp(80px, 10vw, 150px);
+        border-bottom: 1px solid var(--line);
+        scroll-margin-top: calc(var(--header-h) - 40px);
+      }
+
+      .v-row:nth-of-type(even) .v-row__media {
+        order: -1;
+      }
+
+      .v-row__num {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 22px;
+        color: var(--ember-ink);
+        font: 600 0.8rem/1 var(--text);
+        letter-spacing: 0.16em;
+      }
+
+      .v-row__num::before {
+        content: "";
+        width: 5px;
+        height: 18px;
+        border-radius: 1px;
+        background: linear-gradient(180deg, var(--gold), var(--ember) 50%, #e8430f);
+        box-shadow: 0 0 12px rgba(255, 90, 31, 0.6);
+      }
+
+      .v-row h3 {
+        font-size: clamp(2.1rem, 1.2rem + 2.6vw, 3.9rem);
+        line-height: 1.02;
+        letter-spacing: -0.012em;
+      }
+
+      .v-row__lede {
+        margin-top: 22px;
+        max-width: 46ch;
+        color: var(--ink-2);
+        font-size: 1.125rem;
+      }
+
+      .v-proof {
+        margin: 30px 0 0;
+        padding: 0;
+        list-style: none;
+        max-width: 52ch;
+      }
+
+      .v-proof li {
+        position: relative;
+        padding: 16px 0 16px 30px;
+        border-top: 1px solid var(--line);
+        color: #d9d3ca;
+      }
+
+      .v-proof li::before {
+        content: "";
+        position: absolute;
+        left: 2px;
+        top: 26px;
+        width: 12px;
+        height: 1px;
+        background: var(--ember-2);
+      }
+
+      .v-proof a {
+        color: var(--ink);
+        border-bottom: 1px solid var(--line-2);
+        transition: border-color 0.3s, color 0.3s;
+      }
+
+      .v-proof a:hover {
+        color: var(--gold);
+        border-color: var(--ember-2);
+      }
+
+      .v-tools {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 26px 0 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .v-tools li {
+        padding: 7px 14px;
+        border: 1px solid var(--line-2);
+        border-radius: 999px;
+        color: var(--ink-2);
+        font-size: 0.86rem;
+        line-height: 1.3;
+      }
+
+      .v-tools__label {
+        margin-top: 28px;
+        color: var(--ink-3);
+        font: 600 0.72rem/1 var(--text);
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+
+      .v-tools__label + .v-tools {
+        margin-top: 12px;
+      }
+
+      /* The pictures beside each kind of work. Each sits on a stage that tilts with the pointer; the pieces inside bob
+         and drift with the scroll at their own depth (services.js). */
+      .v-media {
+        position: relative;
+        aspect-ratio: 1 / 0.92;
+        perspective: 1600px;
+      }
+
+      /* Apps: Anatomy of the Human Body and Stoppy, side by side. */
+      .m-apps .v-phone {
+        bottom: auto;
+        top: 50%;
+        width: 39%;
+      }
+
+      .m-apps .v-phone--a {
+        left: 10%;
+        transform: translateY(-54%) rotate(-7deg);
+      }
+
+      .m-apps .v-phone--b {
+        right: 9%;
+        width: 35%;
+        transform: translateY(-42%) rotate(6deg);
+      }
+
+      .m-apps .v-tag--b {
+        left: 0;
+        bottom: 6%;
+      }
+
+      /* Websites: sagazo.com, with its languages. */
+      .m-web .v-browser {
+        top: 14%;
+        right: 4%;
+        width: 92%;
+        transform: rotateY(12deg) rotateX(4deg) rotateZ(-1deg);
+        transform-origin: 0 50%;
+      }
+
+      .m-web .v-tag--b {
+        left: auto;
+        right: 0;
+        bottom: 4%;
+      }
+
+      .v-langs span + span {
+        margin-left: 4px;
+      }
+
+      /* 3D: the website's body pictures take turns, from the skin of the muscles down to the vessels. */
+      .v-stage3d {
+        position: absolute;
+        top: 4%;
+        left: 50%;
+        width: 62%;
+        aspect-ratio: 608 / 760;
+        margin-left: -31%;
+        overflow: hidden;
+        border-radius: 28px;
+        background: #f5f7f9;
+        box-shadow:
+          0 60px 120px -40px rgba(0, 0, 0, 0.8),
+          0 0 0 1px rgba(255, 255, 255, 0.12),
+          0 0 140px rgba(111, 242, 220, 0.12);
+      }
+
+      .v-stage3d img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        animation: v-layer 12s infinite backwards;
+      }
+
+      .v-stage3d img:nth-child(2) {
+        animation-delay: 3s;
+      }
+
+      .v-stage3d img:nth-child(3) {
+        animation-delay: 6s;
+      }
+
+      .v-stage3d img:nth-child(4) {
+        animation-delay: 9s;
+      }
+
+      @keyframes v-layer {
+        0% {
+          opacity: 0;
+        }
+        5%,
+        25% {
+          opacity: 1;
+        }
+        30%,
+        100% {
+          opacity: 0;
+        }
+      }
+
+      .v-part {
+        position: absolute;
+        z-index: 3;
+        left: 0;
+        bottom: 6%;
+      }
+
+      .v-part .v-bob {
+        width: clamp(120px, 11vw, 150px);
+        overflow: hidden;
+        border-radius: 16px;
+        background: #fff;
+        color: #0e1a1f;
+        box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.6);
+        transform: rotate(-6deg);
+        animation-duration: 8.5s;
+      }
+
+      .v-part img {
+        width: 100%;
+        aspect-ratio: 1;
+        object-fit: cover;
+        background: #f5f7f9;
+      }
+
+      .v-part p {
+        padding: 9px 12px 11px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        line-height: 1.25;
+      }
+
+      .m-3d .v-tag--b {
+        left: auto;
+        right: 0;
+        bottom: 14%;
+      }
+
+      /* Games: Stoppy's worlds float in his sky. */
+      .v-sky {
+        position: absolute;
+        inset: 6% 2%;
+        overflow: hidden;
+        border-radius: clamp(22px, 3vw, 36px);
+        background:
+          radial-gradient(60% 50% at 50% 0%, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0) 70%),
+          linear-gradient(180deg, #7cc4f5, #b9e2fb 55%, #d9cdf7);
+        box-shadow:
+          0 60px 140px -50px rgba(120, 160, 255, 0.45),
+          0 0 0 1px rgba(255, 255, 255, 0.1);
+      }
+
+      .v-world {
+        position: absolute;
+      }
+
+      .v-world img {
+        width: 100%;
+      }
+
+      .v-world--1 {
+        left: 6%;
+        top: 30%;
+        width: 52%;
+      }
+
+      .v-world--2 {
+        right: -4%;
+        top: 8%;
+        width: 40%;
+      }
+
+      .v-world--2 .v-bob {
+        animation-delay: -4s;
+      }
+
+      .v-world--stoppy {
+        right: 14%;
+        bottom: 10%;
+        width: 22%;
+      }
+
+      .v-world--stoppy .v-bob {
+        animation-duration: 5s;
+      }
+
+      .v-world--prickle {
+        left: 10%;
+        top: 8%;
+        width: 12%;
+      }
+
+      .v-world--prickle .v-bob {
+        animation-duration: 6.5s;
+        animation-delay: -2s;
+      }
+
+      /* Zombie Highrise's home screen stands in front of the sky's right edge. */
+      .m-games .v-sky {
+        inset: 4% 20% 10% 0;
+      }
+
+      .m-games .v-phone--zh {
+        z-index: 2;
+        top: auto;
+        right: 0;
+        bottom: 0;
+        width: 34%;
+        transform: rotate(5deg);
+      }
+
+      .m-games .v-phone--zh .v-bob {
+        animation-delay: -2.5s;
+      }
+
+      /* The game draws its title at the very top of the screen, so this phone shows no camera notch over it. */
+      .m-games .v-phone--zh .v-phone__body::before {
+        display: none;
+      }
+
+      .m-games .v-tag--b {
+        left: 0;
+        bottom: 0;
+      }
+
+      /* ---------- How a project works: four steps on a rail whose ember line draws with the scroll ---------- */
+      .v-how {
+        padding-top: clamp(100px, 13vw, 190px);
+      }
+
+      .v-how h2 {
+        font-size: clamp(2.8rem, 1.3rem + 4.6vw, 6.4rem);
+        line-height: 0.98;
+        letter-spacing: -0.012em;
+      }
+
+      .v-timeline {
+        position: relative;
+        margin-top: clamp(48px, 6vw, 88px);
+        padding-top: 44px;
+      }
+
+      .v-timeline__rail,
+      .v-timeline__fill {
+        position: absolute;
+        top: 4px;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: var(--line-2);
+      }
+
+      /* services.js draws this line with the scroll; without it, the line is simply there. */
+      .v-timeline__fill {
+        background: linear-gradient(90deg, var(--gold), var(--ember-2) 50%, var(--ember));
+        box-shadow: 0 0 14px rgba(255, 90, 31, 0.55);
+        transform-origin: left;
+      }
+
+      .v-steps {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 40px clamp(24px, 3vw, 48px);
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+
+      .v-step {
+        position: relative;
+      }
+
+      /* Each step's light on the rail. */
+      .v-step::before {
+        content: "";
+        position: absolute;
+        top: -44px;
+        left: 0;
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        background: var(--ember-2);
+        box-shadow: 0 0 0 5px var(--night-1), 0 0 16px rgba(255, 90, 31, 0.9);
+      }
+
+      .v-step__num {
+        display: block;
+        margin-bottom: 16px;
+        color: var(--ember-ink);
+        font: 600 0.8rem/1 var(--text);
+        letter-spacing: 0.16em;
+      }
+
+      .v-step h3 {
+        font-size: clamp(1.35rem, 1rem + 1vw, 1.8rem);
+        line-height: 1.15;
+      }
+
+      /* Side by side, the headings keep two lines each, so the four paragraphs start on one line. */
+      @media (min-width: 901px) {
+        .v-step h3 {
+          min-height: 2.3em;
+        }
+      }
+
+      .v-step p {
+        margin-top: 12px;
+        max-width: 34ch;
+        color: var(--ink-2);
+      }
+
+      /* ---------- Start a project ---------- */
+      .v-cta {
+        position: relative;
+        isolation: isolate;
+        padding-block: clamp(120px, 16vw, 230px) clamp(90px, 11vw, 150px);
+        overflow: clip;
+      }
+
+      .v-cta::before {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: 10%;
+        z-index: -1;
+        width: min(110vw, 1300px);
+        aspect-ratio: 1.6;
+        margin-left: max(-55vw, -650px);
+        background: radial-gradient(closest-side, rgba(255, 90, 31, 0.16), rgba(255, 90, 31, 0.05) 55%, rgba(255, 90, 31, 0));
+        pointer-events: none;
+      }
+
+      .v-cta h2 {
+        font-size: clamp(2.6rem, 1.4rem + 4vw, 5.5rem);
+        line-height: 1;
+      }
+
+      .v-mail {
+        position: relative;
+        display: inline-block;
+        margin-top: clamp(24px, 3vw, 40px);
+        padding-bottom: 6px;
+        font-family: var(--display);
+        font-weight: 500;
+        font-size: clamp(1.6rem, 0.5rem + 4.4vw, 5.25rem);
+        line-height: 1.05;
+        letter-spacing: -0.01em;
+        background: linear-gradient(100deg, var(--gold), var(--ember-2) 60%, var(--ember));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        overflow-wrap: anywhere;
+      }
+
+      .v-mail::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 2px;
+        background: linear-gradient(90deg, var(--gold), var(--ember));
+        transform: scaleX(0.18);
+        transform-origin: left;
+        transition: transform 0.9s var(--ease-out);
+      }
+
+      .v-mail:hover::after,
+      .v-mail:focus-visible::after {
+        transform: scaleX(1);
+      }
+
+      .v-cta__text {
+        max-width: 54ch;
+        margin-top: 30px;
+        color: var(--ink-2);
+        font-size: 1.125rem;
+      }
+
+      .v-note {
+        max-width: 90ch;
+        margin-top: clamp(64px, 9vw, 120px);
+        padding-top: 28px;
+        border-top: 1px solid var(--line);
+        color: var(--ink-3);
+        font-size: 0.8rem;
+        line-height: 1.5;
+      }
+
+      .v-note + .v-note {
+        margin-top: 12px;
+        padding-top: 0;
+        border-top: 0;
+      }
+
+      .v-note a {
+        color: var(--ink-2);
+        text-decoration: underline;
+        text-decoration-thickness: 1px;
+        text-underline-offset: 0.2em;
+      }
+
+      /* Touch screens keep the pictures still. */
+      @media (pointer: coarse) {
+        .v-bob {
+          animation: none;
+        }
+      }
+
+      /* With reduced motion nothing moves, and the body shows its muscles. */
+      @media (prefers-reduced-motion: reduce) {
+        .v-bob,
+        .v-stage3d img {
+          animation: none;
+        }
+
+        .v-stage3d img:first-child {
+          opacity: 1;
+        }
+      }
+
+      /* ---------- Small screens ---------- */
+      @media (max-width: 900px) {
+        .v-hero {
+          min-height: 0;
+          display: block;
+        }
+
+        .v-hero__grid,
+        .v-what__head,
+        .v-row {
+          grid-template-columns: minmax(0, 1fr);
+        }
+
+        .v-row:nth-of-type(even) .v-row__media {
+          order: 0;
+        }
+
+        .v-build {
+          width: min(100%, 560px);
+          margin: 24px auto 0;
+        }
+
+        .v-build .v-tag--a {
+          top: 0;
+        }
+
+        .v-media {
+          width: min(100%, 560px);
+          margin-inline: auto;
+        }
+
+        /* The rail stands up on the left, and the steps follow it down. */
+        .v-timeline {
+          padding: 0 0 0 34px;
+        }
+
+        .v-timeline__rail,
+        .v-timeline__fill {
+          top: 6px;
+          bottom: 6px;
+          left: 4px;
+          right: auto;
+          width: 1px;
+          height: auto;
+        }
+
+        .v-timeline__fill {
+          background: linear-gradient(180deg, var(--gold), var(--ember-2) 50%, var(--ember));
+          transform-origin: top;
+        }
+
+        .v-steps {
+          grid-template-columns: minmax(0, 1fr);
+        }
+
+        .v-step::before {
+          top: 2px;
+          left: -34px;
+        }
+      }
+
+      @media (max-width: 520px) {
+        .v-build {
+          margin-top: 8px;
+          margin-bottom: 24px;
+        }
+
+        .v-tag .v-bob {
+          padding: 8px 13px;
+          font-size: 0.76rem;
+        }
+
+        .v-tag--a {
+          left: 0;
+        }
+
+        .v-tag--b {
+          left: 18%;
+          bottom: 4%;
+        }
+
+        .v-phone--b {
+          right: 2%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <header class="site-header" data-header>
+      <div class="wrap site-header__in">
+        <a class="brand" href="/" aria-label="Proper Eleven Technologies home">
+          <span class="mark" aria-hidden="true"><i></i><i></i></span>
+          <span class="brand__word">Proper Eleven</span>
+        </a>
+        <nav class="site-nav" aria-label="Main">
+          <div class="nav-group" data-nav-group>
+            <button class="nav-group__toggle" type="button" aria-expanded="false" aria-controls="nav-products">
+              Products<span class="nav-group__chev" aria-hidden="true"></span>
+            </button>
+            <div class="nav-panel" id="nav-products">
+              <a href="/sagazo">
+                <img src="/assets/img/icons/sagazo.webp" alt="" width="96" height="96" decoding="async" />
+                <span><b>Sagazo</b><small>A social commerce app where India shares and shops</small></span>
+              </a>
+              <a href="/anatomy">
+                <img src="/assets/img/icons/anatomy.webp" alt="" width="96" height="96" decoding="async" />
+                <span><b>Anatomy of the Human Body</b><small>The human body in 3D, one part at a time</small></span>
+              </a>
+              <a href="/games">
+                <img src="/assets/img/icons/games.webp" alt="" width="96" height="96" decoding="async" />
+                <span><b>Games</b><small>Original games for phones and tablets</small></span>
+              </a>
+            </div>
+          </div>
+          <a href="/services" aria-current="page">Services</a>
+          <a href="/#contact">Contact</a>
+        </nav>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-menu">
+          <span class="menu-toggle__label">Menu</span><span class="menu-toggle__icon" aria-hidden="true"></span>
+        </button>
+      </div>
+    </header>
+
+    <div class="menu" id="site-menu" data-lenis-prevent>
+      <nav aria-label="Menu">
+        <p class="menu__label" id="menu-products">Products</p>
+        <ul class="menu__products" aria-labelledby="menu-products">
+          <li><a href="/sagazo"><img src="/assets/img/icons/sagazo.webp" alt="" width="96" height="96" decoding="async" />Sagazo</a></li>
+          <li><a href="/anatomy"><img src="/assets/img/icons/anatomy.webp" alt="" width="96" height="96" decoding="async" />Anatomy</a></li>
+          <li><a href="/games"><img src="/assets/img/icons/games.webp" alt="" width="96" height="96" decoding="async" />Games</a></li>
+        </ul>
+        <ul class="menu__main">
+          <li><a href="/">Home</a></li>
+          <li><a href="/services" aria-current="page">Services</a></li>
+          <li><a href="/#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <p class="menu__foot">contact@propereleven.com</p>
+    </div>
+
+    <main id="main">
+      <section class="v-hero" aria-labelledby="v-title">
+        <div class="wrap v-hero__grid">
+          <div>
+            <nav class="crumbs" aria-label="Breadcrumb">
+              <ol>
+                <li><a href="/">Home</a></li>
+                <li aria-current="page">Services</li>
+              </ol>
+            </nav>
+            <h1 id="v-title" class="v-title">We build apps, websites and games for other companies</h1>
+            <p class="lede v-lede">
+              Every example on this page is one of our own products. Most of them are live, so you can try our work before you
+              write to us.
+            </p>
+            <div class="actions">
+              <a class="btn btn--light" href="mailto:contact@propereleven.com?subject=A%20project" data-magnetic>Tell us about your project</a>
+              <a class="btn btn--ghost" href="#what-we-build" data-magnetic>See what we build</a>
+            </div>
+          </div>
+          <div class="v-build" data-build aria-hidden="true">
+            <div class="v-grid"></div>
+            <div class="v-browser">
+              <div class="v-browser__bar"><i></i><i></i><i></i><span>anatomyofthehumanbody.com</span></div>
+              <img src="/assets/img/services/anatomy-web.webp" alt="" width="1280" height="780" fetchpriority="high" />
+            </div>
+            <div class="v-phone v-phone--a" data-depth="0.6">
+              <div class="v-bob">
+                <div class="v-phone__body"><img src="/assets/img/sagazo/screen-seller.webp" alt="" width="780" height="1688" /></div>
+              </div>
+            </div>
+            <div class="v-phone v-phone--b" data-depth="1">
+              <div class="v-bob">
+                <div class="v-phone__body"><img src="/assets/img/stoppy/screens/daily.webp" alt="" width="600" height="1301" /></div>
+              </div>
+            </div>
+            <div class="v-tag v-tag--a" data-depth="0.8"><div class="v-bob">Websites and web apps</div></div>
+            <div class="v-tag v-tag--b" data-depth="1.2"><div class="v-bob">iPhone, iPad and Android</div></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="v-what" id="what-we-build" aria-labelledby="what-title">
+        <div class="wrap">
+          <div class="v-what__head">
+            <h2 id="what-title" data-split>What we build</h2>
+            <p data-reveal>Each kind of work comes with the products we built and the tools we used.</p>
+          </div>
+
+          <article class="v-row" id="apps" aria-labelledby="apps-title">
+            <div class="v-row__copy">
+              <p class="v-row__num" data-reveal aria-hidden="true">01</p>
+              <h3 id="apps-title" data-split>Apps for iPhone, iPad and Android</h3>
+              <p class="v-row__lede" data-reveal>
+                We build native iPhone apps in Swift, and apps that run on iPhone and Android from the same code with React Native
+                or Capacitor. We also take each app through the App Store's and Google Play's review.
+              </p>
+              <ul class="v-proof" data-reveal>
+                <li>
+                  <a href="/stoppy">Stoppy</a>, our 3D puzzle game, is on the App Store and Google Play for iPhone, iPad and
+                  Android.
+                </li>
+                <li>
+                  <a href="/anatomy">Anatomy of the Human Body</a> is a native iPhone app with a whole human body in 3D. It's
+                  coming soon to the App Store.
+                </li>
+              </ul>
+              <p class="v-tools__label" data-reveal aria-hidden="true">Tools</p>
+              <ul class="v-tools" data-reveal aria-label="Tools for apps">
+                <li>Swift</li>
+                <li>SwiftUI</li>
+                <li>RealityKit</li>
+                <li>React Native</li>
+                <li>Capacitor</li>
+              </ul>
+            </div>
+            <div class="v-row__media">
+              <div class="v-media m-apps" data-media aria-hidden="true">
+                <div class="v-grid"></div>
+                <div class="v-phone v-phone--a" data-depth="0.5">
+                  <div class="v-bob">
+                    <div class="v-phone__body"><img src="/assets/img/anatomy/screen-explore.webp" alt="" width="780" height="1696" loading="lazy" /></div>
+                  </div>
+                </div>
+                <div class="v-phone v-phone--b" data-depth="0.9">
+                  <div class="v-bob">
+                    <div class="v-phone__body"><img src="/assets/img/stoppy/screens/challenge.webp" alt="" width="600" height="1301" loading="lazy" /></div>
+                  </div>
+                </div>
+                <div class="v-tag v-tag--b" data-depth="1.2"><div class="v-bob">iPhone, iPad and Android</div></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="v-row" id="web" aria-labelledby="web-title">
+            <div class="v-row__copy">
+              <p class="v-row__num" data-reveal aria-hidden="true">02</p>
+              <h3 id="web-title" data-split>Websites and web apps</h3>
+              <p class="v-row__lede" data-reveal>
+                We build company websites, and web apps with sign-in, feeds, shops and chat.
+              </p>
+              <ul class="v-proof" data-reveal>
+                <li>
+                  <a href="/sagazo">Sagazo</a> is a social commerce app where India shares and shops, with a feed, shops from
+                  verified sellers and Circles with group chat. Its buttons and menus are in English, Hindi, Telugu, Tamil and
+                  Kannada.
+                </li>
+                <li>
+                  <a href="https://anatomyofthehumanbody.com">anatomyofthehumanbody.com</a> is a free anatomy reference. Its
+                  pages explain the parts of the body in plain words, each with a 3D view and the sources for its facts.
+                </li>
+              </ul>
+              <p class="v-tools__label" data-reveal aria-hidden="true">Tools</p>
+              <ul class="v-tools" data-reveal aria-label="Tools for websites and web apps">
+                <li>Elixir</li>
+                <li>Phoenix</li>
+                <li>PostgreSQL</li>
+                <li>GraphQL</li>
+                <li>Astro</li>
+                <li>TypeScript</li>
+              </ul>
+            </div>
+            <div class="v-row__media">
+              <div class="v-media m-web" data-media aria-hidden="true">
+                <div class="v-grid"></div>
+                <div class="v-browser" data-depth="0.4">
+                  <div class="v-browser__bar"><i></i><i></i><i></i><span>sagazo.com/become-a-seller</span></div>
+                  <img src="/assets/img/services/sagazo-web.webp" alt="" width="1280" height="780" loading="lazy" />
+                </div>
+                <div class="v-tag v-tag--b" data-depth="1.1">
+                  <div class="v-bob v-langs">
+                    <span lang="en">English</span><span lang="hi">हिंदी</span><span lang="te">తెలుగు</span><span lang="ta">தமிழ்</span><span lang="kn">ಕನ್ನಡ</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="v-row" id="3d" aria-labelledby="three-title">
+            <div class="v-row__copy">
+              <p class="v-row__num" data-reveal aria-hidden="true">03</p>
+              <h3 id="three-title" data-split>3D for apps and websites</h3>
+              <p class="v-row__lede" data-reveal>
+                We build 3D that people can turn and tap, in an app or a web browser, and we make detailed models light enough for
+                a phone.
+              </p>
+              <ul class="v-proof" data-reveal>
+                <li>
+                  <a href="/anatomy">Anatomy of the Human Body</a> has over 2,000 parts in 3D. Tap one, and the rest of the
+                  body turns to an X-ray with the part's name on a label.
+                </li>
+                <li>Stoppy's five worlds are 3D, and so is the scene at the top of this website's home page.</li>
+              </ul>
+              <p class="v-tools__label" data-reveal aria-hidden="true">Tools</p>
+              <ul class="v-tools" data-reveal aria-label="Tools for 3D">
+                <li>Three.js</li>
+                <li>WebGL</li>
+                <li>RealityKit</li>
+                <li>Metal</li>
+              </ul>
+            </div>
+            <div class="v-row__media">
+              <div class="v-media m-3d" data-media aria-hidden="true">
+                <div class="v-grid"></div>
+                <div class="v-stage3d" data-depth="0.4">
+                  <img src="/assets/img/anatomy/layer-muscles.webp" alt="" width="608" height="760" loading="lazy" />
+                  <img src="/assets/img/anatomy/layer-skeleton.webp" alt="" width="608" height="760" loading="lazy" />
+                  <img src="/assets/img/anatomy/layer-nerves.webp" alt="" width="608" height="760" loading="lazy" />
+                  <img src="/assets/img/anatomy/layer-vessels.webp" alt="" width="608" height="760" loading="lazy" />
+                </div>
+                <div class="v-part" data-depth="1">
+                  <div class="v-bob">
+                    <img src="/assets/img/anatomy/part-heart-chambers.webp" alt="" width="480" height="600" loading="lazy" />
+                    <p>Chambers of the heart</p>
+                  </div>
+                </div>
+                <div class="v-tag v-tag--b" data-depth="1.2"><div class="v-bob">Over 2,000 parts in 3D</div></div>
+              </div>
+            </div>
+          </article>
+
+          <article class="v-row" id="games" aria-labelledby="games-title">
+            <div class="v-row__copy">
+              <p class="v-row__num" data-reveal aria-hidden="true">04</p>
+              <h3 id="games-title" data-split>Games</h3>
+              <p class="v-row__lede" data-reveal>
+                We design games and write their code, for phones, tablets and the web.
+              </p>
+              <ul class="v-proof" data-reveal>
+                <li>
+                  <a href="/stoppy">Stoppy</a> has 50 levels in five worlds, a new puzzle every day, challenges against the
+                  clock and 25 awards to win.
+                </li>
+                <li>
+                  Zombie Highrise, our next game, is for iPhone and Android. You climb a 100-floor tower in the dark to rescue
+                  the president from the top floor. It's coming soon to the App Store and Google Play.
+                </li>
+              </ul>
+              <p class="v-tools__label" data-reveal aria-hidden="true">Tools</p>
+              <ul class="v-tools" data-reveal aria-label="Tools for games">
+                <li>TypeScript</li>
+                <li>Three.js</li>
+                <li>Capacitor</li>
+                <li>Godot</li>
+              </ul>
+            </div>
+            <div class="v-row__media">
+              <div class="v-media m-games" data-media aria-hidden="true">
+                <div class="v-phone v-phone--zh" data-depth="0.9">
+                  <div class="v-bob">
+                    <div class="v-phone__body"><img src="/assets/img/services/zombie-highrise.webp" alt="" width="780" height="1688" loading="lazy" /></div>
+                  </div>
+                </div>
+                <div class="v-sky" data-depth="0.3">
+                  <div class="v-world v-world--2"><div class="v-bob"><img src="/assets/img/stoppy/worlds/3-480.webp" alt="" width="480" height="430" loading="lazy" /></div></div>
+                  <div class="v-world v-world--1"><div class="v-bob"><img src="/assets/img/stoppy/worlds/1-480.webp" alt="" width="480" height="387" loading="lazy" /></div></div>
+                  <div class="v-world v-world--prickle"><div class="v-bob"><img src="/assets/img/stoppy/prickle.webp" alt="" width="360" height="360" loading="lazy" /></div></div>
+                  <div class="v-world v-world--stoppy"><div class="v-bob"><img src="/assets/img/stoppy/stoppy.svg" alt="" width="1024" height="1024" loading="lazy" /></div></div>
+                </div>
+                <div class="v-tag v-tag--b" data-depth="1.2"><div class="v-bob">50 levels in five worlds</div></div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="v-how" id="how-we-work" aria-labelledby="how-title">
+        <div class="wrap">
+          <h2 id="how-title" data-split>How a project works</h2>
+          <div class="v-timeline" data-timeline>
+            <span class="v-timeline__rail" aria-hidden="true"></span>
+            <span class="v-timeline__fill" aria-hidden="true"></span>
+            <ol class="v-steps">
+              <li class="v-step" data-reveal>
+                <span class="v-step__num" aria-hidden="true">01</span>
+                <h3>You tell us what you need</h3>
+                <p>Write to us about the problem, who it's for and when you need it.</p>
+              </li>
+              <li class="v-step" data-reveal data-delay="0.08">
+                <span class="v-step__num" aria-hidden="true">02</span>
+                <h3>We send a plan and a price</h3>
+                <p>
+                  We reply with our questions, then a written plan: what we'll build, in what order, how long it will take and
+                  what it will cost.
+                </p>
+              </li>
+              <li class="v-step" data-reveal data-delay="0.16">
+                <span class="v-step__num" aria-hidden="true">03</span>
+                <h3>You see it as we build it</h3>
+                <p>We design the screens first. Then you try working versions as we build, so you can change course early.</p>
+              </li>
+              <li class="v-step" data-reveal data-delay="0.24">
+                <span class="v-step__num" aria-hidden="true">04</span>
+                <h3>We launch it</h3>
+                <p>
+                  We publish it on the web, the App Store or Google Play. After the launch, we can keep fixing and improving it,
+                  or hand it over to your team.
+                </p>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <section class="v-cta" id="start" aria-labelledby="start-title">
+        <div class="wrap">
+          <h2 id="start-title" data-split>Tell us about your project</h2>
+          <a class="v-mail" href="mailto:contact@propereleven.com?subject=A%20project" data-reveal>contact@propereleven.com</a>
+          <p class="v-cta__text" data-reveal>A short email is enough to start. We'll reply with our questions.</p>
+          <p class="v-note" data-reveal>
+            The 3D body is our own. We built it from
+            <a href="https://dbarchive.biosciencedbc.jp/en/bodyparts3d/lic.html">BodyParts3D</a>, © The Database Center for Life
+            Science, and the heart, brain, kidneys, eyes and spinal cord of the
+            <a href="https://humanatlas.io/3d-reference-library">HuBMAP CCF 3D Reference Object Library</a> (Browne, Schlehlein,
+            Herr, Quardokus, Bueckle and Börner, 2024), both licensed under
+            <a href="https://creativecommons.org/licenses/by/4.0/">CC Attribution 4.0 International</a>. We fitted the parts
+            together, simplified their surfaces and coloured each tissue.
+          </p>
+          <p class="v-note">
+            iPhone and iPad are trademarks of Apple Inc., registered in the U.S. and other countries and regions. App Store is a
+            service mark of Apple Inc. Google Play is a trademark of Google LLC.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap">
+        <div class="footer__top">
+          <p class="footer__line">We build companies and products that move humanity forward.</p>
+          <nav class="footer__nav" aria-label="Footer">
+            <div class="footer__col">
+              <p class="footer__head">Products</p>
+              <a href="/sagazo">Sagazo</a>
+              <a href="/anatomy">Anatomy</a>
+              <a href="/games">Games</a>
+            </div>
+            <div class="footer__col">
+              <p class="footer__head">Company</p>
+              <a href="/services">Services</a>
+              <a href="/#contact">Contact</a>
+              <a href="/privacy">Privacy policy</a>
+            </div>
+          </nav>
+        </div>
+        <div class="footer__mark" aria-hidden="true">
+          <span class="mark"><i></i><i></i></span><span class="footer__word">Proper Eleven</span>
+        </div>
+        <div class="footer__legal">
+          <span>© 2026 Proper Eleven Technologies Private Limited, India</span>
+          <a href="mailto:contact@propereleven.com">contact@propereleven.com</a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="/assets/js/vendor/gsap.min.js" defer></script>
+    <script src="/assets/js/vendor/ScrollTrigger.min.js" defer></script>
+    <script src="/assets/js/vendor/SplitText.min.js" defer></script>
+    <script src="/assets/js/vendor/lenis.min.js" defer></script>
+    <script src="/assets/js/site.js" defer></script>
+    <script src="/assets/js/services.js" defer></script>
+  </body>
+</html>

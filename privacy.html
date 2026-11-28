@@ -47,9 +47,26 @@
           <span class="brand__word">Proper Eleven</span>
         </a>
         <nav class="site-nav" aria-label="Main">
-          <a href="/sagazo">Sagazo</a>
-          <a href="/anatomy">Anatomy</a>
-          <a href="/games">Games</a>
+          <div class="nav-group" data-nav-group>
+            <button class="nav-group__toggle" type="button" aria-expanded="false" aria-controls="nav-products">
+              Products<span class="nav-group__chev" aria-hidden="true"></span>
+            </button>
+            <div class="nav-panel" id="nav-products">
+              <a href="/sagazo">
+                <img src="/assets/img/icons/sagazo.webp" alt="" width="96" height="96" decoding="async" />
+                <span><b>Sagazo</b><small>A social commerce app where India shares and shops</small></span>
+              </a>
+              <a href="/anatomy">
+                <img src="/assets/img/icons/anatomy.webp" alt="" width="96" height="96" decoding="async" />
+                <span><b>Anatomy of the Human Body</b><small>The human body in 3D, one part at a time</small></span>
+              </a>
+              <a href="/games">
+                <img src="/assets/img/icons/games.webp" alt="" width="96" height="96" decoding="async" />
+                <span><b>Games</b><small>Original games for phones and tablets</small></span>
+              </a>
+            </div>
+          </div>
+          <a href="/services">Services</a>
           <a href="/#contact">Contact</a>
         </nav>
         <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-menu">
@@ -58,13 +75,17 @@
       </div>
     </header>
 
-    <div class="menu" id="site-menu">
+    <div class="menu" id="site-menu" data-lenis-prevent>
       <nav aria-label="Menu">
-        <ul>
+        <p class="menu__label" id="menu-products">Products</p>
+        <ul class="menu__products" aria-labelledby="menu-products">
+          <li><a href="/sagazo"><img src="/assets/img/icons/sagazo.webp" alt="" width="96" height="96" decoding="async" />Sagazo</a></li>
+          <li><a href="/anatomy"><img src="/assets/img/icons/anatomy.webp" alt="" width="96" height="96" decoding="async" />Anatomy</a></li>
+          <li><a href="/games"><img src="/assets/img/icons/games.webp" alt="" width="96" height="96" decoding="async" />Games</a></li>
+        </ul>
+        <ul class="menu__main">
           <li><a href="/">Home</a></li>
-          <li><a href="/sagazo">Sagazo</a></li>
-          <li><a href="/anatomy">Anatomy</a></li>
-          <li><a href="/games">Games</a></li>
+          <li><a href="/services">Services</a></li>
           <li><a href="/#contact">Contact</a></li>
         </ul>
       </nav>
@@ -227,11 +248,18 @@
         <div class="footer__top">
           <p class="footer__line">We build companies and products that move humanity forward.</p>
           <nav class="footer__nav" aria-label="Footer">
-            <a href="/sagazo">Sagazo</a>
-            <a href="/anatomy">Anatomy</a>
-            <a href="/games">Games</a>
-            <a href="/#contact">Contact</a>
-            <a href="/privacy">Privacy policy</a>
+            <div class="footer__col">
+              <p class="footer__head">Products</p>
+              <a href="/sagazo">Sagazo</a>
+              <a href="/anatomy">Anatomy</a>
+              <a href="/games">Games</a>
+            </div>
+            <div class="footer__col">
+              <p class="footer__head">Company</p>
+              <a href="/services">Services</a>
+              <a href="/#contact">Contact</a>
+              <a href="/privacy">Privacy policy</a>
+            </div>
           </nav>
         </div>
         <div class="footer__mark" aria-hidden="true">

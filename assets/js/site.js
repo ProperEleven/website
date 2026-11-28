@@ -1,8 +1,8 @@
 /* Proper Eleven Technologies: shared page behaviour.
    - Pages show at once. The home page's intro (the gate, CSS in index.html) plays once per visit, and the hero's
      [data-split-open] and [data-reveal-open] rise as it opens. whenOpen() lets other scripts wait for it.
-   - Smooth wheel scrolling (Lenis) for mice and trackpads, the header that hides on the way down, and the
-     small-screen menu. Touch screens keep the browser's own scrolling.
+   - Smooth wheel scrolling (Lenis) for mice and trackpads, the header that hides on the way down, the header's
+     Products panel and the small-screen menu. Touch screens keep the browser's own scrolling.
    - Reveals: [data-split] headings rise line by line, [data-reveal] blocks fade up, [data-words] statements
      light up word by word as you scroll, [data-parallax] layers drift. Anything already on screen when the page
      opens is simply there.
@@ -97,13 +97,72 @@
   var header = document.querySelector("[data-header]");
   var lastY = window.scrollY;
   var menuOpen = false;
+  var navOpen = false;
+  var navOpenedAt = 0;
+  var closeNav = function () {};
   function onScroll(y) {
+    if (navOpen && Math.abs(y - navOpenedAt) > 40) closeNav();
     if (!header) return;
     header.classList.toggle("is-scrolled", y > 40);
     if (menuOpen) return;
     if (y > 200 && y > lastY + 3) header.classList.add("is-hidden");
     else if (y < lastY - 3 || y <= 200) header.classList.remove("is-hidden");
     lastY = y;
+  }
+
+  /* ---------- Products: the header's panel ---------- */
+
+  // A disclosure: the button tells assistive tech whether the panel is open. A mouse opens it by hovering and it
+  // closes when the mouse leaves; a tap, a click or Enter toggles it. Escape, a click outside, tabbing out of it or
+  // scrolling closes it.
+  var navGroup = document.querySelector("[data-nav-group]");
+  var navBtn = navGroup ? navGroup.querySelector(".nav-group__toggle") : null;
+  if (navGroup && navBtn) {
+    var byHover = false;
+    var leaveTimer = 0;
+    var setNav = function (open) {
+      window.clearTimeout(leaveTimer);
+      if (open === navOpen) return;
+      navOpen = open;
+      if (!open) byHover = false;
+      else navOpenedAt = window.scrollY;
+      navBtn.setAttribute("aria-expanded", String(open));
+      navGroup.classList.toggle("is-open", open);
+    };
+    closeNav = function () {
+      setNav(false);
+    };
+    navGroup.setAttribute("data-ready", "");
+    navGroup.addEventListener("pointerenter", function (e) {
+      if (e.pointerType !== "mouse") return;
+      window.clearTimeout(leaveTimer);
+      if (!navOpen) {
+        setNav(true);
+        byHover = true;
+      }
+    });
+    navGroup.addEventListener("pointerleave", function (e) {
+      if (e.pointerType !== "mouse" || !byHover) return;
+      leaveTimer = window.setTimeout(closeNav, 160);
+    });
+    navBtn.addEventListener("click", function () {
+      // A mouse that opened the panel by hovering has nothing to toggle: the panel stays until the mouse leaves.
+      if (navOpen && byHover) return;
+      setNav(!navOpen);
+    });
+    navGroup.addEventListener("focusout", function (e) {
+      if (navOpen && !(e.relatedTarget && navGroup.contains(e.relatedTarget))) closeNav();
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key !== "Escape" || !navOpen) return;
+      var inside = navGroup.contains(document.activeElement);
+      closeNav();
+      if (inside) navBtn.focus();
+    });
+    document.addEventListener("pointerdown", function (e) {
+      if (navOpen && !navGroup.contains(e.target)) closeNav();
+    });
+    window.addEventListener("resize", closeNav);
   }
   if (lenis) {
     lenis.on("scroll", function (l) {
@@ -173,6 +232,7 @@
       url.origin === window.location.origin && url.pathname.replace(/\/$/, "") === window.location.pathname.replace(/\/$/, "");
     var target = samePage && url.hash ? document.getElementById(decodeURIComponent(url.hash.slice(1))) : null;
     if (menuOpen) setMenu(false);
+    closeNav();
     if (!target) return;
     e.preventDefault();
     scrollToEl(target);

@@ -710,6 +710,10 @@
         color: #0f6b4f;
       }
 
+      .z-langs span:nth-child(5) {
+        color: #1b2547;
+      }
+
       .z-india .z-safe {
         max-width: 60ch;
         margin-top: clamp(40px, 5vw, 64px);
@@ -840,9 +844,26 @@
           <span class="brand__word">Proper Eleven</span>
         </a>
         <nav class="site-nav" aria-label="Main">
-          <a href="/sagazo" aria-current="page">Sagazo</a>
-          <a href="/anatomy">Anatomy</a>
-          <a href="/games">Games</a>
+          <div class="nav-group" data-nav-group data-current>
+            <button class="nav-group__toggle" type="button" aria-expanded="false" aria-controls="nav-products">
+              Products<span class="nav-group__chev" aria-hidden="true"></span>
+            </button>
+            <div class="nav-panel" id="nav-products">
+              <a href="/sagazo" aria-current="page">
+                <img src="/assets/img/icons/sagazo.webp" alt="" width="96" height="96" decoding="async" />
+                <span><b>Sagazo</b><small>A social commerce app where India shares and shops</small></span>
+              </a>
+              <a href="/anatomy">
+                <img src="/assets/img/icons/anatomy.webp" alt="" width="96" height="96" decoding="async" />
+                <span><b>Anatomy of the Human Body</b><small>The human body in 3D, one part at a time</small></span>
+              </a>
+              <a href="/games">
+                <img src="/assets/img/icons/games.webp" alt="" width="96" height="96" decoding="async" />
+                <span><b>Games</b><small>Original games for phones and tablets</small></span>
+              </a>
+            </div>
+          </div>
+          <a href="/services">Services</a>
           <a href="/#contact">Contact</a>
         </nav>
         <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-menu">
@@ -851,13 +872,17 @@
       </div>
     </header>
 
-    <div class="menu" id="site-menu">
+    <div class="menu" id="site-menu" data-lenis-prevent>
       <nav aria-label="Menu">
-        <ul>
+        <p class="menu__label" id="menu-products">Products</p>
+        <ul class="menu__products" aria-labelledby="menu-products">
+          <li><a href="/sagazo" aria-current="page"><img src="/assets/img/icons/sagazo.webp" alt="" width="96" height="96" decoding="async" />Sagazo</a></li>
+          <li><a href="/anatomy"><img src="/assets/img/icons/anatomy.webp" alt="" width="96" height="96" decoding="async" />Anatomy</a></li>
+          <li><a href="/games"><img src="/assets/img/icons/games.webp" alt="" width="96" height="96" decoding="async" />Games</a></li>
+        </ul>
+        <ul class="menu__main">
           <li><a href="/">Home</a></li>
-          <li><a href="/sagazo" aria-current="page">Sagazo</a></li>
-          <li><a href="/anatomy">Anatomy</a></li>
-          <li><a href="/games">Games</a></li>
+          <li><a href="/services">Services</a></li>
           <li><a href="/#contact">Contact</a></li>
         </ul>
       </nav>
@@ -898,7 +923,7 @@
             <div class="z-float z-float--lang">
               <div class="z-bob" style="animation-delay: -4s">
                 <div class="z-pill z-pill--lang">
-                  <span lang="en">English</span><span lang="hi">हिंदी</span><span lang="te">తెలుగు</span><span lang="ta">தமிழ்</span>
+                  <span lang="en">English</span><span lang="hi">हिंदी</span><span lang="te">తెలుగు</span><span lang="ta">தமிழ்</span><span lang="kn">ಕನ್ನಡ</span>
                 </div>
               </div>
             </div>
@@ -1009,8 +1034,9 @@
           <span lang="hi" data-reveal data-delay="0.08">हिंदी</span>
           <span lang="te" data-reveal data-delay="0.16">తెలుగు</span>
           <span lang="ta" data-reveal data-delay="0.24">தமிழ்</span>
+          <span lang="kn" data-reveal data-delay="0.32">ಕನ್ನಡ</span>
         </div>
-        <p data-reveal>Sagazo's buttons and menus are in English, Hindi, Telugu and Tamil, and it's open to people across India.</p>
+        <p data-reveal>Sagazo's buttons and menus are in English, Hindi, Telugu, Tamil and Kannada, and it's open to people across India.</p>
         <p class="z-safe" data-reveal>
           Every account on Sagazo is tied to a verified phone number. People can report anything that breaks the Community
           Guidelines, and moderators look at every report. Sagazo follows India's Digital Personal Data Protection Act, 2023.
@@ -1035,11 +1061,18 @@
         <div class="footer__top">
           <p class="footer__line">We build companies and products that move humanity forward.</p>
           <nav class="footer__nav" aria-label="Footer">
-            <a href="/sagazo">Sagazo</a>
-            <a href="/anatomy">Anatomy</a>
-            <a href="/games">Games</a>
-            <a href="/#contact">Contact</a>
-            <a href="/privacy">Privacy policy</a>
+            <div class="footer__col">
+              <p class="footer__head">Products</p>
+              <a href="/sagazo">Sagazo</a>
+              <a href="/anatomy">Anatomy</a>
+              <a href="/games">Games</a>
+            </div>
+            <div class="footer__col">
+              <p class="footer__head">Company</p>
+              <a href="/services">Services</a>
+              <a href="/#contact">Contact</a>
+              <a href="/privacy">Privacy policy</a>
+            </div>
           </nav>
         </div>
         <div class="footer__mark" aria-hidden="true">
